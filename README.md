@@ -9,15 +9,15 @@ We do this by using `scancode-toolkit` to scan the code and compare the results 
 ## Features
 This checks:
 - [x] Is any license defined in `package.xml`?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L79)
+    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L92)
 - [x] Has at most one license tag without a source-files declaration?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L79)
+    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L92)
 - [x] Do all licenses tags follow the SPDX standard?
-    [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L92)
+    [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L106)
 - [x] Are license texts available and correctly referenced for all declared licenses?
-    [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L108)
+    [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L125)
 - [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/*")?
-    [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L155)
+    [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L184)
 
 ## State of Development
 *WORK IN PROGRESS*
@@ -27,8 +27,11 @@ In particular, the following things will have to be done:
 
 ### To Do
 - [ ] Coverage analysis
+- [ ] Linter(s) per CI
 - [ ] Field trials (check existing ROS packages and see what to do with the results.)
 - [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
+- [ ] Allow license name in tag to be also full name of SPDX key.
+- [ ] Each LicenseTag should have SPDX id.
 
 ## License
 ros_license_linter is open-sourced under the Apache-2.0 license. See the
