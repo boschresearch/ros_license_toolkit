@@ -36,6 +36,7 @@ class TestAllPackages(unittest.TestCase):
         print(stdout)
         print(stderr)
         self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertIn(b"test_pkg_deep", stdout)
         self.assertIn(
             b"test_pkg_has_code_disjoint", stdout)
         self.assertIn(
@@ -47,6 +48,8 @@ class TestAllPackages(unittest.TestCase):
         self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
         self.assertIn(b"test_pkg_no_license_file", stdout)
         self.assertIn(b"test_pkg_no_license", stdout)
+        self.assertIn(b"test_pkg_spdx_name", stdout)
+        self.assertIn(b"test_pkg_spdx_tag", stdout)
         self.assertIn(b"test_pkg_unknown_license", stdout)
         self.assertIn(b"test_pkg_with_license_and_file", stdout)
         self.assertIn(

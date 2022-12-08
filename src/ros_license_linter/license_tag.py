@@ -1,3 +1,18 @@
+# Copyright (c) 2022 - for information on the respective copyright owner
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import os
 import xml.etree.ElementTree as ET
@@ -14,13 +29,18 @@ def is_license_name_in_spdx_list(license_name: str) -> bool:
 
 
 def to_spdx_license_tag(license_name: str) -> str:
-    """Convert a license name to a SPDX license tag."""
-    if license_name in LICENSE_MAP.keys():
-        return license_name
-    if license_name in LICENSE_MAP.values():
-        return list(LICENSE_MAP.keys())[list(LICENSE_MAP.values()).index(
-            license_name)]
-    return license_name
+    """Convert a license name to a SPDX license tag 
+    (assuming it is shorter than the name).
+    This is because the dict from spdx.config.LICENSE_MAP
+    contains both pairings (tag, name) and (name, tag).
+    """
+    for tag, name in LICENSE_MAP.items():
+        if license_name == name or license_name == tag:
+            if len(tag) < len(name):
+                return tag
+            else:
+                return name
+    raise ValueError("License name not in SPDX list.")
 
 
 class LicenseTag(object):

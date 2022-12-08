@@ -21,8 +21,6 @@ import unittest
 
 import git
 
-from ros_license_linter.main import main
-
 
 class TestLicensePerRepo(unittest.TestCase):
     """Test that the license per repo is detected correctly.
