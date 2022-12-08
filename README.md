@@ -30,8 +30,9 @@ In particular, the following things will have to be done:
 - [ ] Linter(s) per CI
 - [ ] Field trials (check existing ROS packages and see what to do with the results.)
 - [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
-- [ ] Allow license name in tag to be also full name of SPDX key.
-- [ ] Each LicenseTag should have SPDX id.
+- [x] Allow license name in tag to be also full name of SPDX key.
+- [x] Each LicenseTag should have SPDX id.
+- [ ] Single license tag without file attribute and single license text should match automatically.
 
 ## License
 ros_license_linter is open-sourced under the Apache-2.0 license. See the

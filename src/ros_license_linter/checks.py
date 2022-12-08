@@ -19,18 +19,12 @@ import xml.etree.ElementTree as ET
 from pprint import pformat
 from typing import Dict, List, Optional
 
-from spdx.config import LICENSE_MAP
-
-from ros_license_linter.license_tag import LicenseTag
+from ros_license_linter.license_tag import (LicenseTag,
+                                            is_license_name_in_spdx_list)
 from ros_license_linter.package import (Package, PackageException,
                                         get_spdx_license_name,
                                         is_license_text_file)
 from ros_license_linter.ui_elements import NO_REASON_STR, green, red
-
-
-def is_license_name_in_spdx_list(license_name: str) -> bool:
-    """Check if a license name is in the SPDX list of licenses."""
-    return license_name in LICENSE_MAP
 
 
 class Check(object):
@@ -82,7 +76,10 @@ class Check(object):
         try:
             self._check(package)
         except PackageException as e:
-            self._failed(f"Exception: {e}")
+            self._failed(f"PackageException: {e}")
+            return
+        except AssertionError as e:
+            self._failed(f"AssertionError: {e}")
             return
 
     def _check(self, package: Package):
@@ -164,8 +161,8 @@ class LicenseTextExistsCheck(Check):
                 continue
             if actual_license != license_tag.get_license_id():
                 license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' is" +\
-                    "of license {actual_license} but should be" +\
+                    f"License text file '{license_text_file}' is " +\
+                    f"of license {actual_license} but should be" +\
                     f"{license_tag.get_license_id()}."
                 continue
         if len(license_tags_without_license_text) > 0:

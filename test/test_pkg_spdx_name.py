@@ -14,16 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import unittest
 
-from ros_license_linter.checks import is_license_name_in_spdx_list
+from ros_license_linter.main import main
 
 
-class TestChecks(unittest.TestCase):
+class TestPkgSpdxName(unittest.TestCase):
 
-    def test_is_license_name_in_spdx_list(self):
-        self.assertTrue(is_license_name_in_spdx_list("Apache-2.0"))
-        self.assertFalse(is_license_name_in_spdx_list("Apache-2.0-foo"))
+    def test_success(self):
+        self.assertEqual(os.EX_OK, main(
+            ["test/test_pkg_spdx_name"]))
 
 
 if __name__ == '__main__':
