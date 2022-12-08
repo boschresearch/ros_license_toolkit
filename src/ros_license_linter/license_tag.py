@@ -4,6 +4,24 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from typing import List, Optional
 
+from spdx.config import LICENSE_MAP
+
+
+def is_license_name_in_spdx_list(license_name: str) -> bool:
+    """Check if a license name is in the SPDX list of licenses."""
+    return license_name in LICENSE_MAP.keys() or \
+        license_name in LICENSE_MAP.values()
+
+
+def to_spdx_license_tag(license_name: str) -> str:
+    """Convert a license name to a SPDX license tag."""
+    if license_name in LICENSE_MAP.keys():
+        return license_name
+    if license_name in LICENSE_MAP.values():
+        return list(LICENSE_MAP.keys())[list(LICENSE_MAP.values()).index(
+            license_name)]
+    return license_name
+
 
 class LicenseTag(object):
     """A license tag found in a package.xml file."""
@@ -13,8 +31,11 @@ class LicenseTag(object):
         self.element = element
         assert self.element.text is not None, "License tag must have text."
 
-        # Name of the license (presumably in SPDX format)
-        self.license_id = element.text  # TODO: make sure this is SPDX
+        raw_license_name: str = str(self.element.text)
+        assert is_license_name_in_spdx_list(
+            raw_license_name), "License name must be in SPDX list."
+        # Name of the license (in SPDX tag format for comparability)
+        self.license_id = to_spdx_license_tag(raw_license_name)
 
         # Path to the file containing the license text
         # (relative to package root)
