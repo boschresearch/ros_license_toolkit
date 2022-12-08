@@ -40,7 +40,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Update pip
-        run: pip install --upgrade pip
+        run: |
+          pip install --upgrade pip
+          pip install setuptools_rust  
       - name: Install pytest
         run: pip install pytest pytest-md pytest-emoji
       - name: Install package
