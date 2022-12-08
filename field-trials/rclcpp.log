@@ -1,0 +1,61 @@
+Found 4 packages in .
+====================
+[rclcpp_action]
+git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rclcpp_action] Overall:[92m
+ SUCCESS[00m
+====================
+[rclcpp_lifecycle]
+git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rclcpp_lifecycle] Overall:[92m
+ SUCCESS[00m
+====================
+[rclcpp_components]
+git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rclcpp_components] Overall:[92m
+ SUCCESS[00m
+====================
+[rclcpp]
+git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rclcpp] Overall:[92m
+ SUCCESS[00m
+====================
+Execution time: 199.96 seconds
+All packages:[92m
+ SUCCESS[00m

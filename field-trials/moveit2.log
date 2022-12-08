@@ -1,0 +1,565 @@
+Found 40 packages in .
+====================
+[moveit]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_simulation]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_simulation] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_app_plugins]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_app_plugins] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_assistant]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_assistant] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_srdf_plugins]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_srdf_plugins] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_framework]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_framework] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_core_plugins]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_core_plugins] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_setup_controllers]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_setup_controllers] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_configs_utils]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_configs_utils] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_servo]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_servo] Overall:[91m
+ FAILURE[00m
+====================
+[benchmarks]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[benchmarks] Overall:[91m
+ FAILURE[00m
+====================
+[move_group]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[move_group] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_ros]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_ros] Overall:[91m
+ FAILURE[00m
+====================
+[hybrid_planning]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[hybrid_planning] Overall:[91m
+ FAILURE[00m
+====================
+[planning_interface]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[planning_interface] Overall:[91m
+ FAILURE[00m
+====================
+[occupancy_map_monitor]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[occupancy_map_monitor] Overall:[91m
+ FAILURE[00m
+====================
+[warehouse]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[warehouse] Overall:[91m
+ FAILURE[00m
+====================
+[robot_interaction]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[robot_interaction] Overall:[91m
+ FAILURE[00m
+====================
+[visualization]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[visualization] Overall:[91m
+ FAILURE[00m
+====================
+[planning]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[planning] Overall:[91m
+ FAILURE[00m
+====================
+[perception]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[perception] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_common]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_common] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_simple_controller_manager]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_simple_controller_manager] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_plugins]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_plugins] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_ros_control_interface]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_ros_control_interface] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_commander]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_commander] Overall:[91m
+ FAILURE[00m
+====================
+[ompl]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[ompl] Overall:[91m
+ FAILURE[00m
+====================
+[chomp_interface]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[chomp_interface] Overall:[91m
+ FAILURE[00m
+====================
+[chomp_optimizer_adapter]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[chomp_optimizer_adapter] Overall:[91m
+ FAILURE[00m
+====================
+[chomp_motion_planner]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[chomp_motion_planner] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_planners]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_planners] Overall:[91m
+ FAILURE[00m
+====================
+[prbt_pg70_support]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[prbt_pg70_support] Overall:[91m
+ FAILURE[00m
+====================
+[prbt_support]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[prbt_support] Overall:[91m
+ FAILURE[00m
+====================
+[prbt_moveit_config]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[prbt_moveit_config] Overall:[91m
+ FAILURE[00m
+====================
+[prbt_ikfast_manipulator_plugin]
+git hash of (None): None
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[prbt_ikfast_manipulator_plugin] Overall:[91m
+ FAILURE[00m
+====================
+[pilz_industrial_motion_planner_testutils]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[pilz_industrial_motion_planner_testutils] Overall:[91m
+ FAILURE[00m
+====================
+[pilz_industrial_motion_planner]
+git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[pilz_industrial_motion_planner] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_core]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_core] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_runtime]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_runtime] Overall:[91m
+ FAILURE[00m
+====================
+[moveit_kinematics]
+git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+LicenseTagExistsCheck
+[91m FAILURE AssertionError: License name must be in SPDX list.[00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[91m FAILURE No license tag defined.[00m
+LicensesInCodeCheck
+[91m FAILURE No license tag defined.[00m
+--------------------
+[moveit_kinematics] Overall:[91m
+ FAILURE[00m
+====================
+Execution time: 0.01 seconds
+All packages:[91m
+ FAILURE[00m
