@@ -44,18 +44,19 @@ def is_git_repo(path: str) -> bool:
 
 def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
     """Check if a file is a license text file."""
-    if len(scan_results["licenses"]) != 1:
-        # License text files should only have one license
-        return False
-    return scan_results["licenses"][0]["matched_rule"]["is_license_text"]
+    for license in scan_results["licenses"]:
+        if license["matched_rule"]["is_license_text"] and \
+                license["score"] >= 99:
+            return True
+    return False
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
-    if len(scan_results["licenses"]) != 1:
-        # This should only be called on files with one license
-        return None
-    return scan_results["licenses"][0]["spdx_license_key"]
+    for license in scan_results["licenses"]:
+        if license["score"] >= 99:
+            return license["spdx_license_key"]
+    return None
 
 
 class PackageException(Exception):
@@ -148,6 +149,8 @@ class Package(object):
             if self.repo is not None:
                 for file in os.listdir(os.path.join(self.abspath, self.repo)):
                     fpath = os.path.join(self.abspath, self.repo, file)
+                    if not os.path.isfile(fpath):
+                        continue
                     scan_results = get_licenses(fpath)
                     if is_license_text_file(scan_results):
                         self.found_license_texts[os.path.join(
@@ -196,6 +199,11 @@ class Package(object):
                     _, license_texts = self.get_scan_results()
                     if len(license_texts) == 1:
                         li.license_text_file = list(license_texts.keys())[0]
+                    else:
+                        for license_text_file in license_texts.keys():
+                            if "LICENSE" in license_text_file:
+                                li.license_text_file = license_text_file
+                                break
                     break
 
         return self.license_tags

@@ -55,6 +55,8 @@ class TestAllPackages(unittest.TestCase):
         self.assertIn(
             b"test_pkg_with_multiple_licenses_no_source_files_tag", stdout)
         self.assertIn(b"test_pkg_wrong_license_file", stdout)
+        self.assertIn(b"pkg_with_bsd3_a", stdout)
+        self.assertIn(b"pkg_with_bsd3_b", stdout)
         self.assertIn(b"pkg_with_mit_a", stdout)
         self.assertIn(b"pkg_with_mit_b", stdout)
 

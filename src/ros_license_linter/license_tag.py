@@ -52,10 +52,14 @@ class LicenseTag(object):
         assert self.element.text is not None, "License tag must have text."
 
         raw_license_name: str = str(self.element.text)
-        assert is_license_name_in_spdx_list(
-            raw_license_name), "License name must be in SPDX list."
         # Name of the license (in SPDX tag format for comparability)
-        self.license_id = to_spdx_license_tag(raw_license_name)
+        try:
+            self.license_id = to_spdx_license_tag(raw_license_name)
+        except ValueError:
+            # If the license name is not in the SPDX list,
+            # we assume it is a custom license and use the name as-is.
+            # This will be detected in `LicenseTagIsInSpdxListCheck`.
+            self.license_id = raw_license_name
 
         # Path to the file containing the license text
         # (relative to package root)

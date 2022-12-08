@@ -15,24 +15,37 @@
 # limitations under the License.
 
 import os
+import shutil
 import subprocess
 import unittest
 
-from ros_license_linter.main import main
+import git
 
 
-class TestPkgUnknownLicense(unittest.TestCase):
+class TestLicensePerRepoBsd3(unittest.TestCase):
+    """Test that the license per repo is detected correctly.
+    Here a repo folder has a license text with subfolders that are packages
+    using that license."""
 
-    def test_failure(self):
+    def test_license_text_in_repo_bsd3(self):
+        # make actual git repo
+        r = git.Repo.init("test/test_repo_bsd3")
+        r.index.add(["LICENSE"])
+        r.index.commit("initial commit")
+        # test
         process = subprocess.Popen(
-            ["bin/ros_license_linter", "test/test_pkg_unknown_license"],
+            ["bin/ros_license_linter", "test/test_repo_bsd3"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
         stdout, stderr = process.communicate()
-        self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertIn(b'not in SPDX list of licenses', stdout)
-        self.assertIn(b'my own fancy license 1.0', stdout)
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertEqual(b'', stderr)
+        self.assertIn(b'BSD-3-Clause', stdout)
+        self.assertIn(b'pkg_with_bsd3_a', stdout)
+        self.assertIn(b'pkg_with_bsd3_b', stdout)
+        # clean up
+        shutil.rmtree("test/test_repo_bsd3/.git")
 
 
 if __name__ == '__main__':
