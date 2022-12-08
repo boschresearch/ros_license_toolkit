@@ -9,10 +9,27 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    name: Run tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.6", "3.7", "3.8", "3.9"]
 
     steps:
-      - name: GitHub Action for pytest
-        # You may pin to the exact commit or the version.
-        # uses: cclauss/GitHub-Action-for-pytest@5863d02de95f37516a732802fa6257dfdf93e54c
-        uses: cclauss/GitHub-Action-for-pytest@0.5.0
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: "Europe/Berlin"
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pytest
+        run: pip install pytest pytest-md pytest-emoji
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - uses: pavelzw/pytest-action@v2
+        with:
+          emoji: true
+          verbose: true
+          job-summary: true
