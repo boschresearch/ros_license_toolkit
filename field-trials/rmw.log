@@ -1,0 +1,33 @@
+Found 2 packages in .
+====================
+[rmw]
+git hash of (..): 31c6fd094c8bd01d0a231856df1bd9a476bea26a
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rmw] Overall:[92m
+ SUCCESS[00m
+====================
+[rmw_implementation_cmake]
+git hash of (..): 31c6fd094c8bd01d0a231856df1bd9a476bea26a
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache-2.0'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+--------------------
+[rmw_implementation_cmake] Overall:[92m
+ SUCCESS[00m
+====================
+Execution time: 45.27 seconds
+All packages:[92m
+ SUCCESS[00m

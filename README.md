@@ -12,15 +12,15 @@ We do this by using `scancode-toolkit` to scan the code and compare the results 
 ## Features
 This checks:
 - [x] Is any license defined in `package.xml`?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L92)
+    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L90)
 - [x] Has at most one license tag without a source-files declaration?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L92)
+    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L90)
 - [x] Do all licenses tags follow the SPDX standard?
-    [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L106)
+    [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L104)
 - [x] Are license texts available and correctly referenced for all declared licenses?
-    [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L125)
+    [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L123)
 - [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/*")?
-    [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L184)
+    [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L182)
 
 ## State of Development
 *WORK IN PROGRESS*
@@ -30,12 +30,13 @@ In particular, the following things will have to be done:
 
 ### To Do
 - [ ] Coverage analysis
-- [ ] Linter(s) per CI
-- [ ] Field trials (check existing ROS packages and see what to do with the results.)
+- [x] Linter(s) per CI
+- [x] Field trials (check existing ROS packages and see what to do with the results). see [field-trials/](field-trials/)
 - [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
 - [x] Allow license name in tag to be also full name of SPDX key.
 - [x] Each LicenseTag should have SPDX id.
 - [ ] Single license tag without file attribute and single license text should match automatically.
+- [ ] Turn into github action.
 
 ## License
 ros_license_linter is open-sourced under the Apache-2.0 license. See the
