@@ -29,7 +29,7 @@ def is_license_name_in_spdx_list(license_name: str) -> bool:
 
 
 def to_spdx_license_tag(license_name: str) -> str:
-    """Convert a license name to a SPDX license tag 
+    """Convert a license name to a SPDX license tag
     (assuming it is shorter than the name).
     This is because the dict from spdx.config.LICENSE_MAP
     contains both pairings (tag, name) and (name, tag).
