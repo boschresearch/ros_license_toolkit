@@ -46,7 +46,7 @@ jobs:
       - name: Install pytest
         run: pip install pytest pytest-md pytest-emoji
       - name: Install package
-        run: python setup.py install
+        run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
           emoji: true
