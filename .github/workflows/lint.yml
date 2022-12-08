@@ -1,4 +1,4 @@
-name: Pytest
+name: Lint
 on:
   push:
     branches: [ main ]
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build: 
-    name: Run tests with python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: Linting with python ${{ matrix.python-version }} on ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -37,16 +37,18 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Update pip
-        run: |
-          pip install --upgrade pip
-          pip install setuptools_rust  
-      - name: Install pytest
-        run: pip install pytest pytest-md pytest-emoji
-      - name: Install package
-        run: pip install .
-      - uses: pavelzw/pytest-action@v2
+      - uses: ricardochaves/python-lint@v1.4.0
         with:
-          emoji: true
-          verbose: true
-          job-summary: true
+          python-root-list: "src/ test/ bin/ros_license_linter setup.py"
+          use-pylint: false
+          use-pycodestyle: true
+          use-flake8: false
+          use-black: false
+          use-mypy: true
+          use-isort: true
+          extra-pylint-options: ""
+          extra-pycodestyle-options: ""
+          extra-flake8-options: ""
+          extra-black-options: ""
+          extra-mypy-options: "--ignore-missing-imports"
+          extra-isort-options: ""

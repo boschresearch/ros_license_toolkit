@@ -1,5 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository https://github.com/boschresearch/ros_license_linter
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,6 +35,7 @@ setup(
     keywords=["license", "ROS"],
     packages=["ros_license_linter"],
     install_requires=[
+        'gitpython',
         'rospkg',
         'scancode-toolkit',
         'spdx-tools'

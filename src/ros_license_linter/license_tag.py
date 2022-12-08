@@ -16,7 +16,8 @@ class LicenseTag(object):
         # Name of the license (presumably in SPDX format)
         self.license_id = element.text  # TODO: make sure this is SPDX
 
-        # Path to the file containing the license text (relative to package root)
+        # Path to the file containing the license text
+        # (relative to package root)
         self.license_text_file: Optional[str] = element.attrib.get(
             "file", None)
 

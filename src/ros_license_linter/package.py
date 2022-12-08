@@ -1,5 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository https://github.com/boschresearch/ros_license_linter
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,7 +76,7 @@ class MoreThanOneLicenseWithoutLicenseTextFile(PackageException):
 
 
 class Package(object):
-    """This represents a ros package, defined by its `path` (absolute) and 
+    """This represents a ros package, defined by its `path` (absolute) and
     results within it."""
 
     def __init__(self, path: str):
@@ -123,7 +124,8 @@ class Package(object):
     def get_scan_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if self.found_files_w_licenses is None or self.found_license_texts is None:
+        if (self.found_files_w_licenses is None or
+                self.found_license_texts is None):
             self.found_files_w_licenses = {}
             self.found_license_texts = {}
             for (root, _, files) in os.walk(self.abspath):
@@ -199,9 +201,11 @@ class Package(object):
         return self.license_tags
 
     def get_license_files(self) -> List[str]:
-        """Get all license text files asosiated with license tags 
+        """Get all license text files asosiated with license tags
         in the package.xml."""
-        return list(map(lambda x: x.get_license_text_file(), self.get_license_tags().values()))
+        return list(map(
+            lambda x: x.get_license_text_file(),
+            self.get_license_tags().values()))
 
 
 def get_packages_in_path(path: str) -> List[Package]:

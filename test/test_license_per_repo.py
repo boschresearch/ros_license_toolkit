@@ -1,5 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository https://github.com/boschresearch/ros_license_linter
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,39 +19,22 @@ import shutil
 import subprocess
 import unittest
 
+import git
+
 from ros_license_linter.main import main
 
 
 class TestLicensePerRepo(unittest.TestCase):
     """Test that the license per repo is detected correctly.
-    Here a repo folder has a license text with subfolders that are packages 
+    Here a repo folder has a license text with subfolders that are packages
     using that license."""
 
     def test_license_text_in_repo(self):
-        process_init = subprocess.Popen(
-            ["git", "init"],
-            cwd="test/test_repo",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        stdout, stderr = process_init.communicate()
-        assert stderr == b""
-        process_add = subprocess.Popen(
-            ["git", "add", "."],
-            cwd="test/test_repo",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        stdout, stderr = process_add.communicate()
-        assert stderr == b""
-        process_commit = subprocess.Popen(
-            ["git", "commit", "-m", "Initial commit"],
-            cwd="test/test_repo",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        stdout, stderr = process_commit.communicate()
-        assert stderr == b""
+        # make actual git repo
+        r = git.Repo.init("test/test_repo")
+        r.index.add(["LICENSE"])
+        r.index.commit("initial commit")
+        # test
         process = subprocess.Popen(
             ["bin/ros_license_linter", "test/test_repo"],
             stdout=subprocess.PIPE,
@@ -58,6 +42,10 @@ class TestLicensePerRepo(unittest.TestCase):
         )
         stdout, stderr = process.communicate()
         self.assertEqual(os.EX_OK, process.returncode)
+        self.assertEqual(b'', stderr)
+        self.assertIn(b'MIT', stdout)
+        self.assertIn(b'pkg_with_mit_a', stdout)
+        self.assertIn(b'pkg_with_mit_b', stdout)
         # clean up
         shutil.rmtree("test/test_repo/.git")
 

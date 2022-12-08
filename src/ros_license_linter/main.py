@@ -1,5 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository https://github.com/boschresearch/ros_license_linter
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,8 +33,10 @@ from ros_license_linter.ui_elements import (FAILURE_STR, SUCCESS_STR,
 def main(args: Sequence[str] = sys.argv[1:]) -> int:
     parser = argparse.ArgumentParser(
         description='Checks ROS packages for correct license declaration.')
-    parser.add_argument('path', default='.',
-                        help='path to ROS2 package or repo containing packages')
+    parser.add_argument(
+        'path',
+        default='.',
+        help='path to ROS2 package or repo containing packages')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                         default=False, help='enable verbose output')
     parser.add_argument('-q', '--quiet', dest='quiet', action='store_true',
