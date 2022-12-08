@@ -34,6 +34,7 @@ setup(
     keywords=["license", "ROS"],
     packages=["ros_license_linter"],
     install_requires=[
+        'gitpython',
         'rospkg',
         'scancode-toolkit',
         'spdx-tools'

@@ -1,3 +1,0 @@
-rospkg
-scancode-toolkit
-spdx-tools
