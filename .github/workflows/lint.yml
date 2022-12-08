@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build: 
-    name: Linting with python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: py${{ matrix.python-version }} @ ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
