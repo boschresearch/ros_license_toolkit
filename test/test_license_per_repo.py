@@ -27,6 +27,14 @@ class TestLicensePerRepo(unittest.TestCase):
     using that license."""
 
     def test_license_text_in_repo(self):
+        process_config = subprocess.Popen(
+            ["git", "config", "--global", "init.defaultBranch", "main"],
+            cwd="test/test_repo",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        stdout, stderr = process_config.communicate()
+        assert stderr == b""
         process_init = subprocess.Popen(
             ["git", "init"],
             cwd="test/test_repo",
