@@ -1,5 +1,8 @@
 # ros_license_linter
-Checks ROS packages for correct license declaration
+
+[![Pytest](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml) [![Lint](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml) [![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/issues) [![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/pulls) [![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/search?l=python) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/boschresearch/ros_license_linter/blob/main/LICENSE)
+
+> Checks ROS packages for correct license declaration
 
 ## Motivation
 ROS packages must have licenses. 
