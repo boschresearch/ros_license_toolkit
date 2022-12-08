@@ -22,19 +22,19 @@ import unittest
 import git
 
 
-class TestLicensePerRepo(unittest.TestCase):
+class TestLicensePerRepoMit(unittest.TestCase):
     """Test that the license per repo is detected correctly.
     Here a repo folder has a license text with subfolders that are packages
     using that license."""
 
-    def test_license_text_in_repo(self):
+    def test_license_text_in_repo_mit(self):
         # make actual git repo
-        r = git.Repo.init("test/test_repo")
+        r = git.Repo.init("test/test_repo_mit")
         r.index.add(["LICENSE"])
         r.index.commit("initial commit")
         # test
         process = subprocess.Popen(
-            ["bin/ros_license_linter", "test/test_repo"],
+            ["bin/ros_license_linter", "test/test_repo_mit"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
@@ -45,7 +45,7 @@ class TestLicensePerRepo(unittest.TestCase):
         self.assertIn(b'pkg_with_mit_a', stdout)
         self.assertIn(b'pkg_with_mit_b', stdout)
         # clean up
-        shutil.rmtree("test/test_repo/.git")
+        shutil.rmtree("test/test_repo_mit/.git")
 
 
 if __name__ == '__main__':
