@@ -199,6 +199,11 @@ class Package(object):
                     _, license_texts = self.get_scan_results()
                     if len(license_texts) == 1:
                         li.license_text_file = list(license_texts.keys())[0]
+                    else:
+                        for license_text_file in license_texts.keys():
+                            if "LICENSE" in license_text_file:
+                                li.license_text_file = license_text_file
+                                break
                     break
 
         return self.license_tags
