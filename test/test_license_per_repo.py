@@ -1,5 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository https://github.com/boschresearch/ros_license_linter
+# see the NOTICE file and/or the repository
+# https://github.com/boschresearch/ros_license_linter
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +26,7 @@ from ros_license_linter.main import main
 
 class TestLicensePerRepo(unittest.TestCase):
     """Test that the license per repo is detected correctly.
-    Here a repo folder has a license text with subfolders that are packages 
+    Here a repo folder has a license text with subfolders that are packages
     using that license."""
 
     def test_license_text_in_repo(self):
