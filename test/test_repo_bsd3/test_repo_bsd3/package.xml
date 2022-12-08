@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>test_repo_bsd3</name>
+  <!-- This has the same name as the repo -->
+  <license>BSD-3-Clause</license>
+</package>

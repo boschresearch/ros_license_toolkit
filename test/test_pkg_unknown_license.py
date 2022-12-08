@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+import subprocess
 import unittest
 
 from ros_license_linter.main import main
@@ -23,8 +24,15 @@ from ros_license_linter.main import main
 class TestPkgUnknownLicense(unittest.TestCase):
 
     def test_failure(self):
-        self.assertEqual(os.EX_DATAERR, main(
-            ["test/test_pkg_unknown_license"]))
+        process = subprocess.Popen(
+            ["bin/ros_license_linter", "test/test_pkg_unknown_license"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        stdout, stderr = process.communicate()
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertIn(b'not in SPDX list of licenses', stdout)
+        self.assertIn(b'my own fancy license 1.0', stdout)
 
 
 if __name__ == '__main__':
