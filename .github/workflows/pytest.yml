@@ -8,12 +8,27 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  build:
-    name: Run tests
-    runs-on: ubuntu-latest
+  build: 
+    name: Run tests with python ${{ matrix.python-version }} on ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9"]
+        include:
+          - python-version: "3.6"
+            os: "ubuntu-20.04"
+          - python-version: "3.7"
+            os: "ubuntu-20.04"
+          - python-version: "3.7"
+            os: "ubuntu-22.04"
+          - python-version: "3.8"
+            os: "ubuntu-20.04"
+          - python-version: "3.8"
+            os: "ubuntu-22.04"
+          - python-version: "3.9"
+            os: "ubuntu-22.04"
+          - python-version: "3.10"
+            os: "ubuntu-22.04"
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: szenius/set-timezone@v1.0
