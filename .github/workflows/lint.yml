@@ -37,6 +37,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Update pip
+        run: |
+          pip install --upgrade pip
+          pip install setuptools_rust  
+      - name: Install dependencies
+        run: pip install .
       - uses: ricardochaves/python-lint@v1.4.0
         with:
           python-root-list: "src/ test/ bin/ros_license_linter setup.py"
