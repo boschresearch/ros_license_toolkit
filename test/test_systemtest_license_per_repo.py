@@ -19,12 +19,9 @@ System tests to make sure that the license per repo is detected correctly.
 """
 
 import os
-import shutil
 import subprocess
 import unittest
 from test.test_functions import make_repo, remove_repo
-
-import git
 
 
 class TestLicensePerRepoBsd3(unittest.TestCase):
