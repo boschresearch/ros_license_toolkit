@@ -14,11 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Module containing the entry point for the ros_license_linter CLI.
+"""
+
 import argparse
 import os
 import sys
 import timeit
-from typing import Optional, Sequence
+from typing import Sequence
 
 from ros_license_linter.checks import (LicensesInCodeCheck,
                                        LicenseTagExistsCheck,
@@ -30,7 +34,17 @@ from ros_license_linter.ui_elements import (FAILURE_STR, SUCCESS_STR,
                                             minor_sep, red, rll_print_factory)
 
 
-def main(args: Sequence[str] = sys.argv[1:]) -> int:
+def main(args: Sequence[str]) -> int:
+    """Main entry point for the ros_license_linter CLI.
+
+    :param args: the command line arguments, defaults to sys.argv[1:]
+    :type args: Sequence[str], optional
+    :return: the exit code, `os.EX_OK` if all checks passed, `os.EX_USAGE` if
+        no packages were found, `os.EX_DATAERR` if any check failed
+    :rtype: int
+    """
+    if not args:
+        args = sys.argv[1:]
     parser = argparse.ArgumentParser(
         description='Checks ROS packages for correct license declaration.')
     parser.add_argument(
@@ -107,6 +121,5 @@ def main(args: Sequence[str] = sys.argv[1:]) -> int:
     if all(results_per_package.values()):
         rll_print("All packages:"+green(f"\n {SUCCESS_STR}"), Verbosity.QUIET)
         return os.EX_OK
-    else:
-        rll_print("All packages:"+red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
-        return os.EX_DATAERR
+    rll_print("All packages:"+red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
+    return os.EX_DATAERR

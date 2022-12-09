@@ -14,16 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This module contains the Package class.
+"""
+
 import os
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
 
-import git
 from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_linter.license_tag import LicenseTag
+from ros_license_linter.repo import NotARepoError, Repo
 
 # files we ignore in scan results
 IGNORED_FILES = [
@@ -33,50 +37,39 @@ IGNORED_FILES = [
     "CMakeLists.txt"
 ]
 
-# how many folders up to search for a repo
-REPO_SEARCH_DEPTH = 2
-
-
-def is_git_repo(path: str) -> bool:
-    """Check if a path is a git repo."""
-    return os.path.isdir(os.path.join(path, ".git"))
-
 
 def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
     """Check if a file is a license text file."""
-    for license in scan_results["licenses"]:
-        if license["matched_rule"]["is_license_text"] and \
-                license["score"] >= 99:
+    for _license in scan_results["licenses"]:
+        if _license["matched_rule"]["is_license_text"] and \
+                _license["score"] >= 99:
             return True
     return False
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
-    for license in scan_results["licenses"]:
-        if license["score"] >= 99:
-            return license["spdx_license_key"]
+    for _license in scan_results["licenses"]:
+        if _license["score"] >= 99:
+            return _license["spdx_license_key"]
     return None
 
 
 class PackageException(Exception):
     """Exception raised when a package is invalid."""
-    pass
 
 
 class MoreThanOneLicenseWithoutSourceFilesTag(PackageException):
     """Exception raised when a package has more than one license tag without
     source files."""
-    pass
 
 
 class MoreThanOneLicenseWithoutLicenseTextFile(PackageException):
     """Exception raised when a package has more than one license tag without
     a license text file."""
-    pass
 
 
-class Package(object):
+class Package:
     """This represents a ros package, defined by its `path` (absolute) and
     results within it."""
 
@@ -85,19 +78,11 @@ class Package(object):
         self.abspath: str = path
 
         # relative path to the parent repo, if any
-        self.repo: Optional[str] = None
-        search_path = path
-        for _ in range(REPO_SEARCH_DEPTH + 1):
-            if is_git_repo(search_path):
-                self.repo = os.path.relpath(search_path, self.abspath)
-                break
-            search_path = os.path.dirname(search_path)
-
-        # (for logging purposes) the current git hash
-        self.git_hash: Optional[str] = None
-        if self.repo is not None:
-            repo = git.Repo(os.path.join(self.abspath, self.repo))
-            self.git_hash = repo.head.object.hexsha
+        self.repo: Optional[Repo] = None
+        try:
+            self.repo = Repo(self.abspath)
+        except NotARepoError:
+            pass
 
         # name of this package by its folder name
         self.name: str = os.path.basename(self.abspath)
@@ -118,43 +103,45 @@ class Package(object):
         # this is Optional, because it is only evaluated on the first call
         self.license_tags: Optional[Dict[str, LicenseTag]] = None
 
-    def _get_path_relative_to_pkg(self, p: str) -> str:
+    def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
-        return os.path.relpath(p, self.abspath)
+        return os.path.relpath(path, self.abspath)
 
     def get_scan_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if (self.found_files_w_licenses is None or
+        if not (self.found_files_w_licenses is None or
                 self.found_license_texts is None):
-            self.found_files_w_licenses = {}
-            self.found_license_texts = {}
-            for (root, _, files) in os.walk(self.abspath):
-                for fname in files:
-                    if fname in IGNORED_FILES:
-                        continue
-                    # Path relative to cwd
-                    fpath = os.path.join(root, fname)
-                    # Path relative to package root
-                    fpath_rel_to_pkg = self._get_path_relative_to_pkg(fpath)
-                    scan_results = get_licenses(fpath)
-                    if is_license_text_file(scan_results):
-                        self.found_license_texts[fpath_rel_to_pkg
-                                                 ] = scan_results
-                    else:
-                        # not a license text file but also interesting
-                        self.found_files_w_licenses[fpath_rel_to_pkg
-                                                    ] = scan_results
-            # look also in the repo for license text files
-            if self.repo is not None:
-                for file in os.listdir(os.path.join(self.abspath, self.repo)):
-                    fpath = os.path.join(self.abspath, self.repo, file)
-                    if not os.path.isfile(fpath):
-                        continue
-                    scan_results = get_licenses(fpath)
-                    if is_license_text_file(scan_results):
-                        self.found_license_texts[os.path.join(
-                            self.repo, file)] = scan_results
+            return self.found_files_w_licenses, self.found_license_texts
+        self.found_files_w_licenses = {}
+        self.found_license_texts = {}
+        for (root, _, files) in os.walk(self.abspath):
+            for fname in files:
+                if fname in IGNORED_FILES:
+                    continue
+                # Path relative to cwd
+                fpath = os.path.join(root, fname)
+                # Path relative to package root
+                fpath_rel_to_pkg = self._get_path_relative_to_pkg(fpath)
+                scan_results = get_licenses(fpath)
+                if is_license_text_file(scan_results):
+                    self.found_license_texts[fpath_rel_to_pkg
+                                             ] = scan_results
+                else:
+                    # not a license text file but also interesting
+                    self.found_files_w_licenses[fpath_rel_to_pkg
+                                                ] = scan_results
+        # look also in the repo for license text files
+        if self.repo is not None:
+            repo_path = self.repo.abs_path
+            for file in os.listdir(repo_path):
+                fpath = os.path.join(repo_path, file)
+                if not os.path.isfile(fpath):
+                    continue
+                scan_results = get_licenses(fpath)
+                if is_license_text_file(scan_results):
+                    self.found_license_texts[os.path.relpath(
+                        fpath, self.abspath)] = scan_results
             # pprint.pprint(self.licenses)
         return self.found_files_w_licenses, self.found_license_texts
 
@@ -167,44 +154,45 @@ class Package(object):
 
     def get_license_tags(self) -> Dict[str, LicenseTag]:
         """Get all license tags in the package.xml file."""
-        if self.license_tags is None:
-            self.license_tags = {}
-            for license_tag in self._get_package_xml().iterfind('license'):
-                li = LicenseTag(license_tag, self.abspath)
-                self.license_tags[li.get_license_id()] = li
+        if self.license_tags is not None:
+            return self.license_tags
+        self.license_tags = {}
+        for license_tag in self._get_package_xml().iterfind('license'):
+            tag = LicenseTag(license_tag, self.abspath)
+            self.license_tags[tag.get_license_id()] = tag
 
-            # One license tag can have no source-files attribute, but only one.
-            # This is then the main license.
-            if len(list(filter(lambda x: not x.has_source_files(),
-                               self.license_tags.values()))) > 1:
-                raise MoreThanOneLicenseWithoutSourceFilesTag(
-                    "There must be at most one license tag without "
-                    + "source-files.")
-            for li in self.license_tags.values():
-                if not li.has_source_files():
-                    li.make_this_the_main_license(
-                        list(self.license_tags.values()))
-                    break
+        # One license tag can have no source-files attribute, but only one.
+        # This is then the main license.
+        if len(list(filter(lambda x: not x.has_source_files(),
+                           self.license_tags.values()))) > 1:
+            raise MoreThanOneLicenseWithoutSourceFilesTag(
+                "There must be at most one license tag without "
+                + "source-files.")
+        for tag in self.license_tags.values():
+            if not tag.has_source_files():
+                tag.make_this_the_main_license(
+                    list(self.license_tags.values()))
+                break
 
-            # One license tag can have no file attribute, but only one.
-            # It may be associated to a license text file in the package or
-            # the repo.
-            if len(list(filter(lambda x: not x.has_license_text_file(),
-                               self.license_tags.values()))) > 1:
-                raise MoreThanOneLicenseWithoutLicenseTextFile(
-                    "There must be at most one license tag without "
-                    + "a license text file.")
-            for li in self.license_tags.values():
-                if not li.has_license_text_file():
-                    _, license_texts = self.get_scan_results()
-                    if len(license_texts) == 1:
-                        li.license_text_file = list(license_texts.keys())[0]
-                    else:
-                        for license_text_file in license_texts.keys():
-                            if "LICENSE" in license_text_file:
-                                li.license_text_file = license_text_file
-                                break
-                    break
+        # One license tag can have no file attribute, but only one.
+        # It may be associated to a license text file in the package or
+        # the repo.
+        if len(list(filter(lambda x: not x.has_license_text_file(),
+                           self.license_tags.values()))) > 1:
+            raise MoreThanOneLicenseWithoutLicenseTextFile(
+                "There must be at most one license tag without "
+                + "a license text file.")
+        for tag in self.license_tags.values():
+            if not tag.has_license_text_file():
+                _, license_texts = self.get_scan_results()
+                if len(license_texts) == 1:
+                    tag.license_text_file = list(license_texts.keys())[0]
+                else:
+                    for license_text_file in license_texts:
+                        if "LICENSE" in license_text_file:
+                            tag.license_text_file = license_text_file
+                            break
+                break
 
         return self.license_tags
 

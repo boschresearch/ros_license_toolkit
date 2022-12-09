@@ -14,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Module containing the LicenseTag class and related functions to handle
+license tags in package.xml files.
+"""
+
 import os
 import xml.etree.ElementTree as ET
 from glob import glob
@@ -24,7 +29,7 @@ from spdx.config import LICENSE_MAP
 
 def is_license_name_in_spdx_list(license_name: str) -> bool:
     """Check if a license name is in the SPDX list of licenses."""
-    return license_name in LICENSE_MAP.keys() or \
+    return license_name in LICENSE_MAP or \
         license_name in LICENSE_MAP.values()
 
 
@@ -35,15 +40,15 @@ def to_spdx_license_tag(license_name: str) -> str:
     contains both pairings (tag, name) and (name, tag).
     """
     for tag, name in LICENSE_MAP.items():
-        if license_name == name or license_name == tag:
+        if license_name in [tag, name]:
             if len(tag) < len(name):
                 return tag
-            else:
-                return name
+            # else
+            return name
     raise ValueError("License name not in SPDX list.")
 
 
-class LicenseTag(object):
+class LicenseTag:
     """A license tag found in a package.xml file."""
 
     def __init__(self, element: ET.Element, pkg_path: str):
@@ -77,8 +82,9 @@ class LicenseTag(object):
             for src_glob in source_files_str.split(" "):
                 _source_files = glob(os.path.join(
                     pkg_path, src_glob), recursive=True)
-                for sf in _source_files:
-                    self.source_files.append(os.path.relpath(sf, pkg_path))
+                for _source_file in _source_files:
+                    self.source_files.append(
+                        os.path.relpath(_source_file, pkg_path))
 
         # Path of package file this is in
         self.package_path: str = pkg_path
