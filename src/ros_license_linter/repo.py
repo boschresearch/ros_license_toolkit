@@ -24,7 +24,7 @@ from typing import Optional
 import git
 
 # how many folders up to search for a repo
-REPO_SEARCH_DEPTH = 2
+REPO_SEARCH_DEPTH = 4
 
 
 def is_git_repo(path: str) -> bool:

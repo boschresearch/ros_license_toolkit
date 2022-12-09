@@ -19,6 +19,7 @@
 import os
 import subprocess
 import unittest
+from test.test_functions import make_repo, remove_repo
 
 from ros_license_linter.main import main
 
@@ -26,22 +27,26 @@ from ros_license_linter.main import main
 class TestPkgs(unittest.TestCase):
     """Test different test packages."""
 
-    def test_failure(self):
+    def test_deep_package_folder(self):
         """Call the linter on directories in three levels.
         Check that it has found the package that is multiple levels deep."""
+        repo_path = "test/test_data/test_deep_package_folder"
+        make_repo(repo_path)
         for call_path in [
-                "test",
-                "test/test_data",
-                "test/test_data/test_deep_package_folder"]:
+                "test/test_data/test_deep_package_folder",
+                "test/test_data/test_deep_package_folder/deeper",
+                "test/test_data/test_deep_package_folder/deeper/test_pkg_deep"
+        ]:
             with subprocess.Popen(
                 ["bin/ros_license_linter", call_path],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ) as process:
-                stdout = process.communicate()
+                stdout, _ = process.communicate()
             self.assertEqual(os.EX_DATAERR, process.returncode)
             self.assertIn(
                 b"test_pkg_deep", stdout)
+        remove_repo(repo_path)
 
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under

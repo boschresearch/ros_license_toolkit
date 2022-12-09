@@ -26,7 +26,7 @@ import unittest
 class TestAllPackages(unittest.TestCase):
     """Test the linter on all packages in the test directory."""
 
-    def test_failure(self):
+    def test_all(self):
         """Call the linter on the whole test directory.
         Check that the output contains all package names.
         """
@@ -36,32 +36,32 @@ class TestAllPackages(unittest.TestCase):
             stderr=subprocess.PIPE,
         ) as process:
             stdout, stderr = process.communicate()
-            self.assertEqual(os.EX_DATAERR, process.returncode)
-            print(stdout)
-            print(stderr)
-            self.assertIn(b"test_pkg_deep", stdout)
-            self.assertIn(
-                b"test_pkg_has_code_disjoint", stdout)
-            self.assertIn(
-                b"test_pkg_has_code_of_different", stdout)
-            self.assertIn(
-                b"test_pkg_has_code_of_different_license_and_tag", stdout)
-            self.assertIn(
-                b"test_pkg_has_code_of_different_license_and_wrong_tag", stdout)
-            self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
-            self.assertIn(b"test_pkg_no_license_file", stdout)
-            self.assertIn(b"test_pkg_no_license", stdout)
-            self.assertIn(b"test_pkg_spdx_name", stdout)
-            self.assertIn(b"test_pkg_spdx_tag", stdout)
-            self.assertIn(b"test_pkg_unknown_license", stdout)
-            self.assertIn(b"test_pkg_with_license_and_file", stdout)
-            self.assertIn(
-                b"test_pkg_with_multiple_licenses_no_source_files_tag", stdout)
-            self.assertIn(b"test_pkg_wrong_license_file", stdout)
-            self.assertIn(b"pkg_with_bsd3_a", stdout)
-            self.assertIn(b"pkg_with_bsd3_b", stdout)
-            self.assertIn(b"pkg_with_mit_a", stdout)
-            self.assertIn(b"pkg_with_mit_b", stdout)
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        print(stdout)
+        print(stderr)
+        self.assertIn(b"test_pkg_deep", stdout)
+        self.assertIn(
+            b"test_pkg_has_code_disjoint", stdout)
+        self.assertIn(
+            b"test_pkg_has_code_of_different", stdout)
+        self.assertIn(
+            b"test_pkg_has_code_of_different_license_and_tag", stdout)
+        self.assertIn(
+            b"test_pkg_has_code_of_different_license_and_wrong_tag", stdout)
+        self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
+        self.assertIn(b"test_pkg_no_license_file", stdout)
+        self.assertIn(b"test_pkg_no_license", stdout)
+        self.assertIn(b"test_pkg_spdx_name", stdout)
+        self.assertIn(b"test_pkg_spdx_tag", stdout)
+        self.assertIn(b"test_pkg_unknown_license", stdout)
+        self.assertIn(b"test_pkg_with_license_and_file", stdout)
+        self.assertIn(
+            b"test_pkg_with_multiple_licenses_no_source_files_tag", stdout)
+        self.assertIn(b"test_pkg_wrong_license_file", stdout)
+        self.assertIn(b"pkg_with_bsd3_a", stdout)
+        self.assertIn(b"pkg_with_bsd3_b", stdout)
+        self.assertIn(b"pkg_with_mit_a", stdout)
+        self.assertIn(b"pkg_with_mit_b", stdout)
 
 
 if __name__ == '__main__':

@@ -14,12 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""System tests to make sure that the license per repo is detected correctly."""
+"""
+System tests to make sure that the license per repo is detected correctly.
+"""
 
 import os
 import shutil
 import subprocess
 import unittest
+from test.test_functions import make_repo, remove_repo
 
 import git
 
@@ -41,9 +44,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         """
         # make actual git repo
         repo_path = os.path.join("test", "test_data", repo_name)
-        repo = git.Repo.init(repo_path)
-        repo.index.add(["LICENSE"])
-        repo.index.commit("initial commit")
+        make_repo(repo_path)
         # test
         with subprocess.Popen(
             ["bin/ros_license_linter", repo_path],
@@ -57,7 +58,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         for pkg_name in pkg_names:
             self.assertIn(pkg_name.encode(), stdout)
         # clean up
-        shutil.rmtree(os.path.join(repo_path, ".git"))
+        remove_repo(repo_path)
 
     def test_license_text_in_repo_bsd3(self):
         """Testing with BSD-3-Clause license text."""

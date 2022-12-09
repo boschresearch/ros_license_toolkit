@@ -91,6 +91,7 @@ def main(args: Sequence[str]) -> int:
     results_per_package = {}
     for package in packages:
         rll_print(f'[{package.name}]')
+        assert package.repo is not None, 'Package must be in a git repo.'
         rll_print(
             f'git hash of ({package.repo.get_path()}):' +
             f' {package.repo.get_hash()}')
