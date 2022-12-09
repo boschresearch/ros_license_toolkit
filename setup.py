@@ -14,13 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Setup script for the ros_license_linter package."""
+
 import os
 
 from setuptools import setup
 
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    """Read a file (here: README.md) and return its content."""
+    return open(
+        os.path.join(os.path.dirname(__file__), fname),
+        encoding="utf-8").read()
 
 
 setup(

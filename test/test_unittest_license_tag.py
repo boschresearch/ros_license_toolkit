@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Unit tests for the license tag module"""
+
 import unittest
 from xml.etree import ElementTree as ET
 
@@ -22,12 +24,15 @@ from ros_license_linter.license_tag import (LicenseTag,
 
 
 class TestChecks(unittest.TestCase):
+    """Test the license tag module"""
 
     def test_is_license_name_in_spdx_list(self):
+        """Test the function is_license_name_in_spdx_list"""
         self.assertTrue(is_license_name_in_spdx_list("Apache-2.0"))
         self.assertFalse(is_license_name_in_spdx_list("Apache-2.0-foo"))
 
     def test_init(self):
+        """Test the constructor of the LicenseTag class"""
         by_spdx_tag = LicenseTag(ET.fromstring(
             "<license>Apache-2.0</license>"), "")
         self.assertEqual(by_spdx_tag.license_id, "Apache-2.0")

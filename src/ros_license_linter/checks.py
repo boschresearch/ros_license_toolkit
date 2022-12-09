@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This module contains the checks for the linter.
+"""
+
 import os
-import xml.etree.ElementTree as ET
 from pprint import pformat
 from typing import Dict, List, Optional
 
@@ -27,7 +30,9 @@ from ros_license_linter.package import (Package, PackageException,
 from ros_license_linter.ui_elements import NO_REASON_STR, green, red
 
 
-class Check(object):
+class Check:
+    """Base class for checks."""
+
     def __init__(self):
         # overall success of this check
         self.success: bool = False
@@ -38,30 +43,31 @@ class Check(object):
         # string with additional information for verbose output
         self.verbose_output: str = ""
 
-    def _failed(self, r: str):
+    def _failed(self, reason: str):
         """Set this check as failed for reason `r`."""
         self.success = False
-        self.reason = r
+        self.reason = reason
 
-    def _success(self, r: str):
+    def _success(self, reason: str):
         """Set this check as successful for reason `r`."""
         self.success = True
         if self.reason == NO_REASON_STR:
             self.reason = ""
         else:
             self.reason += "\n "
-        self.reason += r
+        self.reason += reason
 
     def __str__(self) -> str:
         """Return formatted string for normal output."""
         if self.success:
-            return str(
+            info: str = str(
                 type(self).__name__) + "\n" + \
                 green(f" SUCCESS {self.reason}")
         else:
-            return str(
+            info = str(
                 type(self).__name__) + "\n" + \
                 red(f" FAILURE {self.reason}")
+        return info
 
     def verbose(self) -> str:
         """Return string with additional information for verbose output."""
@@ -75,11 +81,11 @@ class Check(object):
         """Check `package` and set success and reason."""
         try:
             self._check(package)
-        except PackageException as e:
-            self._failed(f"PackageException: {e}")
+        except PackageException as ex:
+            self._failed(f"PackageException: {ex}")
             return
-        except AssertionError as e:
-            self._failed(f"AssertionError: {e}")
+        except AssertionError as ex:
+            self._failed(f"AssertionError: {ex}")
             return
 
     def _check(self, package: Package):
@@ -95,7 +101,6 @@ class LicenseTagExistsCheck(Check):
         if len(package.get_license_tags()) == 0:
             self._failed("No license tag defined.")
             self.verbose_output = red(str(package.package_xml))
-            return
         else:
             self._success(
                 f"Found licenses {list(map(str, package.get_license_tags()))}")
@@ -205,7 +210,7 @@ class LicensesInCodeCheck(Check):
                     files_with_uncovered_licenses[fname].append(
                         found_license_str)
                     continue
-                elif fname not in declared_licenses[
+                if fname not in declared_licenses[
                         found_license_str].get_source_files():
                     # this license is declared by a license tag but the file
                     # is not listed in the source files of the license tag

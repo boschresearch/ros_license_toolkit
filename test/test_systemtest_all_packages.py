@@ -14,28 +14,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This module tests the linter on all packages in the test directory.
+"""
+
 import os
 import subprocess
 import unittest
 
-from ros_license_linter.main import main
-
 
 class TestAllPackages(unittest.TestCase):
+    """Test the linter on all packages in the test directory."""
 
-    def test_failure(self):
+    def test_all(self):
         """Call the linter on the whole test directory.
         Check that the output contains all package names.
         """
-        process = subprocess.Popen(
-            ["bin/ros_license_linter", "test"],
+        with subprocess.Popen(
+            ["bin/ros_license_linter", "test/test_data"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-        )
-        stdout, stderr = process.communicate()
+        ) as process:
+            stdout, stderr = process.communicate()
+        self.assertEqual(os.EX_DATAERR, process.returncode)
         print(stdout)
         print(stderr)
-        self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertIn(b"test_pkg_deep", stdout)
         self.assertIn(
             b"test_pkg_has_code_disjoint", stdout)

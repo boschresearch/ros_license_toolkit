@@ -14,18 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This module contains helper functions for testing.
+"""
+
 import os
-import unittest
+import shutil
 
-from ros_license_linter.main import main
-
-
-class TestPkgHasCodeDisjoint(unittest.TestCase):
-
-    def test_failure(self):
-        self.assertEqual(os.EX_OK, main(
-            ["test/test_pkg_has_code_disjoint"]))
+import git
 
 
-if __name__ == '__main__':
-    unittest.main()
+def remove_repo(repo_path):
+    """Remove an existing git repo."""
+    shutil.rmtree(os.path.join(repo_path, ".git"))
+
+
+def make_repo(repo_path):
+    """Make a git repo with a commit."""
+    assert os.path.exists(repo_path)
+    if os.path.exists(os.path.join(repo_path, ".git")):
+        remove_repo(repo_path)
+    repo = git.Repo.init(repo_path)
+    repo.index.add(["."])
+    repo.index.commit("initial commit")
