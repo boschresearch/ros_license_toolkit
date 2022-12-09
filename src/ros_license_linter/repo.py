@@ -82,3 +82,7 @@ class Repo:
     def get_path(self) -> str:
         """Get the absolute path to the repo."""
         return self.abs_path
+
+    def get_hash(self) -> str:
+        """Get the current git hash."""
+        return self.git_hash

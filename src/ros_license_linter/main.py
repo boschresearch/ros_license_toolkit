@@ -91,7 +91,9 @@ def main(args: Sequence[str]) -> int:
     results_per_package = {}
     for package in packages:
         rll_print(f'[{package.name}]')
-        rll_print(f'git hash of ({package.repo}): {package.git_hash}')
+        rll_print(
+            f'git hash of ({package.repo.get_path()}):' +
+            f' {package.repo.get_hash()}')
         checks_to_perform = [
             LicenseTagExistsCheck(),
             LicenseTagIsInSpdxListCheck(),
