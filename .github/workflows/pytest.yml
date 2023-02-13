@@ -51,10 +51,10 @@ jobs:
           emoji: true
           verbose: true
           job-summary: true
-      # - uses: orgoro/coverage@v3
-      #   with:
-      #     coverageFile: "coverage.xml"
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: MishaKav/pytest-coverage-comment@main
+      - uses: orgoro/coverage@v3
         with:
-          pytest-xml-coverage-path: "coverage.xml"
+          coverageFile: "coverage.xml"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: MishaKav/pytest-coverage-comment@main
+      #   with:
+      #     pytest-xml-coverage-path: "coverage.xml"
