@@ -66,7 +66,8 @@ class TestPkgs(unittest.TestCase):
         from the package main license, but the additional license is declared
         in the package.xml."""
         self.assertEqual(os.EX_OK, main(
-            ["test/_test_data/test_pkg_has_code_of_different_license_and_tag"]))
+            ["test/_test_data/"
+                "test_pkg_has_code_of_different_license_and_tag"]))
 
     def test_pkg_has_code_of_different_license_and_wrong_tag(self):
         """Test on a package with source files under a license different
