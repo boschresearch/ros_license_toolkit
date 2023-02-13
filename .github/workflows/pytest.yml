@@ -1,14 +1,14 @@
 name: Pytest
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  build: 
+  build:
     name: py${{ matrix.python-version }} @ ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -40,13 +40,21 @@ jobs:
       - name: Update pip
         run: |
           pip install --upgrade pip
-          pip install setuptools_rust  
+          pip install setuptools_rust
       - name: Install pytest
-        run: pip install pytest pytest-md pytest-emoji
+        run: pip install pytest pytest-md pytest-emoji pytest-cov
       - name: Install package
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
+          custom-arguments: "--cov=src/ros_license_linter --cov-report=xml"
           emoji: true
           verbose: true
           job-summary: true
+      - uses: orgoro/coverage@v3
+        with:
+          coverageFile: "coverage.xml"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: MishaKav/pytest-coverage-comment@main
+      #   with:
+      #     pytest-xml-coverage-path: "coverage.xml"
