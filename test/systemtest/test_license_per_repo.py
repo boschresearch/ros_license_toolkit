@@ -21,7 +21,7 @@ System tests to make sure that the license per repo is detected correctly.
 import os
 import subprocess
 import unittest
-from test.test_functions import make_repo, remove_repo
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 
 class TestLicensePerRepoBsd3(unittest.TestCase):
@@ -40,7 +40,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         :type license_name: str
         """
         # make actual git repo
-        repo_path = os.path.join("test", "test_data", repo_name)
+        repo_path = os.path.join("test", "_test_data", repo_name)
         make_repo(repo_path)
         # test
         with subprocess.Popen(
