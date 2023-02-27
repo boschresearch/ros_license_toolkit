@@ -51,10 +51,10 @@ def to_spdx_license_tag(license_name: str) -> str:
 def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
     """Evaluate a glob string and return a set of matching relative paths."""
     paths = set()
-    for path in glob(os.path.join(pkg_path, glob_str), recursive=True):
-        if not os.path.isfile(path):
+    for fpath in glob(os.path.join(pkg_path, glob_str), recursive=True):
+        if not os.path.isfile(fpath):
             continue
-        paths.add(os.path.relpath(path, pkg_path))
+        paths.add(os.path.relpath(fpath, pkg_path))
     return paths
 
 
@@ -87,7 +87,7 @@ class LicenseTag:
         if self.source_files_str == '':
             # If no source-files attribute is given, assume all files
             # are licensed under this license.
-            self.source_files_str = "*"
+            self.source_files_str = "**"
         else:
             self._source_files = set()
             for src_glob in self.source_files_str.split(" "):
@@ -131,8 +131,8 @@ class LicenseTag:
         """Make this the main license for the package."""
         assert not self.has_source_files(), \
             "This must not have a source-files, yet."
-        assert self.source_files_str == "*", \
-            "This must have a source-files attribute of '*'."
+        assert self.source_files_str == "**", \
+            "This must have a source-files attribute of '**'."
         source_files = _eval_glob(
             self.source_files_str, self.package_path)
         for other_license in other_licenses:

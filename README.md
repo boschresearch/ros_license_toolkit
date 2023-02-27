@@ -19,7 +19,7 @@ This checks:
     [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L104)
 - [x] Are license texts available and correctly referenced for all declared licenses?
     [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L123)
-- [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/*")?
+- [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/**")?
     [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L182)
 
 ## State of Development

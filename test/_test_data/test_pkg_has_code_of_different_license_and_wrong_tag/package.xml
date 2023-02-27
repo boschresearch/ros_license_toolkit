@@ -3,5 +3,5 @@
 <package format="3">
   <name>test_pkg_has_code_of_different_license_and_wrong_tag</name>
   <license file="LICENSE">BSD-3-Clause</license>
-  <license file="LICENSE_LGPL_2_1_or_later" source-files="not_src/*">LGPL-2.1-or-later</license>
+  <license file="LICENSE_LGPL_2_1_or_later" source-files="not_src/**">LGPL-2.1-or-later</license>
 </package>
