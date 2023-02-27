@@ -73,13 +73,13 @@ class LicenseTag:
 
         # Paths to the source files that are licensed under this license
         self.source_files: Optional[List[str]] = None
-        source_files_str = element.attrib.get("source-files", None)
-        if source_files_str == "*":
+        self.source_files_str = element.attrib.get("source-files", None)
+        if self.source_files_str == "*" or self.source_files_str is None:
             # We will handle this case later (see `make_this_the_main_license`)
-            source_files_str = None
-        if source_files_str is not None:
+            self.source_files_str = None
+        if self.source_files_str is not None:
             self.source_files = []
-            for src_glob in source_files_str.split(" "):
+            for src_glob in self.source_files_str.split(" "):
                 _source_files = glob(os.path.join(
                     pkg_path, src_glob), recursive=True)
                 for _source_file in _source_files:

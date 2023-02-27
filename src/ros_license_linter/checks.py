@@ -77,7 +77,12 @@ class Check:
         return self.success
 
     def check(self, package: Package):
-        """Check `package` and set success and reason."""
+        """
+        Check `package` and set success and reason.
+
+        Calls `_check` internally. If they raise an exception, this is
+        caught and the check is set to failed.
+        """
         try:
             self._check(package)
         except PackageException as ex:
@@ -88,7 +93,7 @@ class Check:
             return
 
     def _check(self, package: Package):
-        """Check `package`."""
+        """Check `package`. To be overwritten by subclasses."""
         raise NotImplementedError("Overwrite this")
 
 
@@ -96,12 +101,12 @@ class LicenseTagExistsCheck(Check):
     """This ensures that a tag defining the license exists."""
 
     def _check(self, package: Package):
-        if len(package.get_license_tags()) == 0:
+        if len(package.license_tags) == 0:
             self._failed("No license tag defined.")
             self.verbose_output = red(str(package.package_xml))
         else:
             self._success(
-                f"Found licenses {list(map(str, package.get_license_tags()))}")
+                f"Found licenses {list(map(str, package.license_tags))}")
 
 
 class LicenseTagIsInSpdxListCheck(Check):
@@ -109,7 +114,7 @@ class LicenseTagIsInSpdxListCheck(Check):
 
     def _check(self, package: Package):
         licenses_not_in_spdx_list = []
-        for license_tag in package.get_license_tags().keys():
+        for license_tag in package.license_tags.keys():
             if not is_license_name_in_spdx_list(
                     license_tag):
                 licenses_not_in_spdx_list.append(license_tag)
@@ -126,12 +131,12 @@ class LicenseTextExistsCheck(Check):
     """This ensures that the license text file referenced by the tag exists."""
 
     def _check(self, package: Package):
-        if len(package.get_license_tags()) == 0:
+        if len(package.license_tags) == 0:
             self._failed("No license tag defined.")
             return
         license_tags_without_license_text: Dict[LicenseTag, str] = {}
-        _, found_license_texts = package.get_scan_results()
-        for license_tag in package.get_license_tags().values():
+        found_license_texts = package.found_license_texts
+        for license_tag in package.license_tags.values():
             if not license_tag.has_license_text_file():
                 license_tags_without_license_text[
                     license_tag] = "No license text file defined."
@@ -184,15 +189,14 @@ class LicensesInCodeCheck(Check):
     """Check if all found licenses have a declaration in the package.xml."""
 
     def _check(self, package: Package):
-        if len(package.get_license_tags()) == 0:
+        if len(package.license_tags) == 0:
             self._failed('No license tag defined.')
             return
-        declared_licenses = package.get_license_tags()
+        declared_licenses = package.license_tags
         files_with_uncovered_licenses: Dict[str, List[str]] = {}
         files_not_matched_by_any_license_tag: Dict[str, List[str]] = {}
 
-        found_files_w_licenses, _ = package.get_scan_results()
-        for fname, found_licenses in found_files_w_licenses.items():
+        for fname, found_licenses in package.found_files_w_licenses.items():
             if fname in package.get_license_files():
                 # the actual license text files are not relevant for this
                 continue
@@ -235,7 +239,7 @@ class LicensesInCodeCheck(Check):
                     list(filter(
                         lambda x: x[0] in files_with_uncovered_licenses or (
                             x[0] in files_not_matched_by_any_license_tag),
-                        found_files_w_licenses.items()))))
+                        package.found_files_w_licenses.items()))))
 
         else:
             self._success('All licenses found in the code are covered by a '
