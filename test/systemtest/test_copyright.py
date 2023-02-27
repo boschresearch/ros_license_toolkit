@@ -16,8 +16,8 @@
 
 import os
 
-from ros_license_linter.package import Package
 from ros_license_linter.copyright import Copyright
+from ros_license_linter.package import Package
 
 
 # @pytest.mark.skip

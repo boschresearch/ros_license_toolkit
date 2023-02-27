@@ -22,13 +22,12 @@ import os
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
 
-from ros_license_linter.license_tag import LicenseTag
-from ros_license_linter.repo import NotARepoError, Repo
-
 from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
-
 from scancode.api import get_licenses
+
+from ros_license_linter.license_tag import LicenseTag
+from ros_license_linter.repo import NotARepoError, Repo
 
 # files we ignore in scan results
 IGNORED_FILES = [
