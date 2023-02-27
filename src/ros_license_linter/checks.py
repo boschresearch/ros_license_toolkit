@@ -228,8 +228,8 @@ class LicensesInCodeCheck(Check):
                             files_with_uncovered_licenses.items()])
             elif len(files_not_matched_by_any_license_tag) > 0:
                 info_str += '\nThe following files contain licenses that ' +\
-                    'are covered by a license tag but are not listed in the' +\
-                    'a source files of the license tag:\n' + '\n'.join(
+                    'are covered by a license tag but are not listed in ' +\
+                    'the source files of the license tag:\n' + '\n'.join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             files_not_matched_by_any_license_tag.items()])
             assert info_str != ''
