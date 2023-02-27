@@ -16,8 +16,6 @@
 
 import os
 
-import pytest
-
 from ros_license_linter.package import Package
 from ros_license_linter.copyright import Copyright
 
