@@ -20,7 +20,6 @@ from ros_license_linter.copyright import Copyright
 from ros_license_linter.package import Package
 
 
-# @pytest.mark.skip
 def test_copyright():
     path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
     pkg = Package(path)

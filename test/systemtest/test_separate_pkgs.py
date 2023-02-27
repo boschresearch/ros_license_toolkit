@@ -18,8 +18,9 @@
 
 import os
 import subprocess
+from test.systemtest._test_helpers import make_repo
+from test.systemtest._test_helpers import remove_repo
 import unittest
-from test.systemtest._test_helpers import make_repo, remove_repo
 
 from ros_license_linter.main import main
 

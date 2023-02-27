@@ -20,10 +20,10 @@ import os
 import re
 from typing import Any, Dict, List, Set, Tuple, Union
 
+from scancode.api import get_copyrights
+
 from ros_license_linter.license_tag import LicenseTag
 from ros_license_linter.package import Package
-
-from scancode.api import get_copyrights
 
 
 def _get_copyright_strs_from_results(

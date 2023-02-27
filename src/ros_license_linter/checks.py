@@ -20,12 +20,15 @@ import os
 from pprint import pformat
 from typing import Dict, List, Optional
 
-from ros_license_linter.license_tag import (LicenseTag,
-                                            is_license_name_in_spdx_list)
-from ros_license_linter.package import (Package, PackageException,
-                                        get_spdx_license_name,
-                                        is_license_text_file)
-from ros_license_linter.ui_elements import NO_REASON_STR, green, red
+from ros_license_linter.license_tag import is_license_name_in_spdx_list
+from ros_license_linter.license_tag import LicenseTag
+from ros_license_linter.package import get_spdx_license_name
+from ros_license_linter.package import is_license_text_file
+from ros_license_linter.package import Package
+from ros_license_linter.package import PackageException
+from ros_license_linter.ui_elements import green
+from ros_license_linter.ui_elements import NO_REASON_STR
+from ros_license_linter.ui_elements import red
 
 
 class Check:

@@ -19,15 +19,17 @@ This module contains the Package class.
 """
 
 import os
-import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
+import xml.etree.ElementTree as ET
 
-from rospkg import RosPack, list_by_path
+from rospkg import list_by_path
+from rospkg import RosPack
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_linter.license_tag import LicenseTag
-from ros_license_linter.repo import NotARepoError, Repo
+from ros_license_linter.repo import NotARepoError
+from ros_license_linter.repo import Repo
 
 # files we ignore in scan results
 IGNORED_FILES = [

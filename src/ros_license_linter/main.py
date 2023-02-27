@@ -24,14 +24,19 @@ import sys
 import timeit
 from typing import Sequence
 
-from ros_license_linter.checks import (LicensesInCodeCheck,
-                                       LicenseTagExistsCheck,
-                                       LicenseTagIsInSpdxListCheck,
-                                       LicenseTextExistsCheck)
+from ros_license_linter.checks import LicensesInCodeCheck
+from ros_license_linter.checks import LicenseTagExistsCheck
+from ros_license_linter.checks import LicenseTagIsInSpdxListCheck
+from ros_license_linter.checks import LicenseTextExistsCheck
 from ros_license_linter.package import get_packages_in_path
-from ros_license_linter.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                            Verbosity, green, major_sep,
-                                            minor_sep, red, rll_print_factory)
+from ros_license_linter.ui_elements import FAILURE_STR
+from ros_license_linter.ui_elements import green
+from ros_license_linter.ui_elements import major_sep
+from ros_license_linter.ui_elements import minor_sep
+from ros_license_linter.ui_elements import red
+from ros_license_linter.ui_elements import rll_print_factory
+from ros_license_linter.ui_elements import SUCCESS_STR
+from ros_license_linter.ui_elements import Verbosity
 
 
 def main(args: Sequence[str]) -> int:
