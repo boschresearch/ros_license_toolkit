@@ -47,12 +47,12 @@ N_SEP = 20
 
 def major_sep() -> str:
     """Get a major separator"""
-    return "="*N_SEP
+    return "=" * N_SEP
 
 
 def minor_sep() -> str:
     """Get a minor separator"""
-    return "-"*N_SEP
+    return "-" * N_SEP
 
 
 # verbosity levels

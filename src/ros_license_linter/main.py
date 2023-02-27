@@ -93,7 +93,7 @@ def main(args: Sequence[str]) -> int:
         rll_print(f'[{package.name}]')
         assert package.repo is not None, 'Package must be in a git repo.'
         rll_print(
-            f'git hash of ({package.repo.get_path()}):' +
+            f'git hash of ({package.repo.get_path()}):'
             f' {package.repo.get_hash()}')
         checks_to_perform = [
             LicenseTagExistsCheck(),
@@ -108,12 +108,14 @@ def main(args: Sequence[str]) -> int:
 
         if all(checks_to_perform):
             rll_print(minor_sep())
-            rll_print(f"[{package.name}] Overall:"+green(f"\n {SUCCESS_STR}"))
+            rll_print(f"[{package.name}] Overall:" + green(
+                f"\n {SUCCESS_STR}"))
             rll_print(major_sep())
             results_per_package[package.abspath] = True
         else:
             rll_print(minor_sep())
-            rll_print(f"[{package.name}] Overall:"+red(f"\n {FAILURE_STR}"))
+            rll_print(f"[{package.name}] Overall:" + red(
+                f"\n {FAILURE_STR}"))
             rll_print(major_sep())
             results_per_package[package.abspath] = False
 
@@ -122,7 +124,8 @@ def main(args: Sequence[str]) -> int:
 
     # Print the overall results
     if all(results_per_package.values()):
-        rll_print("All packages:"+green(f"\n {SUCCESS_STR}"), Verbosity.QUIET)
+        rll_print("All packages:" + green(
+            f"\n {SUCCESS_STR}"), Verbosity.QUIET)
         return os.EX_OK
-    rll_print("All packages:"+red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
+    rll_print("All packages:" + red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
     return os.EX_DATAERR

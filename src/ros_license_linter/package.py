@@ -110,8 +110,8 @@ class Package:
     def get_scan_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if not (self.found_files_w_licenses is None or
-                self.found_license_texts is None):
+        if not (self.found_files_w_licenses is None or (
+                self.found_license_texts is None)):
             return self.found_files_w_licenses, self.found_license_texts
         self.found_files_w_licenses = {}
         self.found_license_texts = {}
@@ -167,7 +167,7 @@ class Package:
                            self.license_tags.values()))) > 1:
             raise MoreThanOneLicenseWithoutSourceFilesTag(
                 "There must be at most one license tag without "
-                + "source-files.")
+                "source-files.")
         for tag in self.license_tags.values():
             if not tag.has_source_files():
                 tag.make_this_the_main_license(
@@ -181,7 +181,7 @@ class Package:
                            self.license_tags.values()))) > 1:
             raise MoreThanOneLicenseWithoutLicenseTextFile(
                 "There must be at most one license tag without "
-                + "a license text file.")
+                "a license text file.")
         for tag in self.license_tags.values():
             if not tag.has_license_text_file():
                 _, license_texts = self.get_scan_results()

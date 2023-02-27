@@ -74,8 +74,8 @@ class TestPkgs(unittest.TestCase):
         from the package main license, but the additional license is declared
         in the package.xml, but with the wrong name."""
         self.assertEqual(os.EX_DATAERR, main(
-            ["test/_test_data/" +
-                "test_pkg_has_code_of_different_license_and_wrong_tag"]))
+            ["test/_test_data/"
+             "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
     def test_pkg_no_license(self):
         """Test on a package with no license declared in the package.xml."""
@@ -124,8 +124,8 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with multiple licenses declared in the
         package.xml, none of which have source file tags."""
         self.assertEqual(os.EX_DATAERR, main(
-            ["test/_test_data/" +
-                "test_pkg_with_multiple_licenses_no_source_files_tag"]))
+            ["test/_test_data/"
+             "test_pkg_with_multiple_licenses_no_source_files_tag"]))
 
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
