@@ -14,9 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-This module contains the checks for the linter.
-"""
+"""This module contains the checks for the linter."""
 
 import os
 from pprint import pformat
@@ -33,7 +31,8 @@ from ros_license_linter.ui_elements import NO_REASON_STR, green, red
 class Check:
     """Base class for checks."""
 
-    def __init__(self):
+    def __init__(self: 'Check'):
+        """Initialize a check."""
         # overall success of this check
         self.success: bool = False
 
@@ -41,7 +40,7 @@ class Check:
         self.reason: str = NO_REASON_STR
 
         # string with additional information for verbose output
-        self.verbose_output: str = ""
+        self.verbose_output: str = ''
 
     def _failed(self, reason: str):
         """Set this check as failed for reason `r`."""
@@ -52,7 +51,7 @@ class Check:
         """Set this check as successful for reason `r`."""
         self.success = True
         if self.reason == NO_REASON_STR:
-            self.reason = ""
+            self.reason = ''
         else:
             self.reason += "\n "
         self.reason += reason
@@ -74,7 +73,7 @@ class Check:
         return self.verbose_output
 
     def __bool__(self) -> bool:
-        """Evaluate success of check as bool"""
+        """Evaluate success of check as bool."""
         return self.success
 
     def check(self, package: Package):
@@ -94,8 +93,7 @@ class Check:
 
 
 class LicenseTagExistsCheck(Check):
-    """This check ensures that the xml tag defining the license exists in the
-    package.xml."""
+    """This ensures that a tag defining the license exists."""
 
     def _check(self, package: Package):
         if len(package.get_license_tags()) == 0:
@@ -107,8 +105,7 @@ class LicenseTagExistsCheck(Check):
 
 
 class LicenseTagIsInSpdxListCheck(Check):
-    """This check ensures that the license tag is in the SPDX list of
-    licenses."""
+    """This ensures that the license tag is in the SPDX list of licenses."""
 
     def _check(self, package: Package):
         licenses_not_in_spdx_list = []
@@ -126,8 +123,7 @@ class LicenseTagIsInSpdxListCheck(Check):
 
 
 class LicenseTextExistsCheck(Check):
-    """This check ensures that the license text file that the license tag
-    references exists."""
+    """This ensures that the license text file referenced by the tag exists."""
 
     def _check(self, package: Package):
         if len(package.get_license_tags()) == 0:
@@ -174,23 +170,22 @@ class LicenseTextExistsCheck(Check):
             self._failed(
                 "The following license tags do not have a valid license text "
                 "file:\n" + "\n".join(
-                    map(lambda x: f"  '{x[0]}': {x[1]}",
-                        license_tags_without_license_text.items())))
+                    [f"  '{x[0]}': {x[1]}" for x in
+                        license_tags_without_license_text.items()]))
             self.verbose_output = red(
-                "\n".join(map(lambda x: f"  '{x[0]}': {x[1]}",
-                              found_license_texts.items())))
+                "\n".join([f"  '{x[0]}': {x[1]}" for x in
+                           found_license_texts.items()]))
 
         else:
             self._success("All license tags have a valid license text file.")
 
 
 class LicensesInCodeCheck(Check):
-    """This checks if all licenses found in the code are covered by a license
-    declaration in the package.xml."""
+    """Check if all found licenses have a declaration in the package.xml."""
 
     def _check(self, package: Package):
         if len(package.get_license_tags()) == 0:
-            self._failed("No license tag defined.")
+            self._failed('No license tag defined.')
             return
         declared_licenses = package.get_license_tags()
         files_with_uncovered_licenses: Dict[str, List[str]] = {}
@@ -221,27 +216,27 @@ class LicensesInCodeCheck(Check):
                     continue
         if len(files_with_uncovered_licenses) > 0 or \
                 len(files_not_matched_by_any_license_tag) > 0:
-            info_str = ""
+            info_str = ''
             if len(files_with_uncovered_licenses) > 0:
-                info_str += "\nThe following files contain licenses that " +\
-                    "are not covered by any license tag:\n" + "\n".join(
-                        map(lambda x: f"  '{x[0]}': {x[1]}",
-                            files_with_uncovered_licenses.items()))
+                info_str += '\nThe following files contain licenses that ' +\
+                    'are not covered by any license tag:\n' + '\n'.join(
+                        [f"  '{x[0]}': {x[1]}" for x in
+                            files_with_uncovered_licenses.items()])
             elif len(files_not_matched_by_any_license_tag) > 0:
-                info_str += "\nThe following files contain licenses that " +\
-                    "are covered by a license tag but are not listed in the" +\
-                    "a source files of the license tag:\n" + "\n".join(
-                        map(lambda x: f"  '{x[0]}': {x[1]}",
-                            files_not_matched_by_any_license_tag.items()))
-            assert info_str != ""
+                info_str += '\nThe following files contain licenses that ' +\
+                    'are covered by a license tag but are not listed in the' +\
+                    'a source files of the license tag:\n' + '\n'.join(
+                        [f"  '{x[0]}': {x[1]}" for x in
+                            files_not_matched_by_any_license_tag.items()])
+            assert info_str != ''
             self._failed(info_str)
             self.verbose_output = red(
-                "\n  Relevant scan results:\n" +
-                pformat(list(filter(
-                    lambda x: x[0] in files_with_uncovered_licenses
-                    or x[0] in files_not_matched_by_any_license_tag,
-                    found_files_w_licenses.items()))))
+                '\n  Relevant scan results:\n' + pformat(
+                    list(filter(
+                        lambda x: x[0] in files_with_uncovered_licenses or (
+                            x[0] in files_not_matched_by_any_license_tag),
+                        found_files_w_licenses.items()))))
 
         else:
-            self._success("All licenses found in the code are covered by a "
-                          "license declaration.")
+            self._success('All licenses found in the code are covered by a '
+                          'license declaration.')
