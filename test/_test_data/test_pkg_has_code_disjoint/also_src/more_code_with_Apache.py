@@ -1,4 +1,4 @@
-# Copyright (C) 2000 An Author
+# Copyright (C) 2002 Another Author
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

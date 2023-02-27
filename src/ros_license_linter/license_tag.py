@@ -22,7 +22,7 @@ license tags in package.xml files.
 import os
 import xml.etree.ElementTree as ET
 from glob import glob
-from typing import List, Optional
+from typing import List, Optional, Set
 
 from spdx.config import LICENSE_MAP
 
@@ -46,6 +46,16 @@ def to_spdx_license_tag(license_name: str) -> str:
             # else
             return name
     raise ValueError("License name not in SPDX list.")
+
+
+def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
+    """Evaluate a glob string and return a set of matching relative paths."""
+    paths = set()
+    for path in glob(os.path.join(pkg_path, glob_str), recursive=True):
+        if not os.path.isfile(path):
+            continue
+        paths.add(os.path.relpath(path, pkg_path))
+    return paths
 
 
 class LicenseTag:
@@ -72,19 +82,16 @@ class LicenseTag:
             "file", None)
 
         # Paths to the source files that are licensed under this license
-        self.source_files: Optional[List[str]] = None
-        self.source_files_str = element.attrib.get("source-files", None)
-        if self.source_files_str == "*" or self.source_files_str is None:
-            # We will handle this case later (see `make_this_the_main_license`)
-            self.source_files_str = None
-        if self.source_files_str is not None:
-            self.source_files = []
+        self._source_files: Optional[Set[str]] = None
+        self.source_files_str: str = element.attrib.get("source-files", '')
+        if self.source_files_str == '':
+            # If no source-files attribute is given, assume all files
+            # are licensed under this license.
+            self.source_files_str = "*"
+        else:
+            self._source_files = set()
             for src_glob in self.source_files_str.split(" "):
-                _source_files = glob(os.path.join(
-                    pkg_path, src_glob), recursive=True)
-                for _source_file in _source_files:
-                    self.source_files.append(
-                        os.path.relpath(_source_file, pkg_path))
+                self._source_files.update(_eval_glob(src_glob, pkg_path))
 
         # Path of package file this is in
         self.package_path: str = pkg_path
@@ -100,7 +107,7 @@ class LicenseTag:
 
     def has_source_files(self) -> bool:
         """Return whether this license tag has a source-files attribute."""
-        return self.source_files is not None
+        return self._source_files is not None
 
     def get_license_id(self) -> str:
         """Return the license name."""
@@ -113,21 +120,23 @@ class LicenseTag:
             "License tag must have file attribute."
         return self.license_text_file
 
-    def get_source_files(self) -> List[str]:
+    @property
+    def source_files(self) -> Set[str]:
         """Return the source-files attribute."""
-        assert self.source_files is not None, \
+        assert self._source_files is not None, \
             "License tag must have source-files attribute."
-        return self.source_files
+        return self._source_files
 
     def make_this_the_main_license(self, other_licenses: List["LicenseTag"]):
         """Make this the main license for the package."""
         assert not self.has_source_files(), \
             "This must not have a source-files, yet."
-        source_files = set(
-            map(lambda x: os.path.relpath(x, self.package_path), glob(
-                os.path.join(self.package_path, "**"), recursive=True)))
+        assert self.source_files_str == "*", \
+            "This must have a source-files attribute of '*'."
+        source_files = _eval_glob(
+            self.source_files_str, self.package_path)
         for other_license in other_licenses:
             if other_license == self:
                 continue
-            source_files -= set(other_license.get_source_files())
-        self.source_files = list(source_files)
+            source_files -= other_license.source_files
+        self._source_files = source_files

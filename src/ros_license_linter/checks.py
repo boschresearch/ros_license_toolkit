@@ -210,7 +210,7 @@ class LicensesInCodeCheck(Check):
                         found_license_str)
                     continue
                 if fname not in declared_licenses[
-                        found_license_str].get_source_files():
+                        found_license_str].source_files:
                     # this license is declared by a license tag but the file
                     # is not listed in the source files of the license tag
                     if fname not in files_not_matched_by_any_license_tag:
