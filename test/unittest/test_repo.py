@@ -16,11 +16,13 @@
 
 """Unit tests for the repo module"""
 
-import unittest
 import os
-from ros_license_linter.repo import Repo, NotARepoError
+import unittest
 
 import git
+
+from ros_license_linter.repo import NotARepoError
+from ros_license_linter.repo import Repo
 
 
 class TestRepo(unittest.TestCase):
