@@ -209,7 +209,7 @@ def get_packages_in_path(path: str) -> List[Package]:
     """Get all ROS packages in a given path."""
     packages = []
     try:
-        repo = Repo(os.path.abspath(path))
+        repo: Optional[Repo] = Repo(os.path.abspath(path))
     except NotARepoError:
         repo = None
     for pkg in list_by_path(PACKAGE_FILE, path, {}):
