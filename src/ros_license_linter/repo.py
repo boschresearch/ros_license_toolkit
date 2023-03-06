@@ -19,9 +19,12 @@ This module contains the Repo class.
 """
 
 import os
-from typing import Optional
+from typing import Any, Dict, Optional
 
 import git
+from scancode.api import get_licenses
+
+from ros_license_linter.common import is_license_text_file
 
 # how many folders up to search for a repo
 REPO_SEARCH_DEPTH = 5
@@ -63,17 +66,22 @@ class Repo:
             raise NotARepoError("No git repo found for package.")
 
         # absolute path to the repo
-        self.abs_path: str = os.path.join(
-            self.abs_package_path, relpath)
+        self.abs_path: str = os.path.normpath(os.path.join(
+            self.abs_package_path, relpath))
 
         # (for logging purposes) the current git hash
         repo = git.Repo()
         self.git_hash: str = repo.head.object.hexsha
 
-        # pylint: disable=fixme
-        # TODO: search for license text files here and use the info for
-        #  all packages in the repo to speed up the process and avoid
-        #  duplicate scans.
+        # scan files in the repo
+        self.license_text_files: Dict[str, Dict[str, Any]] = {}
+        for file in os.scandir(self.abs_path):
+            fpath = os.path.join(self.abs_path, file)
+            if not os.path.isfile(fpath):
+                continue
+            scan_results = get_licenses(fpath)
+            if is_license_text_file(scan_results):
+                self.license_text_files[fpath] = scan_results
 
     def __eq__(self, __o) -> bool:
         """Check if two repos are the same."""

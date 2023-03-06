@@ -1,6 +1,5 @@
-# Copyright (c) 2022 - for information on the respective copyright owner
-# see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# Copyright (c) 2022 - see the NOTICE file in root or repo
+
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +26,7 @@ from rospkg import RosPack
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
+from ros_license_linter.common import is_license_text_file
 from ros_license_linter.license_tag import LicenseTag
 from ros_license_linter.repo import NotARepoError
 from ros_license_linter.repo import Repo
@@ -38,15 +38,6 @@ IGNORED_FILES = [
     "setup.cfg",
     "CMakeLists.txt"
 ]
-
-
-def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
-    """Check if a file is a license text file."""
-    for _license in scan_results["licenses"]:
-        if _license["matched_rule"]["is_license_text"] and \
-                _license["score"] >= 99:
-            return True
-    return False
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
@@ -75,16 +66,12 @@ class Package:
     """This represents a ros package, defined by its `path` (absolute) and
     results within it."""
 
-    def __init__(self, path: str):
+    def __init__(self, path: str, repo: Optional[Repo] = None):
         # absolute path to this package
         self.abspath: str = path
 
         # relative path to the parent repo, if any
-        self.repo: Optional[Repo] = None
-        try:
-            self.repo = Repo(self.abspath)
-        except NotARepoError:
-            pass
+        self.repo: Optional[Repo] = repo
 
         # name of this package by its folder name
         self.name: str = os.path.basename(self.abspath)
@@ -153,16 +140,9 @@ class Package:
                                                  ] = scan_results
         # look also in the repo for license text files
         if self.repo is not None:
-            repo_path = self.repo.abs_path
-            for file in os.listdir(repo_path):
-                fpath = os.path.join(repo_path, file)
-                if not os.path.isfile(fpath):
-                    continue
-                scan_results = get_licenses(fpath)
-                if is_license_text_file(scan_results):
-                    self._found_license_texts[os.path.relpath(
-                        fpath, self.abspath)] = scan_results
-            # pprint.pprint(self.licenses)
+            for path, res in self.repo.license_text_files.items():
+                self._found_license_texts[
+                    self._get_path_relative_to_pkg(path)] = res
 
     @property
     def package_xml(self):
@@ -228,7 +208,11 @@ class Package:
 def get_packages_in_path(path: str) -> List[Package]:
     """Get all ROS packages in a given path."""
     packages = []
+    try:
+        repo = Repo(os.path.abspath(path))
+    except NotARepoError:
+        repo = None
     for pkg in list_by_path(PACKAGE_FILE, path, {}):
         ros_pkg = RosPack([path]).get_path(pkg)
-        packages.append(Package(ros_pkg))
+        packages.append(Package(ros_pkg, repo))
     return packages
