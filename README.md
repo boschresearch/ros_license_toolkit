@@ -10,21 +10,16 @@ This tool checks if the license declarations in the `package.xml` matches the li
 We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
 
 ## Functionality
-<style>
-  span.b {
-    font-weight: bold;
-  }
-</style>
 ```mermaid
 graph TD
     classDef stroke stroke:#333,stroke-width:2px;
     s([scan code for licenses and copyrights]) 
     class s stroke
-    p[compare to\n package.xml\n <span class='b'>for linter</span>]
+    p[compare to\n package.xml\n _for linter_]
     class p stroke
-    c[create\ncopyright file\n<span class='b'>to be implemented</span>]
+    c[create\ncopyright file\n_to be implemented_]
     class c stroke
-    style c fill:#f98
+    style c fill:#f98,color:#000
     s --> p
     s --> c
 ```
