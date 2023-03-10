@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+import sys
 import subprocess
 import unittest
 
@@ -22,6 +23,9 @@ import unittest
 class TestDocumentation(unittest.TestCase):
     """Test if this packages readme is up to date."""
 
+    @unittest.skipIf(
+        sys.version_info >= (3, 10),
+        "Behavior of argparse changed in Python 3.10")
     def test_readme(self):
         """Check if the help text is up to date."""
         with subprocess.Popen(
