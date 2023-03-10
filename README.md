@@ -2,12 +2,11 @@
 
 [![Pytest](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml) [![Lint](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml) [![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/issues) [![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/pulls) [![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/search?l=python) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/boschresearch/ros_license_linter/blob/main/LICENSE)
 
-> Checks ROS packages for correct license declaration
+> **Warning**
+> For any legal questions, please consult a lawyer. This tool is not a substitute for legal advice. 
 
 ## Motivation
-ROS packages must have licenses. 
-This tool checks if the license declarations in the `package.xml` matches the license(s) of the code.
-We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
+ROS packages must have licenses. This tool checks if the license declarations in the `package.xml` matches the license(s) of the code. We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
 
 ## Functionality
 ```mermaid
@@ -36,6 +35,35 @@ This checks:
     [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L123)
 - [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/**")?
     [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L182)
+
+## Usage
+### Installation
+Install the package from source:
+```bash
+pip install .
+```
+
+### Basic Usage
+You should then have the executable in your `$PATH` and can run it on any ROS package or a directory containing multiple ROS packages:
+```bash
+ros_license_linter my_ros_package
+```
+
+### All Options
+```
+$ ros_license_linter -h
+usage: ros_license_linter [-h] [-v] [-q] path
+
+Checks ROS packages for correct license declaration.
+
+positional arguments:
+  path           path to ROS2 package or repo containing packages
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  enable verbose output
+  -q, --quiet    disable most output
+```
 
 ## State of Development
 *WORK IN PROGRESS*
