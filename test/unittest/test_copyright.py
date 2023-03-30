@@ -1,6 +1,6 @@
 # Copyright (c) 2023 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 import unittest
 
-from ros_license_linter.copyright import _get_year_from_copyright_str
+from ros_license_toolkit.copyright import _get_year_from_copyright_str
 
 
 class TestCopyright(unittest.TestCase):

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-i="ros_license_linter"
+i="ros_license_toolkit"
 type -P $i &>/dev/null  && echo "$i installed"  || { echo "$i command not found."; exit 1; }
 
 workdir="$(pwd)"
@@ -22,7 +22,7 @@ for n in $(cat _repos.list); do
     name="${name_w_ext%.*}"
     cd $name
     echo "Running license linter on $name"
-    ros_license_linter . > $workdir/$name.log
+    ros_license_toolkit . > $workdir/$name.log
 done
 
 rm -rf $tmpdir

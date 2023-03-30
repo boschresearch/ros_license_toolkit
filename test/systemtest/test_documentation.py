@@ -1,6 +1,6 @@
 # Copyright (c) 2023 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class TestDocumentation(unittest.TestCase):
     def test_readme(self):
         """Check if the help text is up to date."""
         with subprocess.Popen(
-            ["bin/ros_license_linter", "-h"],
+            ["bin/ros_license_toolkit", "-h"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         ) as process:
@@ -40,6 +40,6 @@ class TestDocumentation(unittest.TestCase):
         with open("README.md", "r") as readme:
             readme_content = readme.read()
         readme_usage = readme_content.split(
-            "$ ros_license_linter -h")[1].split(
+            "$ ros_license_toolkit -h")[1].split(
                 "```")[0].strip()
         self.assertEqual(readme_usage, output)

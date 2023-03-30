@@ -1,6 +1,6 @@
-# ros_license_linter
+# ros_license_toolkit
 
-[![Pytest](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/pytest.yml) [![Lint](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_linter/actions/workflows/lint.yml) [![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/issues) [![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/pulls) [![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_linter.svg)](https://github.com/boschresearch/ros_license_linter/search?l=python) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/boschresearch/ros_license_linter/blob/main/LICENSE)
+[![Pytest](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml) [![Lint](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml) [![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/issues) [![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/pulls) [![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/search?l=python) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/boschresearch/ros_license_toolkit/blob/main/LICENSE)
 
 > **Warning**
 > For any legal questions, please consult a lawyer. This tool is not a substitute for legal advice. 
@@ -26,15 +26,15 @@ graph TD
 ## Features
 This checks:
 - [x] Is any license defined in `package.xml`?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L90)
+    [- LicenseTagExistsCheck](src/ros_license_toolkit/checks.py#L90)
 - [x] Has at most one license tag without a source-files declaration?
-    [- LicenseTagExistsCheck](src/ros_license_linter/checks.py#L90)
+    [- LicenseTagExistsCheck](src/ros_license_toolkit/checks.py#L90)
 - [x] Do all licenses tags follow the SPDX standard?
-    [- LicenseTagIsInSpdxListCheck](src/ros_license_linter/checks.py#L104)
+    [- LicenseTagIsInSpdxListCheck](src/ros_license_toolkit/checks.py#L104)
 - [x] Are license texts available and correctly referenced for all declared licenses?
-    [- LicenseTextExistsCheck](src/ros_license_linter/checks.py#L123)
+    [- LicenseTextExistsCheck](src/ros_license_toolkit/checks.py#L123)
 - [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/**")?
-    [- LicensesInCodeCheck](src/ros_license_linter/checks.py#L182)
+    [- LicensesInCodeCheck](src/ros_license_toolkit/checks.py#L182)
 
 ## Usage
 ### Installation
@@ -46,13 +46,13 @@ pip install .
 ### Basic Usage
 You should then have the executable in your `$PATH` and can run it on any ROS package or a directory containing multiple ROS packages:
 ```bash
-ros_license_linter my_ros_package
+ros_license_toolkit my_ros_package
 ```
 
 ### All Options
 ```
-$ ros_license_linter -h
-usage: ros_license_linter [-h] [-v] [-q] path
+$ ros_license_toolkit -h
+usage: ros_license_toolkit [-h] [-v] [-q] path
 
 Checks ROS packages for correct license declaration.
 
@@ -82,5 +82,5 @@ In particular, the following things will have to be done:
 - [ ] Turn into github action.
 
 ## License
-ros_license_linter is open-sourced under the Apache-2.0 license. See the
+ros_license_toolkit is open-sourced under the Apache-2.0 license. See the
 [LICENSE](LICENSE) file for details.

@@ -1,6 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup script for the ros_license_linter package."""
+"""Setup script for the ros_license_toolkit package."""
 
 import os
 
@@ -29,7 +29,7 @@ def read(fname):
 
 
 setup(
-    name="ros_license_linter",
+    name="ros_license_toolkit",
     description="Checks ROS packages for correct license declaration.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -38,7 +38,7 @@ setup(
     license="Apache License, Version 2.0",
     url="tbd",
     keywords=["license", "ROS"],
-    packages=["ros_license_linter"],
+    packages=["ros_license_toolkit"],
     install_requires=[
         'gitpython',
         'rospkg',
@@ -47,5 +47,5 @@ setup(
     ],
     package_dir={"": "src"},
     data_files=[],
-    scripts=["bin/ros_license_linter"]
+    scripts=["bin/ros_license_toolkit"]
 )

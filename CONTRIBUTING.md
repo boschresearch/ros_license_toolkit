@@ -95,7 +95,7 @@ Often employers or academic institution have ownership over code that is
 written in certain circumstances, so please do due diligence to ensure that
 you have the right to submit the code.
 
-If you are a developer who is authorized to contribute to ros_license_linter on
+If you are a developer who is authorized to contribute to ros_license_toolkit on
 behalf of your employer, then please use your corporate email address in the
 Signed-off-by tag. Otherwise please use a personal email address.
 
@@ -106,7 +106,7 @@ Each contributor is responsible for identifying themselves in the
 Please add the respective information corresponding to the Signed-off-by tag
 as part of your first pull request.
 
-If you are a developer who is authorized to contribute to ros_license_linter on
+If you are a developer who is authorized to contribute to ros_license_toolkit on
 behalf of your employer, then add your company / organization to the list of
 copyright holders in the [NOTICE](NOTICE) file. As author of a corporate
 contribution you can also add your name and corporate email address as in the

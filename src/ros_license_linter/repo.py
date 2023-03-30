@@ -1,6 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ from typing import Any, Dict, Optional
 import git
 from scancode.api import get_licenses
 
-from ros_license_linter.common import is_license_text_file
+from ros_license_toolkit.common import is_license_text_file
 
 # how many folders up to search for a repo
 REPO_SEARCH_DEPTH = 5

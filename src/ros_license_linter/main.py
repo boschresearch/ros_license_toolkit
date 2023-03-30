@@ -1,6 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 """
-Module containing the entry point for the ros_license_linter CLI.
+Module containing the entry point for the ros_license_toolkit CLI.
 """
 
 import argparse
@@ -24,23 +24,23 @@ import sys
 import timeit
 from typing import Sequence
 
-from ros_license_linter.checks import LicensesInCodeCheck
-from ros_license_linter.checks import LicenseTagExistsCheck
-from ros_license_linter.checks import LicenseTagIsInSpdxListCheck
-from ros_license_linter.checks import LicenseTextExistsCheck
-from ros_license_linter.package import get_packages_in_path
-from ros_license_linter.ui_elements import FAILURE_STR
-from ros_license_linter.ui_elements import green
-from ros_license_linter.ui_elements import major_sep
-from ros_license_linter.ui_elements import minor_sep
-from ros_license_linter.ui_elements import red
-from ros_license_linter.ui_elements import rll_print_factory
-from ros_license_linter.ui_elements import SUCCESS_STR
-from ros_license_linter.ui_elements import Verbosity
+from ros_license_toolkit.checks import LicensesInCodeCheck
+from ros_license_toolkit.checks import LicenseTagExistsCheck
+from ros_license_toolkit.checks import LicenseTagIsInSpdxListCheck
+from ros_license_toolkit.checks import LicenseTextExistsCheck
+from ros_license_toolkit.package import get_packages_in_path
+from ros_license_toolkit.ui_elements import FAILURE_STR
+from ros_license_toolkit.ui_elements import green
+from ros_license_toolkit.ui_elements import major_sep
+from ros_license_toolkit.ui_elements import minor_sep
+from ros_license_toolkit.ui_elements import red
+from ros_license_toolkit.ui_elements import rll_print_factory
+from ros_license_toolkit.ui_elements import SUCCESS_STR
+from ros_license_toolkit.ui_elements import Verbosity
 
 
 def main(args: Sequence[str]) -> int:
-    """Main entry point for the ros_license_linter CLI.
+    """Main entry point for the ros_license_toolkit CLI.
 
     :param args: the command line arguments, defaults to sys.argv[1:]
     :type args: Sequence[str], optional

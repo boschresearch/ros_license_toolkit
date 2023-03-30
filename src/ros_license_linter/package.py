@@ -26,10 +26,10 @@ from rospkg import RosPack
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_linter.common import is_license_text_file
-from ros_license_linter.license_tag import LicenseTag
-from ros_license_linter.repo import NotARepoError
-from ros_license_linter.repo import Repo
+from ros_license_toolkit.common import is_license_text_file
+from ros_license_toolkit.license_tag import LicenseTag
+from ros_license_toolkit.repo import NotARepoError
+from ros_license_toolkit.repo import Repo
 
 # files we ignore in scan results
 IGNORED_FILES = [

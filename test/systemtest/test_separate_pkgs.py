@@ -1,6 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ from test.systemtest._test_helpers import make_repo
 from test.systemtest._test_helpers import remove_repo
 import unittest
 
-from ros_license_linter.main import main
+from ros_license_toolkit.main import main
 
 
 class TestPkgs(unittest.TestCase):
@@ -39,7 +39,7 @@ class TestPkgs(unittest.TestCase):
                 "test/_test_data/test_deep_package_folder/deeper/test_pkg_deep"
         ]:
             with subprocess.Popen(
-                ["bin/ros_license_linter", call_path],
+                ["bin/ros_license_toolkit", call_path],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ) as process:
@@ -105,7 +105,7 @@ class TestPkgs(unittest.TestCase):
         package.xml."""
         # using subprocess.Popen instead of main() to capture stdout
         with subprocess.Popen(
-            ["bin/ros_license_linter",
+            ["bin/ros_license_toolkit",
              "test/_test_data/test_pkg_unknown_license"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE

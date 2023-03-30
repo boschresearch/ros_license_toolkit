@@ -1,6 +1,6 @@
 # Copyright (c) 2023 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import unittest
 
 import git
 
-from ros_license_linter.repo import NotARepoError
-from ros_license_linter.repo import Repo
+from ros_license_toolkit.repo import NotARepoError
+from ros_license_toolkit.repo import Repo
 
 
 class TestRepo(unittest.TestCase):
@@ -34,7 +34,7 @@ class TestRepo(unittest.TestCase):
         repo = Repo(os.path.join(os.path.dirname(__file__)))
         self.assertEqual(
             os.path.basename(repo.get_path()),
-            "ros_license_linter"
+            "ros_license_toolkit"
         )
 
     def test_raises(self):

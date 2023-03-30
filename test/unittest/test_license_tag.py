@@ -1,6 +1,6 @@
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@
 import unittest
 from xml.etree import ElementTree as ET
 
-from ros_license_linter.license_tag import is_license_name_in_spdx_list
-from ros_license_linter.license_tag import LicenseTag
+from ros_license_toolkit.license_tag import is_license_name_in_spdx_list
+from ros_license_toolkit.license_tag import LicenseTag
 
 
 class TestChecks(unittest.TestCase):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2022 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
-# https://github.com/boschresearch/ros_license_linter
+# https://github.com/boschresearch/ros_license_toolkit
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Executable entry point for the ros_license_linter script"""
+"""Executable entry point for the ros_license_toolkit script"""
 
 import os
 import sys
@@ -23,14 +23,14 @@ import sys
 # Determine the real location of this script, resolving all symlinks
 bindir = os.path.dirname(os.path.realpath(__file__))
 
-# If ros_license_linter uses private modules, they are in the same folder as
+# If ros_license_toolkit uses private modules, they are in the same folder as
 # the script. The script will be symlinked from e.g. /usr/bin
-if os.path.isfile(os.path.join(bindir, "ros_license_linter", "__init__.py")):
+if os.path.isfile(os.path.join(bindir, "ros_license_toolkit", "__init__.py")):
     sys.path.insert(0, bindir)
 
-# If ros_license_linter is called from the source tree, we use that module
+# If ros_license_toolkit is called from the source tree, we use that module
 if os.path.isfile(os.path.join(bindir, os.path.pardir,
-                               "src", "ros_license_linter", "__init__.py")):
+                               "src", "ros_license_toolkit", "__init__.py")):
     sys.path.insert(0, os.path.normpath(
         os.path.join(bindir, os.path.pardir, "src")))
 
@@ -38,5 +38,5 @@ del bindir
 del os
 
 if __name__ == "__main__":
-    from ros_license_linter.main import main
+    from ros_license_toolkit.main import main
     sys.exit(main(args=sys.argv[1:]))
