@@ -52,17 +52,20 @@ ros_license_toolkit my_ros_package
 ### All Options
 ```
 $ ros_license_toolkit -h
-usage: ros_license_toolkit [-h] [-v] [-q] path
+usage: ros_license_toolkit [-h] [-c] [-v] [-q] path
 
 Checks ROS packages for correct license declaration.
 
 positional arguments:
-  path           path to ROS2 package or repo containing packages
+  path                  path to ROS2 package or repo containing
+                        packages
 
 optional arguments:
-  -h, --help     show this help message and exit
-  -v, --verbose  enable verbose output
-  -q, --quiet    disable most output
+  -h, --help            show this help message and exit
+  -c, --generate_copyright_file
+                        generate a copyright file
+  -v, --verbose         enable verbose output
+  -q, --quiet           disable most output
 ```
 
 ## State of Development
