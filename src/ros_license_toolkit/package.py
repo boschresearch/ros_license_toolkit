@@ -209,7 +209,8 @@ class Package:
         """Get a string representation of the copyright notice."""
         copyright = CopyrightPerPkg(self)
         cpr_str = "".join((
-            "Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/\n",
+            "Format: https://www.debian.org/doc/packaging-manuals/copyright",
+            "-format/1.0/\n",
             "Source: tbd\n",
             f"Upstream-Name: {self.name}\n\n",))
         for key, cprs in copyright.copyright_sections.items():
