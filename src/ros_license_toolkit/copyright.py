@@ -18,11 +18,9 @@
 
 import os
 import re
-from typing import Any, Dict, List, Set, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 from scancode.api import get_copyrights
-
-from ros_license_toolkit.license_tag import LicenseTag
 
 
 def _get_copyright_strs_from_results(
