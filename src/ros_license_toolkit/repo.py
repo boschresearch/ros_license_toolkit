@@ -70,7 +70,7 @@ class Repo:
             self.abs_package_path, relpath))
 
         # (for logging purposes) the current git hash
-        repo = git.Repo()
+        repo = git.Repo(search_path)
         self.git_hash: str = repo.head.object.hexsha
 
         # scan files in the repo
