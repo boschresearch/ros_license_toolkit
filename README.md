@@ -14,11 +14,10 @@ graph TD
     classDef stroke stroke:#333,stroke-width:2px;
     s([scan code for licenses and copyrights]) 
     class s stroke
-    p[compare to\n package.xml\n _for linter_]
+    p[compare to\n package.xml]
     class p stroke
-    c[create\ncopyright file\n_to be implemented_]
+    c[create\ncopyright file]
     class c stroke
-    style c fill:#f98,color:#000
     s --> p
     s --> c
 ```
