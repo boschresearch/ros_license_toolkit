@@ -37,6 +37,7 @@ from ros_license_toolkit.ui_elements import red
 from ros_license_toolkit.ui_elements import rll_print_factory
 from ros_license_toolkit.ui_elements import SUCCESS_STR
 from ros_license_toolkit.ui_elements import Verbosity
+from ros_license_toolkit.copyright import Copyright
 
 
 def main(args: Sequence[str]) -> int:
@@ -53,13 +54,17 @@ def main(args: Sequence[str]) -> int:
     parser = argparse.ArgumentParser(
         description='Checks ROS packages for correct license declaration.')
     parser.add_argument(
-        'path',
-        default='.',
+        'path', default='.',
         help='path to ROS2 package or repo containing packages')
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
-                        default=False, help='enable verbose output')
-    parser.add_argument('-q', '--quiet', dest='quiet', action='store_true',
-                        default=False, help='disable most output')
+    parser.add_argument(
+        '-c', '--generate_copyright_file', action='store_true',
+        default=False, help='generate a copyright file')
+    parser.add_argument(
+        '-v', '--verbose', dest='verbose', action='store_true',
+        default=False, help='enable verbose output')
+    parser.add_argument(
+        '-q', '--quiet', dest='quiet', action='store_true',
+        default=False, help='disable most output')
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
@@ -123,6 +128,12 @@ def main(args: Sequence[str]) -> int:
                 f"\n {FAILURE_STR}"))
             rll_print(major_sep())
             results_per_package[package.abspath] = False
+        if parsed_args.generate_copyright_file:
+            file_content = str(Copyright(package))
+            rll_print("Copyright file content:")
+            rll_print(minor_sep())
+            rll_print(file_content)
+            rll_print(minor_sep())
 
     stop = timeit.default_timer()
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
