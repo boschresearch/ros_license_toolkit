@@ -222,6 +222,8 @@ class Package:
             )
             license = self.license_tags[key]
             cpr_str += f"\nLicense: {license.id}\n"
+            assert license.license_text_file, \
+                "License text file must be defined."
             with open(os.path.join(
                     self.abspath,
                     license.license_text_file)) as f:
