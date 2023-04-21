@@ -23,7 +23,7 @@ from ros_license_toolkit.package import Package
 def test_copyright():
     path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
     pkg = Package(path)
-    cpr_secs = CopyrightPerPkg(pkg).copyright_sections
+    cpr_secs = CopyrightPerPkg(pkg).copyright_strings
     assert len(cpr_secs) == 2
 
 

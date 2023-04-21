@@ -65,7 +65,7 @@ class CopyrightPerPkg:
         self.pkg = pkg
         # one section per license tag
         # each section is a list of unique copyright lines
-        self.copyright_sections: Dict[str, List[CopyrightPerFile]] = {}
+        self.copyright_strings: Dict[str, List[str]] = {}
         for key, license_tag in self.pkg.license_tags.items():
             cprs = set()
             for source_file in license_tag.source_files:
@@ -75,5 +75,5 @@ class CopyrightPerPkg:
                     continue
                 for cpr in _get_copyright_strs_from_results(res):
                     cprs.add(CopyrightPerFile(source_file, cpr))
-            self.copyright_sections[key] = sorted(
-                cprs, key=lambda c: c.copyright_text)
+            self.copyright_strings[key] = sorted(
+                {cpr.copyright_text for cpr in cprs})

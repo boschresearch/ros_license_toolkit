@@ -213,13 +213,11 @@ class Package:
             "-format/1.0/\n",
             "Source: tbd\n",
             f"Upstream-Name: {self.name}\n\n",))
-        for key, cprs in copyright.copyright_sections.items():
+        for key, cprs in copyright.copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str
             cpr_str += f"Files:\n {source_files_str}\n"
             cpr_str += "Copyright: "
-            cpr_str += "\n           ".join(
-                [cpr.copyright_text for cpr in cprs]
-            )
+            cpr_str += "\n           ".join(cprs)
             license = self.license_tags[key]
             cpr_str += f"\nLicense: {license.id}\n"
             assert license.license_text_file, \
