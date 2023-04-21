@@ -37,7 +37,7 @@ from ros_license_toolkit.ui_elements import red
 from ros_license_toolkit.ui_elements import rll_print_factory
 from ros_license_toolkit.ui_elements import SUCCESS_STR
 from ros_license_toolkit.ui_elements import Verbosity
-from ros_license_toolkit.copyright import Copyright
+from ros_license_toolkit.copyright import CopyrightPerPkg
 
 
 def main(args: Sequence[str]) -> int:
@@ -129,11 +129,7 @@ def main(args: Sequence[str]) -> int:
             rll_print(major_sep())
             results_per_package[package.abspath] = False
         if parsed_args.generate_copyright_file:
-            file_content = str(Copyright(package))
-            rll_print("Copyright file content:")
-            rll_print(minor_sep())
-            rll_print(file_content)
-            rll_print(minor_sep())
+            package.write_copyright_file()
 
     stop = timeit.default_timer()
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)

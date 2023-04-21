@@ -16,21 +16,21 @@
 
 import os
 
-from ros_license_toolkit.copyright import Copyright
+from ros_license_toolkit.copyright import CopyrightPerPkg
 from ros_license_toolkit.package import Package
 
 
 def test_copyright():
     path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
     pkg = Package(path)
-    cpr_secs = Copyright(pkg).copyright_sections
+    cpr_secs = CopyrightPerPkg(pkg).copyright_sections
     assert len(cpr_secs) == 2
 
 
 def test_copyright_to_string():
     path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
     pkg = Package(path)
-    cprs = Copyright(pkg)
+    cprs = CopyrightPerPkg(pkg)
     assert '1995' in str(cprs)
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)

@@ -23,7 +23,6 @@ from typing import Any, Dict, List, Set, Tuple, Union
 from scancode.api import get_copyrights
 
 from ros_license_toolkit.license_tag import LicenseTag
-from ros_license_toolkit.package import Package
 
 
 def _get_copyright_strs_from_results(
@@ -51,32 +50,32 @@ class CopyrightPerFile:
 
     def __init__(self, file_path: str, copyright_text: str):
         self.file_path = file_path
+        for prefix_to_remove in [
+            'copyright',
+            'Copyright (c) ',
+            'Copyright ',
+            'Copyright'
+        ]:
+            if copyright_text.startswith(prefix_to_remove):
+                copyright_text = copyright_text[len(prefix_to_remove):]
+                break
         self.copyright_text = copyright_text
 
 
-class Copyright:
-
-    def __init__(self, pkg: Package):
+class CopyrightPerPkg:
+    def __init__(self, pkg):
         self.pkg = pkg
         # one section per license tag
         # each section is a list of unique copyright lines
-        self.copyright_sections: Dict[str, Set[CopyrightPerFile]] = {}
-        for license_tag in self.pkg.license_tags.values():  # type: LicenseTag
-            self.copyright_sections[license_tag.source_files_str] = set()
+        self.copyright_sections: Dict[str, List[CopyrightPerFile]] = {}
+        for key, license_tag in self.pkg.license_tags.items():
+            cprs = set()
             for source_file in license_tag.source_files:
                 fpath = os.path.join(self.pkg.abspath, source_file)
                 res = get_copyrights(fpath)
                 if len(res) == 0:
                     continue
                 for cpr in _get_copyright_strs_from_results(res):
-                    self.copyright_sections[license_tag.source_files_str].add(
-                        CopyrightPerFile(source_file, cpr))
-
-    def __str__(self):
-        """Get a string representation of the copyright notice."""
-        cpr_str = ""
-        for files_str, cprs in self.copyright_sections.items():
-            cpr_str += f"{files_str}:\n"
-            for cpr in cprs:
-                cpr_str += f"  {cpr.copyright_text}\n"
-        return cpr_str
+                    cprs.add(CopyrightPerFile(source_file, cpr))
+            self.copyright_sections[key] = sorted(
+                cprs, key=lambda c: c.copyright_text)
