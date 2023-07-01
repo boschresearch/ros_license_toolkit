@@ -14,9 +14,9 @@ graph TD
     classDef stroke stroke:#333,stroke-width:2px;
     s([scan code for licenses and copyrights]) 
     class s stroke
-    p[compare to\n package.xml]
+    p[compare to\n package.xml\nfor linting]
     class p stroke
-    c[create\ncopyright file]
+    c[create\ncopyright file\nfor release]
     class c stroke
     s --> p
     s --> c
