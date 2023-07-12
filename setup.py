@@ -42,7 +42,10 @@ setup(
     install_requires=[
         'gitpython',
         'rospkg',
-        'scancode-toolkit',
+        # TODO v32 changes things, see
+        # https://github.com/nexB/scancode-toolkit/blob/develop/
+        # CHANGELOG.rst#v3200---2023-05-23
+        'scancode-toolkit<=31.2.6',
         'spdx-tools'
     ],
     package_dir={"": "src"},
