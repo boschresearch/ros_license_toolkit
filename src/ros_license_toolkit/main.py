@@ -39,7 +39,7 @@ from ros_license_toolkit.ui_elements import SUCCESS_STR
 from ros_license_toolkit.ui_elements import Verbosity
 
 
-def main(args: Sequence[str]) -> int:
+def main(args: Sequence[str] = sys.argv) -> int:
     """Main entry point for the ros_license_toolkit CLI.
 
     :param args: the command line arguments, defaults to sys.argv[1:]
