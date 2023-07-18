@@ -22,7 +22,7 @@ import argparse
 import os
 import sys
 import timeit
-from typing import Sequence
+from typing import Optional, Sequence
 
 from ros_license_toolkit.checks import LicensesInCodeCheck
 from ros_license_toolkit.checks import LicenseTagExistsCheck
@@ -39,7 +39,7 @@ from ros_license_toolkit.ui_elements import SUCCESS_STR
 from ros_license_toolkit.ui_elements import Verbosity
 
 
-def main(args: Sequence[str] = sys.argv) -> int:
+def main(args: Optional[Sequence[str]] = None) -> int:
     """Main entry point for the ros_license_toolkit CLI.
 
     :param args: the command line arguments, defaults to sys.argv[1:]
