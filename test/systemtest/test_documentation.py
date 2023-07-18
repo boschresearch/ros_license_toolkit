@@ -29,7 +29,7 @@ class TestDocumentation(unittest.TestCase):
     def test_readme(self):
         """Check if the help text is up to date."""
         with subprocess.Popen(
-            ["bin/ros_license_toolkit", "-h"],
+            ["ros-license-toolkit", "-h"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         ) as process:
