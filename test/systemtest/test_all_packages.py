@@ -31,7 +31,7 @@ class TestAllPackages(unittest.TestCase):
         Check that the output contains all package names.
         """
         with subprocess.Popen(
-            ["ros-license-toolkit", "test/_test_data"],
+            ["ros_license_toolkit", "test/_test_data"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         ) as process:
