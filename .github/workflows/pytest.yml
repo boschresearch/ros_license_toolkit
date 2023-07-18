@@ -51,15 +51,15 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--cov=src/ros_license_toolkit --cov-report=xml"
+          custom-arguments: "--cov=src/ros_license_toolkit"
           emoji: true
           verbose: true
           job-summary: true
-      - uses: orgoro/coverage@v3
-        with:
-          coverageFile: "coverage.xml"
-          token: ${{ secrets.GITHUB_TOKEN }}
-        if: github.event_name == 'pull_request'
+      # - uses: orgoro/coverage@v3
+      #   with:
+      #     coverageFile: "coverage.xml"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #   if: github.event_name == 'pull_request'
       # - uses: MishaKav/pytest-coverage-comment@main
       #   with:
       #     pytest-xml-coverage-path: "coverage.xml"
