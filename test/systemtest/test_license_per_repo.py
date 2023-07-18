@@ -45,7 +45,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         make_repo(repo_path)
         # test
         with subprocess.Popen(
-            ["bin/ros_license_toolkit", repo_path],
+            ["ros_license_toolkit", repo_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         ) as process:
