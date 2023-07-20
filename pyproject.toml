@@ -35,6 +35,9 @@ dependencies = [
 ]
 requires-python = ">=3.7"
 
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "pycodestyle", "flake8", "mypy", "isort", "bumpver"]
+
 [project.urls]
 homepage = "https://github.com/boschresearch/ros_license_toolkit"
 repository = "https://github.com/boschresearch/ros_license_toolkit"
