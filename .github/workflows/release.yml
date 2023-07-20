@@ -1,0 +1,70 @@
+on:
+    push:
+        tags:
+            - "[0-9]+.[0-9]+.[0-9]+"
+jobs:
+    test:
+        strategy:
+          fail-fast: true
+          matrix:
+            include:
+              # versions updated accoring to 
+              # https://devguide.python.org/versions/
+              # on 2023-07-12
+              - python-version: "3.8"
+                os: "ubuntu-20.04"
+              - python-version: "3.8"
+                os: "ubuntu-22.04"
+              - python-version: "3.9"
+                os: "ubuntu-22.04"
+              - python-version: "3.10"
+                os: "ubuntu-22.04"
+              - python-version: "3.11"
+                os: "ubuntu-22.04"
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: szenius/set-timezone@v1.0
+              with:
+                timezoneLinux: "Europe/Berlin"
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                python-version: ${{ matrix.python-version }}
+            - name: Update pip
+              run: |
+                pip install --upgrade pip
+                pip install pytest pytest-md pytest-emoji pytest-cov
+            - uses: pavelzw/pytest-action@v2
+              with:
+                emoji: true
+                verbose: true
+                job-summary: true
+
+    release:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - uses: szenius/set-timezone@v1.0
+              with:
+                timezoneLinux: "Europe/Berlin"
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                python-version: "3.11"
+            - name: Update pip
+              run: |
+                pip install --upgrade pip
+                pip install build
+            - name: Build
+              run: |
+                python -m build
+            - uses: softprops/action-gh-release@v1
+              with:
+                files: dist/*
+                tag_name: ${{ github.ref }}
+            - uses: pypa/gh-action-pypi-publish@v1.8.8
+              with:
+                user: __token__
+                password: ${{ secrets.PYPI_TOKEN }}
+                packages-dir: dist
+            
