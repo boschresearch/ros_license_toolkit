@@ -67,7 +67,8 @@ jobs:
             - uses: softprops/action-gh-release@v1
               with:
                 files: dist/*
-                tag_name: ${{ github.ref }}
+                tag_name: ${{ github.ref_name }}
+                name: ${{ github.ref_name }}
             - uses: pypa/gh-action-pypi-publish@v1.8.8
               with:
                 user: __token__
