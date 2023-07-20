@@ -18,8 +18,7 @@
 This module contains UI elements for the CLI.
 """
 
-from enum import auto
-from enum import Enum
+from enum import Enum, auto
 
 # colors
 

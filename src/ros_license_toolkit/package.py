@@ -18,18 +18,17 @@ This module contains the Package class.
 """
 
 import os
-from typing import Any, Dict, List, Optional
 import xml.etree.ElementTree as ET
+from typing import Any, Dict, List, Optional
 
-from rospkg import list_by_path
-from rospkg import RosPack
+from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_toolkit.common import is_license_text_file
+from ros_license_toolkit.copyright import CopyrightPerPkg
 from ros_license_toolkit.license_tag import LicenseTag
-from ros_license_toolkit.repo import NotARepoError
-from ros_license_toolkit.repo import Repo
+from ros_license_toolkit.repo import NotARepoError, Repo
 
 # files we ignore in scan results
 IGNORED_FILES = [
@@ -203,6 +202,38 @@ class Package:
         in the package.xml."""
         return [x.get_license_text_file() for x in
                 self.license_tags.values()]
+
+    def get_copyright_file_contents(self) -> str:
+        """Get a string representation of the copyright notice."""
+        copyright = CopyrightPerPkg(self)
+        cpr_str = "".join((
+            "Format: https://www.debian.org/doc/packaging-manuals/copyright",
+            "-format/1.0/\n",
+            "Source: tbd\n",
+            f"Upstream-Name: {self.name}\n\n",))
+        for key, cprs in copyright.copyright_strings.items():
+            source_files_str = self.license_tags[key].source_files_str
+            cpr_str += f"Files:\n {source_files_str}\n"
+            cpr_str += "Copyright: "
+            cpr_str += "\n           ".join(cprs)
+            license = self.license_tags[key]
+            cpr_str += f"\nLicense: {license.id}\n"
+            assert license.license_text_file, \
+                "License text file must be defined."
+            with open(os.path.join(
+                    self.abspath,
+                    license.license_text_file)) as f:
+                license_lines = f.readlines()
+            for line in license_lines:
+                cpr_str += f" {line}"
+            cpr_str += "\n\n"
+        return cpr_str
+
+    def write_copyright_file(self):
+        with open(os.path.join(
+                self.abspath,
+                'copyright'), 'w') as f:
+            f.write(self.get_copyright_file_contents())
 
 
 def get_packages_in_path(path: str) -> List[Package]:

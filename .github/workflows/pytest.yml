@@ -31,6 +31,9 @@ jobs:
           - python-version: "3.11"
             os: "ubuntu-22.04"
     runs-on: ${{ matrix.os }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.python-version }}
+      cancel-in-progress: true
 
     steps:
       - uses: szenius/set-timezone@v1.0
@@ -51,15 +54,15 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--cov=src/ros_license_toolkit --cov-report=xml"
+          custom-arguments: "--cov=src/ros_license_toolkit"
           emoji: true
           verbose: true
           job-summary: true
-      - uses: orgoro/coverage@v3
-        with:
-          coverageFile: "coverage.xml"
-          token: ${{ secrets.GITHUB_TOKEN }}
-        if: github.event_name == 'pull_request'
+      # - uses: orgoro/coverage@v3
+      #   with:
+      #     coverageFile: "coverage.xml"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #   if: github.event_name == 'pull_request'
       # - uses: MishaKav/pytest-coverage-comment@main
       #   with:
       #     pytest-xml-coverage-path: "coverage.xml"

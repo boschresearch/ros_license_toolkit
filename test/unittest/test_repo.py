@@ -21,8 +21,7 @@ import unittest
 
 import git
 
-from ros_license_toolkit.repo import NotARepoError
-from ros_license_toolkit.repo import Repo
+from ros_license_toolkit.repo import NotARepoError, Repo
 
 
 class TestRepo(unittest.TestCase):

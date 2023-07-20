@@ -20,9 +20,8 @@ System tests to make sure that the license per repo is detected correctly.
 
 import os
 import subprocess
-from test.systemtest._test_helpers import make_repo
-from test.systemtest._test_helpers import remove_repo
 import unittest
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 
 class TestLicensePerRepoBsd3(unittest.TestCase):
@@ -45,7 +44,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         make_repo(repo_path)
         # test
         with subprocess.Popen(
-            ["bin/ros_license_toolkit", repo_path],
+            ["ros_license_toolkit", repo_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         ) as process:

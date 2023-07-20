@@ -18,9 +18,8 @@
 
 import os
 import subprocess
-from test.systemtest._test_helpers import make_repo
-from test.systemtest._test_helpers import remove_repo
 import unittest
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 from ros_license_toolkit.main import main
 
@@ -39,7 +38,7 @@ class TestPkgs(unittest.TestCase):
                 "test/_test_data/test_deep_package_folder/deeper/test_pkg_deep"
         ]:
             with subprocess.Popen(
-                ["bin/ros_license_toolkit", call_path],
+                ["ros_license_toolkit", call_path],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ) as process:
@@ -105,7 +104,7 @@ class TestPkgs(unittest.TestCase):
         package.xml."""
         # using subprocess.Popen instead of main() to capture stdout
         with subprocess.Popen(
-            ["bin/ros_license_toolkit",
+            ["ros_license_toolkit",
              "test/_test_data/test_pkg_unknown_license"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE

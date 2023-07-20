@@ -19,10 +19,10 @@ Module containing the LicenseTag class and related functions to handle
 license tags in package.xml files.
 """
 
-from glob import glob
 import os
-from typing import List, Optional, Set
 import xml.etree.ElementTree as ET
+from glob import glob
+from typing import List, Optional, Set
 
 from spdx.config import LICENSE_MAP
 
@@ -69,12 +69,12 @@ class LicenseTag:
         raw_license_name: str = str(self.element.text)
         # Name of the license (in SPDX tag format for comparability)
         try:
-            self.license_id = to_spdx_license_tag(raw_license_name)
+            self.id = to_spdx_license_tag(raw_license_name)
         except ValueError:
             # If the license name is not in the SPDX list,
             # we assume it is a custom license and use the name as-is.
             # This will be detected in `LicenseTagIsInSpdxListCheck`.
-            self.license_id = raw_license_name
+            self.id = raw_license_name
 
         # Path to the file containing the license text
         # (relative to package root)
@@ -84,7 +84,7 @@ class LicenseTag:
         # Paths to the source files that are licensed under this license
         self._source_files: Optional[Set[str]] = None
         self.source_files_str: str = element.attrib.get("source-files", '')
-        if self.source_files_str == '':
+        if not self.source_files_str:
             # If no source-files attribute is given, assume all files
             # are licensed under this license.
             self.source_files_str = "**"
@@ -98,8 +98,8 @@ class LicenseTag:
 
     def __str__(self) -> str:
         """Return a string representation of this license tag."""
-        assert self.license_id is not None, "License must have a name."
-        return self.license_id
+        assert self.id is not None, "License must have a name."
+        return self.id
 
     def has_license_text_file(self) -> bool:
         """Return whether this license tag has a file attribute."""
@@ -111,8 +111,8 @@ class LicenseTag:
 
     def get_license_id(self) -> str:
         """Return the license name."""
-        assert self.license_id is not None, "License tag must have an id."
-        return self.license_id
+        assert self.id is not None, "License tag must have an id."
+        return self.id
 
     def get_license_text_file(self) -> str:
         """Return the file attribute."""

@@ -22,24 +22,19 @@ import argparse
 import os
 import sys
 import timeit
-from typing import Sequence
+from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import LicensesInCodeCheck
-from ros_license_toolkit.checks import LicenseTagExistsCheck
-from ros_license_toolkit.checks import LicenseTagIsInSpdxListCheck
-from ros_license_toolkit.checks import LicenseTextExistsCheck
+from ros_license_toolkit.checks import (LicensesInCodeCheck,
+                                        LicenseTagExistsCheck,
+                                        LicenseTagIsInSpdxListCheck,
+                                        LicenseTextExistsCheck)
 from ros_license_toolkit.package import get_packages_in_path
-from ros_license_toolkit.ui_elements import FAILURE_STR
-from ros_license_toolkit.ui_elements import green
-from ros_license_toolkit.ui_elements import major_sep
-from ros_license_toolkit.ui_elements import minor_sep
-from ros_license_toolkit.ui_elements import red
-from ros_license_toolkit.ui_elements import rll_print_factory
-from ros_license_toolkit.ui_elements import SUCCESS_STR
-from ros_license_toolkit.ui_elements import Verbosity
+from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
+                                             Verbosity, green, major_sep,
+                                             minor_sep, red, rll_print_factory)
 
 
-def main(args: Sequence[str]) -> int:
+def main(args: Optional[Sequence[str]] = None) -> int:
     """Main entry point for the ros_license_toolkit CLI.
 
     :param args: the command line arguments, defaults to sys.argv[1:]
@@ -53,13 +48,17 @@ def main(args: Sequence[str]) -> int:
     parser = argparse.ArgumentParser(
         description='Checks ROS packages for correct license declaration.')
     parser.add_argument(
-        'path',
-        default='.',
+        'path', default='.',
         help='path to ROS2 package or repo containing packages')
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
-                        default=False, help='enable verbose output')
-    parser.add_argument('-q', '--quiet', dest='quiet', action='store_true',
-                        default=False, help='disable most output')
+    parser.add_argument(
+        '-c', '--generate_copyright_file', action='store_true',
+        default=False, help='generate a copyright file')
+    parser.add_argument(
+        '-v', '--verbose', dest='verbose', action='store_true',
+        default=False, help='enable verbose output')
+    parser.add_argument(
+        '-q', '--quiet', dest='quiet', action='store_true',
+        default=False, help='disable most output')
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
@@ -123,6 +122,8 @@ def main(args: Sequence[str]) -> int:
                 f"\n {FAILURE_STR}"))
             rll_print(major_sep())
             results_per_package[package.abspath] = False
+        if parsed_args.generate_copyright_file:
+            package.write_copyright_file()
 
     stop = timeit.default_timer()
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
