@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ros_license_toolkit"
+version = "1.0.0"
+description = "Checks ROS packages for correct license declaration."
+readme = "README.md"
+authors = [
+    {name = "Christian Henkel", email = "christian.henkel2@de.bosch.com"},
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Framework :: Robot Framework :: Tool",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["ros", "license", "toolkit", "oss", "packages"]
+dependencies = [
+    "gitpython",
+    "rospkg",
+# TODO v32 changes things, see
+# https://github.com/nexB/scancode-toolkit/blob/develop/
+# CHANGELOG.rst#v3200---2023-05-23
+    "scancode-toolkit<=31.2.6",
+    "spdx-tools"
+]
+requires-python = ">=3.7"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "pycodestyle", "flake8", "mypy", "isort", "bumpver"]
+
+[project.urls]
+homepage = "https://github.com/boschresearch/ros_license_toolkit"
+repository = "https://github.com/boschresearch/ros_license_toolkit"
+
+[project.scripts]
+ros_license_toolkit = "ros_license_toolkit.main:main"
+
+[isort]
+profile = "google"
