@@ -22,6 +22,10 @@ jobs:
               - python-version: "3.11"
                 os: "ubuntu-22.04"
         runs-on: ${{ matrix.os }}
+        concurrency:
+          group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.python-version }}
+          cancel-in-progress: true
+
         steps:
             - uses: szenius/set-timezone@v1.0
               with:
@@ -33,7 +37,9 @@ jobs:
             - name: Update pip
               run: |
                 pip install --upgrade pip
-                pip install pytest pytest-md pytest-emoji pytest-cov
+                pip install pytest pytest-md pytest-emoji
+            - name: Install package
+              run: pip install .
             - uses: pavelzw/pytest-action@v2
               with:
                 emoji: true
