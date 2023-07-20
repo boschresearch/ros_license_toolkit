@@ -19,10 +19,10 @@ Module containing the LicenseTag class and related functions to handle
 license tags in package.xml files.
 """
 
-from glob import glob
 import os
-from typing import List, Optional, Set
 import xml.etree.ElementTree as ET
+from glob import glob
+from typing import List, Optional, Set
 
 from spdx.config import LICENSE_MAP
 

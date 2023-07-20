@@ -24,19 +24,14 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import LicensesInCodeCheck
-from ros_license_toolkit.checks import LicenseTagExistsCheck
-from ros_license_toolkit.checks import LicenseTagIsInSpdxListCheck
-from ros_license_toolkit.checks import LicenseTextExistsCheck
+from ros_license_toolkit.checks import (LicensesInCodeCheck,
+                                        LicenseTagExistsCheck,
+                                        LicenseTagIsInSpdxListCheck,
+                                        LicenseTextExistsCheck)
 from ros_license_toolkit.package import get_packages_in_path
-from ros_license_toolkit.ui_elements import FAILURE_STR
-from ros_license_toolkit.ui_elements import green
-from ros_license_toolkit.ui_elements import major_sep
-from ros_license_toolkit.ui_elements import minor_sep
-from ros_license_toolkit.ui_elements import red
-from ros_license_toolkit.ui_elements import rll_print_factory
-from ros_license_toolkit.ui_elements import SUCCESS_STR
-from ros_license_toolkit.ui_elements import Verbosity
+from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
+                                             Verbosity, green, major_sep,
+                                             minor_sep, red, rll_print_factory)
 
 
 def main(args: Optional[Sequence[str]] = None) -> int:
