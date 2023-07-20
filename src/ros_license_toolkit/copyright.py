@@ -26,10 +26,7 @@ from scancode.api import get_copyrights
 def _get_copyright_strs_from_results(
         scan_results: Dict[str, Any]) -> List[str]:
     """Get copyright strings from scan results."""
-    cprs = []
-    for cpr in scan_results['copyrights']:
-        cprs.append(cpr['copyright'])
-    return cprs
+    return [cpr['copyright'] for cpr in scan_results['copyrights']]
 
 
 def _get_year_from_copyright_str(cpr_str: str) -> Union[int, Tuple[int, int]]:
@@ -82,5 +79,5 @@ class CopyrightPerPkg:
                 {cpr.copyright_text for cpr in cprs})
 
     def __str__(self):
-        return " ".join(" ".join(copyrights) 
+        return " ".join(" ".join(copyrights)
                         for copyrights in self.copyright_strings.values())
