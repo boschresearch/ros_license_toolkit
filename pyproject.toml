@@ -43,4 +43,4 @@ repository = "https://github.com/boschresearch/ros_license_toolkit"
 ros_license_toolkit = "ros_license_toolkit.main:main"
 
 [isort]
-profile = google
+profile = "google"
