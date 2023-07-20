@@ -15,10 +15,8 @@
 # limitations under the License.
 
 import unittest
-from unittest.mock import patch
 
-from ros_license_toolkit.copyright import (
-    _get_year_from_copyright_str, CopyrightPerPkg)
+from ros_license_toolkit.copyright import _get_year_from_copyright_str
 
 
 class TestCopyright(unittest.TestCase):
