@@ -59,6 +59,9 @@ class CopyrightPerFile:
                 break
         self.copyright_text = copyright_text
 
+    def __str__(self):
+        return self.copyright_text
+
 
 class CopyrightPerPkg:
     def __init__(self, pkg):
@@ -77,3 +80,7 @@ class CopyrightPerPkg:
                     cprs.add(CopyrightPerFile(source_file, cpr))
             self.copyright_strings[key] = sorted(
                 {cpr.copyright_text for cpr in cprs})
+
+    def __str__(self):
+        return " ".join(" ".join(copyrights) 
+                        for copyrights in self.copyright_strings.values())

@@ -18,7 +18,7 @@ import unittest
 from unittest.mock import patch
 
 from ros_license_toolkit.copyright import (
-    _get_year_from_copyright_str, Copyright)
+    _get_year_from_copyright_str, CopyrightPerFile)
 
 
 class TestCopyright(unittest.TestCase):
@@ -46,5 +46,5 @@ class TestCopyright(unittest.TestCase):
     def test_copyrigth_str(self, mock_package):
         mock_package.name = 'test_package'
         mock_package.license_file = 'LICENSE'
-        c = Copyright(mock_package)
+        c = CopyrightPerFile(mock_package)
         self.assertEqual(c.__str__(), 'test_package (LICENSE)')
