@@ -56,8 +56,7 @@ usage: ros_license_toolkit [-h] [-c] [-v] [-q] path
 Checks ROS packages for correct license declaration.
 
 positional arguments:
-  path                  path to ROS2 package or repo containing
-                        packages
+  path                  path to ROS2 package or repo containing packages
 
 optional arguments:
   -h, --help            show this help message and exit
