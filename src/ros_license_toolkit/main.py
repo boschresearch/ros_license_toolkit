@@ -48,13 +48,17 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         description='Checks ROS packages for correct license declaration.')
     parser.add_argument(
-        'path',
-        default='.',
+        'path', default='.',
         help='path to ROS2 package or repo containing packages')
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
-                        default=False, help='enable verbose output')
-    parser.add_argument('-q', '--quiet', dest='quiet', action='store_true',
-                        default=False, help='disable most output')
+    parser.add_argument(
+        '-c', '--generate_copyright_file', action='store_true',
+        default=False, help='generate a copyright file')
+    parser.add_argument(
+        '-v', '--verbose', dest='verbose', action='store_true',
+        default=False, help='enable verbose output')
+    parser.add_argument(
+        '-q', '--quiet', dest='quiet', action='store_true',
+        default=False, help='disable most output')
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
@@ -118,6 +122,8 @@ def main(args: Optional[Sequence[str]] = None) -> int:
                 f"\n {FAILURE_STR}"))
             rll_print(major_sep())
             results_per_package[package.abspath] = False
+        if parsed_args.generate_copyright_file:
+            package.write_copyright_file()
 
     stop = timeit.default_timer()
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
