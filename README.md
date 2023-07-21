@@ -1,6 +1,12 @@
 # ros_license_toolkit
 
-[![Pytest](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml) [![Lint](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml) [![PyPI version](https://badge.fury.io/py/ros-license-toolkit.svg)](https://badge.fury.io/py/ros-license-toolkit) [![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/issues) [![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/pulls) [![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_toolkit.svg)](https://github.com/boschresearch/ros_license_toolkit/search?l=python) [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://github.com/boschresearch/ros_license_toolkit/blob/main/LICENSE)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/boschresearch/ros_license_toolkit/pytest.yml?label=pytest&style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml)
+[![github lint](https://img.shields.io/github/actions/workflow/status/boschresearch/ros_license_toolkit/lint.yml?label=lint&style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml)
+[![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/issues) 
+[![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/pulls) 
+[![PyPI](https://img.shields.io/pypi/v/ros_license_toolkit?style=flat-square)](https://pypi.org/project/ros-license-toolkit/)
+[![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/search?l=python) 
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/blob/main/LICENSE)
 
 > **Warning**
 > For any legal questions, please consult a lawyer. This tool is not a substitute for legal advice. 
