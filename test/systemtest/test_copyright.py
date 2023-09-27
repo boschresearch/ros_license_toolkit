@@ -15,11 +15,10 @@
 # limitations under the License.
 
 import os
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 from ros_license_toolkit.copyright import CopyrightPerPkg
 from ros_license_toolkit.package import Package, get_packages_in_path
-
-from test.systemtest._test_helpers import make_repo, remove_repo
 
 TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
 
