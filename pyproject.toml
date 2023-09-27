@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ros_license_toolkit"
-version = "1.1.5"
+version = "1.2.0"
 description = "Checks ROS packages for correct license declaration."
 readme = "README.md"
 authors = [
