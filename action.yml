@@ -1,0 +1,16 @@
+name: ros_license_tool
+description: Runs the ros_license_tool on the ROS packages from a repo
+
+runs:
+  using: composite
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install package
+      run: pip install $GITHUB_ACTION_PATH
+      shell: bash
+    - name: Run ros_license_toolkit linter
+      run: ros_license_toolkit .
+      shell: bash

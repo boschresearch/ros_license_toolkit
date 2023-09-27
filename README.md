@@ -72,6 +72,20 @@ optional arguments:
   -q, --quiet           disable most output
 ```
 
+### Using it as a GitHub action
+You can use `ros_license_toolkit` inside your GitHub workflow in order to check licenses in your
+repository in each pull request. Use the following job inside your workflow file:
+
+```yaml
+jobs:
+  check_licenses:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: boschresearch/ros_license_toolkit@1.1.5
+```
+
 ## State of Development
 *WORK IN PROGRESS*
 This is currently working and feature complete to the point it was originally intended.
@@ -86,7 +100,7 @@ In particular, the following things will have to be done:
 - [x] Allow license name in tag to be also full name of SPDX key.
 - [x] Each LicenseTag should have SPDX id.
 - [ ] Single license tag without file attribute and single license text should match automatically.
-- [ ] Turn into github action.
+- [x] Turn into github action.
 
 ## License
 ros_license_toolkit is open-sourced under the Apache-2.0 license. See the
