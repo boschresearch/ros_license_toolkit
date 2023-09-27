@@ -229,10 +229,8 @@ class Package:
             cpr_str += "\n\n"
         return cpr_str
 
-    def write_copyright_file(self):
-        with open(os.path.join(
-                self.abspath,
-                'copyright'), 'w') as f:
+    def write_copyright_file(self, path: str):
+        with open(path, 'w') as f:
             f.write(self.get_copyright_file_contents())
 
 

@@ -19,20 +19,78 @@ import os
 from ros_license_toolkit.copyright import CopyrightPerPkg
 from ros_license_toolkit.package import Package
 
+TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
+
+TEST_PACKAGES_COPYRIGHT_FILE = [
+    "test_pkg_has_code_disjoint",
+    "test_pkg_has_code_of_different_license_and_tag",
+    "test_pkg_spdx_name",
+    "test_pkg_spdx_tag",
+    "test_pkg_with_license_and_file"
+]
+
+
+def remove_existing_copyright_file(path: str):
+    if os.path.exists(path):
+        os.remove(path)
+
 
 def test_copyright():
-    path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
-    pkg = Package(path)
+    pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
+    pkg = Package(pkg_path)
     cpr_secs = CopyrightPerPkg(pkg).copyright_strings
     assert len(cpr_secs) == 2
 
 
 def test_copyright_to_string():
-    path = os.path.abspath("test/_test_data/test_pkg_has_code_disjoint")
-    pkg = Package(path)
+    pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
+    pkg = Package(pkg_path)
     cprs = CopyrightPerPkg(pkg)
     assert '1995' in str(cprs)
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)
     assert '2002' in str(cprs)
     assert 'Another' in str(cprs)
+
+
+def test_get_copyright_file_contents():
+    for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
+        pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
+        pkg = Package(pkg_path)
+        copyright_file_content = pkg.get_copyright_file_contents()
+        print(copyright_file_content)
+        with open(os.path.join(
+                TEST_DATA_FOLDER,
+                "copyright_file_contents",
+                pkg_name
+        ), "r") as f:
+            expected = f.read()
+            assert expected == copyright_file_content
+
+
+def test_write_copyright_file():
+    for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
+        pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
+        copyright_file_folder = \
+            os.path.join("/tmp", pkg_name)
+        os.makedirs(name=copyright_file_folder,
+                    exist_ok=True)
+        copyright_file_path = os.path.join(
+            copyright_file_folder, 'copyright')
+        remove_existing_copyright_file(
+            path=copyright_file_path)
+        pkg = Package(pkg_path)
+        pkg.write_copyright_file(
+            copyright_file_path)
+        assert os.path.exists(copyright_file_path)
+        with open(copyright_file_path, "r") as f:
+            output = f.read()
+            with open(os.path.join(
+                TEST_DATA_FOLDER,
+                "copyright_file_contents",
+                pkg_name
+            ), "r") as f:
+                expected = f.read()
+                assert expected == output
+        # remove_existing_copyright_file(
+        #     path=copyright_file_path)
