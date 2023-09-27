@@ -123,11 +123,12 @@ def main(args: Optional[Sequence[str]] = None) -> int:
             rll_print(major_sep())
             results_per_package[package.abspath] = False
 
-    # Generate copyright file 
+    # Generate copyright file
     if parsed_args.generate_copyright_file:
         if len(packages) == 1:
             package = packages[0]
-            package.write_copyright_file(os.path.join(os.getcwd(), 'copyright'))
+            package.write_copyright_file(
+                os.path.join(os.getcwd(), 'copyright'))
         else:
             rll_print(red(
                 "Can only generate copyright file for single package"),

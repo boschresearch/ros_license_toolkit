@@ -196,7 +196,7 @@ class Package:
                 break
 
         return self._license_tags
-    
+
     @property
     def repo_url(self) -> Optional[str]:
         """Get the url of the repo this package is in if the package is in a
