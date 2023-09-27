@@ -46,12 +46,12 @@ class CopyrightPerFile:
     def __init__(self, file_path: str, copyright_text: str):
         self.file_path = file_path
         for prefix_to_remove in [
+            'copyright (c) ',
+            'copyright (c)',
+            'copyright ',
             'copyright',
-            'Copyright (c) ',
-            'Copyright ',
-            'Copyright'
         ]:
-            if copyright_text.startswith(prefix_to_remove):
+            if copyright_text.lower().startswith(prefix_to_remove):
                 copyright_text = copyright_text[len(prefix_to_remove):]
                 break
         self.copyright_text = copyright_text
