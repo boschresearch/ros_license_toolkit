@@ -17,7 +17,9 @@
 import os
 
 from ros_license_toolkit.copyright import CopyrightPerPkg
-from ros_license_toolkit.package import Package
+from ros_license_toolkit.package import Package, get_packages_in_path
+
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
 
@@ -54,9 +56,10 @@ def test_copyright_to_string():
 
 
 def test_get_copyright_file_contents():
+    make_repo(TEST_DATA_FOLDER)
     for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
         pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
-        pkg = Package(pkg_path)
+        pkg = get_packages_in_path(pkg_path)[0]
         copyright_file_content = pkg.get_copyright_file_contents()
         print(copyright_file_content)
         with open(os.path.join(
@@ -66,9 +69,11 @@ def test_get_copyright_file_contents():
         ), "r") as f:
             expected = f.read()
             assert expected == copyright_file_content
+    remove_repo(TEST_DATA_FOLDER)
 
 
 def test_write_copyright_file():
+    make_repo(TEST_DATA_FOLDER)
     for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
         pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
         copyright_file_folder = \
@@ -79,7 +84,7 @@ def test_write_copyright_file():
             copyright_file_folder, 'copyright')
         remove_existing_copyright_file(
             path=copyright_file_path)
-        pkg = Package(pkg_path)
+        pkg = get_packages_in_path(pkg_path)[0]
         pkg.write_copyright_file(
             copyright_file_path)
         assert os.path.exists(copyright_file_path)
@@ -92,5 +97,6 @@ def test_write_copyright_file():
             ), "r") as f:
                 expected = f.read()
                 assert expected == output
-        # remove_existing_copyright_file(
-        #     path=copyright_file_path)
+        remove_existing_copyright_file(
+            path=copyright_file_path)
+    make_repo(TEST_DATA_FOLDER)

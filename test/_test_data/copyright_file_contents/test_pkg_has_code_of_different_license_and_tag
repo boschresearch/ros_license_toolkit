@@ -1,5 +1,5 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Source: tbd
+Source: https://fake.git
 Upstream-Name: test_pkg_has_code_of_different_license_and_tag
 
 Files:

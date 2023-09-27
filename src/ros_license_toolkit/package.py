@@ -196,6 +196,14 @@ class Package:
                 break
 
         return self._license_tags
+    
+    @property
+    def repo_url(self) -> Optional[str]:
+        """Get the url of the repo this package is in if the package is in a
+        git repo and this has an origin. Else return None."""
+        if self.repo is None:
+            return None
+        return None if self.repo.remote_url is None else self.repo.remote_url
 
     def get_license_files(self) -> List[str]:
         """Get all license text files associated with license tags
@@ -209,7 +217,7 @@ class Package:
         cpr_str = "".join((
             "Format: https://www.debian.org/doc/packaging-manuals/copyright",
             "-format/1.0/\n",
-            "Source: tbd\n",
+            f"Source: {self.repo_url}\n",
             f"Upstream-Name: {self.name}\n\n",))
         for key, cprs in copyright.copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str

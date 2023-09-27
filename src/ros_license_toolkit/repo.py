@@ -83,6 +83,11 @@ class Repo:
             if is_license_text_file(scan_results):
                 self.license_text_files[fpath] = scan_results
 
+        # get the remote url
+        self.remote_url: Optional[str] = None
+        if len(repo.remotes) > 0:
+            self.remote_url = repo.remotes[0].url
+
     def __eq__(self, __o) -> bool:
         """Check if two repos are the same."""
         return os.path.samefile(self.abs_path, __o.abs_path)
