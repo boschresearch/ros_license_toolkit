@@ -70,7 +70,9 @@ class CopyrightPerPkg:
             cprs = set()
             for source_file in license_tag.source_files:
                 fpath = os.path.join(self.pkg.abspath, source_file)
+                print(fpath)
                 res = get_copyrights(fpath)
+                print(res)
                 if len(res) == 0:
                     continue
                 for cpr in _get_copyright_strs_from_results(res):
