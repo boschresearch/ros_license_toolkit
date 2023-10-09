@@ -24,4 +24,5 @@ REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 99.0
 def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
     """Check if a file is a license text file."""
     return (
-        scan_results["percentage_of_license_text"] >= REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
+        scan_results["percentage_of_license_text"] >=
+        REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
