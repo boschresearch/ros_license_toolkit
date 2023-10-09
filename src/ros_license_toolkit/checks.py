@@ -58,11 +58,18 @@ class Check:
 
     def __str__(self) -> str:
         """Return formatted string for normal output."""
-        return (
-            str(type(self).__name__) + "\n" + green(f" SUCCESS {self.reason}")
-            if self.success
-            else str(type(self).__name__) + "\n" + red(f" FAILURE {self.reason}")
-        )
+        if self.success:
+            return (
+                str(type(self).__name__)
+                + "\n"
+                + green(f" SUCCESS {self.reason}")
+            )
+        else:
+            return (
+                str(type(self).__name__)
+                + "\n"
+                + red(f" FAILURE {self.reason}")
+            )
 
     def verbose(self) -> str:
         """Return string with additional information for verbose output."""
@@ -141,32 +148,36 @@ class LicenseTextExistsCheck(Check):
                     os.path.join(package.abspath, license_text_file)):
                 license_tags_without_license_text[
                     license_tag
-                ] = f"License text file '{license_text_file}' does not exist."
+                ] = f"License text file '{license_text_file}'" +\
+                    " does not exist."
                 continue
             if license_text_file not in found_license_texts:
                 print("{package.license_tags}")
                 license_tags_without_license_text[
                     license_tag
-                ] = f"License text file '{license_text_file}' not included in scan results."
+                ] = f"License text file '{license_text_file}'" +\
+                    " not included in scan results."
                 continue
             if not is_license_text_file(
                     found_license_texts[license_text_file]):
                 license_tags_without_license_text[
                     license_tag
-                ] = f"License text file '{license_text_file}' is not recognized as license text."
+                ] = f"License text file '{license_text_file}'" +\
+                    " is not recognized as license text."
                 continue
             actual_license: Optional[str] = get_spdx_license_name(
                 found_license_texts[license_text_file])
             if actual_license is None:
                 license_tags_without_license_text[
                     license_tag
-                ] = f"License text file '{license_text_file}' is not recognized as license text."
+                ] = f"License text file '{license_text_file}'" +\
+                    " is not recognized as license text."
                 continue
             if actual_license != license_tag.get_license_id():
                 license_tags_without_license_text[license_tag] =\
-                                f"License text file '{license_text_file}' is " +\
-                                f"of license {actual_license} but should be " +\
-                                f"{license_tag.get_license_id()}."
+                    f"License text file '{license_text_file}' is " +\
+                    f"of license {actual_license} but should be " +\
+                    f"{license_tag.get_license_id()}."
                 continue
         if license_tags_without_license_text:
             self._failed(
@@ -220,10 +231,10 @@ class LicensesInCodeCheck(Check):
         if files_with_uncovered_licenses:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
-                    'are not covered by any license tag:\n' + '\n'.join(
+                'are not covered by any license tag:\n' + '\n'.join(
                     [f"  '{x[0]}': {x[1]}" for x in
                         files_with_uncovered_licenses.items()])
-            self._extracted_from__check_47(
+            self._print_info(
                 info_str,
                 files_with_uncovered_licenses,
                 files_not_matched_by_any_license_tag,
@@ -232,11 +243,11 @@ class LicensesInCodeCheck(Check):
         elif len(files_not_matched_by_any_license_tag) > 0:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
-                    'are covered by a license tag but are not listed in ' +\
-                    'the source files of the license tag:\n' + '\n'.join(
+                'are covered by a license tag but are not listed in ' +\
+                'the source files of the license tag:\n' + '\n'.join(
                     [f"  '{x[0]}': {x[1]}" for x in
                         files_not_matched_by_any_license_tag.items()])
-            self._extracted_from__check_47(
+            self._print_info(
                 info_str,
                 files_with_uncovered_licenses,
                 files_not_matched_by_any_license_tag,
@@ -246,8 +257,8 @@ class LicensesInCodeCheck(Check):
             self._success('All licenses found in the code are covered by a '
                           'license declaration.')
 
-    # TODO Rename this here and in `_check`
-    def _extracted_from__check_47(self, info_str, files_with_uncovered_licenses, files_not_matched_by_any_license_tag, package):
+    def _print_info(self, info_str, files_with_uncovered_licenses,
+                    files_not_matched_by_any_license_tag, package):
         assert info_str != ''
         self._failed(info_str)
         self.verbose_output = red(

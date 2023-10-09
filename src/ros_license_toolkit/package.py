@@ -44,7 +44,7 @@ IGNORED_FILE_PREFIXES = [
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
     if scan_results['percentage_of_license_text'] >=\
-          REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
+            REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
         return scan_results['detected_license_expression_spdx']
     return None
 
