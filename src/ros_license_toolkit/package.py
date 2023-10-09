@@ -25,25 +25,27 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import is_license_text_file
+from ros_license_toolkit.common import is_license_text_file, \
+    REQUIRED_PERCENTAGE_OF_LICENSE_TEXT
 from ros_license_toolkit.copyright import CopyrightPerPkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
 # files we ignore in scan results
-IGNORED_FILES = [
+IGNORED_FILE_PREFIXES = [
     "package.xml",
     "setup.py",
     "setup.cfg",
-    "CMakeLists.txt"
+    "CMakeLists.txt",
+    ".git/"
 ]
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
-    for _license in scan_results["licenses"]:
-        if _license["score"] >= 99:
-            return _license["spdx_license_key"]
+    if scan_results['percentage_of_license_text'] >=\
+          REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
+        return scan_results['detected_license_expression_spdx']
     return None
 
 
@@ -116,27 +118,36 @@ class Package:
     def _run_scan_and_save_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if not (self._found_files_w_licenses is None or (
-                self._found_license_texts is None)):
+        if (
+            self._found_files_w_licenses is not None
+            and self._found_license_texts is not None
+        ):
             return self._found_files_w_licenses, self._found_license_texts
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
         for (root, _, files) in os.walk(self.abspath):
             for fname in files:
-                if fname in IGNORED_FILES:
-                    continue
                 # Path relative to cwd
                 fpath = os.path.join(root, fname)
                 # Path relative to package root
                 fpath_rel_to_pkg = self._get_path_relative_to_pkg(fpath)
+                print(f"0 {fpath_rel_to_pkg=}")
+                if any(
+                    fpath_rel_to_pkg.startswith(ignored_file_prefix) for
+                    ignored_file_prefix in IGNORED_FILE_PREFIXES
+                        ):
+                    continue
                 scan_results = get_licenses(fpath)
+                print(f"1 {fpath_rel_to_pkg=}")
                 if is_license_text_file(scan_results):
                     self._found_license_texts[fpath_rel_to_pkg
                                               ] = scan_results
+                    print("license text file")
                 else:
                     # not a license text file but also interesting
                     self._found_files_w_licenses[fpath_rel_to_pkg
                                                  ] = scan_results
+                    print("not license text file")
         # look also in the repo for license text files
         if self.repo is not None:
             for path, res in self.repo.license_text_files.items():

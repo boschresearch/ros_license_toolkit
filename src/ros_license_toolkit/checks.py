@@ -58,15 +58,11 @@ class Check:
 
     def __str__(self) -> str:
         """Return formatted string for normal output."""
-        if self.success:
-            info: str = str(
-                type(self).__name__) + "\n" + \
-                green(f" SUCCESS {self.reason}")
-        else:
-            info = str(
-                type(self).__name__) + "\n" + \
-                red(f" FAILURE {self.reason}")
-        return info
+        return (
+            str(type(self).__name__) + "\n" + green(f" SUCCESS {self.reason}")
+            if self.success
+            else str(type(self).__name__) + "\n" + red(f" FAILURE {self.reason}")
+        )
 
     def verbose(self) -> str:
         """Return string with additional information for verbose output."""
@@ -113,12 +109,11 @@ class LicenseTagIsInSpdxListCheck(Check):
     """This ensures that the license tag is in the SPDX list of licenses."""
 
     def _check(self, package: Package):
-        licenses_not_in_spdx_list = []
-        for license_tag in package.license_tags.keys():
-            if not is_license_name_in_spdx_list(
-                    license_tag):
-                licenses_not_in_spdx_list.append(license_tag)
-        if len(licenses_not_in_spdx_list) > 0:
+        if licenses_not_in_spdx_list := [
+            license_tag
+            for license_tag in package.license_tags.keys()
+            if not is_license_name_in_spdx_list(license_tag)
+        ]:
             self._failed(
                 f"Licenses {licenses_not_in_spdx_list} are "
                 "not in SPDX list of licenses."
@@ -144,34 +139,36 @@ class LicenseTextExistsCheck(Check):
             license_text_file = license_tag.get_license_text_file()
             if not os.path.exists(
                     os.path.join(package.abspath, license_text_file)):
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' does not exist."
+                license_tags_without_license_text[
+                    license_tag
+                ] = f"License text file '{license_text_file}' does not exist."
                 continue
             if license_text_file not in found_license_texts:
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' not included" +\
-                    " in scan results."
+                print("{package.license_tags}")
+                license_tags_without_license_text[
+                    license_tag
+                ] = f"License text file '{license_text_file}' not included in scan results."
                 continue
             if not is_license_text_file(
                     found_license_texts[license_text_file]):
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' is not " +\
-                    "recognized as license text."
+                license_tags_without_license_text[
+                    license_tag
+                ] = f"License text file '{license_text_file}' is not recognized as license text."
                 continue
             actual_license: Optional[str] = get_spdx_license_name(
                 found_license_texts[license_text_file])
             if actual_license is None:
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}'" +\
-                    " is not recognized as license text."
+                license_tags_without_license_text[
+                    license_tag
+                ] = f"License text file '{license_text_file}' is not recognized as license text."
                 continue
             if actual_license != license_tag.get_license_id():
                 license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' is " +\
-                    f"of license {actual_license} but should be " +\
-                    f"{license_tag.get_license_id()}."
+                                f"License text file '{license_text_file}' is " +\
+                                f"of license {actual_license} but should be " +\
+                                f"{license_tag.get_license_id()}."
                 continue
-        if len(license_tags_without_license_text) > 0:
+        if license_tags_without_license_text:
             self._failed(
                 "The following license tags do not have a valid license text "
                 "file:\n" + "\n".join(
@@ -200,47 +197,62 @@ class LicensesInCodeCheck(Check):
             if fname in package.get_license_files():
                 # the actual license text files are not relevant for this
                 continue
-            for found_license in found_licenses['licenses']:
-                found_license_str = found_license['spdx_license_key']
-                if found_license_str not in declared_licenses:
+            found_licenses_str = found_licenses[
+                'detected_license_expression_spdx']
+            licenses = found_licenses_str.split(' AND ')
+            for license_str in licenses:
+                if license_str not in declared_licenses:
                     # this license is not declared by any license tag
                     if fname not in files_with_uncovered_licenses:
                         files_with_uncovered_licenses[fname] = []
                     files_with_uncovered_licenses[fname].append(
-                        found_license_str)
+                        license_str)
                     continue
                 if fname not in declared_licenses[
-                        found_license_str].source_files:
+                        license_str].source_files:
                     # this license is declared by a license tag but the file
                     # is not listed in the source files of the license tag
                     if fname not in files_not_matched_by_any_license_tag:
                         files_not_matched_by_any_license_tag[fname] = []
                     files_not_matched_by_any_license_tag[fname].append(
-                        found_license_str)
+                        license_str)
                     continue
-        if len(files_with_uncovered_licenses) > 0 or \
-                len(files_not_matched_by_any_license_tag) > 0:
+        if files_with_uncovered_licenses:
             info_str = ''
-            if len(files_with_uncovered_licenses) > 0:
-                info_str += '\nThe following files contain licenses that ' +\
+            info_str += '\nThe following files contain licenses that ' +\
                     'are not covered by any license tag:\n' + '\n'.join(
-                        [f"  '{x[0]}': {x[1]}" for x in
-                            files_with_uncovered_licenses.items()])
-            elif len(files_not_matched_by_any_license_tag) > 0:
-                info_str += '\nThe following files contain licenses that ' +\
+                    [f"  '{x[0]}': {x[1]}" for x in
+                        files_with_uncovered_licenses.items()])
+            self._extracted_from__check_47(
+                info_str,
+                files_with_uncovered_licenses,
+                files_not_matched_by_any_license_tag,
+                package,
+            )
+        elif len(files_not_matched_by_any_license_tag) > 0:
+            info_str = ''
+            info_str += '\nThe following files contain licenses that ' +\
                     'are covered by a license tag but are not listed in ' +\
                     'the source files of the license tag:\n' + '\n'.join(
-                        [f"  '{x[0]}': {x[1]}" for x in
-                            files_not_matched_by_any_license_tag.items()])
-            assert info_str != ''
-            self._failed(info_str)
-            self.verbose_output = red(
-                '\n  Relevant scan results:\n' + pformat(
-                    list(filter(
-                        lambda x: x[0] in files_with_uncovered_licenses or (
-                            x[0] in files_not_matched_by_any_license_tag),
-                        package.found_files_w_licenses.items()))))
-
+                    [f"  '{x[0]}': {x[1]}" for x in
+                        files_not_matched_by_any_license_tag.items()])
+            self._extracted_from__check_47(
+                info_str,
+                files_with_uncovered_licenses,
+                files_not_matched_by_any_license_tag,
+                package,
+            )
         else:
             self._success('All licenses found in the code are covered by a '
                           'license declaration.')
+
+    # TODO Rename this here and in `_check`
+    def _extracted_from__check_47(self, info_str, files_with_uncovered_licenses, files_not_matched_by_any_license_tag, package):
+        assert info_str != ''
+        self._failed(info_str)
+        self.verbose_output = red(
+            '\n  Relevant scan results:\n' + pformat(
+                list(filter(
+                    lambda x: x[0] in files_with_uncovered_licenses or (
+                        x[0] in files_not_matched_by_any_license_tag),
+                    package.found_files_w_licenses.items()))))
