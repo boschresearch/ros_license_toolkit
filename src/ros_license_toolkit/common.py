@@ -18,11 +18,10 @@
 
 from typing import Any, Dict
 
+REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 99.0
+
 
 def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
     """Check if a file is a license text file."""
-    for _license in scan_results["licenses"]:
-        if _license["matched_rule"]["is_license_text"] and \
-                _license["score"] >= 99:
-            return True
-    return False
+    return (
+        scan_results["percentage_of_license_text"] >= REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
