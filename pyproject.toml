@@ -30,7 +30,7 @@ dependencies = [
 # TODO v32 changes things, see
 # https://github.com/nexB/scancode-toolkit/blob/develop/
 # CHANGELOG.rst#v3200---2023-05-23
-    "scancode-toolkit<=32.0.7",
+    "scancode-toolkit>=32.0.7",
     "spdx-tools"
 ]
 requires-python = ">=3.7"
