@@ -59,17 +59,12 @@ class Check:
     def __str__(self) -> str:
         """Return formatted string for normal output."""
         if self.success:
-            return (
-                str(type(self).__name__)
-                + "\n"
-                + green(f" SUCCESS {self.reason}")
-            )
-        else:
-            return (
-                str(type(self).__name__)
-                + "\n"
-                + red(f" FAILURE {self.reason}")
-            )
+            return \
+                str(type(self).__name__) + "\n" + green(
+                    f" SUCCESS {self.reason}")
+        return \
+            str(type(self).__name__) + "\n" + red(
+                f" FAILURE {self.reason}")
 
     def verbose(self) -> str:
         """Return string with additional information for verbose output."""
