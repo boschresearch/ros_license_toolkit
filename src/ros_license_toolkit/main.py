@@ -92,36 +92,8 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     start = timeit.default_timer()
 
     # Check the packages
-    results_per_package = {}
     for package in packages:
-        rll_print(f'[{package.name}]')
-        assert package.repo is not None, 'Package must be in a git repo.'
-        rll_print(
-            f'git hash of ({package.repo.get_path()}):'
-            f' {package.repo.get_hash()}')
-        checks_to_perform = [
-            LicenseTagExistsCheck(),
-            LicenseTagIsInSpdxListCheck(),
-            LicenseTextExistsCheck(),
-            LicensesInCodeCheck()]
-
-        for check in checks_to_perform:
-            check.check(package)
-            rll_print(check)
-            rll_print(check.verbose(), Verbosity.VERBOSE)
-
-        if all(checks_to_perform):
-            rll_print(minor_sep())
-            rll_print(f"[{package.name}] Overall:" + green(
-                f"\n {SUCCESS_STR}"))
-            rll_print(major_sep())
-            results_per_package[package.abspath] = True
-        else:
-            rll_print(minor_sep())
-            rll_print(f"[{package.name}] Overall:" + red(
-                f"\n {FAILURE_STR}"))
-            rll_print(major_sep())
-            results_per_package[package.abspath] = False
+        results_per_package = process_one_pkg(rll_print, package)
 
     # Generate copyright file
     if parsed_args.generate_copyright_file:
@@ -144,3 +116,36 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         return os.EX_OK
     rll_print("All packages:" + red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
     return os.EX_DATAERR
+
+def process_one_pkg(rll_print, package):
+    """Perform checks on one package, print results and return them."""
+    results_per_package = {}
+    rll_print(f'[{package.name}]')
+    assert package.repo is not None, 'Package must be in a git repo.'
+    rll_print(
+            f'git hash of ({package.repo.get_path()}):'
+            f' {package.repo.get_hash()}')
+    checks_to_perform = [
+            LicenseTagExistsCheck(),
+            LicenseTagIsInSpdxListCheck(),
+            LicenseTextExistsCheck(),
+            LicensesInCodeCheck()]
+
+    for check in checks_to_perform:
+        check.check(package)
+        rll_print(check)
+        rll_print(check.verbose(), Verbosity.VERBOSE)
+
+    if all(checks_to_perform):
+        rll_print(minor_sep())
+        rll_print(f"[{package.name}] Overall:" + green(
+                f"\n {SUCCESS_STR}"))
+        rll_print(major_sep())
+        results_per_package[package.abspath] = True
+    else:
+        rll_print(minor_sep())
+        rll_print(f"[{package.name}] Overall:" + red(
+                f"\n {FAILURE_STR}"))
+        rll_print(major_sep())
+        results_per_package[package.abspath] = False
+    return results_per_package
