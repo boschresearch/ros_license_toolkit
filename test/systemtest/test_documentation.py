@@ -1,3 +1,4 @@
+"""Test if this packages readme is up to date."""
 # Copyright (c) 2023 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
 # https://github.com/boschresearch/ros_license_toolkit
@@ -24,7 +25,7 @@ class TestDocumentation(unittest.TestCase):
     """Test if this packages readme is up to date."""
 
     @unittest.skipIf(
-        sys.version_info >= (3, 10),
+        sys.version_info < (3, 10),
         "Behavior of argparse changed in Python 3.10")
     def test_readme(self):
         """Check if the help text is up to date."""
@@ -33,11 +34,11 @@ class TestDocumentation(unittest.TestCase):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         ) as process:
-            stdout, stderr = process.communicate()
+            stdout, _ = process.communicate()
         self.assertEqual(os.EX_OK, process.returncode)
         output = stdout.decode("utf-8").strip()
         # find relevant part of the readme
-        with open("README.md", "r") as readme:
+        with open("README.md", "r", encoding='utf-8') as readme:
             readme_content = readme.read()
         readme_usage = readme_content.split(
             "$ ros_license_toolkit -h")[1].split(

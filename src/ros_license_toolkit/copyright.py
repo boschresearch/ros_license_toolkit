@@ -17,8 +17,7 @@
 """Assemble copyright notices for a package."""
 
 import os
-import re
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List
 
 from scancode.api import get_copyrights
 
@@ -29,55 +28,30 @@ def _get_copyright_strs_from_results(
     return [cpr['copyright'] for cpr in scan_results['copyrights']]
 
 
-def _get_year_from_copyright_str(cpr_str: str) -> Union[int, Tuple[int, int]]:
-    """Get the year from a copyright string."""
-    finds = re.findall(r"\d{4}", cpr_str)
-    if len(finds) == 1:
-        return int(finds[0])
-    elif len(finds) == 2:
-        return (int(finds[0]), int(finds[1]))
-    else:
-        raise ValueError("Unexpected number of digits in year")
+def _clean_copyright_text(copyright_text: str):
+    for prefix_to_remove in [
+        'copyright (c) ',
+        'copyright (c)',
+        'copyright ',
+        'copyright',
+    ]:
+        if copyright_text.lower().startswith(prefix_to_remove):
+            copyright_text = copyright_text[len(prefix_to_remove):]
+            break
+    return copyright_text
 
 
-class CopyrightPerFile:
-    """A copyright notice for a single file."""
-
-    def __init__(self, file_path: str, copyright_text: str):
-        self.file_path = file_path
-        for prefix_to_remove in [
-            'copyright (c) ',
-            'copyright (c)',
-            'copyright ',
-            'copyright',
-        ]:
-            if copyright_text.lower().startswith(prefix_to_remove):
-                copyright_text = copyright_text[len(prefix_to_remove):]
-                break
-        self.copyright_text = copyright_text
-
-    def __str__(self):
-        return self.copyright_text
-
-
-class CopyrightPerPkg:
-    def __init__(self, pkg):
-        self.pkg = pkg
-        # one section per license tag
-        # each section is a list of unique copyright lines
-        self.copyright_strings: Dict[str, List[str]] = {}
-        for key, license_tag in self.pkg.license_tags.items():
-            cprs = set()
-            for source_file in license_tag.source_files:
-                fpath = os.path.join(self.pkg.abspath, source_file)
-                res = get_copyrights(fpath)
-                if len(res) == 0:
-                    continue
-                for cpr in _get_copyright_strs_from_results(res):
-                    cprs.add(CopyrightPerFile(source_file, cpr))
-            self.copyright_strings[key] = sorted(
-                {cpr.copyright_text for cpr in cprs})
-
-    def __str__(self):
-        return " ".join(" ".join(copyrights)
-                        for copyrights in self.copyright_strings.values())
+def get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
+    """Get a dictionary of license keys and their respective notices."""
+    copyright_strings: Dict[str, List[str]] = {}
+    for key, license_tag in pkg.license_tags.items():
+        cprs = set()
+        for source_file in license_tag.source_files:
+            fpath = os.path.join(pkg.abspath, source_file)
+            res = get_copyrights(fpath)
+            if len(res) == 0:
+                continue
+            for cpr in _get_copyright_strs_from_results(res):
+                cprs.add(_clean_copyright_text(cpr))
+        copyright_strings[key] = sorted(list(cprs))
+    return copyright_strings

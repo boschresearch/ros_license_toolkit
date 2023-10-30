@@ -17,6 +17,7 @@
 This module contains the Package class.
 """
 
+import fnmatch
 import os
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
@@ -26,16 +27,17 @@ from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_toolkit.common import is_license_text_file
-from ros_license_toolkit.copyright import CopyrightPerPkg
+from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
 # files we ignore in scan results
-IGNORED_FILES = [
+IGNORED = [
     "package.xml",
     "setup.py",
     "setup.cfg",
-    "CMakeLists.txt"
+    "CMakeLists.txt",
+    ".git/*",
 ]
 
 
@@ -116,26 +118,29 @@ class Package:
     def _run_scan_and_save_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if not (self._found_files_w_licenses is None or (
-                self._found_license_texts is None)):
-            return self._found_files_w_licenses, self._found_license_texts
+        if (self._found_files_w_licenses is not None and  # noqa: W504
+                self._found_license_texts is not None):
+            return
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
         for (root, _, files) in os.walk(self.abspath):
-            for fname in files:
-                if fname in IGNORED_FILES:
-                    continue
+            files_rel_to_pkg = [self._get_path_relative_to_pkg(
+                os.path.join(root, f)) for f in files]
+            for pattern in IGNORED:
+                matched = fnmatch.filter(files_rel_to_pkg, pattern)
+                for m in matched:
+                    files_rel_to_pkg.remove(m)
+            for fname in files_rel_to_pkg:
                 # Path relative to cwd
-                fpath = os.path.join(root, fname)
+                fpath = os.path.join(self.abspath, fname)
                 # Path relative to package root
-                fpath_rel_to_pkg = self._get_path_relative_to_pkg(fpath)
                 scan_results = get_licenses(fpath)
                 if is_license_text_file(scan_results):
-                    self._found_license_texts[fpath_rel_to_pkg
+                    self._found_license_texts[fname
                                               ] = scan_results
                 else:
                     # not a license text file but also interesting
-                    self._found_files_w_licenses[fpath_rel_to_pkg
+                    self._found_files_w_licenses[fname
                                                  ] = scan_results
         # look also in the repo for license text files
         if self.repo is not None:
@@ -213,24 +218,28 @@ class Package:
 
     def get_copyright_file_contents(self) -> str:
         """Get a string representation of the copyright notice."""
-        copyright = CopyrightPerPkg(self)
+        pkg_copyright_strings \
+            = get_copyright_strings_per_pkg(
+                self)
         cpr_str = "".join((
             "Format: https://www.debian.org/doc/packaging-manuals/copyright",
             "-format/1.0/\n",
             f"Source: {self.repo_url}\n",
             f"Upstream-Name: {self.name}\n\n",))
-        for key, cprs in copyright.copyright_strings.items():
+        for key, cprs in pkg_copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str
             cpr_str += f"Files:\n {source_files_str}\n"
             cpr_str += "Copyright: "
             cpr_str += "\n           ".join(cprs)
-            license = self.license_tags[key]
-            cpr_str += f"\nLicense: {license.id}\n"
-            assert license.license_text_file, \
+            pkg_license = self.license_tags[key]
+            cpr_str += f"\nLicense: {pkg_license.id}\n"
+            assert pkg_license.license_text_file, \
                 "License text file must be defined."
             with open(os.path.join(
-                    self.abspath,
-                    license.license_text_file)) as f:
+                self.abspath,
+                pkg_license.license_text_file),
+                encoding="utf-8"
+            ) as f:
                 license_lines = f.readlines()
             for line in license_lines:
                 cpr_str += f" {line}"
@@ -238,7 +247,8 @@ class Package:
         return cpr_str
 
     def write_copyright_file(self, path: str):
-        with open(path, 'w') as f:
+        """Write the contents of the copyright notice to a file."""
+        with open(path, 'w', encoding="utf-8") as f:
             f.write(self.get_copyright_file_contents())
 
 
