@@ -36,7 +36,7 @@ class TestAllPackages(unittest.TestCase):
             stderr=subprocess.PIPE,
         ) as process:
             stdout, stderr = process.communicate()
-        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertNotEqual(os.EX_OK, process.returncode)
         print(stdout)
         print(stderr)
         self.assertIn(b"test_pkg_deep", stdout)

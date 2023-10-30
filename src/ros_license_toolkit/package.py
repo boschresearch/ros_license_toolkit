@@ -17,6 +17,7 @@
 This module contains the Package class.
 """
 
+import fnmatch
 import os
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
@@ -31,11 +32,12 @@ from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
 # files we ignore in scan results
-IGNORED_FILES = [
+IGNORED = [
     "package.xml",
     "setup.py",
     "setup.cfg",
-    "CMakeLists.txt"
+    "CMakeLists.txt",
+    ".git/*",
 ]
 
 
@@ -124,20 +126,23 @@ class Package:
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
         for (root, _, files) in os.walk(self.abspath):
-            for fname in files:
-                if fname in IGNORED_FILES:
-                    continue
+            files_rel_to_pkg = [self._get_path_relative_to_pkg(
+                os.path.join(root, f)) for f in files]
+            for pattern in IGNORED:
+                matched = fnmatch.filter(files_rel_to_pkg, pattern)
+                for m in matched:
+                    files_rel_to_pkg.remove(m)
+            for fname in files_rel_to_pkg:
                 # Path relative to cwd
-                fpath = os.path.join(root, fname)
+                fpath = os.path.join(self.abspath, fname)
                 # Path relative to package root
-                fpath_rel_to_pkg = self._get_path_relative_to_pkg(fpath)
                 scan_results = get_licenses(fpath)
                 if is_license_text_file(scan_results):
-                    self._found_license_texts[fpath_rel_to_pkg
+                    self._found_license_texts[fname
                                               ] = scan_results
                 else:
                     # not a license text file but also interesting
-                    self._found_files_w_licenses[fpath_rel_to_pkg
+                    self._found_files_w_licenses[fname
                                                  ] = scan_results
         # look also in the repo for license text files
         if self.repo is not None:
