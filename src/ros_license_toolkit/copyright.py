@@ -42,8 +42,7 @@ def _clean_copyright_text(copyright_text: str):
 
 
 def get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
-    # one section per license tag
-    # each section is a list of unique copyright lines
+    """Get a dictionary of license keys and their respective notices."""
     copyright_strings: Dict[str, List[str]] = {}
     for key, license_tag in pkg.license_tags.items():
         cprs = set()
