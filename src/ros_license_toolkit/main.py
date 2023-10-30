@@ -30,7 +30,7 @@ from ros_license_toolkit.checks import (LicensesInCodeCheck,
                                         LicenseTextExistsCheck)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                             Verbosity, green, major_sep,
+                                             Verbosity, major_sep,
                                              minor_sep, red, rll_print_factory)
 
 
@@ -111,10 +111,9 @@ def main(args: Optional[Sequence[str]] = None) -> int:
 
     # Print the overall results
     if all(results_per_package.values()):
-        rll_print("All packages:" + green(
-            f"\n {SUCCESS_STR}"), Verbosity.QUIET)
+        rll_print("All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
         return os.EX_OK
-    rll_print("All packages:" + red(f"\n {FAILURE_STR}"), Verbosity.QUIET)
+    rll_print("All packages:\n {FAILURE_STR}", Verbosity.QUIET)
     return os.EX_DATAERR
 
 def process_one_pkg(rll_print, package):
@@ -138,14 +137,12 @@ def process_one_pkg(rll_print, package):
 
     if all(checks_to_perform):
         rll_print(minor_sep())
-        rll_print(f"[{package.name}] Overall:" + green(
-                f"\n {SUCCESS_STR}"))
+        rll_print(f"[{package.name}] Overall:\n {SUCCESS_STR}")
         rll_print(major_sep())
         results_per_package[package.abspath] = True
     else:
         rll_print(minor_sep())
-        rll_print(f"[{package.name}] Overall:" + red(
-                f"\n {FAILURE_STR}"))
+        rll_print(f"[{package.name}] Overall:\n {FAILURE_STR}")
         rll_print(major_sep())
         results_per_package[package.abspath] = False
     return results_per_package
