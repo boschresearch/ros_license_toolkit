@@ -41,7 +41,7 @@ def _clean_copyright_text(copyright_text: str):
     return copyright_text
 
 
-def _get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
+def get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
     # one section per license tag
     # each section is a list of unique copyright lines
     copyright_strings: Dict[str, List[str]] = {}
@@ -56,10 +56,3 @@ def _get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
                 cprs.add(_clean_copyright_text(cpr))
         copyright_strings[key] = sorted(list(cprs))
     return copyright_strings
-
-def _get_copyright_string_per_pkg(pkg) -> str:
-    """Get a string containing all the license notices for a package."""
-    copyright_strings \
-        = _get_copyright_strings_per_pkg(pkg)
-    return " ".join(" ".join(copyrights)
-                        for copyrights in copyright_strings.values())
