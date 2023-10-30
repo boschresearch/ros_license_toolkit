@@ -64,7 +64,7 @@ Checks ROS packages for correct license declaration.
 positional arguments:
   path                  path to ROS2 package or repo containing packages
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -c, --generate_copyright_file
                         generate a copyright file
