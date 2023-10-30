@@ -46,7 +46,7 @@ def test_copyright():
     """Test if correct number of copyright sections is found."""
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
     pkg = Package(pkg_path)
-    cpr_secs = _join_copyright_strings(get_copyright_strings_per_pkg(pkg))
+    cpr_secs = get_copyright_strings_per_pkg(pkg)
     assert len(cpr_secs) == 2
 
 
