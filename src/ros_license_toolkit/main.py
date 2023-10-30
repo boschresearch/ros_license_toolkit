@@ -118,6 +118,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
     return os.EX_DATAERR
 
+
 def process_one_pkg(rll_print, package):
     """Perform checks on one package, print results and return them."""
     results_per_package = {}
@@ -148,6 +149,7 @@ def process_one_pkg(rll_print, package):
         rll_print(major_sep())
         results_per_package[package.abspath] = False
     return results_per_package
+
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))

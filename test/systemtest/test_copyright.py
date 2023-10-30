@@ -31,9 +31,10 @@ TEST_PACKAGES_COPYRIGHT_FILE = [
     "test_pkg_with_license_and_file"
 ]
 
+
 def _join_copyright_strings(copyright_strings) -> str:
     return " ".join(" ".join(copyrights)
-                        for copyrights in copyright_strings.values())
+                    for copyrights in copyright_strings.values())
 
 
 def remove_existing_copyright_file(path: str):
