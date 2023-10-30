@@ -18,8 +18,6 @@
 import os
 from test.systemtest._test_helpers import make_repo, remove_repo
 
-import pytest
-
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.package import Package, get_packages_in_path
 
@@ -53,7 +51,6 @@ def test_copyright():
     assert len(cpr_secs) == 2
 
 
-@pytest.mark.skip(reason="Currently, not the full copyright is extracted TODO")
 def test_copyright_to_string():
     """Test if correct content in copyright sections is found."""
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
