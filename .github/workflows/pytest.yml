@@ -54,7 +54,7 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--cov=src/ros_license_toolkit --cov-report xml"
+          custom-arguments: "--cov=ros_license_toolkit --cov-report xml"
           emoji: true
           verbose: true
           job-summary: true
