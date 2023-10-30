@@ -9,12 +9,14 @@
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/blob/main/LICENSE)
 
 > **Warning**
-> For any legal questions, please consult a lawyer. This tool is not a substitute for legal advice. 
+> For any legal questions, please consult a lawyer. This tool is not a substitute for legal advice.
 
 ## Motivation
+
 ROS packages must have licenses. This tool checks if the license declarations in the `package.xml` matches the license(s) of the code. We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
 
 ## Functionality
+
 ```mermaid
 graph TD
     classDef stroke stroke:#333,stroke-width:2px;
@@ -29,7 +31,9 @@ graph TD
 ```
 
 ## Features
+
 This checks:
+
 - [x] Is any license defined in `package.xml`?
     [- LicenseTagExistsCheck](src/ros_license_toolkit/checks.py#L90)
 - [x] Has at most one license tag without a source-files declaration?
@@ -42,20 +46,26 @@ This checks:
     [- LicensesInCodeCheck](src/ros_license_toolkit/checks.py#L182)
 
 ## Usage
+
 ### Installation
+
 Install the package from source:
+
 ```bash
 pip install .
 ```
 
 ### Basic Usage
+
 You should then have the executable in your `$PATH` and can run it on any ROS package or a directory containing multiple ROS packages:
+
 ```bash
 ros_license_toolkit my_ros_package
 ```
 
 ### All Options
-```
+
+```bash
 $ ros_license_toolkit -h
 usage: ros_license_toolkit [-h] [-c] [-v] [-q] path
 
@@ -73,6 +83,7 @@ options:
 ```
 
 ### Using it as a GitHub action
+
 You can use `ros_license_toolkit` inside your GitHub workflow in order to check licenses in your
 repository in each pull request. Use the following job inside your workflow file:
 
@@ -87,12 +98,14 @@ jobs:
 ```
 
 ## State of Development
+
 *WORK IN PROGRESS*
 This is currently working and feature complete to the point it was originally intended.
 But there are still open points concerning testing and it is also very important to make sure how this behaves with existing ROS packages.
 In particular, the following things will have to be done:
 
 ### To Do
+
 - [ ] Coverage analysis
 - [x] Linter(s) per CI
 - [x] Field trials (check existing ROS packages and see what to do with the results). see [field-trials/](field-trials/)
@@ -103,5 +116,6 @@ In particular, the following things will have to be done:
 - [x] Turn into github action.
 
 ## License
+
 ros_license_toolkit is open-sourced under the Apache-2.0 license. See the
 [LICENSE](LICENSE) file for details.
