@@ -92,8 +92,10 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     start = timeit.default_timer()
 
     # Check the packages
+    results_per_package = {}
     for package in packages:
-        results_per_package = process_one_pkg(rll_print, package)
+        results_per_package.update(
+            process_one_pkg(rll_print, package))
 
     # Generate copyright file
     if parsed_args.generate_copyright_file:
@@ -111,9 +113,9 @@ def main(args: Optional[Sequence[str]] = None) -> int:
 
     # Print the overall results
     if all(results_per_package.values()):
-        rll_print("All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
+        rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
         return os.EX_OK
-    rll_print("All packages:\n {FAILURE_STR}", Verbosity.QUIET)
+    rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
     return os.EX_DATAERR
 
 def process_one_pkg(rll_print, package):
@@ -146,3 +148,6 @@ def process_one_pkg(rll_print, package):
         rll_print(major_sep())
         results_per_package[package.abspath] = False
     return results_per_package
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
