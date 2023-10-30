@@ -125,13 +125,13 @@ def process_one_pkg(rll_print, package):
     rll_print(f'[{package.name}]')
     assert package.repo is not None, 'Package must be in a git repo.'
     rll_print(
-            f'git hash of ({package.repo.get_path()}):'
-            f' {package.repo.get_hash()}')
+        f'git hash of ({package.repo.get_path()}):'
+        f' {package.repo.get_hash()}')
     checks_to_perform = [
-            LicenseTagExistsCheck(),
-            LicenseTagIsInSpdxListCheck(),
-            LicenseTextExistsCheck(),
-            LicensesInCodeCheck()]
+        LicenseTagExistsCheck(),
+        LicenseTagIsInSpdxListCheck(),
+        LicenseTextExistsCheck(),
+        LicensesInCodeCheck()]
 
     for check in checks_to_perform:
         check.check(package)

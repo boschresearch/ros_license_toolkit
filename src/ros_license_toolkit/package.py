@@ -118,10 +118,8 @@ class Package:
     def _run_scan_and_save_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if (
-            self._found_files_w_licenses is not None
-            and self._found_license_texts is not None
-        ):
+        if (self._found_files_w_licenses is not None and  # noqa: W504
+                self._found_license_texts is not None):
             return
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
@@ -238,10 +236,10 @@ class Package:
             assert pkg_license.license_text_file, \
                 "License text file must be defined."
             with open(os.path.join(
-                    self.abspath,
-                    pkg_license.license_text_file),
-                    encoding="utf-8"
-                    ) as f:
+                self.abspath,
+                pkg_license.license_text_file),
+                encoding="utf-8"
+            ) as f:
                 license_lines = f.readlines()
             for line in license_lines:
                 cpr_str += f" {line}"
