@@ -17,7 +17,7 @@
 import os
 from test.systemtest._test_helpers import make_repo, remove_repo
 
-from ros_license_toolkit.copyright import CopyrightPerPkg
+from ros_license_toolkit.copyright import _get_copyright_string_per_pkg
 from ros_license_toolkit.package import Package, get_packages_in_path
 
 TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
@@ -39,14 +39,14 @@ def remove_existing_copyright_file(path: str):
 def test_copyright():
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
     pkg = Package(pkg_path)
-    cpr_secs = CopyrightPerPkg(pkg).copyright_strings
+    cpr_secs = _get_copyright_string_per_pkg(pkg)
     assert len(cpr_secs) == 2
 
 
 def test_copyright_to_string():
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
     pkg = Package(pkg_path)
-    cprs = CopyrightPerPkg(pkg)
+    cprs = _get_copyright_string_per_pkg(pkg)
     assert '1995' in str(cprs)
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)

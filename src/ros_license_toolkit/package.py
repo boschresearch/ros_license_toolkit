@@ -27,7 +27,7 @@ from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_toolkit.common import is_license_text_file
-from ros_license_toolkit.copyright import CopyrightPerPkg
+from ros_license_toolkit.copyright import _get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
@@ -220,13 +220,15 @@ class Package:
 
     def get_copyright_file_contents(self) -> str:
         """Get a string representation of the copyright notice."""
-        pkg_copyright = CopyrightPerPkg(self)
+        pkg_copyright_strings \
+            = _get_copyright_strings_per_pkg(
+                self)
         cpr_str = "".join((
             "Format: https://www.debian.org/doc/packaging-manuals/copyright",
             "-format/1.0/\n",
             f"Source: {self.repo_url}\n",
             f"Upstream-Name: {self.name}\n\n",))
-        for key, cprs in pkg_copyright.copyright_strings.items():
+        for key, cprs in pkg_copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str
             cpr_str += f"Files:\n {source_files_str}\n"
             cpr_str += "Copyright: "

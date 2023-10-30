@@ -41,25 +41,25 @@ def _clean_copyright_text(copyright_text: str):
     return copyright_text
 
 
-class CopyrightPerPkg:
-    """A collection of all unique license texts in a package."""
+def _get_copyright_strings_per_pkg(pkg) -> Dict[str, List[str]]:
+    # one section per license tag
+    # each section is a list of unique copyright lines
+    copyright_strings: Dict[str, List[str]] = {}
+    for key, license_tag in pkg.license_tags.items():
+        cprs = set()
+        for source_file in license_tag.source_files:
+            fpath = os.path.join(pkg.abspath, source_file)
+            res = get_copyrights(fpath)
+            if len(res) == 0:
+                continue
+            for cpr in _get_copyright_strs_from_results(res):
+                cprs.add(_clean_copyright_text(cpr))
+        copyright_strings[key] = sorted(list(cprs))
+    return copyright_strings
 
-    def __init__(self, pkg):
-        self.pkg = pkg
-        # one section per license tag
-        # each section is a list of unique copyright lines
-        self.copyright_strings: Dict[str, List[str]] = {}
-        for key, license_tag in self.pkg.license_tags.items():
-            cprs = set()
-            for source_file in license_tag.source_files:
-                fpath = os.path.join(self.pkg.abspath, source_file)
-                res = get_copyrights(fpath)
-                if len(res) == 0:
-                    continue
-                for cpr in _get_copyright_strs_from_results(res):
-                    cprs.add(_clean_copyright_text(cpr))
-            self.copyright_strings[key] = sorted(list(cprs))
-
-    def __str__(self):
-        return " ".join(" ".join(copyrights)
-                        for copyrights in self.copyright_strings.values())
+def _get_copyright_string_per_pkg(pkg) -> str:
+    """Get a string containing all the license notices for a package."""
+    copyright_strings \
+        = _get_copyright_strings_per_pkg(pkg)
+    return " ".join(" ".join(copyrights)
+                        for copyrights in copyright_strings.values())
