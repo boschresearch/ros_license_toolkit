@@ -29,17 +29,6 @@ def _get_copyright_strs_from_results(
     return [cpr['copyright'] for cpr in scan_results['copyrights']]
 
 
-def _get_year_from_copyright_str(cpr_str: str) -> Union[int, Tuple[int, int]]:
-    """Get the year from a copyright string."""
-    finds = re.findall(r"\d{4}", cpr_str)
-    if len(finds) == 1:
-        return int(finds[0])
-    elif len(finds) == 2:
-        return (int(finds[0]), int(finds[1]))
-    else:
-        raise ValueError("Unexpected number of digits in year")
-
-
 class CopyrightPerFile:
     """A copyright notice for a single file."""
 
@@ -61,6 +50,8 @@ class CopyrightPerFile:
 
 
 class CopyrightPerPkg:
+    """A collection of all unique license texts in a package."""
+
     def __init__(self, pkg):
         self.pkg = pkg
         # one section per license tag
