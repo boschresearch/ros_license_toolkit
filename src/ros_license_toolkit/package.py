@@ -116,9 +116,11 @@ class Package:
     def _run_scan_and_save_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if not (self._found_files_w_licenses is None or (
-                self._found_license_texts is None)):
-            return self._found_files_w_licenses, self._found_license_texts
+        if (
+            self._found_files_w_licenses is not None
+            and self._found_license_texts is not None
+        ):
+            return
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
         for (root, _, files) in os.walk(self.abspath):
@@ -213,24 +215,26 @@ class Package:
 
     def get_copyright_file_contents(self) -> str:
         """Get a string representation of the copyright notice."""
-        copyright = CopyrightPerPkg(self)
+        pkg_copyright = CopyrightPerPkg(self)
         cpr_str = "".join((
             "Format: https://www.debian.org/doc/packaging-manuals/copyright",
             "-format/1.0/\n",
             f"Source: {self.repo_url}\n",
             f"Upstream-Name: {self.name}\n\n",))
-        for key, cprs in copyright.copyright_strings.items():
+        for key, cprs in pkg_copyright.copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str
             cpr_str += f"Files:\n {source_files_str}\n"
             cpr_str += "Copyright: "
             cpr_str += "\n           ".join(cprs)
-            license = self.license_tags[key]
-            cpr_str += f"\nLicense: {license.id}\n"
-            assert license.license_text_file, \
+            pkg_license = self.license_tags[key]
+            cpr_str += f"\nLicense: {pkg_license.id}\n"
+            assert pkg_license.license_text_file, \
                 "License text file must be defined."
             with open(os.path.join(
                     self.abspath,
-                    license.license_text_file)) as f:
+                    pkg_license.license_text_file),
+                    encoding="utf-8"
+                    ) as f:
                 license_lines = f.readlines()
             for line in license_lines:
                 cpr_str += f" {line}"
@@ -238,7 +242,8 @@ class Package:
         return cpr_str
 
     def write_copyright_file(self, path: str):
-        with open(path, 'w') as f:
+        """Write the contents of the copyright notice to a file."""
+        with open(path, 'w', encoding="utf-8") as f:
             f.write(self.get_copyright_file_contents())
 
 
