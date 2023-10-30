@@ -17,8 +17,7 @@
 """Assemble copyright notices for a package."""
 
 import os
-import re
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List
 
 from scancode.api import get_copyrights
 
