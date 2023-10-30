@@ -28,24 +28,17 @@ def _get_copyright_strs_from_results(
     return [cpr['copyright'] for cpr in scan_results['copyrights']]
 
 
-class CopyrightPerFile:
-    """A copyright notice for a single file."""
-
-    def __init__(self, file_path: str, copyright_text: str):
-        self.file_path = file_path
-        for prefix_to_remove in [
-            'copyright (c) ',
-            'copyright (c)',
-            'copyright ',
-            'copyright',
-        ]:
-            if copyright_text.lower().startswith(prefix_to_remove):
-                copyright_text = copyright_text[len(prefix_to_remove):]
-                break
-        self.copyright_text = copyright_text
-
-    def __str__(self):
-        return self.copyright_text
+def _clean_copyright_text(copyright_text: str):
+    for prefix_to_remove in [
+        'copyright (c) ',
+        'copyright (c)',
+        'copyright ',
+        'copyright',
+    ]:
+        if copyright_text.lower().startswith(prefix_to_remove):
+            copyright_text = copyright_text[len(prefix_to_remove):]
+            break
+    return copyright_text
 
 
 class CopyrightPerPkg:
@@ -64,9 +57,8 @@ class CopyrightPerPkg:
                 if len(res) == 0:
                     continue
                 for cpr in _get_copyright_strs_from_results(res):
-                    cprs.add(CopyrightPerFile(source_file, cpr))
-            self.copyright_strings[key] = sorted(
-                {cpr.copyright_text for cpr in cprs})
+                    cprs.add(_clean_copyright_text(cpr))
+            self.copyright_strings[key] = sorted(list(cprs))
 
     def __str__(self):
         return " ".join(" ".join(copyrights)
