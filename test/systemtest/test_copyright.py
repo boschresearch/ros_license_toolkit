@@ -1,3 +1,4 @@
+"""Testing copyright."""
 # Copyright (c) 2023 - for information on the respective copyright owner
 # see the NOTICE file and/or the repository
 # https://github.com/boschresearch/ros_license_toolkit
@@ -15,12 +16,11 @@
 # limitations under the License.
 
 import os
+from test.systemtest._test_helpers import make_repo, remove_repo
 
 import pytest
 
-from test.systemtest._test_helpers import make_repo, remove_repo
-
-from ros_license_toolkit.copyright import CopyrightPerPkg
+from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.package import Package, get_packages_in_path
 
 TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
@@ -34,22 +34,31 @@ TEST_PACKAGES_COPYRIGHT_FILE = [
 ]
 
 
+def _join_copyright_strings(copyright_strings) -> str:
+    return " ".join(" ".join(copyrights)
+                    for copyrights in copyright_strings.values())
+
+
 def remove_existing_copyright_file(path: str):
+    """Remove existing file at path if it exists."""
     if os.path.exists(path):
         os.remove(path)
 
 
 def test_copyright():
+    """Test if correct number of copyright sections is found."""
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
     pkg = Package(pkg_path)
-    cpr_secs = CopyrightPerPkg(pkg).copyright_strings
+    cpr_secs = get_copyright_strings_per_pkg(pkg)
     assert len(cpr_secs) == 2
+
 
 @pytest.mark.skip(reason="Currently, not the full copyright is extracted TODO")
 def test_copyright_to_string():
+    """Test if correct content in copyright sections is found."""
     pkg_path = os.path.join(TEST_DATA_FOLDER, "test_pkg_has_code_disjoint")
     pkg = Package(pkg_path)
-    cprs = CopyrightPerPkg(pkg)
+    cprs = _join_copyright_strings(get_copyright_strings_per_pkg(pkg))
     assert '1995' in str(cprs)
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)
@@ -58,6 +67,7 @@ def test_copyright_to_string():
 
 
 def test_get_copyright_file_contents():
+    """Test if correct content in copyright file."""
     make_repo(TEST_DATA_FOLDER)
     for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
         pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
@@ -68,13 +78,14 @@ def test_get_copyright_file_contents():
                 TEST_DATA_FOLDER,
                 "copyright_file_contents",
                 pkg_name
-        ), "r") as f:
+        ), "r", encoding='utf-8') as f:
             expected = f.read()
             assert expected == copyright_file_content
     remove_repo(TEST_DATA_FOLDER)
 
 
 def test_write_copyright_file():
+    """Test if correct writing of copyright file."""
     make_repo(TEST_DATA_FOLDER)
     for pkg_name in TEST_PACKAGES_COPYRIGHT_FILE:
         pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
@@ -90,13 +101,13 @@ def test_write_copyright_file():
         pkg.write_copyright_file(
             copyright_file_path)
         assert os.path.exists(copyright_file_path)
-        with open(copyright_file_path, "r") as f:
+        with open(copyright_file_path, "r", encoding='utf-8') as f:
             output = f.read()
             with open(os.path.join(
                 TEST_DATA_FOLDER,
                 "copyright_file_contents",
                 pkg_name
-            ), "r") as f:
+            ), "r", encoding='utf-8') as f:
                 expected = f.read()
                 assert expected == output
         # remove_existing_copyright_file(

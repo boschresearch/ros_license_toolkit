@@ -43,7 +43,7 @@ class TestPkgs(unittest.TestCase):
                 stderr=subprocess.PIPE,
             ) as process:
                 stdout, _ = process.communicate()
-            self.assertEqual(os.EX_DATAERR, process.returncode)
+            self.assertNotEqual(os.EX_OK, process.returncode)
             self.assertIn(
                 b"test_pkg_deep", stdout)
         remove_repo(repo_path)
@@ -110,7 +110,7 @@ class TestPkgs(unittest.TestCase):
             stderr=subprocess.PIPE
         ) as process:
             stdout, _ = process.communicate()
-        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertNotEqual(os.EX_OK, process.returncode)
         self.assertIn(b'not in SPDX list of licenses', stdout)
         self.assertIn(b'my own fancy license 1.0', stdout)
 

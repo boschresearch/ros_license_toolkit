@@ -39,8 +39,8 @@ def green(message: str):
 # further UI elements
 
 
-FAILURE_STR = "FAILURE"
-SUCCESS_STR = "SUCCESS"
+FAILURE_STR = red("FAILURE")
+SUCCESS_STR = green("SUCCESS")
 NO_REASON_STR = "No reason provided."
 N_SEP = 20
 
