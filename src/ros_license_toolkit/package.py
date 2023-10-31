@@ -43,10 +43,14 @@ IGNORED = [
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
-    for _license in scan_results["licenses"]:
-        if _license["score"] >= 99:
-            return _license["spdx_license_key"]
-    return None
+    return next(
+        (
+            _license["spdx_license_key"]
+            for _license in scan_results["licenses"]
+            if _license["score"] >= 99
+        ),
+        None,
+    )
 
 
 class PackageException(Exception):
@@ -156,19 +160,10 @@ class Package:
                 os.path.join(self.abspath, 'package.xml'))
         return self._package_xml
 
-    @property
-    def license_tags(self) -> Dict[str, LicenseTag]:
-        """Get all license tags in the package.xml file."""
-        if self._license_tags is not None:
-            return self._license_tags
-        self._license_tags = {}
-        for license_tag in self.package_xml.iterfind('license'):
-            tag = LicenseTag(license_tag, self.abspath)
-            self._license_tags[tag.get_license_id()] = tag
-
-        # One license tag can have no source-files attribute.
-        # But there can be only one such tag.
-        # This is then the main license.
+    def _check_single_license_tag_without_source_files(self):
+        """One license tag can have no source-files attribute.
+        But there can be only one such tag.
+        This is then the main license."""
         if len(list(filter(lambda x: not x.has_source_files(),
                            self._license_tags.values()))) > 1:
             raise MoreThanOneLicenseWithoutSourceFilesTag(
@@ -180,9 +175,10 @@ class Package:
                     list(self._license_tags.values()))
                 break
 
-        # One license tag can have no file attribute, but only one.
-        # It may be associated to a license text file in the package or
-        # the repo.
+    def _check_single_license_tag_without_file_attribute(self):
+        """One license tag can have no file attribute, but only one.
+        It may be associated to a license text file in the package or
+        the repo."""
         if len(list(filter(lambda x: not x.has_license_text_file(),
                            self._license_tags.values()))) > 1:
             raise MoreThanOneLicenseWithoutLicenseTextFile(
@@ -198,7 +194,30 @@ class Package:
                         if "LICENSE" in license_text_file:
                             tag.license_text_file = license_text_file
                             break
+                # there was no license text found by content, but we can
+                # look for some files by their name, e.g. LICENSE or COPYING
+                potential_license_files = [
+                    file
+                    for file in os.listdir(self.abspath)
+                    if "LICENSE" in file or "COPYING" in file
+                ]
+                # only if there is exactly one such file, we can use it
+                if len(potential_license_files) == 1:
+                    tag.license_text_file = potential_license_files[0]
                 break
+
+    @property
+    def license_tags(self) -> Dict[str, LicenseTag]:
+        """Get all license tags in the package.xml file."""
+        if self._license_tags is not None:
+            return self._license_tags
+        self._license_tags = {}
+        for license_tag in self.package_xml.iterfind('license'):
+            tag = LicenseTag(license_tag, self.abspath)
+            self._license_tags[tag.get_license_id()] = tag
+
+        self._check_single_license_tag_without_source_files()
+        self._check_single_license_tag_without_file_attribute()
 
         return self._license_tags
 

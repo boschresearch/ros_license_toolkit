@@ -129,8 +129,6 @@ class LicenseTag:
 
     def make_this_the_main_license(self, other_licenses: List["LicenseTag"]):
         """Make this the main license for the package."""
-
-        # Handle source files
         assert not self.has_source_files(), \
             "This must not have a source-files, yet."
         assert self.source_files_str == "**", \
@@ -142,15 +140,3 @@ class LicenseTag:
                 continue
             source_files -= other_license.source_files
         self._source_files = source_files
-
-        # Handle license text file
-        if self.has_license_text_file():
-            return
-        potential_license_files = [
-            file
-            for file in os.listdir(self.package_path)
-            if "LICENSE" in file or "COPYING" in file
-        ]
-        assert len(potential_license_files) == 1, \
-            "There must be exactly one potential license file."
-        self.license_text_file = potential_license_files[0]
