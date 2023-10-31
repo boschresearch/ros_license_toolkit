@@ -50,12 +50,11 @@ def to_spdx_license_tag(license_name: str) -> str:
 
 def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
     """Evaluate a glob string and return a set of matching relative paths."""
-    paths = set()
-    for fpath in glob(os.path.join(pkg_path, glob_str), recursive=True):
-        if not os.path.isfile(fpath):
-            continue
-        paths.add(os.path.relpath(fpath, pkg_path))
-    return paths
+    return {
+        os.path.relpath(fpath, pkg_path)
+        for fpath in glob(os.path.join(pkg_path, glob_str), recursive=True)
+        if os.path.isfile(fpath)
+    }
 
 
 class LicenseTag:

@@ -1,4 +1,4 @@
-# Note for me:
+# Note for me
 
 How to update the project:
 
