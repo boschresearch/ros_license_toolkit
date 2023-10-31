@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://fake.git
+Upstream-Name: test_pkg_unknown_license
+
+Files:
+ **
+Copyright: (c) 2017 - 2018
+License: my own fancy license 1.0
+ My own fancy license content !! (c) 2017 - 2018 
+ 🌴
+
+
