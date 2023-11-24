@@ -15,6 +15,10 @@
 
 ROS packages must have licenses. This tool checks if the license declarations in the `package.xml` matches the license(s) of the code. We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
 
+## Presentation
+
+[![ROSCon 2023 Presentation](doc/roscon2023.png)](https://vimeo.com/879001224/d6461b638a)
+
 ## Functionality
 
 ```mermaid
