@@ -118,6 +118,7 @@ In particular, the following things will have to be done:
 - [x] Each LicenseTag should have SPDX id.
 - [ ] Single license tag without file attribute and single license text should match automatically.
 - [x] Turn into github action.
+- [ ] Idea: Create pull requests for package maintainers.
 
 ## License
 
