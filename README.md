@@ -110,15 +110,16 @@ In particular, the following things will have to be done:
 
 ### To Do
 
-- [ ] Coverage analysis
+- [x] Coverage analysis
 - [x] Linter(s) per CI
 - [x] Field trials (check existing ROS packages and see what to do with the results). see [field-trials/](field-trials/)
-- [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
 - [x] Allow license name in tag to be also full name of SPDX key.
 - [x] Each LicenseTag should have SPDX id.
 - [ ] Single license tag without file attribute and single license text should match automatically.
 - [x] Turn into github action.
-- [ ] Idea: Create pull requests for package maintainers.
+- [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
+- [ ] Idea: Create pull requests for package maintainers automatically.
+- [ ] Error of `LicenseTagIsInSpdxListCheck` must be a warning
 
 ## License
 
