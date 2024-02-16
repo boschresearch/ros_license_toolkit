@@ -77,6 +77,12 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
+    def test_pkg_no_file_attribute(self):
+        """Test on a package with License file that is not referenced in
+        package.xml"""
+        self.assertEqual(os.EX_OK, main(
+            ["test/_test_data/test_pkg_no_file_attribute"]))
+
     def test_pkg_no_license(self):
         """Test on a package with no license declared in the package.xml."""
         self.assertEqual(os.EX_DATAERR, main(
