@@ -25,7 +25,8 @@ from ros_license_toolkit.license_tag import (LicenseTag,
 from ros_license_toolkit.package import (Package, PackageException,
                                          get_spdx_license_name,
                                          is_license_text_file)
-from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red
+from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, red,
+                                         Status)
 
 
 class Check:
@@ -34,7 +35,7 @@ class Check:
     def __init__(self: 'Check'):
         """Initialize a check."""
         # overall success of this check
-        self.success: bool = False
+        self.success: Status = Status.FAILURE
 
         # explanation for success or failure for normal output
         self.reason: str = NO_REASON_STR
@@ -44,12 +45,12 @@ class Check:
 
     def _failed(self, reason: str):
         """Set this check as failed for reason `r`."""
-        self.success = False
+        self.success = Status.FAILURE
         self.reason = reason
 
     def _success(self, reason: str):
         """Set this check as successful for reason `r`."""
-        self.success = True
+        self.success = Status.SUCCESS
         if self.reason == NO_REASON_STR:
             self.reason = ''
         else:
@@ -73,8 +74,11 @@ class Check:
         return self.verbose_output
 
     def __bool__(self) -> bool:
-        """Evaluate success of check as bool."""
-        return self.success
+        """Evaluate success of check as bool. Warning is treated as success"""
+        if self.success == Status.FAILURE:
+            return False
+        else:
+            return True
 
     def check(self, package: Package):
         """
