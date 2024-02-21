@@ -23,6 +23,7 @@ from enum import Enum, auto
 # colors
 
 GREEN = "\033[92m"
+YELLOW = "\033[93m"
 RED = "\033[91m"
 NC = "\033[00m"
 
@@ -30,6 +31,11 @@ NC = "\033[00m"
 def red(message: str):
     """Make this `message` red"""
     return f"{RED}{message}{NC}"
+
+
+def yellow(message :str):
+    """Make this `message` yellow """
+    return f"{YELLOW}{message}{NC}"
 
 
 def green(message: str):
@@ -40,6 +46,7 @@ def green(message: str):
 
 
 FAILURE_STR = red("FAILURE")
+WARNING_STR = yellow("WARNING")
 SUCCESS_STR = green("SUCCESS")
 NO_REASON_STR = "No reason provided."
 N_SEP = 20
