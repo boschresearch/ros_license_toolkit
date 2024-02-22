@@ -25,8 +25,8 @@ from ros_license_toolkit.license_tag import (LicenseTag,
 from ros_license_toolkit.package import (Package, PackageException,
                                          get_spdx_license_name,
                                          is_license_text_file)
-from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, red,
-                                         Status)
+from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, yellow,
+                                         red, Status)
 
 
 class Check:
@@ -48,6 +48,11 @@ class Check:
         self.success = Status.FAILURE
         self.reason = reason
 
+    def _warning(self, reason :str):
+        """Set this check as passed but display a warning for reason `r`."""
+        self.success = Status.WARNING
+        self.reason = reason
+
     def _success(self, reason: str):
         """Set this check as successful for reason `r`."""
         self.success = Status.SUCCESS
@@ -59,14 +64,13 @@ class Check:
 
     def __str__(self) -> str:
         """Return formatted string for normal output."""
-        if self.success:
-            info: str = str(
-                type(self).__name__) + "\n" + \
-                green(f" SUCCESS {self.reason}")
+        info: str = str(type(self).__name__) + "\n"
+        if self.success == Status.SUCCESS:
+            info += green(f" SUCCESS {self.reason}")
+        elif self.success == Status.WARNING:
+            info += yellow(f" WARNING {self.reason}")
         else:
-            info = str(
-                type(self).__name__) + "\n" + \
-                red(f" FAILURE {self.reason}")
+            info += red(f" FAILURE {self.reason}")
         return info
 
     def verbose(self) -> str:
@@ -77,8 +81,7 @@ class Check:
         """Evaluate success of check as bool. Warning is treated as success"""
         if self.success == Status.FAILURE:
             return False
-        else:
-            return True
+        return True
 
     def check(self, package: Package):
         """
@@ -123,9 +126,9 @@ class LicenseTagIsInSpdxListCheck(Check):
                     license_tag):
                 licenses_not_in_spdx_list.append(license_tag)
         if len(licenses_not_in_spdx_list) > 0:
-            self._failed(
+            self._warning(
                 f"Licenses {licenses_not_in_spdx_list} are "
-                "not in SPDX list of licenses."
+                "not in SPDX list of licenses." # maybe add hint "Make sure to exactly match the names of SPDX list."?
             )
         else:
             self._success("All license tags are in SPDX list of licenses.")
