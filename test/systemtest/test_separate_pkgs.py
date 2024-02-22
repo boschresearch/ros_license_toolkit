@@ -77,6 +77,12 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
+    def test_pkg_name_not_in_spdx(self):
+        """Test on a package that has valid License file with BSD-3-Clause 
+        but its license tag BSD-3 is not in SPDX format"""
+        self.assertEqual(os.EX_OK, main(
+            ["test/_test_data/test_pkg_name_not_in_spdx"]))
+
     def test_pkg_no_file_attribute(self):
         """Test on a package with License file that is not referenced in
         package.xml"""
@@ -133,10 +139,17 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_with_multiple_licenses_no_source_files_tag"]))
 
+    def test_pkg_with_multiple_licenses_one_referenced_incorrect(self):
+        """Test on a package with multiple licenses declared in the 
+        package.xml. First has tag not in SPDX list with correct source file,
+        second is in SPDX."""
+        self.assertEqual(os.EX_OK, main(
+            ["test/_test_data/"
+             "test_pkg_with_multiple_licenses_one_referenced_incorrect"]))
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
         the license declared in the package.xml."""
-        self.assertEqual(os.EX_DATAERR, main(
+        self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_wrong_license_file"]))
 
 
