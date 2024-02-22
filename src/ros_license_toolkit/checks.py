@@ -83,6 +83,10 @@ class Check:
             return False
         return True
 
+    def get_success(self) -> Status:
+        """Get the level of success to also consider possible warnings"""
+        return self.success
+
     def check(self, package: Package):
         """
         Check `package` and set success and reason.
@@ -128,7 +132,8 @@ class LicenseTagIsInSpdxListCheck(Check):
         if len(licenses_not_in_spdx_list) > 0:
             self._warning(
                 f"Licenses {licenses_not_in_spdx_list} are "
-                "not in SPDX list of licenses." # maybe add hint "Make sure to exactly match the names of SPDX list."?
+                "not in SPDX list of licenses. "
+                "Make sure to exactly match the names of SPDX list."
             )
         else:
             self._success("All license tags are in SPDX list of licenses.")
@@ -179,10 +184,10 @@ class LicenseTextExistsCheck(Check):
                     f"{license_tag.get_license_id()}."
                 continue
         if len(license_tags_without_license_text) > 0:
-            self._failed(
+            self._warning(
                 "The following license tags do not have a valid license text "
                 "file:\n" + "\n".join(
-                    [f"  '{x[0]}': {x[1]}" for x in
+                    [f"  '{ x[0]}': {x[1]}" for x in
                         license_tags_without_license_text.items()]))
             self.verbose_output = red(
                 "\n".join([f"  '{x[0]}': {x[1]}" for x in
