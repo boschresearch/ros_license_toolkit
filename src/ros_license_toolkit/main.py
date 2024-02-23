@@ -115,7 +115,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     if all(result == Status.SUCCESS for result in results_per_package.values()):
         rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
         return os.EX_OK
-    elif all(result != Status.FAILURE for result in results_per_package.values()):
+    if all(result != Status.FAILURE for result in results_per_package.values()):
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)

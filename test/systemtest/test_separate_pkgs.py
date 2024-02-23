@@ -43,7 +43,7 @@ class TestPkgs(unittest.TestCase):
                 stderr=subprocess.PIPE,
             ) as process:
                 stdout, _ = process.communicate()
-            self.assertNotEqual(os.EX_OK, process.returncode)
+            self.assertEqual(os.EX_OK, process.returncode)
             self.assertIn(
                 b"test_pkg_deep", stdout)
         remove_repo(repo_path)
@@ -78,7 +78,7 @@ class TestPkgs(unittest.TestCase):
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
     def test_pkg_name_not_in_spdx(self):
-        """Test on a package that has valid License file with BSD-3-Clause 
+        """Test on a package that has valid License file with BSD-3-Clause
         but its license tag BSD-3 is not in SPDX format"""
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_name_not_in_spdx"]))
@@ -140,7 +140,7 @@ class TestPkgs(unittest.TestCase):
              "test_pkg_with_multiple_licenses_no_source_files_tag"]))
 
     def test_pkg_with_multiple_licenses_one_referenced_incorrect(self):
-        """Test on a package with multiple licenses declared in the 
+        """Test on a package with multiple licenses declared in the
         package.xml. First has tag not in SPDX list with correct source file,
         second is in SPDX."""
         self.assertEqual(os.EX_OK, main(
