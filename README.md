@@ -15,6 +15,10 @@
 
 ROS packages must have licenses. This tool checks if the license declarations in the `package.xml` matches the license(s) of the code. We do this by using `scancode-toolkit` to scan the code and compare the results to the declaration in the `package.xml`
 
+## Presentation
+
+[![ROSCon 2023 Presentation](doc/roscon2023.png)](https://vimeo.com/879001224/d6461b638a)
+
 ## Functionality
 
 ```mermaid
@@ -106,14 +110,16 @@ In particular, the following things will have to be done:
 
 ### To Do
 
-- [ ] Coverage analysis
+- [x] Coverage analysis
 - [x] Linter(s) per CI
 - [x] Field trials (check existing ROS packages and see what to do with the results). see [field-trials/](field-trials/)
-- [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
 - [x] Allow license name in tag to be also full name of SPDX key.
 - [x] Each LicenseTag should have SPDX id.
-- [ ] Single license tag without file attribute and single license text should match automatically.
+- [x] Single license tag without file attribute and single license text should match automatically.
 - [x] Turn into github action.
+- [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
+- [ ] Idea: Create pull requests for package maintainers automatically.
+- [ ] Error of `LicenseTagIsInSpdxListCheck` must be a warning
 
 ## License
 

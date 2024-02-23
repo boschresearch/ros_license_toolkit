@@ -28,7 +28,8 @@ TEST_PACKAGES_COPYRIGHT_FILE = [
     "test_pkg_has_code_of_different_license_and_tag",
     "test_pkg_spdx_name",
     "test_pkg_spdx_tag",
-    "test_pkg_with_license_and_file"
+    "test_pkg_with_license_and_file",
+    "test_pkg_unknown_license"
 ]
 
 
@@ -70,7 +71,6 @@ def test_get_copyright_file_contents():
         pkg_path = os.path.join(TEST_DATA_FOLDER, pkg_name)
         pkg = get_packages_in_path(pkg_path)[0]
         copyright_file_content = pkg.get_copyright_file_contents()
-        print(copyright_file_content)
         with open(os.path.join(
                 TEST_DATA_FOLDER,
                 "copyright_file_contents",
