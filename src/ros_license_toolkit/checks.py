@@ -25,8 +25,8 @@ from ros_license_toolkit.license_tag import (LicenseTag,
 from ros_license_toolkit.package import (Package, PackageException,
                                          get_spdx_license_name,
                                          is_license_text_file)
-from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, yellow,
-                                         red, Status)
+from ros_license_toolkit.ui_elements import (NO_REASON_STR, Status, green, red,
+                                             yellow)
 
 
 class Check:
@@ -48,7 +48,7 @@ class Check:
         self.success = Status.FAILURE
         self.reason = reason
 
-    def _warning(self, reason :str):
+    def _warning(self, reason: str):
         """Set this check as passed but display a warning for reason `r`."""
         self.success = Status.WARNING
         self.reason = reason
@@ -191,15 +191,18 @@ class LicenseTextExistsCheck(Check):
                 missing_license_texts_status[license_tag] = Status.WARNING
                 continue
         if len(license_tags_without_license_text) > 0:
-            if all(status == Status.WARNING for status in missing_license_texts_status.values()):
+            if all(status == Status.WARNING
+                   for status in missing_license_texts_status.values()):
                 self._warning(
-                    "The following license tags do not have a valid license text "
+                    "The following license tags do not "
+                    "have a valid license text "
                     "file:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             license_tags_without_license_text.items()]))
             else:
                 self._failed(
-                    "The following license tags do not have a valid license text "
+                    "The following license tags do not "
+                    "have a valid license text "
                     "file:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             license_tags_without_license_text.items()]))

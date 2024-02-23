@@ -146,6 +146,7 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/"
              "test_pkg_with_multiple_licenses_one_referenced_incorrect"]))
+
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
         the license declared in the package.xml."""

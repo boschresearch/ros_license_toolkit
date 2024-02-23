@@ -30,8 +30,9 @@ from ros_license_toolkit.checks import (LicensesInCodeCheck,
                                         LicenseTextExistsCheck)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                             WARNING_STR, Verbosity, major_sep,
-                                             minor_sep, red, rll_print_factory, Status)
+                                             WARNING_STR, Status, Verbosity,
+                                             major_sep, minor_sep, red,
+                                             rll_print_factory)
 
 
 def main(args: Optional[Sequence[str]] = None) -> int:
@@ -112,10 +113,12 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
 
     # Print the overall results
-    if all(result == Status.SUCCESS for result in results_per_package.values()):
+    if all(result == Status.SUCCESS
+           for result in results_per_package.values()):
         rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
         return os.EX_OK
-    if all(result != Status.FAILURE for result in results_per_package.values()):
+    if all(result != Status.FAILURE
+           for result in results_per_package.values()):
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
@@ -142,14 +145,14 @@ def process_one_pkg(rll_print, package):
         rll_print(check.verbose(), Verbosity.VERBOSE)
 
     rll_print(minor_sep())
-    # Every check is successfull, no warning
-    if all(check.get_success() == Status.SUCCESS \
+    # Every check is successful, no warning
+    if all(check.get_success() == Status.SUCCESS
             for check in checks_to_perform):
         rll_print(f"[{package.name}] Overall:\n {SUCCESS_STR}")
         results_per_package[package.abspath] = Status.SUCCESS
-    # Either every check is sucessfull or contains a warning
-    elif all(check.get_success() != Status.FAILURE \
-            for check in checks_to_perform):
+    # Either every check is successful or contains a warning
+    elif all(check.get_success() != Status.FAILURE
+             for check in checks_to_perform):
         rll_print(f"[{package.name}] Overall:\n {WARNING_STR}")
         results_per_package[package.abspath] = Status.WARNING
     # At least one check contains an error

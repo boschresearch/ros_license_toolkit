@@ -33,7 +33,7 @@ def red(message: str):
     return f"{RED}{message}{NC}"
 
 
-def yellow(message :str):
+def yellow(message: str):
     """Make this `message` yellow """
     return f"{YELLOW}{message}{NC}"
 
@@ -70,11 +70,13 @@ class Verbosity(Enum):
     NORMAL = auto()
     VERBOSE = auto()
 
+
 class Status(Enum):
     """Levels of success or failure for the output"""
     SUCCESS = auto()
     WARNING = auto()
     FAILURE = auto()
+
 
 def rll_print_factory(verbosity: Verbosity):
     """Return a function that prints only if the verbosity is high enough"""
