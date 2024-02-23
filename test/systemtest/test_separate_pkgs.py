@@ -39,8 +39,8 @@ class TestPkgs(unittest.TestCase):
         ]:
             with subprocess.Popen(
                 ["ros_license_toolkit", call_path],
-                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
             ) as process:
                 stdout, _ = process.communicate()
             self.assertEqual(os.EX_OK, process.returncode)
