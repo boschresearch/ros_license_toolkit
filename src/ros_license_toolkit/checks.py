@@ -17,7 +17,7 @@
 """This module contains the checks for the linter."""
 
 import os
-from enum import IntEnum, auto
+from enum import IntEnum
 from pprint import pformat
 from typing import Dict, List, Optional
 
@@ -31,9 +31,9 @@ from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 class Status(IntEnum):
     """Levels of success or failure for the output"""
-    SUCCESS = auto()
-    WARNING = auto()
-    FAILURE = auto()
+    SUCCESS = 0
+    WARNING = 1
+    FAILURE = 2
 
 
 class Check:

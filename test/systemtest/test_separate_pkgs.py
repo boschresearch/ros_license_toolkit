@@ -143,9 +143,15 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with multiple licenses declared in the
         package.xml. First has tag not in SPDX list with correct source file,
         second is in SPDX."""
-        self.assertEqual(os.EX_OK, main(
-            ["test/_test_data/"
-             "test_pkg_with_multiple_licenses_one_referenced_incorrect"]))
+        with subprocess.Popen(
+            ["ros_license_toolkit",
+             "test/_test_data/test_pkg_with_multiple_licenses_one_referenced_incorrect"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        ) as process:
+            stdout, _ = process.communicate()
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING Licenses ['BSD'] are not in SPDX list", stdout)
 
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
