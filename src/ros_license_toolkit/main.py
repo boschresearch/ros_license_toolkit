@@ -24,13 +24,14 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (LicensesInCodeCheck,
+from ros_license_toolkit.checks import (Status,
+                                        LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
                                         LicenseTextExistsCheck)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                             WARNING_STR, Status, Verbosity,
+                                             WARNING_STR, Verbosity,
                                              major_sep, minor_sep, red,
                                              rll_print_factory)
 
@@ -144,11 +145,11 @@ def process_one_pkg(rll_print, package):
 
     rll_print(minor_sep())
     # Every check is successful, no warning
-    if max(checks_to_perform) == Status.SUCCESS:
+    if max(check.status for check in checks_to_perform) == Status.SUCCESS:
         rll_print(f"[{package.name}] Overall:\n {SUCCESS_STR}")
         results_per_package[package.abspath] = Status.SUCCESS
     # Either every check is successful or contains a warning
-    elif max(checks_to_perform) == Status.Warning:
+    elif max(check.status for check in checks_to_perform) == Status.WARNING:
         rll_print(f"[{package.name}] Overall:\n {WARNING_STR}")
         results_per_package[package.abspath] = Status.WARNING
     # At least one check contains an error

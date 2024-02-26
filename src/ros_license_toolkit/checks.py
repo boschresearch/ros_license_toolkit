@@ -19,6 +19,7 @@
 import os
 from pprint import pformat
 from typing import Dict, List, Optional
+from enum import IntEnum, auto
 
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
@@ -27,7 +28,13 @@ from ros_license_toolkit.package import (Package, PackageException,
                                          is_license_text_file)
 from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, red,
                                              yellow)
-from enum import Enum, auto
+
+
+class Status(IntEnum):
+    """Levels of success or failure for the output"""
+    SUCCESS = auto()
+    WARNING = auto()
+    FAILURE = auto()
 
 
 class Check:
@@ -271,10 +278,3 @@ class LicensesInCodeCheck(Check):
         else:
             self._success('All licenses found in the code are covered by a '
                           'license declaration.')
-
-
-class Status(Enum):
-    """Levels of success or failure for the output"""
-    SUCCESS = auto()
-    WARNING = auto()
-    FAILURE = auto()
