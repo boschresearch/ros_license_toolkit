@@ -17,17 +17,16 @@
 """This module contains the checks for the linter."""
 
 import os
+from enum import IntEnum, auto
 from pprint import pformat
 from typing import Dict, List, Optional
-from enum import IntEnum, auto
 
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
 from ros_license_toolkit.package import (Package, PackageException,
                                          get_spdx_license_name,
                                          is_license_text_file)
-from ros_license_toolkit.ui_elements import (NO_REASON_STR, green, red,
-                                             yellow)
+from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 
 class Status(IntEnum):
@@ -139,7 +138,7 @@ class LicenseTagIsInSpdxListCheck(Check):
             self._warning(
                 f"Licenses {licenses_not_in_spdx_list} are "
                 "not in SPDX list of licenses. "
-                "Make sure to exactly match one of https://spdx.org/licenses/."  
+                "Make sure to exactly match one of https://spdx.org/licenses/."
             )
         else:
             self._success("All license tags are in SPDX list of licenses.")
@@ -199,9 +198,9 @@ class LicenseTextExistsCheck(Check):
         if len(license_tags_without_license_text) > 0:
             if max(missing_license_texts_status.values()) == Status.WARNING:
                 self._warning(
-                    "Since they are not in the SPDX list, "  
-                    "we can not check if these tags have the correct "  
-                    "license text:\n" + "\n".join(  
+                    "Since they are not in the SPDX list, "
+                    "we can not check if these tags have the correct "
+                    "license text:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             license_tags_without_license_text.items()]))
             else:

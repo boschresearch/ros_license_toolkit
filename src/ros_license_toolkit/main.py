@@ -24,16 +24,14 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (Status,
-                                        LicensesInCodeCheck,
+from ros_license_toolkit.checks import (LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
-                                        LicenseTextExistsCheck)
+                                        LicenseTextExistsCheck, Status)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                             WARNING_STR, Verbosity,
-                                             major_sep, minor_sep, red,
-                                             rll_print_factory)
+                                             WARNING_STR, Verbosity, major_sep,
+                                             minor_sep, red, rll_print_factory)
 
 
 def main(args: Optional[Sequence[str]] = None) -> int:
