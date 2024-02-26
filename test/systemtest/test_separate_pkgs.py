@@ -79,7 +79,7 @@ class TestPkgs(unittest.TestCase):
 
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
-        but its license tag BSD-3 is not in SPDX format"""
+        but its license tag BSD is not in SPDX format"""
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_name_not_in_spdx"]))
 

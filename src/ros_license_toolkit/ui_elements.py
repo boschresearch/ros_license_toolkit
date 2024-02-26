@@ -71,13 +71,6 @@ class Verbosity(Enum):
     VERBOSE = auto()
 
 
-class Status(Enum):
-    """Levels of success or failure for the output"""
-    SUCCESS = auto()
-    WARNING = auto()
-    FAILURE = auto()
-
-
 def rll_print_factory(verbosity: Verbosity):
     """Return a function that prints only if the verbosity is high enough"""
     def rll_print(message: str, level: Verbosity = Verbosity.NORMAL):

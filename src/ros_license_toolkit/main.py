@@ -113,12 +113,10 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
 
     # Print the overall results
-    if all(result == Status.SUCCESS
-           for result in results_per_package.values()):
+    if max(results_per_package.values()) == Status.SUCCESS:
         rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
         return os.EX_OK
-    if all(result != Status.FAILURE
-           for result in results_per_package.values()):
+    if max(results_per_package.values()) == Status.WARNING:
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
@@ -146,13 +144,11 @@ def process_one_pkg(rll_print, package):
 
     rll_print(minor_sep())
     # Every check is successful, no warning
-    if all(check.get_success() == Status.SUCCESS
-            for check in checks_to_perform):
+    if max(checks_to_perform) == Status.SUCCESS:
         rll_print(f"[{package.name}] Overall:\n {SUCCESS_STR}")
         results_per_package[package.abspath] = Status.SUCCESS
     # Either every check is successful or contains a warning
-    elif all(check.get_success() != Status.FAILURE
-             for check in checks_to_perform):
+    elif max(checks_to_perform) == Status.Warning:
         rll_print(f"[{package.name}] Overall:\n {WARNING_STR}")
         results_per_package[package.abspath] = Status.WARNING
     # At least one check contains an error

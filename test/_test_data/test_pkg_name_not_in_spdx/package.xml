@@ -2,5 +2,5 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_name_not_in_spdx</name>
-  <license file="LICENSE">BSD-3</license>
+  <license file="LICENSE">BSD</license>
 </package>
