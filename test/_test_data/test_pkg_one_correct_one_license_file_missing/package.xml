@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>test_pkg_with_multiple_licenses_one_referenced_incorrect</name>
+  <license file="bsd.LICENSE" source-files="code_with_BSD.py">BSD-3-Clause</license>
+  <license file="nisl.LICENSE">not-in-spdx-license</license>
+</package>
