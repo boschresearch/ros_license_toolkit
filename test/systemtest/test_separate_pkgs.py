@@ -105,6 +105,12 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/test_pkg_one_correct_one_license_file_missing"]))
 
+    def test_pkg_one_tag_three_files(self):
+        """Test on a package with one SPDX tag and corresponding file,
+        but in the package lay two other not referenced licenses."""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_one_tag_three_files"]))
+
     def test_pkg_spdx_name(self):
         """Test on a package with a license declared in the package.xml
         with the SPDX name."""
@@ -131,6 +137,12 @@ class TestPkgs(unittest.TestCase):
         self.assertNotEqual(os.EX_OK, process.returncode)
         self.assertIn(b'not in SPDX list of licenses', stdout)
         self.assertIn(b'my own fancy license 1.0', stdout)
+
+    def test_pkg_unknown_license_missing_file(self):
+        """Test on a package that has an unknown license 
+        without a license file"""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_unknown_license_missing_file"]))
 
     def test_pkg_with_license_and_file(self):
         """Test on a package with a license declared in the package.xml
