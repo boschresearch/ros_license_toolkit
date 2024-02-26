@@ -191,7 +191,7 @@ class LicenseTextExistsCheck(Check):
             if actual_license != license_tag.get_license_id():
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' is " +\
-                    f"of license {actual_license} but should be " +\
+                    f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
                 missing_license_texts_status[license_tag] = Status.WARNING
                 continue
