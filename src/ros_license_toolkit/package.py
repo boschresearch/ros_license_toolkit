@@ -26,8 +26,8 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import (is_license_text_file, 
-                                        REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
+from ros_license_toolkit.common import (REQUIRED_PERCENTAGE_OF_LICENSE_TEXT,
+                                        is_license_text_file)
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
@@ -48,6 +48,7 @@ def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
             REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
         return scan_results['detected_license_expression_spdx']
     return None
+
 
 class PackageException(Exception):
     """Exception raised when a package is invalid."""
