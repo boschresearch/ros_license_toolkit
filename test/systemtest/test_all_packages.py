@@ -49,15 +49,21 @@ class TestAllPackages(unittest.TestCase):
         self.assertIn(
             b"test_pkg_has_code_of_different_license_and_wrong_tag", stdout)
         self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
+        self.assertIn(b"test_pkg_name_not_in_spdx", stdout)
         self.assertIn(b"test_pkg_no_file_attribute", stdout)
         self.assertIn(b"test_pkg_no_license_file", stdout)
+        self.assertIn(b"test_pkg_one_correct_one_license_file_missing", stdout)
         self.assertIn(b"test_pkg_no_license", stdout)
         self.assertIn(b"test_pkg_spdx_name", stdout)
         self.assertIn(b"test_pkg_spdx_tag", stdout)
         self.assertIn(b"test_pkg_unknown_license", stdout)
+        self.assertIn(b"test_pkg_unknown_license_missing_file", stdout)
         self.assertIn(b"test_pkg_with_license_and_file", stdout)
         self.assertIn(
             b"test_pkg_with_multiple_licenses_no_source_files_tag", stdout)
+        self.assertIn(
+            b"test_pkg_with_multiple_licenses_one_referenced_incorrect",
+            stdout)
         self.assertIn(b"test_pkg_wrong_license_file", stdout)
         self.assertIn(b"pkg_with_bsd3_a", stdout)
         self.assertIn(b"pkg_with_bsd3_b", stdout)

@@ -17,6 +17,7 @@
 """This module contains the checks for the linter."""
 
 import os
+from enum import IntEnum
 from pprint import pformat
 from typing import Dict, List, Optional
 
@@ -25,7 +26,14 @@ from ros_license_toolkit.license_tag import (LicenseTag,
 from ros_license_toolkit.package import (Package, PackageException,
                                          get_spdx_license_name,
                                          is_license_text_file)
-from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red
+from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
+
+
+class Status(IntEnum):
+    """Levels of success or failure for the output"""
+    SUCCESS = 0
+    WARNING = 1
+    FAILURE = 2
 
 
 class Check:
@@ -34,7 +42,7 @@ class Check:
     def __init__(self: 'Check'):
         """Initialize a check."""
         # overall success of this check
-        self.success: bool = False
+        self.status: Status = Status.FAILURE
 
         # explanation for success or failure for normal output
         self.reason: str = NO_REASON_STR
@@ -43,13 +51,18 @@ class Check:
         self.verbose_output: str = ''
 
     def _failed(self, reason: str):
-        """Set this check as failed for reason `r`."""
-        self.success = False
+        """Set this check as failed for `reason`."""
+        self.status = Status.FAILURE
+        self.reason = reason
+
+    def _warning(self, reason: str):
+        """Set this check as passed but display a warning for reason `r`."""
+        self.status = Status.WARNING
         self.reason = reason
 
     def _success(self, reason: str):
         """Set this check as successful for reason `r`."""
-        self.success = True
+        self.status = Status.SUCCESS
         if self.reason == NO_REASON_STR:
             self.reason = ''
         else:
@@ -58,14 +71,13 @@ class Check:
 
     def __str__(self) -> str:
         """Return formatted string for normal output."""
-        if self.success:
-            info: str = str(
-                type(self).__name__) + "\n" + \
-                green(f" SUCCESS {self.reason}")
+        info: str = str(type(self).__name__) + "\n"
+        if self.status == Status.SUCCESS:
+            info += green(f" SUCCESS {self.reason}")
+        elif self.status == Status.WARNING:
+            info += yellow(f" WARNING {self.reason}")
         else:
-            info = str(
-                type(self).__name__) + "\n" + \
-                red(f" FAILURE {self.reason}")
+            info += red(f" FAILURE {self.reason}")
         return info
 
     def verbose(self) -> str:
@@ -73,8 +85,12 @@ class Check:
         return self.verbose_output
 
     def __bool__(self) -> bool:
-        """Evaluate success of check as bool."""
-        return self.success
+        """Evaluate success of check as bool. Warning is treated as success"""
+        return self.status != Status.FAILURE
+
+    def get_status(self) -> Status:
+        """Get the level of success to also consider possible warnings"""
+        return self.status
 
     def check(self, package: Package):
         """
@@ -119,9 +135,10 @@ class LicenseTagIsInSpdxListCheck(Check):
                     license_tag):
                 licenses_not_in_spdx_list.append(license_tag)
         if len(licenses_not_in_spdx_list) > 0:
-            self._failed(
+            self._warning(
                 f"Licenses {licenses_not_in_spdx_list} are "
-                "not in SPDX list of licenses."
+                "not in SPDX list of licenses. "
+                "Make sure to exactly match one of https://spdx.org/licenses/."
             )
         else:
             self._success("All license tags are in SPDX list of licenses.")
@@ -135,28 +152,33 @@ class LicenseTextExistsCheck(Check):
             self._failed("No license tag defined.")
             return
         license_tags_without_license_text: Dict[LicenseTag, str] = {}
+        missing_license_texts_status: Dict[LicenseTag, Status] = {}
         found_license_texts = package.found_license_texts
         for license_tag in package.license_tags.values():
             if not license_tag.has_license_text_file():
                 license_tags_without_license_text[
                     license_tag] = "No license text file defined."
+                missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
             license_text_file = license_tag.get_license_text_file()
             if not os.path.exists(
                     os.path.join(package.abspath, license_text_file)):
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' does not exist."
+                missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
             if license_text_file not in found_license_texts:
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' not included" +\
                     " in scan results."
+                missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
             if not is_license_text_file(
                     found_license_texts[license_text_file]):
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' is not " +\
                     "recognized as license text."
+                missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
             actual_license: Optional[str] = get_spdx_license_name(
                 found_license_texts[license_text_file])
@@ -164,19 +186,30 @@ class LicenseTextExistsCheck(Check):
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}'" +\
                     " is not recognized as license text."
+                missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
             if actual_license != license_tag.get_license_id():
                 license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' is " +\
-                    f"of license {actual_license} but should be " +\
+                    f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
+                missing_license_texts_status[license_tag] = Status.WARNING
                 continue
         if len(license_tags_without_license_text) > 0:
-            self._failed(
-                "The following license tags do not have a valid license text "
-                "file:\n" + "\n".join(
-                    [f"  '{x[0]}': {x[1]}" for x in
-                        license_tags_without_license_text.items()]))
+            if max(missing_license_texts_status.values()) == Status.WARNING:
+                self._warning(
+                    "Since they are not in the SPDX list, "
+                    "we can not check if these tags have the correct "
+                    "license text:\n" + "\n".join(
+                        [f"  '{x[0]}': {x[1]}" for x in
+                            license_tags_without_license_text.items()]))
+            else:
+                self._failed(
+                    "The following license tags do not "
+                    "have a valid license text "
+                    "file:\n" + "\n".join(
+                        [f"  '{x[0]}': {x[1]}" for x in
+                            license_tags_without_license_text.items()]))
             self.verbose_output = red(
                 "\n".join([f"  '{x[0]}': {x[1]}" for x in
                            found_license_texts.items()]))

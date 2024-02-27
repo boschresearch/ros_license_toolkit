@@ -39,11 +39,11 @@ class TestPkgs(unittest.TestCase):
         ]:
             with subprocess.Popen(
                 ["ros_license_toolkit", call_path],
-                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
             ) as process:
                 stdout, _ = process.communicate()
-            self.assertNotEqual(os.EX_OK, process.returncode)
+            self.assertEqual(os.EX_OK, process.returncode)
             self.assertIn(
                 b"test_pkg_deep", stdout)
         remove_repo(repo_path)
@@ -77,6 +77,13 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
+    def test_pkg_name_not_in_spdx(self):
+        """Test on a package that has valid License file with BSD-3-Clause
+        but its license tag BSD is not in SPDX format"""
+        process, stdout = open_subprocess("test_pkg_name_not_in_spdx")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
+
     def test_pkg_no_file_attribute(self):
         """Test on a package with License file that is not referenced in
         package.xml"""
@@ -92,6 +99,12 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with no license text file."""
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/test_pkg_no_license_file"]))
+
+    def test_pkg_one_correct_one_license_file_missing(self):
+        """Test on a package that has one correct license with file
+        and code, but also one not known license tag without file"""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_one_correct_one_license_file_missing"]))
 
     def test_pkg_spdx_name(self):
         """Test on a package with a license declared in the package.xml
@@ -120,6 +133,12 @@ class TestPkgs(unittest.TestCase):
         self.assertIn(b'not in SPDX list of licenses', stdout)
         self.assertIn(b'my own fancy license 1.0', stdout)
 
+    def test_pkg_unknown_license_missing_file(self):
+        """Test on a package that has an unknown license
+        without a license file"""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_unknown_license_missing_file"]))
+
     def test_pkg_with_license_and_file(self):
         """Test on a package with a license declared in the package.xml
         and a matching license text file."""
@@ -133,11 +152,33 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_with_multiple_licenses_no_source_files_tag"]))
 
+    def test_pkg_with_multiple_licenses_one_referenced_incorrect(self):
+        """Test on a package with multiple licenses declared in the
+        package.xml. First has tag not in SPDX list with correct source file,
+        second is in SPDX."""
+        process, stdout = open_subprocess(
+            "test_pkg_with_multiple_licenses_one_referenced_incorrect")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING Licenses ['BSD'] are not in SPDX list", stdout)
+
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
         the license declared in the package.xml."""
-        self.assertEqual(os.EX_DATAERR, main(
-            ["test/_test_data/test_pkg_wrong_license_file"]))
+        process, stdout = open_subprocess("test_pkg_wrong_license_file")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
+
+
+def open_subprocess(test_data_name: str):
+    """Open a subprocess to also gather cl output"""
+    with subprocess.Popen(
+            ["ros_license_toolkit",
+             "test/_test_data/" + test_data_name],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+    ) as process:
+        stdout, _ = process.communicate()
+    return process, stdout
 
 
 if __name__ == '__main__':
