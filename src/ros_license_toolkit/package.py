@@ -138,12 +138,10 @@ class Package:
                 if is_license_text_file(scan_results):
                     self._found_license_texts[fname
                                               ] = scan_results
-                    print("license text file")
                 else:
                     # not a license text file but also interesting
                     self._found_files_w_licenses[fname
                                                  ] = scan_results
-                    print("not license text file")
         # look also in the repo for license text files
         if self.repo is not None:
             for path, res in self.repo.license_text_files.items():

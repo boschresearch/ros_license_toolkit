@@ -61,7 +61,7 @@ def test_copyright_to_string():
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)
     assert '2002' in str(cprs)
-    assert 'Another' in str(cprs)
+    assert 'Second' in str(cprs)
 
 
 def test_get_copyright_file_contents():
