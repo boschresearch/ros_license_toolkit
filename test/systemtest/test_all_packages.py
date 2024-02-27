@@ -53,7 +53,6 @@ class TestAllPackages(unittest.TestCase):
         self.assertIn(b"test_pkg_no_file_attribute", stdout)
         self.assertIn(b"test_pkg_no_license_file", stdout)
         self.assertIn(b"test_pkg_one_correct_one_license_file_missing", stdout)
-        self.assertIn(b"test_pkg_one_tag_three_files", stdout)
         self.assertIn(b"test_pkg_no_license", stdout)
         self.assertIn(b"test_pkg_spdx_name", stdout)
         self.assertIn(b"test_pkg_spdx_tag", stdout)

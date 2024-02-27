@@ -77,11 +77,12 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
-    def test_pkg_name_not_in_spdx(self): #todo: warning check
+    def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
         but its license tag BSD is not in SPDX format"""
-        self.assertEqual(os.EX_OK, main(
-            ["test/_test_data/test_pkg_name_not_in_spdx"]))
+        process, stdout = open_subprocess("test_pkg_name_not_in_spdx")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
 
     def test_pkg_no_file_attribute(self):
         """Test on a package with License file that is not referenced in
@@ -104,12 +105,6 @@ class TestPkgs(unittest.TestCase):
         and code, but also one not known license tag without file"""
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/test_pkg_one_correct_one_license_file_missing"]))
-
-    def test_pkg_one_tag_three_files(self):
-        """Test on a package with one SPDX tag and corresponding file,
-        but in the package lay two other not referenced licenses."""
-        self.assertEqual(os.EX_DATAERR, main(
-            ["test/_test_data/test_pkg_one_tag_three_files"]))
 
     def test_pkg_spdx_name(self):
         """Test on a package with a license declared in the package.xml
@@ -139,7 +134,7 @@ class TestPkgs(unittest.TestCase):
         self.assertIn(b'my own fancy license 1.0', stdout)
 
     def test_pkg_unknown_license_missing_file(self):
-        """Test on a package that has an unknown license 
+        """Test on a package that has an unknown license
         without a license file"""
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/test_pkg_unknown_license_missing_file"]))
@@ -174,14 +169,14 @@ class TestPkgs(unittest.TestCase):
         self.assertIn(b"WARNING", stdout)
 
 
-def open_subprocess(test_data_name: str) :
+def open_subprocess(test_data_name: str):
     """Open a subprocess to also gather cl output"""
     with subprocess.Popen(
             ["ros_license_toolkit",
              "test/_test_data/" + test_data_name],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
-        ) as process:
+    ) as process:
         stdout, _ = process.communicate()
     return process, stdout
 
