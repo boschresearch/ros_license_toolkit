@@ -7,7 +7,7 @@ runs:
     - name: Install Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.11'
     - name: Install package
       run: pip install $GITHUB_ACTION_PATH
       shell: bash

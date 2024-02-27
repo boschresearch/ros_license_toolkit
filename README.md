@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: boschresearch/ros_license_toolkit@1.1.5
+      - uses: boschresearch/ros_license_toolkit@1.2.3
 ```
 
 ## State of Development
