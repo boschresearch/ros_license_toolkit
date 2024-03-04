@@ -205,14 +205,14 @@ class LicenseTextExistsCheck(Check):
                         [f"  '{x[0]}': {x[1]}" for x in
                             license_tags_without_license_text.items()]))
                 if len(found_license_texts) == 1:
-                    # if exactly one license text is found, 
+                    # if exactly one license text is found,
                     # treat wrong license tag internally as this license
                     #optional check for similarity between tag and file
                     license_file_tag_spdx: Optional[str] = \
                     found_license_texts[next(iter(found_license_texts))]\
                         ['detected_license_expression_spdx']
                     if  license_file_tag_spdx:
-                        print('here')
+                        package.inofficial_license_tag = license_file_tag_spdx
             else:
                 self._failed(
                     "The following license tags do not "
@@ -238,6 +238,7 @@ class LicensesInCodeCheck(Check):
         declared_licenses = package.license_tags
         files_with_uncovered_licenses: Dict[str, List[str]] = {}
         files_not_matched_by_any_license_tag: Dict[str, List[str]] = {}
+        files_with_inofficial_tag: Dict[str, List[str]] = {}
 
         for fname, found_licenses in package.found_files_w_licenses.items():
             if fname in package.get_license_files():
@@ -248,6 +249,14 @@ class LicensesInCodeCheck(Check):
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
                 if license_str not in declared_licenses:
+                    # this license has an inofficial tag
+                    if license_str == package.inofficial_license_tag:
+                        if fname not in files_with_inofficial_tag:
+                            files_with_inofficial_tag[fname] = []
+                        files_with_inofficial_tag[fname].append(license_str)
+                        files_with_inofficial_tag[fname].append(
+                            next(iter(declared_licenses)))
+                        continue
                     # this license is not declared by any license tag
                     if fname not in files_with_uncovered_licenses:
                         files_with_uncovered_licenses[fname] = []
@@ -275,6 +284,14 @@ class LicensesInCodeCheck(Check):
                 files_not_matched_by_any_license_tag,
                 package,
             )
+        elif files_with_inofficial_tag:
+            info_str = ''
+            info_str += 'For the following files, please change the ' +\
+                'License Tag in the package file to SPDX format:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}." for x in
+                        files_with_inofficial_tag.items()])
+            self._warning(info_str)
         elif len(files_not_matched_by_any_license_tag) > 0:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
