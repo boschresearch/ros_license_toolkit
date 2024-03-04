@@ -204,6 +204,15 @@ class LicenseTextExistsCheck(Check):
                     "license text:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             license_tags_without_license_text.items()]))
+                if len(found_license_texts) == 1:
+                    # if exactly one license text is found, 
+                    # treat wrong license tag internally as this license
+                    #optional check for similarity between tag and file
+                    license_file_tag_spdx: Optional[str] = \
+                    found_license_texts[next(iter(found_license_texts))]\
+                        ['detected_license_expression_spdx']
+                    if  license_file_tag_spdx:
+                        print('here')
             else:
                 self._failed(
                     "The following license tags do not "
