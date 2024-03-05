@@ -96,7 +96,7 @@ class Package:
 
         # If the tag is wrong (like BSD) but the actual license can
         # be found out through declaration, this field contains the tag
-        self.inofficial_license_tag: Optional[str] = None
+        self.inofficial_license_tag: Dict[str, str] = {}
 
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
