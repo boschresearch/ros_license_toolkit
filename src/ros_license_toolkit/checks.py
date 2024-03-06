@@ -287,6 +287,17 @@ class LicensesInCodeCheck(Check):
                     files_not_matched_by_any_license_tag[fname].append(
                         license_str)
                     continue
+        self._evaluate_result(package,
+                              files_with_uncovered_licenses,
+                              files_not_matched_by_any_license_tag,
+                              files_with_inofficial_tag)
+
+    def _evaluate_result(self,
+                         package: Package,
+                         files_with_uncovered_licenses: Dict[str, List[str]],
+                         files_not_matched_by_any_tag: Dict[str, List[str]],
+                         files_with_inofficial_tag: Dict[str, List[str]]
+                         ) -> None:
         if files_with_uncovered_licenses:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
@@ -296,7 +307,7 @@ class LicensesInCodeCheck(Check):
             self._print_info(
                 info_str,
                 files_with_uncovered_licenses,
-                files_not_matched_by_any_license_tag,
+                files_not_matched_by_any_tag,
                 package,
             )
         elif files_with_inofficial_tag:
@@ -307,17 +318,17 @@ class LicensesInCodeCheck(Check):
                     [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
                      for x in files_with_inofficial_tag.items()])
             self._warning(info_str)
-        elif len(files_not_matched_by_any_license_tag) > 0:
+        elif len(files_not_matched_by_any_tag) > 0:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
                 'are covered by a license tag but are not listed in ' +\
                 'the source files of the license tag:\n' + '\n'.join(
                     [f"  '{x[0]}': {x[1]}" for x in
-                        files_not_matched_by_any_license_tag.items()])
+                        files_not_matched_by_any_tag.items()])
             self._print_info(
                 info_str,
                 files_with_uncovered_licenses,
-                files_not_matched_by_any_license_tag,
+                files_not_matched_by_any_tag,
                 package,
             )
         else:
