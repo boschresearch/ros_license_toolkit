@@ -41,6 +41,7 @@ class TestAllPackages(unittest.TestCase):
         print(stderr)
         self.assertIn(b"test_pkg_deep", stdout)
         self.assertIn(b"test_pkg_both_tags_not_spdx", stdout)
+        self.assertIn(b"test_pkg_both_tags_not_spdx_one_file_own", stdout)
         self.assertIn(b"test_pkg_has_code_disjoint", stdout)
         self.assertIn(b"test_pkg_has_code_of_different", stdout)
         self.assertIn(b"test_pkg_has_code_of_different_license", stdout)

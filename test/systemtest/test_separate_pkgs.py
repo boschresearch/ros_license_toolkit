@@ -56,6 +56,13 @@ class TestPkgs(unittest.TestCase):
             "test/_test_data/test_pkg_both_tags_not_spdx"
         ]))
 
+    def test_pkg_both_tags_not_spdx_one_file_own(self):
+        """Test on a package that has two licenses. One is self-defined, other
+        one with not SPDX tag but therefore code and license file in SPDX"""
+        self.assertEqual(os.EX_DATAERR, main([
+            "test/_test_data/test_pkg_both_tags_not_spdx_one_file_own"
+        ]))
+
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
         a license different from the package main license."""
