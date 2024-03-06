@@ -48,6 +48,14 @@ class TestPkgs(unittest.TestCase):
                 b"test_pkg_deep", stdout)
         remove_repo(repo_path)
 
+    def test_pkg_both_tags_not_spdx(self):
+        """ Test on a package that has two different Licenses that both
+        have a not SPDX conform Tag. License files and source files
+        are SPDX conform"""
+        self.assertEqual(os.EX_OK, main([
+            "test/_test_data/test_pkg_both_tags_not_spdx"
+        ]))
+
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
         a license different from the package main license."""

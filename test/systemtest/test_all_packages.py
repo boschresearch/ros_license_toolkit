@@ -40,20 +40,19 @@ class TestAllPackages(unittest.TestCase):
         print(stdout)
         print(stderr)
         self.assertIn(b"test_pkg_deep", stdout)
-        self.assertIn(
-            b"test_pkg_has_code_disjoint", stdout)
-        self.assertIn(
-            b"test_pkg_has_code_of_different", stdout)
+        self.assertIn(b"test_pkg_both_tags_not_spdx", stdout)
+        self.assertIn(b"test_pkg_has_code_disjoint", stdout)
+        self.assertIn(b"test_pkg_has_code_of_different", stdout)
+        self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
         self.assertIn(
             b"test_pkg_has_code_of_different_license_and_tag", stdout)
         self.assertIn(
             b"test_pkg_has_code_of_different_license_and_wrong_tag", stdout)
-        self.assertIn(b"test_pkg_has_code_of_different_license", stdout)
         self.assertIn(b"test_pkg_name_not_in_spdx", stdout)
         self.assertIn(b"test_pkg_no_file_attribute", stdout)
+        self.assertIn(b"test_pkg_no_license", stdout)
         self.assertIn(b"test_pkg_no_license_file", stdout)
         self.assertIn(b"test_pkg_one_correct_one_license_file_missing", stdout)
-        self.assertIn(b"test_pkg_no_license", stdout)
         self.assertIn(b"test_pkg_spdx_name", stdout)
         self.assertIn(b"test_pkg_spdx_tag", stdout)
         self.assertIn(b"test_pkg_unknown_license", stdout)
