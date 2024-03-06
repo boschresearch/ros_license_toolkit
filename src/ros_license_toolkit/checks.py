@@ -154,52 +154,13 @@ class LicenseTextExistsCheck(Check):
         license_tags_without_license_text: Dict[LicenseTag, str] = {}
         missing_license_texts_status: Dict[LicenseTag, Status] = {}
         files_with_wrong_tags: Dict[LicenseTag, Dict[str, str]] = {}
-        found_license_texts = package.found_license_texts
-        for license_tag in package.license_tags.values():
-            if not license_tag.has_license_text_file():
-                license_tags_without_license_text[
-                    license_tag] = "No license text file defined."
-                missing_license_texts_status[license_tag] = Status.FAILURE
-                continue
-            license_text_file = license_tag.get_license_text_file()
-            if not os.path.exists(
-                    os.path.join(package.abspath, license_text_file)):
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' does not exist."
-                missing_license_texts_status[license_tag] = Status.FAILURE
-                continue
-            if license_text_file not in found_license_texts:
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' not included" +\
-                    " in scan results."
-                missing_license_texts_status[license_tag] = Status.FAILURE
-                continue
-            if not is_license_text_file(
-                    found_license_texts[license_text_file]):
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' is not " +\
-                    "recognized as license text."
-                missing_license_texts_status[license_tag] = Status.FAILURE
-                continue
-            actual_license: Optional[str] = get_spdx_license_name(
-                found_license_texts[license_text_file])
-            if actual_license is None:
-                license_tags_without_license_text[
-                    license_tag
-                ] = f"License text file '{license_text_file}'" +\
-                    " is not recognized as license text."
-                missing_license_texts_status[license_tag] = Status.FAILURE
-                continue
-            if actual_license != license_tag.get_license_id():
-                license_tags_without_license_text[license_tag] =\
-                    f"License text file '{license_text_file}' is " +\
-                    f"of license {actual_license} but tag is " +\
-                    f"{license_tag.get_license_id()}."
-                missing_license_texts_status[license_tag] = Status.WARNING
-                files_with_wrong_tags[license_tag] = \
-                    {'actual_license': actual_license,
-                     'license_tag': license_tag.get_license_id()}
-                continue
+
+        found_license_texts = self._check_licenses(
+            package,
+            license_tags_without_license_text,
+            missing_license_texts_status,
+            files_with_wrong_tags)
+
         if len(license_tags_without_license_text) > 0:
             if max(missing_license_texts_status.values()) == Status.WARNING:
                 self._warning(
@@ -224,9 +185,63 @@ class LicenseTextExistsCheck(Check):
             self.verbose_output = red(
                 "\n".join([f"  '{x[0]}': {x[1]}" for x in
                            found_license_texts.items()]))
-
         else:
             self._success("All license tags have a valid license text file.")
+
+    def _check_licenses(self,
+                        package: Package,
+                        tags_without_text: Dict[LicenseTag, str],
+                        missing_texts_status: Dict[LicenseTag, Status],
+                        files_with_wrong_tags: Dict[LicenseTag, Dict[str, str]]
+                        ) -> Dict[str, Any]:
+        found_license_texts: Dict[str, Any] = package.found_license_texts
+        for license_tag in package.license_tags.values():
+            if not license_tag.has_license_text_file():
+                tags_without_text[
+                    license_tag] = "No license text file defined."
+                missing_texts_status[license_tag] = Status.FAILURE
+                continue
+            license_text_file = license_tag.get_license_text_file()
+            if not os.path.exists(
+                    os.path.join(package.abspath, license_text_file)):
+                tags_without_text[license_tag] =\
+                    f"License text file '{license_text_file}' does not exist."
+                missing_texts_status[license_tag] = Status.FAILURE
+                continue
+            if license_text_file not in found_license_texts:
+                tags_without_text[license_tag] =\
+                    f"License text file '{license_text_file}' not included" +\
+                    " in scan results."
+                missing_texts_status[license_tag] = Status.FAILURE
+                continue
+            if not is_license_text_file(
+                    found_license_texts[license_text_file]):
+                tags_without_text[license_tag] =\
+                    f"License text file '{license_text_file}' is not " +\
+                    "recognized as license text."
+                missing_texts_status[license_tag] = Status.FAILURE
+                continue
+            actual_license: Optional[str] = get_spdx_license_name(
+                found_license_texts[license_text_file])
+            if actual_license is None:
+                tags_without_text[
+                    license_tag
+                ] = f"License text file '{license_text_file}'" +\
+                    " is not recognized as license text."
+                missing_texts_status[license_tag] = Status.FAILURE
+                continue
+            if actual_license != license_tag.get_license_id():
+                tags_without_text[license_tag] =\
+                    f"License text file '{license_text_file}' is " +\
+                    f"of license {actual_license} but tag is " +\
+                    f"{license_tag.get_license_id()}."
+                missing_texts_status[license_tag] = Status.WARNING
+                files_with_wrong_tags[license_tag] = \
+                    {'actual_license': actual_license,
+                     'license_tag': license_tag.get_license_id()}
+                continue
+        return found_license_texts
+
 
 class LicensesInCodeCheck(Check):
     """Check if all found licenses have a declaration in the package.xml."""
