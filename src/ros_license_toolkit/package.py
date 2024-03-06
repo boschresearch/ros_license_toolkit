@@ -68,6 +68,9 @@ class Package:
     """This represents a ros package, defined by its `path` (absolute) and
     results within it."""
 
+    # pylint: disable=too-many-instance-attributes
+    # Eight is reasonable in this case.
+
     def __init__(self, path: str, repo: Optional[Repo] = None):
         # absolute path to this package
         self.abspath: str = path
