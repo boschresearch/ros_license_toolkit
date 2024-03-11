@@ -30,10 +30,10 @@ def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
 
 
 def get_ignored_content() -> List[str]:
-    """Return all ignored Files and Folders from 'ignore_in_scan.json'"""
+    """Return all ignored patterns from 'ignore_in_scan.json'"""
     ignored_content: List[str] = []
     with open("ignore_in_scan.json", 'r', encoding="utf-8") as f:
         data = json.loads(f.read())
-    ignored_content.extend(data['ignored_files'])
-    ignored_content.extend(data['ignored_folders'])
+        f.close()
+    ignored_content.extend(data['ignoring'])
     return ignored_content

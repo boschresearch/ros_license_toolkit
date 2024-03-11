@@ -1,12 +1,10 @@
 {
-    "ignored_files": [
+    "ignoring": [
         "README.*",
         "package.xml",
         "setup.py",
         "setup.cfg",
-        "CMakeLists.txt"
-    ],
-    "ignored_folders": [
+        "CMakeLists.txt",
         ".git/*"
     ]
 }

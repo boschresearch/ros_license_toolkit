@@ -86,6 +86,20 @@ options:
   -q, --quiet           disable most output
 ```
 
+Additionally, there is an option to ignore single files, folders and types of files.
+In the File  `ignore_in_scan.json` all of these can be entered into the `ignoring` Field.
+
+```json
+{
+  "ignoring": [
+        "README.md", // Ignoring every README.md file
+        "package.xml",
+        "CMakeLists.txt",
+        ".git/*" //ignoring everything underneath .git/
+    ]
+}
+```
+
 ### Using it as a GitHub action
 
 You can use `ros_license_toolkit` inside your GitHub workflow in order to check licenses in your
