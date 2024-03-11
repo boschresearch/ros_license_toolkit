@@ -100,9 +100,8 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with readme files. READMEs mention licenses
         that are not in package and shall therefore be ignored."""
         with open("ignore_in_scan.json", 'r', encoding="utf-8") as f:
-            file_content = f.read()
+            org_data = json.loads(f.read())
             f.close()
-        org_data = json.loads(file_content)
         test_data = copy.deepcopy(org_data)
         test_data['ignoring'].append('.hidden/*')
         with open("ignore_in_scan.json", 'w', encoding="utf-8") as f:
