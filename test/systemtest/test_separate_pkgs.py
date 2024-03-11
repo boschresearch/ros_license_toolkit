@@ -26,6 +26,8 @@ from ros_license_toolkit.main import main
 
 class TestPkgs(unittest.TestCase):
     """Test different test packages."""
+    # pylint: disable=too-many-public-methods
+    # Here it make sense to keep all tests in one place
 
     def test_deep_package_folder(self):
         """Call the linter on directories in three levels.
@@ -91,6 +93,12 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
+
+    def test_pkg_ignore_readme_contents(self):
+        """Test on a package with readme files. READMEs mention licenses
+        that are not in package and shall therefore be ignored."""
+        self.assertEqual(os.EX_OK, main(
+            ["test/_test_data/test_pkg_ignore_readme_contents"]))
 
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause

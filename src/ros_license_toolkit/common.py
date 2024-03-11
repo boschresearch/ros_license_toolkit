@@ -16,7 +16,8 @@
 
 """Common utility functions."""
 
-from typing import Any, Dict
+import json
+from typing import Any, Dict, List
 
 REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
@@ -26,3 +27,13 @@ def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
     return (
         scan_results["percentage_of_license_text"] >=
         REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
+
+
+def get_ignored_content() -> List[str]:
+    """Return all ignored Files and Folders from 'ignore_in_scan.json'"""
+    ignored_content: List[str] = []
+    with open("ignore_in_scan.json", 'r', encoding="utf-8") as f:
+        data = json.loads(f.read())
+    ignored_content.extend(data['ignored_files'])
+    ignored_content.extend(data['ignored_folders'])
+    return ignored_content

@@ -27,6 +27,7 @@ from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
 from ros_license_toolkit.common import (REQUIRED_PERCENTAGE_OF_LICENSE_TEXT,
+                                        get_ignored_content,
                                         is_license_text_file)
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
@@ -101,6 +102,9 @@ class Package:
         # be found out through declaration, this field contains the tag
         self.inofficial_license_tag: Dict[str, str] = {}
 
+        # All ignored files and folders
+        self._ignored_content: List[str] = get_ignored_content()
+
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
         return os.path.relpath(path, self.abspath)
@@ -134,7 +138,7 @@ class Package:
         for (root, _, files) in os.walk(self.abspath):
             files_rel_to_pkg = [self._get_path_relative_to_pkg(
                 os.path.join(root, f)) for f in files]
-            for pattern in IGNORED:
+            for pattern in self._ignored_content:
                 matched = fnmatch.filter(files_rel_to_pkg, pattern)
                 for m in matched:
                     files_rel_to_pkg.remove(m)
