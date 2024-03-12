@@ -101,8 +101,11 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     if parsed_args.generate_copyright_file:
         if len(packages) == 1:
             package = packages[0]
-            package.write_copyright_file(
-                os.path.join(os.getcwd(), 'copyright'))
+            try:
+                package.write_copyright_file(
+                    os.path.join(os.getcwd(), 'copyright'))
+            except AssertionError as ae:
+                rll_print(red(str(ae)))
         else:
             rll_print(red(
                 "Can only generate copyright file for single package"),
