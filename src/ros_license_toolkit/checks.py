@@ -23,9 +23,8 @@ from typing import Any, Dict, List, Optional
 
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
-from ros_license_toolkit.package import (Package, PackageException,
-                                         get_spdx_license_name,
-                                         is_license_text_file)
+from ros_license_toolkit.package import (Package, PackageException)
+from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 
@@ -164,7 +163,7 @@ class LicenseTextExistsCheck(Check):
 
     def _check_licenses(self, package: Package) -> None:
         '''checks each license tag for the corresponding license text. Also
-        detects inofficial licenses when tag is other than SPDX license file'''
+        detects inofficial licenses when tag is not in the SPDX license list'''
         self.found_license_texts = package.found_license_texts
         for license_tag in package.license_tags.values():
             if not license_tag.has_license_text_file():
@@ -185,7 +184,7 @@ class LicenseTextExistsCheck(Check):
                     " in scan results."
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
-            if not is_license_text_file(
+            if not get_spdx_license_name(
                     self.found_license_texts[license_text_file]):
                 self.license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' is not " +\

@@ -16,13 +16,14 @@
 
 """Common utility functions."""
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
 
-def is_license_text_file(scan_results: Dict[str, Any]) -> bool:
-    """Check if a file is a license text file."""
-    return (
-        scan_results["percentage_of_license_text"] >=
-        REQUIRED_PERCENTAGE_OF_LICENSE_TEXT)
+def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
+    """Get the SPDX license name from scan results."""
+    if scan_results['percentage_of_license_text'] \
+       >= REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
+        return scan_results['detected_license_expression_spdx']
+    return None
