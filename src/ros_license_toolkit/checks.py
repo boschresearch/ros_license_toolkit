@@ -206,7 +206,13 @@ class LicenseTextExistsCheck(Check):
                     f"License text file '{license_text_file}' is " +\
                     f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
-                self.missing_license_texts_status[license_tag] = Status.WARNING
+                # If Tag and File both are in SPDX but don't match -> Error
+                if is_license_name_in_spdx_list(license_tag.get_license_id()):
+                    self.missing_license_texts_status[license_tag] =\
+                        Status.FAILURE
+                else:
+                    self.missing_license_texts_status[license_tag] =\
+                        Status.WARNING
                 self.files_with_wrong_tags[license_tag] = \
                     {'actual_license': actual_license,
                         'license_tag': license_tag.get_license_id()}
