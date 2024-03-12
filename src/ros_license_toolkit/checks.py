@@ -21,10 +21,10 @@ from enum import IntEnum
 from pprint import pformat
 from typing import Any, Dict, List, Optional
 
+from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
-from ros_license_toolkit.package import (Package, PackageException)
-from ros_license_toolkit.common import get_spdx_license_name
+from ros_license_toolkit.package import Package, PackageException
 from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 
