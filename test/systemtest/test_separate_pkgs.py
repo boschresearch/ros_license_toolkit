@@ -26,6 +26,8 @@ from ros_license_toolkit.main import main
 
 class TestPkgs(unittest.TestCase):
     """Test different test packages."""
+    # pylint: disable=too-many-public-methods
+    # Here it make sense to keep all tests in one place
 
     def test_deep_package_folder(self):
         """Call the linter on directories in three levels.
@@ -132,6 +134,15 @@ class TestPkgs(unittest.TestCase):
         with the SPDX tag."""
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_spdx_tag"]))
+
+    def test_pkg_too_many_license_files(self):
+        """"Test on a package with multiple License files that are not
+        declared by any tag and could therefore be removed."""
+        process, stdout = open_subprocess("test_pkg_too_many_license_files")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
+        self.assertIn(b"bsd.LICENSE", stdout)
+        self.assertIn(b"apl.LICENSE", stdout)
 
     def test_pkg_unknown_license(self):
         """Test on a package with an unknown license declared in the

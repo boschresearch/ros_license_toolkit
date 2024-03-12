@@ -24,12 +24,11 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (LicensesInCodeCheck,
+from ros_license_toolkit.checks import (LicenseFilesReferencedCheck,
+                                        LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
-                                        LicenseTextExistsCheck, 
-                                        LicenseFilesReferencedCheck,
-                                        Status)
+                                        LicenseTextExistsCheck, Status)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
                                              WARNING_STR, Verbosity, major_sep,

@@ -355,7 +355,7 @@ class LicenseFilesReferencedCheck(Check):
             if '../' in filename:
                 continue
             if license_text['detected_license_expression_spdx'] not in \
-                package.license_tags:
+               package.license_tags:
                 not_covered_texts[filename] = \
                     license_text['detected_license_expression_spdx']
         if not_covered_texts:
