@@ -143,6 +143,7 @@ class TestPkgs(unittest.TestCase):
         self.assertIn(b"WARNING", stdout)
         self.assertIn(b"bsd.LICENSE", stdout)
         self.assertIn(b"apl.LICENSE", stdout)
+        self.assertNotIn(b"../../../LICENSE", stdout)
 
     def test_pkg_unknown_license(self):
         """Test on a package with an unknown license declared in the
