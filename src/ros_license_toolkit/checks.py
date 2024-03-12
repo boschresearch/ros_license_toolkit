@@ -343,3 +343,28 @@ class LicensesInCodeCheck(Check):
                     lambda x: x[0] in files_with_uncovered_licenses or (
                         x[0] in files_not_matched_by_any_license_tag),
                     package.found_files_w_licenses.items()))))
+
+
+class LicenseFilesReferencedCheck(Check):
+    """Check if all found License file have a reference in package.xml."""
+
+    def _check(self, package: Package):
+        not_covered_texts: Dict[str, str] = {}
+        for filename, license_text in package.found_license_texts.items():
+            # skipping all declarations above the package
+            if '../' in filename:
+                continue
+            if license_text['detected_license_expression_spdx'] not in \
+                package.license_tags:
+                not_covered_texts[filename] = \
+                    license_text['detected_license_expression_spdx']
+        if not_covered_texts:
+            info_str = ''
+            info_str += 'The following license declarations are not' +\
+                ' mentioned by any tag. Check if they can be removed:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1]}."
+                     for x in not_covered_texts.items()])
+            self._warning(info_str)
+        else:
+            self._success("All license declaration are referenced by a tag.")

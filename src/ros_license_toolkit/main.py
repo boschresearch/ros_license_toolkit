@@ -27,7 +27,9 @@ from typing import Optional, Sequence
 from ros_license_toolkit.checks import (LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
-                                        LicenseTextExistsCheck, Status)
+                                        LicenseTextExistsCheck, 
+                                        LicenseFilesReferencedCheck,
+                                        Status)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
                                              WARNING_STR, Verbosity, major_sep,
@@ -134,7 +136,8 @@ def process_one_pkg(rll_print, package):
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),
-        LicensesInCodeCheck()]
+        LicensesInCodeCheck(),
+        LicenseFilesReferencedCheck()]
 
     for check in checks_to_perform:
         check.check(package)
