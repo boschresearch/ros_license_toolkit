@@ -81,12 +81,15 @@ class Repo:
                 continue
             scan_results = get_licenses(fpath)
             if get_spdx_license_name(scan_results):
-                self.license_text_files[fpath] = scan_results
+                if 'ros_license_toolkit/LICENSE' not in fpath:
+                    self.license_text_files[fpath] = scan_results
 
         # get the remote url
         self.remote_url: Optional[str] = None
         if len(repo.remotes) > 0:
-            self.remote_url = repo.remotes[0].url
+            # Ignore package
+            if 'ros_license_toolkit' not in repo.remotes[0].url:
+                self.remote_url = repo.remotes[0].url
 
     def __eq__(self, __o) -> bool:
         """Check if two repos are the same."""
