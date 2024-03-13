@@ -159,7 +159,7 @@ class LicenseTextExistsCheck(Check):
             return
 
         self._check_licenses(package)
-        self._evaluate_results(package)
+        self._evaluate_results()
 
     def _check_licenses(self, package: Package) -> None:
         '''checks each license tag for the corresponding license text. Also
@@ -206,12 +206,9 @@ class LicenseTextExistsCheck(Check):
                     f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
                 self.missing_license_texts_status[license_tag] = Status.WARNING
-                self.files_with_wrong_tags[license_tag] = \
-                    {'actual_license': actual_license,
-                        'license_tag': license_tag.get_license_id()}
                 continue
 
-    def _evaluate_results(self, package: Package):
+    def _evaluate_results(self):
         if len(self.license_tags_without_license_text) > 0:
             if max(self.missing_license_texts_status.values()) \
                == Status.WARNING:
@@ -221,13 +218,6 @@ class LicenseTextExistsCheck(Check):
                     "license text:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             self.license_tags_without_license_text.items()]))
-                for entry in self.files_with_wrong_tags.items():
-                    # if exactly one license text is found,
-                    # treat wrong license tag internally as this license
-                    # optional check for similarity between tag and file
-                    package.license_tags[
-                        entry[1]['license_tag']].id_from_license_text = \
-                        entry[1]['actual_license']
             else:
                 self._failed(
                     "The following license tags do not "

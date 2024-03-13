@@ -211,7 +211,6 @@ class Package:
                 self._license_tags[license_tag_key].id_from_license_text = \
                     only_file_id
 
-
     @property
     def license_tags(self) -> Dict[str, LicenseTag]:
         """Get all license tags in the package.xml file."""
@@ -223,16 +222,16 @@ class Package:
             if 'file' in license_tag.attrib:
                 license_file = license_tag.attrib['file']
                 if license_file in self.found_license_texts:
-                    license_file_scan_result = self.found_license_texts[license_file]
+                    license_file_scan_result = \
+                        self.found_license_texts[license_file]
                     license_file_scan_result['filename'] = license_file
-            tag = LicenseTag(license_tag, self.abspath, license_file_scan_result)
+            tag = LicenseTag(license_tag,
+                             self.abspath, license_file_scan_result)
             self._license_tags[tag.get_license_id()] = tag
 
         self._check_single_license_tag_without_source_files()
         self._check_single_license_tag_without_file_attribute()
         self._check_for_single_tag_without_file()
-
-        #TODO: Add check for inofficial tag when only one tag & one file
 
         return self._license_tags
 

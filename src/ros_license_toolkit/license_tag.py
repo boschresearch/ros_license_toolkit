@@ -72,7 +72,7 @@ class LicenseTag:
 
         # If the tag is wrong (like BSD) but the actual license can
         # be found out through declaration, this field contains the tag
-        self.id_from_license_text: Optional[str] =None
+        self.id_from_license_text: Optional[str] = None
 
         try:
             self.id = to_spdx_license_tag(raw_license_name)
@@ -131,12 +131,12 @@ class LicenseTag:
         return self.license_text_file
 
     def _get_id_from_license_text(self,
-            license_file_scan_result: Dict[str, Any]) -> str:
+                                  license_file_scan_result: Dict[str, Any]
+                                  ) -> str:
         """Return the detected license id from the license declaration"""
         if 'detected_license_expression_spdx' in license_file_scan_result:
             return license_file_scan_result['detected_license_expression_spdx']
         return ''
-
 
     @property
     def source_files(self) -> Set[str]:
