@@ -65,8 +65,13 @@ class LicenseTag:
         self.element = element
         assert self.element.text is not None, "License tag must have text."
 
-        raw_license_name: str = str(self.element.text)
         # Name of the license (in SPDX tag format for comparability)
+        raw_license_name: str = str(self.element.text)
+
+        # If the tag is wrong (like BSD) but the actual license can
+        # be found out through declaration, this field contains the tag
+        self.inofficial_license_tag: str = ''
+
         try:
             self.id = to_spdx_license_tag(raw_license_name)
         except ValueError:

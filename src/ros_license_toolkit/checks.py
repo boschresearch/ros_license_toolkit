@@ -225,8 +225,9 @@ class LicenseTextExistsCheck(Check):
                     # if exactly one license text is found,
                     # treat wrong license tag internally as this license
                     # optional check for similarity between tag and file
-                    package.inofficial_license_tag[entry[1]['actual_license']]\
-                        = entry[1]['license_tag']
+                    package.license_tags[
+                        entry[1]['license_tag']].inofficial_license_tag = \
+                        entry[1]['actual_license']
             else:
                 self._failed(
                     "The following license tags do not "
@@ -270,13 +271,17 @@ class LicensesInCodeCheck(Check):
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
                     # this license has an inofficial tag
-                    if license_str in package.inofficial_license_tag.keys():
+                    inofficial_licenses = {
+                        lic_tag.inofficial_license_tag: key
+                        for key, lic_tag in package.license_tags.items()
+                        if lic_tag.inofficial_license_tag != ''}
+                    if license_str in inofficial_licenses.keys():
                         if fname not in self.files_with_inofficial_tag:
                             self.files_with_inofficial_tag[fname] = []
                         self.files_with_inofficial_tag[fname].append(
                             license_str)
                         self.files_with_inofficial_tag[fname].append(
-                            package.inofficial_license_tag[license_str])
+                            inofficial_licenses[license_str])
                         continue
                     # this license is not declared by any license tag
                     if fname not in self.files_with_uncovered_licenses:
