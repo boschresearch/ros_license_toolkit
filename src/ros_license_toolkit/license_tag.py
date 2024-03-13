@@ -84,7 +84,7 @@ class LicenseTag:
             # If a file is linked to the tag, set its id for internal checks
             if license_file_scan_results:
                 self.id_from_license_text = \
-                    self._get_id_from_license_text(license_file_scan_results)
+                    get_id_from_license_text(license_file_scan_results)
 
         # Path to the file containing the license text
         # (relative to package root)
@@ -130,14 +130,6 @@ class LicenseTag:
             "License tag must have file attribute."
         return self.license_text_file
 
-    def _get_id_from_license_text(self,
-                                  license_file_scan_result: Dict[str, Any]
-                                  ) -> str:
-        """Return the detected license id from the license declaration"""
-        if 'detected_license_expression_spdx' in license_file_scan_result:
-            return license_file_scan_result['detected_license_expression_spdx']
-        return ''
-
     @property
     def source_files(self) -> Set[str]:
         """Return the source-files attribute."""
@@ -158,3 +150,10 @@ class LicenseTag:
                 continue
             source_files -= other_license.source_files
         self._source_files = source_files
+
+
+def get_id_from_license_text(license_file_scan_result: Dict[str, Any]) -> str:
+    """Return the detected license id from the license declaration"""
+    if 'detected_license_expression_spdx' in license_file_scan_result:
+        return license_file_scan_result['detected_license_expression_spdx']
+    return ''
