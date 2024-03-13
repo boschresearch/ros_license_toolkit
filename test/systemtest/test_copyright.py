@@ -61,7 +61,7 @@ def test_copyright_to_string():
     assert 'Foo Bar' in str(cprs)
     assert '2000' in str(cprs)
     assert '2002' in str(cprs)
-    assert 'Another' in str(cprs)
+    assert 'Second' in str(cprs)
 
 
 def test_get_copyright_file_contents():
@@ -107,6 +107,6 @@ def test_write_copyright_file():
             ), "r", encoding='utf-8') as f:
                 expected = f.read()
                 assert expected == output
-        remove_existing_copyright_file(
-            path=copyright_file_path)
-    make_repo(TEST_DATA_FOLDER)
+        # remove_existing_copyright_file(
+        #     path=copyright_file_path)
+    remove_repo(TEST_DATA_FOLDER)

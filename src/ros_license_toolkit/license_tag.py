@@ -22,7 +22,7 @@ license tags in package.xml files.
 import os
 import xml.etree.ElementTree as ET
 from glob import glob
-from typing import List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 from spdx.config import LICENSE_MAP
 
@@ -60,13 +60,20 @@ def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
 class LicenseTag:
     """A license tag found in a package.xml file."""
 
-    def __init__(self, element: ET.Element, pkg_path: str):
+    def __init__(self, element: ET.Element,
+                 pkg_path: str,
+                 license_file_scan_results: Optional[Dict[str, Any]] = None):
         """Initialize a license tag from an XML element."""
         self.element = element
         assert self.element.text is not None, "License tag must have text."
 
-        raw_license_name: str = str(self.element.text)
         # Name of the license (in SPDX tag format for comparability)
+        raw_license_name: str = str(self.element.text)
+
+        # If the tag is wrong (like BSD) but the actual license can
+        # be found out through declaration, this field contains the tag
+        self.id_from_license_text: Optional[str] = None
+
         try:
             self.id = to_spdx_license_tag(raw_license_name)
         except ValueError:
@@ -74,6 +81,10 @@ class LicenseTag:
             # we assume it is a custom license and use the name as-is.
             # This will be detected in `LicenseTagIsInSpdxListCheck`.
             self.id = raw_license_name
+            # If a file is linked to the tag, set its id for internal checks
+            if license_file_scan_results:
+                self.id_from_license_text = \
+                    get_id_from_license_text(license_file_scan_results)
 
         # Path to the file containing the license text
         # (relative to package root)
@@ -139,3 +150,10 @@ class LicenseTag:
                 continue
             source_files -= other_license.source_files
         self._source_files = source_files
+
+
+def get_id_from_license_text(license_file_scan_result: Dict[str, Any]) -> str:
+    """Return the detected license id from the license declaration"""
+    if 'detected_license_expression_spdx' in license_file_scan_result:
+        return license_file_scan_result['detected_license_expression_spdx']
+    return ''

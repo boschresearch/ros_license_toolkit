@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>test_pkg_both_tags_not_spdx</name>
+  <license file="BSD.LICENSE">BSD</license>
+  <license file="MPL.LICENSE" source-files="code_with_MPL.py">MPL</license>
+</package>
