@@ -90,11 +90,23 @@ Additionally, there is an option to ignore single files, folders and types of fi
 If there exists a `.scanignore` in the **top level directory** of a package, 
 everything in it is going to be ignored. 
 The file entries work similar to a `.gitignore` file, including making comments with `#`.
+One Example for a custom `.scanignore` file:
 
 ```
 .git/* # folder
 README.txt # file
 README.* # file pattern
+```
+
+Per default, ros_license_toolkit ignores the following:
+
+```
+.scanignore
+package.xml
+setup.py
+setup.cfg
+CMakeLists.txt
+.git/*
 ```
 
 ### Using it as a GitHub action

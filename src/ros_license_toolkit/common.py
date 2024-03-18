@@ -28,7 +28,7 @@ IGNORED = [
     "setup.py",
     "setup.cfg",
     "CMakeLists.txt",
-    ".git/*",
+    ".git/*"
 ]
 
 
