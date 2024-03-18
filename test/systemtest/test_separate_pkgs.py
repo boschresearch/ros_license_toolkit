@@ -26,6 +26,8 @@ from ros_license_toolkit.main import main
 
 class TestPkgs(unittest.TestCase):
     """Test different test packages."""
+    # pylint: disable=too-many-public-methods
+    # Here it make sense to keep all tests in one place
 
     def test_deep_package_folder(self):
         """Call the linter on directories in three levels.
@@ -47,6 +49,21 @@ class TestPkgs(unittest.TestCase):
             self.assertIn(
                 b"test_pkg_deep", stdout)
         remove_repo(repo_path)
+
+    def test_pkg_both_tags_not_spdx(self):
+        """ Test on a package that has two different Licenses that both
+        have a not SPDX conform Tag. License files and source files
+        are SPDX conform"""
+        self.assertEqual(os.EX_OK, main([
+            "test/_test_data/test_pkg_both_tags_not_spdx"
+        ]))
+
+    def test_pkg_both_tags_not_spdx_one_file_own(self):
+        """Test on a package that has two licenses. One is self-defined, other
+        one with not SPDX tag but therefore code and license file in SPDX"""
+        self.assertEqual(os.EX_DATAERR, main([
+            "test/_test_data/test_pkg_both_tags_not_spdx_one_file_own"
+        ]))
 
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
@@ -117,6 +134,15 @@ class TestPkgs(unittest.TestCase):
         with the SPDX tag."""
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_spdx_tag"]))
+
+    def test_pkg_tag_not_spdx(self):
+        """Test on a package that has one linked declaration, one code file
+        but not in SPDX tag. Tag must be gotten from declaration."""
+        process, stdout = open_subprocess("test_pkg_tag_not_spdx")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
+        self.assertIn(b"'code_with_afl.py' is of AFL-2.0 but its Tag is AFL.",
+                      stdout)
 
     def test_pkg_unknown_license(self):
         """Test on a package with an unknown license declared in the
