@@ -49,6 +49,7 @@ class TestAllPackages(unittest.TestCase):
             b"test_pkg_has_code_of_different_license_and_tag", stdout)
         self.assertIn(
             b"test_pkg_has_code_of_different_license_and_wrong_tag", stdout)
+        self.assertIn(b"test_pkg_ignore_readme_contents", stdout)
         self.assertIn(b"test_pkg_name_not_in_spdx", stdout)
         self.assertIn(b"test_pkg_no_file_attribute", stdout)
         self.assertIn(b"test_pkg_no_license", stdout)

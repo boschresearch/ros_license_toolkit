@@ -26,19 +26,11 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import get_spdx_license_name
+from ros_license_toolkit.common import (get_ignored_content,
+                                        get_spdx_license_name)
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
-
-# files we ignore in scan results
-IGNORED = [
-    "package.xml",
-    "setup.py",
-    "setup.cfg",
-    "CMakeLists.txt",
-    ".git/*",
-]
 
 
 class PackageException(Exception):
@@ -88,6 +80,9 @@ class Package:
         # this is Optional, because it is only evaluated on the first call
         self._license_tags: Optional[Dict[str, LicenseTag]] = None
 
+        # All ignored files and folders
+        self._ignored_content: List[str] = get_ignored_content(self.abspath)
+
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
         return os.path.relpath(path, self.abspath)
@@ -121,7 +116,7 @@ class Package:
         for (root, _, files) in os.walk(self.abspath):
             files_rel_to_pkg = [self._get_path_relative_to_pkg(
                 os.path.join(root, f)) for f in files]
-            for pattern in IGNORED:
+            for pattern in self._ignored_content:
                 matched = fnmatch.filter(files_rel_to_pkg, pattern)
                 for m in matched:
                     files_rel_to_pkg.remove(m)
