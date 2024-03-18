@@ -356,7 +356,7 @@ class LicenseFilesReferencedCheck(Check):
         inofficial_covered_texts: Dict[str, List[str]] = {}
         for filename, license_text in package.found_license_texts.items():
             # skipping all declarations above the package
-            if not self._is_in_package(package, filename):
+            if not is_in_package(package, filename):
                 continue
             if 'detected_license_expression_spdx' in license_text and \
                license_text['detected_license_expression_spdx'] not in \
@@ -393,12 +393,13 @@ class LicenseFilesReferencedCheck(Check):
         else:
             self._success("All license declaration are referenced by a tag.")
 
-    def _is_in_package(self, package: Package, file: str) -> bool:
-        """Return TRUE if the file is underneath the absolute package path.
-        Return FALSE if file is located above package."""
-        parent = os.path.abspath(package.abspath)
-        child = os.path.abspath(package.abspath + '/' + file)
 
-        comm_parent = os.path.commonpath([parent])
-        comm_child_parent = os.path.commonpath([parent, child])
-        return comm_parent == comm_child_parent
+def is_in_package(package: Package, file: str) -> bool:
+    """Return TRUE if the file is underneath the absolute package path.
+    Return FALSE if file is located above package."""
+    parent = os.path.abspath(package.abspath)
+    child = os.path.abspath(package.abspath + '/' + file)
+
+    comm_parent = os.path.commonpath([parent])
+    comm_child_parent = os.path.commonpath([parent, child])
+    return comm_parent == comm_child_parent
