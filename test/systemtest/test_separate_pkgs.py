@@ -155,6 +155,15 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_spdx_tag"]))
 
+    def test_pkg_tag_not_spdx(self):
+        """Test on a package that has one linked declaration, one code file
+        but not in SPDX tag. Tag must be gotten from declaration."""
+        process, stdout = open_subprocess("test_pkg_tag_not_spdx")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"WARNING", stdout)
+        self.assertIn(b"'code_with_afl.py' is of AFL-2.0 but its Tag is AFL.",
+                      stdout)
+
     def test_pkg_unknown_license(self):
         """Test on a package with an unknown license declared in the
         package.xml."""
