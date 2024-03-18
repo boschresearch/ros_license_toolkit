@@ -32,15 +32,6 @@ from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
-# files we ignore in scan results
-IGNORED = [
-    "package.xml",
-    "setup.py",
-    "setup.cfg",
-    "CMakeLists.txt",
-    ".git/*",
-]
-
 
 class PackageException(Exception):
     """Exception raised when a package is invalid."""
@@ -94,7 +85,7 @@ class Package:
         self.inofficial_license_tag: Dict[str, str] = {}
 
         # All ignored files and folders
-        self._ignored_content: List[str] = get_ignored_content()
+        self._ignored_content: List[str] = get_ignored_content(self.abspath)
 
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""

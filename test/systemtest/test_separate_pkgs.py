@@ -16,8 +16,6 @@
 
 """This module tests different test packages."""
 
-import copy
-import json
 import os
 import subprocess
 import unittest
@@ -99,19 +97,7 @@ class TestPkgs(unittest.TestCase):
     def test_pkg_ignore_readme_contents(self):
         """Test on a package with readme files. READMEs mention licenses
         that are not in package and shall therefore be ignored."""
-        with open("ignore_in_scan.json", 'r', encoding="utf-8") as f:
-            org_data = json.loads(f.read())
-            f.close()
-        test_data = copy.deepcopy(org_data)
-        test_data['ignoring'].append('.hidden/*')
-        with open("ignore_in_scan.json", 'w', encoding="utf-8") as f:
-            json.dump(test_data, f, indent=4)
-            f.close()
         test_result = main(["test/_test_data/test_pkg_ignore_readme_contents"])
-        with open("ignore_in_scan.json", 'w', encoding="utf-8") as f:
-            json.dump(org_data, f, indent=4)
-            f.close()
-        # Asserting at end so file still gets reset
         self.assertEqual(os.EX_OK, test_result)
 
     def test_pkg_name_not_in_spdx(self):

@@ -1,4 +1,4 @@
-This is also a license mentioning text, but it should be ignored since its under the .git directory.
+This is also a license mentioning text, but it should be ignored since its under the .hidden directory.
 
 The majority of this library is licensed under the Apache-2.0 licensed. However, certain parts are
 licensed under different licenses:

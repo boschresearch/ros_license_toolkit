@@ -16,12 +16,20 @@
 
 """Common utility functions."""
 
-import json
+import os
 from typing import Any, Dict, List, Optional
 
 REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
-REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
+# files we ignore in scan results
+IGNORED = [
+    ".scanignore",
+    "package.xml",
+    "setup.py",
+    "setup.cfg",
+    "CMakeLists.txt",
+    ".git/*",
+]
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
@@ -32,11 +40,20 @@ def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     return None
 
 
-def get_ignored_content() -> List[str]:
-    """Return all ignored patterns from 'ignore_in_scan.json'"""
+def get_ignored_content(pkg_abspath: str) -> List[str]:
+    """Return all ignored patterns from '.scanignore'
+    and local IGNORED definition."""
     ignored_content: List[str] = []
-    with open("ignore_in_scan.json", 'r', encoding="utf-8") as f:
-        data = json.loads(f.read())
-        f.close()
-    ignored_content.extend(data['ignoring'])
+    scanignore_path = pkg_abspath + "/.scanignore"
+    if os.path.exists(scanignore_path):
+        with open(scanignore_path, 'r', encoding="utf-8") as f:
+            for line in f:
+                line_contents = line.split('#')
+                ignore_pattern = line_contents[0].rstrip()
+                if len(ignore_pattern) > 0:
+                    ignored_content.append(ignore_pattern)
+            f.close()
+    for pattern in IGNORED:
+        if pattern not in ignored_content:
+            ignored_content.append(pattern)
     return ignored_content

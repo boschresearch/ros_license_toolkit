@@ -87,17 +87,14 @@ options:
 ```
 
 Additionally, there is an option to ignore single files, folders and types of files.
-In the File  `ignore_in_scan.json` all of these can be entered into the `ignoring` Field.
+If there exists a `.scanignore` in the **top level directory** of a package, 
+everything in it is going to be ignored. 
+The file entries work similar to a `.gitignore` file, including making comments with `#`.
 
-```json
-{
-  "ignoring": [
-        "README.md", // Ignoring every README.md file
-        "package.xml",
-        "CMakeLists.txt",
-        ".git/*" //ignoring everything underneath .git/
-    ]
-}
+```
+.git/* # folder
+README.txt # file
+README.* # file pattern
 ```
 
 ### Using it as a GitHub action
