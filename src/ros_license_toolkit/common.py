@@ -23,6 +23,7 @@ REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
 REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
+
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
     if scan_results['percentage_of_license_text'] \

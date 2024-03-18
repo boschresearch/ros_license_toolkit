@@ -26,7 +26,8 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import get_spdx_license_name, get_ignored_content
+from ros_license_toolkit.common import (get_ignored_content,
+                                        get_spdx_license_name)
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
