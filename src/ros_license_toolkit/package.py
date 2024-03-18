@@ -88,10 +88,6 @@ class Package:
         # this is Optional, because it is only evaluated on the first call
         self._license_tags: Optional[Dict[str, LicenseTag]] = None
 
-        # If the tag is wrong (like BSD) but the actual license can
-        # be found out through declaration, this field contains the tag
-        self.inofficial_license_tag: Dict[str, str] = {}
-
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
         return os.path.relpath(path, self.abspath)
