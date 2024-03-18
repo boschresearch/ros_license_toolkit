@@ -26,8 +26,7 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import (REQUIRED_PERCENTAGE_OF_LICENSE_TEXT,
-                                        is_license_text_file)
+from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
@@ -40,14 +39,6 @@ IGNORED = [
     "CMakeLists.txt",
     ".git/*",
 ]
-
-
-def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
-    """Get the SPDX license name from scan results."""
-    if scan_results['percentage_of_license_text'] >=\
-            REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
-        return scan_results['detected_license_expression_spdx']
-    return None
 
 
 class PackageException(Exception):
@@ -97,10 +88,6 @@ class Package:
         # this is Optional, because it is only evaluated on the first call
         self._license_tags: Optional[Dict[str, LicenseTag]] = None
 
-        # If the tag is wrong (like BSD) but the actual license can
-        # be found out through declaration, this field contains the tag
-        self.inofficial_license_tag: Dict[str, str] = {}
-
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
         return os.path.relpath(path, self.abspath)
@@ -143,7 +130,7 @@ class Package:
                 fpath = os.path.join(self.abspath, fname)
                 # Path relative to package root
                 scan_results = get_licenses(fpath)
-                if is_license_text_file(scan_results):
+                if get_spdx_license_name(scan_results):
                     self._found_license_texts[fname
                                               ] = scan_results
                 else:
@@ -210,6 +197,20 @@ class Package:
                     tag.license_text_file = potential_license_files[0]
                 break
 
+    def _check_for_single_tag_without_file(self):
+        """Set the id_from_license_text if only one tag and one
+        declaration exist."""
+        if len(self._license_tags) == 1 and len(self.found_license_texts) == 1:
+            license_tag_key = next(iter(self._license_tags.keys()))
+            id_from_text = self._license_tags[
+                license_tag_key].id_from_license_text
+            if id_from_text is None:
+                only_file_id = self.found_license_texts[
+                    next(iter(self.found_license_texts))][
+                        'detected_license_expression_spdx']
+                self._license_tags[license_tag_key].id_from_license_text = \
+                    only_file_id
+
     @property
     def license_tags(self) -> Dict[str, LicenseTag]:
         """Get all license tags in the package.xml file."""
@@ -217,11 +218,20 @@ class Package:
             return self._license_tags
         self._license_tags = {}
         for license_tag in self.package_xml.iterfind('license'):
-            tag = LicenseTag(license_tag, self.abspath)
+            license_file_scan_result = None
+            if 'file' in license_tag.attrib:
+                license_file = license_tag.attrib['file']
+                if license_file in self.found_license_texts:
+                    license_file_scan_result = \
+                        self.found_license_texts[license_file]
+                    license_file_scan_result['filename'] = license_file
+            tag = LicenseTag(license_tag,
+                             self.abspath, license_file_scan_result)
             self._license_tags[tag.get_license_id()] = tag
 
         self._check_single_license_tag_without_source_files()
         self._check_single_license_tag_without_file_attribute()
+        self._check_for_single_tag_without_file()
 
         return self._license_tags
 

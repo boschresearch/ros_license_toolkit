@@ -21,11 +21,10 @@ from enum import IntEnum
 from pprint import pformat
 from typing import Any, Dict, List, Optional
 
+from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
-from ros_license_toolkit.package import (Package, PackageException,
-                                         get_spdx_license_name,
-                                         is_license_text_file)
+from ros_license_toolkit.package import Package, PackageException
 from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 
@@ -160,11 +159,11 @@ class LicenseTextExistsCheck(Check):
             return
 
         self._check_licenses(package)
-        self._evaluate_results(package)
+        self._evaluate_results()
 
     def _check_licenses(self, package: Package) -> None:
         '''checks each license tag for the corresponding license text. Also
-        detects inofficial licenses when tag is other than SPDX license file'''
+        detects inofficial licenses when tag is not in the SPDX license list'''
         self.found_license_texts = package.found_license_texts
         for license_tag in package.license_tags.values():
             if not license_tag.has_license_text_file():
@@ -185,7 +184,7 @@ class LicenseTextExistsCheck(Check):
                     " in scan results."
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
-            if not is_license_text_file(
+            if not get_spdx_license_name(
                     self.found_license_texts[license_text_file]):
                 self.license_tags_without_license_text[license_tag] =\
                     f"License text file '{license_text_file}' is not " +\
@@ -207,12 +206,9 @@ class LicenseTextExistsCheck(Check):
                     f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
                 self.missing_license_texts_status[license_tag] = Status.WARNING
-                self.files_with_wrong_tags[license_tag] = \
-                    {'actual_license': actual_license,
-                        'license_tag': license_tag.get_license_id()}
                 continue
 
-    def _evaluate_results(self, package: Package):
+    def _evaluate_results(self):
         if len(self.license_tags_without_license_text) > 0:
             if max(self.missing_license_texts_status.values()) \
                == Status.WARNING:
@@ -222,12 +218,6 @@ class LicenseTextExistsCheck(Check):
                     "license text:\n" + "\n".join(
                         [f"  '{x[0]}': {x[1]}" for x in
                             self.license_tags_without_license_text.items()]))
-                for entry in self.files_with_wrong_tags.items():
-                    # if exactly one license text is found,
-                    # treat wrong license tag internally as this license
-                    # optional check for similarity between tag and file
-                    package.inofficial_license_tag[entry[1]['actual_license']]\
-                        = entry[1]['license_tag']
             else:
                 self._failed(
                     "The following license tags do not "
@@ -271,13 +261,17 @@ class LicensesInCodeCheck(Check):
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
                     # this license has an inofficial tag
-                    if license_str in package.inofficial_license_tag.keys():
+                    inofficial_licenses = {
+                        lic_tag.id_from_license_text: key
+                        for key, lic_tag in package.license_tags.items()
+                        if lic_tag.id_from_license_text != ''}
+                    if license_str in inofficial_licenses.keys():
                         if fname not in self.files_with_inofficial_tag:
                             self.files_with_inofficial_tag[fname] = []
                         self.files_with_inofficial_tag[fname].append(
                             license_str)
                         self.files_with_inofficial_tag[fname].append(
-                            package.inofficial_license_tag[license_str])
+                            inofficial_licenses[license_str])
                         continue
                     # this license is not declared by any license tag
                     if fname not in self.files_with_uncovered_licenses:

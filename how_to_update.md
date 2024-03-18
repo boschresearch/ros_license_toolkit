@@ -1,5 +1,13 @@
 # Note for me
 
+## Requirements
+
+```bash
+pip install bumpver build twine
+```
+
+## Steps
+
 How to update the project:
 
 1. Increment version

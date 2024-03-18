@@ -24,7 +24,7 @@ from typing import Any, Dict, Optional
 import git
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import is_license_text_file
+from ros_license_toolkit.common import get_spdx_license_name
 
 # how many folders up to search for a repo
 REPO_SEARCH_DEPTH = 5
@@ -80,13 +80,16 @@ class Repo:
             if not os.path.isfile(fpath):
                 continue
             scan_results = get_licenses(fpath)
-            if is_license_text_file(scan_results):
-                self.license_text_files[fpath] = scan_results
+            if get_spdx_license_name(scan_results):
+                if 'ros_license_toolkit/LICENSE' not in fpath:
+                    self.license_text_files[fpath] = scan_results
 
         # get the remote url
         self.remote_url: Optional[str] = None
         if len(repo.remotes) > 0:
-            self.remote_url = repo.remotes[0].url
+            # Ignore package
+            if 'ros_license_toolkit' not in repo.remotes[0].url:
+                self.remote_url = repo.remotes[0].url
 
     def __eq__(self, __o) -> bool:
         """Check if two repos are the same."""
