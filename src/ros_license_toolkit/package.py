@@ -80,10 +80,6 @@ class Package:
         # this is Optional, because it is only evaluated on the first call
         self._license_tags: Optional[Dict[str, LicenseTag]] = None
 
-        # If the tag is wrong (like BSD) but the actual license can
-        # be found out through declaration, this field contains the tag
-        self.inofficial_license_tag: Dict[str, str] = {}
-
         # All ignored files and folders
         self._ignored_content: List[str] = get_ignored_content(self.abspath)
 
