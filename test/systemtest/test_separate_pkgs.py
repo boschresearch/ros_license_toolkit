@@ -139,8 +139,7 @@ class TestPkgs(unittest.TestCase):
         """"Test on a package with multiple License files that are not
         declared by any tag and could therefore be removed."""
         process, stdout = open_subprocess("test_pkg_too_many_license_files")
-        self.assertEqual(os.EX_OK, process.returncode)
-        self.assertIn(b"WARNING", stdout)
+        self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertIn(b"bsd.LICENSE", stdout)
         self.assertIn(b"apl.LICENSE", stdout)
         self.assertNotIn(b"../../../LICENSE", stdout)

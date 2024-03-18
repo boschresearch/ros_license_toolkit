@@ -344,21 +344,52 @@ class LicenseFilesReferencedCheck(Check):
 
     def _check(self, package: Package):
         not_covered_texts: Dict[str, str] = {}
+        inofficial_covered_texts: Dict[str, List[str]] = {}
         for filename, license_text in package.found_license_texts.items():
             # skipping all declarations above the package
-            if '../' in filename:
+            if not self._is_in_package(package, filename):
                 continue
-            if license_text['detected_license_expression_spdx'] not in \
+            if 'detected_license_expression_spdx' in license_text and \
+               license_text['detected_license_expression_spdx'] not in \
                package.license_tags:
-                not_covered_texts[filename] = \
-                    license_text['detected_license_expression_spdx']
+                spdx_expression = license_text[
+                    'detected_license_expression_spdx']
+                inofficial_licenses = {
+                    lic_tag.id_from_license_text: key
+                    for key, lic_tag in package.license_tags.items()
+                    if lic_tag.id_from_license_text != ''}
+                if spdx_expression in inofficial_licenses:
+                    inofficial_covered_texts[filename] = \
+                        [spdx_expression,
+                         inofficial_licenses[spdx_expression]]
+                else:
+                    not_covered_texts[filename] = \
+                        spdx_expression
         if not_covered_texts:
             info_str = ''
-            info_str += 'The following license declarations are not' +\
-                ' mentioned by any tag. Check if they can be removed:\n' +\
+            info_str += 'The following license files are not' +\
+                ' mentioned by any tag:\n' +\
                 '\n'.join(
                     [f"  '{x[0]}' is of {x[1]}."
                      for x in not_covered_texts.items()])
+            self._failed(info_str)
+        elif inofficial_covered_texts:
+            info_str = ''
+            info_str += 'The following license files are not' +\
+                ' mentioned by any tag:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1][0]} but its tag is {x[1][1]}."
+                     for x in inofficial_covered_texts.items()])
             self._warning(info_str)
         else:
             self._success("All license declaration are referenced by a tag.")
+
+    def _is_in_package(self, package: Package, file: str) -> bool:
+        """Return TRUE if the file is underneath the absolute package path.
+        Return FALSE if file is located above package."""
+        parent = os.path.abspath(package.abspath)
+        child = os.path.abspath(package.abspath + '/' + file)
+
+        comm_parent = os.path.commonpath([parent])
+        comm_child_parent = os.path.commonpath([parent, child])
+        return comm_parent == comm_child_parent
