@@ -117,7 +117,8 @@ def main(args: Optional[Sequence[str]] = None) -> int:
 
 
 def generate_copyright_file(packages, rll_print):
-    """Generate copyright file. In case of error, displays error message."""
+    """Generate copyright file. In case more than one package
+    is provided, display error message."""
     if len(packages) == 1:
         package = packages[0]
         try:
