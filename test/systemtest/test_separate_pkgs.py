@@ -66,8 +66,8 @@ class TestPkgs(unittest.TestCase):
         ]))
 
     def test_pkg_code_has_no_license(self):
-        """Test on a package that has a correct package.xml with a license 
-        linked, but the source file is not referenced. Source file itself has 
+        """Test on a package that has a correct package.xml with a license
+        linked, but the source file is not referenced. Source file itself has
         no license declaration in it."""
         process, stdout = open_subprocess("test_pkg_code_has_no_license")
         self.assertEqual(os.EX_OK, process.returncode)
