@@ -94,6 +94,12 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
+    def test_pkg_ignore_readme_contents(self):
+        """Test on a package with readme files. READMEs mention licenses
+        that are not in package and shall therefore be ignored."""
+        test_result = main(["test/_test_data/test_pkg_ignore_readme_contents"])
+        self.assertEqual(os.EX_OK, test_result)
+
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
         but its license tag BSD is not in SPDX format"""
