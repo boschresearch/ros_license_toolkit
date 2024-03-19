@@ -94,6 +94,12 @@ class TestPkgs(unittest.TestCase):
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
 
+    def test_pkg_ignore_readme_contents(self):
+        """Test on a package with readme files. READMEs mention licenses
+        that are not in package and shall therefore be ignored."""
+        test_result = main(["test/_test_data/test_pkg_ignore_readme_contents"])
+        self.assertEqual(os.EX_OK, test_result)
+
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
         but its license tag BSD is not in SPDX format"""
@@ -189,10 +195,9 @@ class TestPkgs(unittest.TestCase):
 
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
-        the license declared in the package.xml."""
-        process, stdout = open_subprocess("test_pkg_wrong_license_file")
-        self.assertEqual(os.EX_OK, process.returncode)
-        self.assertIn(b"WARNING", stdout)
+        the license declared in the package.xml, both tag and file in spdx"""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_wrong_license_file"]))
 
 
 def open_subprocess(test_data_name: str):
