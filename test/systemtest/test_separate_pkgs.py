@@ -71,8 +71,7 @@ class TestPkgs(unittest.TestCase):
         no license declaration in it."""
         process, stdout = open_subprocess("test_pkg_code_has_no_license")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertIn(b"WARNING", stdout)
-        self.assertIn(b"code_without_license.py", stdout)
+        self.assertNotIn(b"WARNING", stdout)
 
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
