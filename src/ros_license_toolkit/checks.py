@@ -248,7 +248,6 @@ class LicensesInCodeCheck(Check):
         Check.__init__(self)
         self.declared_licenses: Dict[str, LicenseTag] = {}
         self.files_with_uncovered_licenses: Dict[str, List[str]] = {}
-        self.files_with_no_licenses: List[str] = []
         self.files_not_matched_by_any_license_tag: Dict[str, List[str]] = {}
         self.files_with_inofficial_tag: Dict[str, List[str]] = {}
 
@@ -268,9 +267,6 @@ class LicensesInCodeCheck(Check):
             found_licenses_str = found_licenses[
                 'detected_license_expression_spdx']
             if not found_licenses_str:
-                if fname not in self.files_with_no_licenses:
-                    self.files_with_no_licenses.append(
-                        fname)
                 continue
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
@@ -337,13 +333,6 @@ class LicensesInCodeCheck(Check):
                 '\n'.join(
                     [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
                      for x in self.files_with_inofficial_tag.items()])
-            self._warning(info_str)
-        elif self.files_with_no_licenses:
-            info_str = ''
-            info_str += 'For the following files, please add ' +\
-                'a License Header in SPDX format:\n' +\
-                '\n'.join(
-                    [f"  {x}" for x in self.files_with_no_licenses])
             self._warning(info_str)
         else:
             self._success('All licenses found in the code are covered by a '
