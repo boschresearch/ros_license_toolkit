@@ -141,6 +141,15 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_spdx_tag"]))
 
+    def test_pkg_too_many_license_files(self):
+        """"Test on a package with multiple License files that are not
+        declared by any tag and could therefore be removed."""
+        process, stdout = open_subprocess("test_pkg_too_many_license_files")
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertIn(b"bsd.LICENSE", stdout)
+        self.assertIn(b"apl.LICENSE", stdout)
+        self.assertNotIn(b"../../../LICENSE", stdout)
+
     def test_pkg_tag_not_spdx(self):
         """Test on a package that has one linked declaration, one code file
         but not in SPDX tag. Tag must be gotten from declaration."""
