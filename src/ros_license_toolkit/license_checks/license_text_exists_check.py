@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Checks if every tag has the referenced License text file."""
+"""This Module contains LicenseTextExistsCheck, which implements Check."""
 
 import os
 from typing import Any, Dict, Optional

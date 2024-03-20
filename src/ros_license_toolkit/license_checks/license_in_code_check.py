@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Checks if all Licenses found in files have a declaration in package.xml"""
+"""This Module contains LicensesInCodeCheck, which implements Check"""
 
 from pprint import pformat
 from typing import Dict, List
