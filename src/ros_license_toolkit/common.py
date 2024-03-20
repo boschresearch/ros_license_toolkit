@@ -19,8 +19,6 @@
 import os
 from typing import Any, Dict, List, Optional
 
-from ros_license_toolkit.package import Package
-
 REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
 
 # files we ignore in scan results
@@ -59,14 +57,3 @@ def get_ignored_content(pkg_abspath: str) -> List[str]:
         if pattern not in ignored_content:
             ignored_content.append(pattern)
     return ignored_content
-
-
-def is_in_package(package: Package, file: str) -> bool:
-    """Return TRUE if the file is underneath the absolute package path.
-    Return FALSE if file is located above package."""
-    parent = os.path.abspath(package.abspath)
-    child = os.path.abspath(package.abspath + '/' + file)
-
-    comm_parent = os.path.commonpath([parent])
-    comm_child_parent = os.path.commonpath([parent, child])
-    return comm_parent == comm_child_parent
