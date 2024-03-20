@@ -21,7 +21,7 @@ from enum import IntEnum
 from pprint import pformat
 from typing import Any, Dict, List, Optional
 
-from ros_license_toolkit.common import get_spdx_license_name
+from ros_license_toolkit.common import get_spdx_license_name, is_in_package
 from ros_license_toolkit.license_tag import (LicenseTag,
                                              is_license_name_in_spdx_list)
 from ros_license_toolkit.package import Package, PackageException
@@ -392,14 +392,3 @@ class LicenseFilesReferencedCheck(Check):
             self._warning(info_str)
         else:
             self._success("All license declaration are referenced by a tag.")
-
-
-def is_in_package(package: Package, file: str) -> bool:
-    """Return TRUE if the file is underneath the absolute package path.
-    Return FALSE if file is located above package."""
-    parent = os.path.abspath(package.abspath)
-    child = os.path.abspath(package.abspath + '/' + file)
-
-    comm_parent = os.path.commonpath([parent])
-    comm_child_parent = os.path.commonpath([parent, child])
-    return comm_parent == comm_child_parent
