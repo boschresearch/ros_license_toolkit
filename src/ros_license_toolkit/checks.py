@@ -18,7 +18,6 @@
 
 from enum import IntEnum
 
-from ros_license_toolkit.license_tag import is_license_name_in_spdx_list
 from ros_license_toolkit.package import Package, PackageException
 from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
@@ -105,34 +104,3 @@ class Check:
     def _check(self, package: Package):
         """Check `package`. To be overwritten by subclasses."""
         raise NotImplementedError("Overwrite this")
-
-
-class LicenseTagExistsCheck(Check):
-    """This ensures that a tag defining the license exists."""
-
-    def _check(self, package: Package):
-        if len(package.license_tags) == 0:
-            self._failed("No license tag defined.")
-            self.verbose_output = red(str(package.package_xml))
-        else:
-            self._success(
-                f"Found licenses {list(map(str, package.license_tags))}")
-
-
-class LicenseTagIsInSpdxListCheck(Check):
-    """This ensures that the license tag is in the SPDX list of licenses."""
-
-    def _check(self, package: Package):
-        licenses_not_in_spdx_list = []
-        for license_tag in package.license_tags.keys():
-            if not is_license_name_in_spdx_list(
-                    license_tag):
-                licenses_not_in_spdx_list.append(license_tag)
-        if len(licenses_not_in_spdx_list) > 0:
-            self._warning(
-                f"Licenses {licenses_not_in_spdx_list} are "
-                "not in SPDX list of licenses. "
-                "Make sure to exactly match one of https://spdx.org/licenses/."
-            )
-        else:
-            self._success("All license tags are in SPDX list of licenses.")
