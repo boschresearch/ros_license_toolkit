@@ -54,9 +54,9 @@ class TestPkgs(unittest.TestCase):
         """ Test on a package that has two different Licenses that both
         have a not SPDX conform Tag. License files and source files
         are SPDX conform"""
-        self.assertEqual(os.EX_OK, main([
-            "test/_test_data/test_pkg_both_tags_not_spdx"
-        ]))
+        process, stdout = open_subprocess("test_pkg_both_tags_not_spdx")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertIn(b"LicenseTagIsInSpdxListCheck\n\x1b[93m WARNING", stdout)
 
     def test_pkg_both_tags_not_spdx_one_file_own(self):
         """Test on a package that has two licenses. One is self-defined, other
