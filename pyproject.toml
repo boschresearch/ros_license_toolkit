@@ -27,7 +27,7 @@ keywords = ["ros", "license", "toolkit", "oss", "packages"]
 dependencies = [
     "gitpython",
     "rospkg",
-    "scancode-toolkit>=32.0.8",
+    "scancode-toolkit==32.0.8",
     "spdx-tools==0.7.0"
 ]
 requires-python = ">=3.7"
