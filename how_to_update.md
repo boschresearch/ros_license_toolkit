@@ -20,6 +20,8 @@ How to update the project:
     git push --tags
     ```
 
+## ALL BELOW IS DONE AUTOMATICALLY
+
 1. Build and upload to PyPI
 
     ```bash
