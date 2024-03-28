@@ -266,6 +266,8 @@ class LicensesInCodeCheck(Check):
                 continue
             found_licenses_str = found_licenses[
                 'detected_license_expression_spdx']
+            if not found_licenses_str:
+                continue
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
@@ -311,14 +313,6 @@ class LicensesInCodeCheck(Check):
                 self.files_not_matched_by_any_license_tag,
                 package,
             )
-        elif self.files_with_inofficial_tag:
-            info_str = ''
-            info_str += 'For the following files, please change the ' +\
-                'License Tag in the package file to SPDX format:\n' +\
-                '\n'.join(
-                    [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
-                     for x in self.files_with_inofficial_tag.items()])
-            self._warning(info_str)
         elif len(self.files_not_matched_by_any_license_tag) > 0:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
@@ -332,6 +326,14 @@ class LicensesInCodeCheck(Check):
                 self.files_not_matched_by_any_license_tag,
                 package,
             )
+        elif self.files_with_inofficial_tag:
+            info_str = ''
+            info_str += 'For the following files, please change the ' +\
+                'License Tag in the package file to SPDX format:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
+                     for x in self.files_with_inofficial_tag.items()])
+            self._warning(info_str)
         else:
             self._success('All licenses found in the code are covered by a '
                           'license declaration.')
