@@ -73,6 +73,14 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(check_output_status(
             stdout, SUCCESS, WARNING, FAILURE, WARNING, WARNING))
 
+    def test_pkg_code_has_no_license(self):
+        """Test on a package that has a correct package.xml with a license
+        linked, but the source file is not referenced. Source file itself has
+        no license declaration in it."""
+        process, stdout = open_subprocess("test_pkg_code_has_no_license")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertNotIn(b"WARNING", stdout)
+
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
         a license different from the package main license."""
