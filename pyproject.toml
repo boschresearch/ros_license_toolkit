@@ -28,7 +28,7 @@ dependencies = [
     "gitpython",
     "rospkg",
     "scancode-toolkit>=32.0.8",
-    "spdx-tools"
+    "spdx-tools<=0.7.1"
 ]
 requires-python = ">=3.7"
 
