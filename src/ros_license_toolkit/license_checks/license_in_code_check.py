@@ -50,6 +50,8 @@ class LicensesInCodeCheck(Check):
                 continue
             found_licenses_str = found_licenses[
                 'detected_license_expression_spdx']
+            if not found_licenses_str:
+                continue
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
