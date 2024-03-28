@@ -265,9 +265,9 @@ class Package:
                 "License text file must be defined."
             license_path = os.path.join(self.abspath,
                                         pkg_license.license_text_file)
-            assert os.path.exists(license_path), \
-                ('Cannot create copyright file. '
-                 f'File {license_path} does not exist.')
+            if not os.path.exists(license_path):
+                raise FileExistsError(('Cannot create copyright file. ' +
+                 f'File {license_path} does not exist.'))
             with open(license_path, encoding="utf-8") as f:
                 license_lines = f.readlines()
             for line in license_lines:
