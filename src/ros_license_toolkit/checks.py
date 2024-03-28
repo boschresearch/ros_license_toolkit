@@ -205,7 +205,16 @@ class LicenseTextExistsCheck(Check):
                     f"License text file '{license_text_file}' is " +\
                     f"of license {actual_license} but tag is " +\
                     f"{license_tag.get_license_id()}."
-                self.missing_license_texts_status[license_tag] = Status.WARNING
+                # If Tag and File both are in SPDX but don't match -> Error
+                if is_license_name_in_spdx_list(license_tag.get_license_id()):
+                    self.missing_license_texts_status[license_tag] =\
+                        Status.FAILURE
+                else:
+                    self.missing_license_texts_status[license_tag] =\
+                        Status.WARNING
+                self.files_with_wrong_tags[license_tag] = \
+                    {'actual_license': actual_license,
+                        'license_tag': license_tag.get_license_id()}
                 continue
 
     def _evaluate_results(self):
@@ -257,6 +266,8 @@ class LicensesInCodeCheck(Check):
                 continue
             found_licenses_str = found_licenses[
                 'detected_license_expression_spdx']
+            if not found_licenses_str:
+                continue
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
@@ -302,14 +313,6 @@ class LicensesInCodeCheck(Check):
                 self.files_not_matched_by_any_license_tag,
                 package,
             )
-        elif self.files_with_inofficial_tag:
-            info_str = ''
-            info_str += 'For the following files, please change the ' +\
-                'License Tag in the package file to SPDX format:\n' +\
-                '\n'.join(
-                    [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
-                     for x in self.files_with_inofficial_tag.items()])
-            self._warning(info_str)
         elif len(self.files_not_matched_by_any_license_tag) > 0:
             info_str = ''
             info_str += '\nThe following files contain licenses that ' +\
@@ -323,6 +326,14 @@ class LicensesInCodeCheck(Check):
                 self.files_not_matched_by_any_license_tag,
                 package,
             )
+        elif self.files_with_inofficial_tag:
+            info_str = ''
+            info_str += 'For the following files, please change the ' +\
+                'License Tag in the package file to SPDX format:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
+                     for x in self.files_with_inofficial_tag.items()])
+            self._warning(info_str)
         else:
             self._success('All licenses found in the code are covered by a '
                           'license declaration.')
@@ -337,3 +348,60 @@ class LicensesInCodeCheck(Check):
                     lambda x: x[0] in files_with_uncovered_licenses or (
                         x[0] in files_not_matched_by_any_license_tag),
                     package.found_files_w_licenses.items()))))
+
+
+class LicenseFilesReferencedCheck(Check):
+    """Check if all found License file have a reference in package.xml."""
+
+    def _check(self, package: Package):
+        not_covered_texts: Dict[str, str] = {}
+        inofficial_covered_texts: Dict[str, List[str]] = {}
+        for filename, license_text in package.found_license_texts.items():
+            # skipping all declarations above the package
+            if not is_in_package(package, filename):
+                continue
+            if 'detected_license_expression_spdx' in license_text and \
+               license_text['detected_license_expression_spdx'] not in \
+               package.license_tags:
+                spdx_expression = license_text[
+                    'detected_license_expression_spdx']
+                inofficial_licenses = {
+                    lic_tag.id_from_license_text: key
+                    for key, lic_tag in package.license_tags.items()
+                    if lic_tag.id_from_license_text != ''}
+                if spdx_expression in inofficial_licenses:
+                    inofficial_covered_texts[filename] = \
+                        [spdx_expression,
+                         inofficial_licenses[spdx_expression]]
+                else:
+                    not_covered_texts[filename] = \
+                        spdx_expression
+        if not_covered_texts:
+            info_str = ''
+            info_str += 'The following license files are not' +\
+                ' mentioned by any tag:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1]}."
+                     for x in not_covered_texts.items()])
+            self._failed(info_str)
+        elif inofficial_covered_texts:
+            info_str = ''
+            info_str += 'The following license files are not' +\
+                ' mentioned by any tag:\n' +\
+                '\n'.join(
+                    [f"  '{x[0]}' is of {x[1][0]} but its tag is {x[1][1]}."
+                     for x in inofficial_covered_texts.items()])
+            self._warning(info_str)
+        else:
+            self._success("All license declaration are referenced by a tag.")
+
+
+def is_in_package(package: Package, file: str) -> bool:
+    """Return TRUE if the file is underneath the absolute package path.
+    Return FALSE if file is located above package."""
+    parent = os.path.abspath(package.abspath)
+    child = os.path.abspath(package.abspath + '/' + file)
+
+    comm_parent = os.path.commonpath([parent])
+    comm_child_parent = os.path.commonpath([parent, child])
+    return comm_parent == comm_child_parent

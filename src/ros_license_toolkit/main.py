@@ -24,7 +24,8 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (LicensesInCodeCheck,
+from ros_license_toolkit.checks import (LicenseFilesReferencedCheck,
+                                        LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
                                         LicenseTextExistsCheck, Status)
@@ -134,7 +135,8 @@ def process_one_pkg(rll_print, package):
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),
-        LicensesInCodeCheck()]
+        LicensesInCodeCheck(),
+        LicenseFilesReferencedCheck()]
 
     for check in checks_to_perform:
         check.check(package)

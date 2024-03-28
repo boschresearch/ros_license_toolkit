@@ -65,6 +65,14 @@ class TestPkgs(unittest.TestCase):
             "test/_test_data/test_pkg_both_tags_not_spdx_one_file_own"
         ]))
 
+    def test_pkg_code_has_no_license(self):
+        """Test on a package that has a correct package.xml with a license
+        linked, but the source file is not referenced. Source file itself has
+        no license declaration in it."""
+        process, stdout = open_subprocess("test_pkg_code_has_no_license")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertNotIn(b"WARNING", stdout)
+
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
         a license different from the package main license."""
@@ -93,6 +101,12 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/"
              "test_pkg_has_code_of_different_license_and_wrong_tag"]))
+
+    def test_pkg_ignore_readme_contents(self):
+        """Test on a package with readme files. READMEs mention licenses
+        that are not in package and shall therefore be ignored."""
+        test_result = main(["test/_test_data/test_pkg_ignore_readme_contents"])
+        self.assertEqual(os.EX_OK, test_result)
 
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
@@ -134,6 +148,15 @@ class TestPkgs(unittest.TestCase):
         with the SPDX tag."""
         self.assertEqual(os.EX_OK, main(
             ["test/_test_data/test_pkg_spdx_tag"]))
+
+    def test_pkg_too_many_license_files(self):
+        """"Test on a package with multiple License files that are not
+        declared by any tag and could therefore be removed."""
+        process, stdout = open_subprocess("test_pkg_too_many_license_files")
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertIn(b"bsd.LICENSE", stdout)
+        self.assertIn(b"apl.LICENSE", stdout)
+        self.assertNotIn(b"../../../LICENSE", stdout)
 
     def test_pkg_tag_not_spdx(self):
         """Test on a package that has one linked declaration, one code file
@@ -189,10 +212,9 @@ class TestPkgs(unittest.TestCase):
 
     def test_pkg_wrong_license_file(self):
         """Test on a package with a license text file that does not match
-        the license declared in the package.xml."""
-        process, stdout = open_subprocess("test_pkg_wrong_license_file")
-        self.assertEqual(os.EX_OK, process.returncode)
-        self.assertIn(b"WARNING", stdout)
+        the license declared in the package.xml, both tag and file in spdx"""
+        self.assertEqual(os.EX_DATAERR, main(
+            ["test/_test_data/test_pkg_wrong_license_file"]))
 
 
 def open_subprocess(test_data_name: str):
