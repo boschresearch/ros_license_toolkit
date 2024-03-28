@@ -103,9 +103,9 @@ def main(args: Optional[Sequence[str]] = None) -> int:
             generate_copyright_file(packages, rll_print)
         else:
             rll_print(red(
-                "Copyright file will not be generated " +\
-                    "because there were linter errors."),
-            Verbosity.QUIET)
+                "Copyright file will not be generated "
+                + "because there were linter errors."),
+                Verbosity.QUIET)
 
     stop = timeit.default_timer()
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
