@@ -98,15 +98,13 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         results_per_package.update(
             process_one_pkg(rll_print, package))
 
-    # Generate copyright file
-    if parsed_args.generate_copyright_file:
-        if len(packages) == 1:
-            package = packages[0]
-            package.write_copyright_file(
-                os.path.join(os.getcwd(), 'copyright'))
+    if max(results_per_package.values()) != Status.FAILURE:
+        if parsed_args.generate_copyright_file:
+            generate_copyright_file(packages, rll_print)
         else:
             rll_print(red(
-                "Can only generate copyright file for single package"),
+                "Copyright file will not be generated "
+                + "because there were linter errors."),
                 Verbosity.QUIET)
 
     stop = timeit.default_timer()
@@ -121,6 +119,22 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
     return os.EX_DATAERR
+
+
+def generate_copyright_file(packages, rll_print):
+    """Generate copyright file. In case more than one package
+    is provided, display error message."""
+    if len(packages) == 1:
+        package = packages[0]
+        try:
+            package.write_copyright_file(
+                os.path.join(os.getcwd(), 'copyright'))
+        except AssertionError as error:
+            rll_print(red(str(error)))
+    else:
+        rll_print(red(
+            "Can only generate copyright file for single package"),
+            Verbosity.QUIET)
 
 
 def process_one_pkg(rll_print, package):

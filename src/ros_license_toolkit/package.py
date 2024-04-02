@@ -263,11 +263,13 @@ class Package:
             cpr_str += f"\nLicense: {pkg_license.id}\n"
             assert pkg_license.license_text_file, \
                 "License text file must be defined."
-            with open(os.path.join(
-                self.abspath,
-                pkg_license.license_text_file),
-                encoding="utf-8"
-            ) as f:
+            license_path = os.path.join(self.abspath,
+                                        pkg_license.license_text_file)
+            if not os.path.exists(license_path):
+                raise FileExistsError(
+                    ('Cannot create copyright file.'
+                     f'File {license_path} does not exist.'))
+            with open(license_path, encoding="utf-8") as f:
                 license_lines = f.readlines()
             for line in license_lines:
                 cpr_str += f" {line}"
