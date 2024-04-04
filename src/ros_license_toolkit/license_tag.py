@@ -24,28 +24,12 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from typing import Any, Dict, List, Optional, Set
 
-from spdx.config import LICENSE_MAP
+from license_expression import get_spdx_licensing
 
 
 def is_license_name_in_spdx_list(license_name: str) -> bool:
     """Check if a license name is in the SPDX list of licenses."""
-    return license_name in LICENSE_MAP or \
-        license_name in LICENSE_MAP.values()
-
-
-def to_spdx_license_tag(license_name: str) -> str:
-    """Convert a license name to a SPDX license tag
-    (assuming it is shorter than the name).
-    This is because the dict from spdx.config.LICENSE_MAP
-    contains both pairings (tag, name) and (name, tag).
-    """
-    for tag, name in LICENSE_MAP.items():
-        if license_name in [tag, name]:
-            if len(tag) < len(name):
-                return tag
-            # else
-            return name
-    raise ValueError("License name not in SPDX list.")
+    return license_name in get_spdx_licensing().known_symbols
 
 
 def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
@@ -74,17 +58,14 @@ class LicenseTag:
         # be found out through declaration, this field contains the tag
         self.id_from_license_text: Optional[str] = None
 
-        try:
-            self.id = to_spdx_license_tag(raw_license_name)
-        except ValueError:
-            # If the license name is not in the SPDX list,
-            # we assume it is a custom license and use the name as-is.
-            # This will be detected in `LicenseTagIsInSpdxListCheck`.
-            self.id = raw_license_name
-            # If a file is linked to the tag, set its id for internal checks
-            if license_file_scan_results:
-                self.id_from_license_text = \
-                    get_id_from_license_text(license_file_scan_results)
+        # If the license name is not in the SPDX list,
+        # we assume it is a custom license and use the name as-is.
+        # This will be detected in `LicenseTagIsInSpdxListCheck`.
+        self.id = raw_license_name
+        # If a file is linked to the tag, set its id for internal checks
+        if license_file_scan_results:
+            self.id_from_license_text = \
+                get_id_from_license_text(license_file_scan_results)
 
         # Path to the file containing the license text
         # (relative to package root)
