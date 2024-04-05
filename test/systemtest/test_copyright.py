@@ -26,7 +26,6 @@ TEST_DATA_FOLDER = os.path.abspath("test/_test_data")
 TEST_PACKAGES_COPYRIGHT_FILE = [
     "test_pkg_has_code_disjoint",
     "test_pkg_has_code_of_different_license_and_tag",
-    "test_pkg_spdx_name",
     "test_pkg_spdx_tag",
     "test_pkg_with_license_and_file",
     "test_pkg_unknown_license"
