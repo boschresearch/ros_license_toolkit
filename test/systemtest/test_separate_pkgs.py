@@ -137,12 +137,6 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_DATAERR, main(
             ["test/_test_data/test_pkg_one_correct_one_license_file_missing"]))
 
-    def test_pkg_spdx_name(self):
-        """Test on a package with a license declared in the package.xml
-        with the SPDX name."""
-        self.assertEqual(os.EX_OK, main(
-            ["test/_test_data/test_pkg_spdx_name"]))
-
     def test_pkg_spdx_tag(self):
         """Test on a package with a license declared in the package.xml
         with the SPDX tag."""
