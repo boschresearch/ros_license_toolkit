@@ -267,7 +267,9 @@ def check_output_status(output: str,
                         exp_lic_in_code: Status = Status.SUCCESS,
                         exp_lic_files_referenced: Status = Status.SUCCESS
                         ) -> bool:
-    """Check output of each check for expected status."""
+    """Check output of each check for expected status.
+    each argument except for output tells the expected status of a 
+    certain check. The default is always SUCCESS."""
     # pylint: disable=too-many-arguments
 
     real_lic_tag_exists = get_test_result(output, "LicenseTagExistsCheck")
@@ -285,12 +287,15 @@ def check_output_status(output: str,
 
 
 def get_test_result(output: str, test_name: str) -> Optional[Status]:
-    """Get single test result for specific test."""
+    """Get result status for specific test.
+    Return None if no status could be found"""
     lines = output.splitlines()
     for i, line in enumerate(lines):
-        if test_name in str(line):
-            if i + 1 < len(lines):
-                result_line = str(lines[i + 1])
+        if test_name not in str(line):
+            continue
+        if i + 1 > len(lines):
+            continue
+        result_line = str(lines[i + 1])
     if "FAILURE" in result_line:
         return FAILURE
     if "WARNING" in result_line:
