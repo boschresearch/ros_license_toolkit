@@ -261,7 +261,7 @@ def check_output_status(output: str,
                         exp_lic_files_referenced: Status = Status.SUCCESS
                         ) -> bool:
     """Check output of each check for expected status.
-    each argument except for output tells the expected status of a 
+    each argument except for output tells the expected status of a
     certain check. The default is always SUCCESS."""
     # pylint: disable=too-many-arguments
 
