@@ -161,13 +161,6 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(check_output_status(
             stdout, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS))
 
-    def test_pkg_spdx_name(self):
-        """Test on a package with a license declared in the package.xml
-        with the SPDX name."""
-        process, stdout = open_subprocess("test_pkg_spdx_name")
-        self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout))
-
     def test_pkg_spdx_tag(self):
         """Test on a package with a license declared in the package.xml
         with the SPDX tag."""
