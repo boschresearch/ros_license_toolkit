@@ -98,8 +98,9 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         results_per_package.update(
             process_one_pkg(rll_print, package))
 
-    if max(results_per_package.values()) != Status.FAILURE:
-        if parsed_args.generate_copyright_file:
+    
+    if parsed_args.generate_copyright_file:
+        if max(results_per_package.values()) != Status.FAILURE:
             generate_copyright_file(packages, rll_print)
         else:
             rll_print(red(
