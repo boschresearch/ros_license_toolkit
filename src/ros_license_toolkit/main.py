@@ -145,6 +145,7 @@ def process_one_pkg(rll_print, package):
     rll_print(
         f'git hash of ({package.repo.get_path()}):'
         f' {package.repo.get_hash()}')
+    # check for scheme here, then insert scheme version in constructor
     checks_to_perform = [
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
