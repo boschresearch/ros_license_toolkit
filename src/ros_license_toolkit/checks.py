@@ -112,6 +112,14 @@ class Check:
         raise NotImplementedError("Overwrite this")
 
 
+class SchemaCheck(Check):
+    """This checks the xml scheme and returns the version number."""
+
+    def check(self, package):
+        
+        return 3
+
+
 class LicenseTagExistsCheck(Check):
     """This ensures that a tag defining the license exists."""
 

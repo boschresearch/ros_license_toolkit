@@ -24,7 +24,8 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (LicenseFilesReferencedCheck,
+from ros_license_toolkit.checks import (SchemaCheck,
+                                        LicenseFilesReferencedCheck,
                                         LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
@@ -146,6 +147,8 @@ def process_one_pkg(rll_print, package):
         f'git hash of ({package.repo.get_path()}):'
         f' {package.repo.get_hash()}')
     # check for scheme here, then insert scheme version in constructor
+    schema_check = SchemaCheck()
+    scheme_version = schema_check.check(package)
     checks_to_perform = [
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
