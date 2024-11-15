@@ -20,6 +20,7 @@ import os
 from enum import IntEnum
 from pprint import pformat
 from typing import Any, Dict, List, Optional
+from lxml import etree
 
 from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.license_tag import (LicenseTag,
@@ -116,8 +117,16 @@ class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
 
     def check(self, package):
-        
+        valid = self.validate(package.abspath + "/package.xml", "")
         return 3
+
+    def validate(self, xml_cont: str, xsd_cont: str) -> bool:
+        xml_schema_doc = etree.parse('./schemas/package_format3.xsd')
+        xmlschema = etree.XMLSchema(xml_schema_doc)
+
+        xml_doc = etree.parse(xml_cont)
+        result = xmlschema.validate(xml_doc)
+        return result
 
 
 class LicenseTagExistsCheck(Check):
