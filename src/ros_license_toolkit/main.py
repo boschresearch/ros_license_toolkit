@@ -24,12 +24,12 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import (SchemaCheck,
-                                        LicenseFilesReferencedCheck,
+from ros_license_toolkit.checks import (LicenseFilesReferencedCheck,
                                         LicensesInCodeCheck,
                                         LicenseTagExistsCheck,
                                         LicenseTagIsInSpdxListCheck,
-                                        LicenseTextExistsCheck, Status)
+                                        LicenseTextExistsCheck, SchemaCheck,
+                                        Status)
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
                                              WARNING_STR, Verbosity, major_sep,
@@ -148,7 +148,9 @@ def process_one_pkg(rll_print, package):
         f' {package.repo.get_hash()}')
     # check for scheme here, then insert scheme version in constructor
     schema_check = SchemaCheck()
-    scheme_version = schema_check.check(package)
+    schema_check.check(package)
+    rll_print(schema_check)
+    rll_print(schema_check.verbose(), Verbosity.VERBOSE)
     checks_to_perform = [
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),

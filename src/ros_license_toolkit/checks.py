@@ -19,7 +19,7 @@
 import os
 from enum import IntEnum
 from pprint import pformat
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from lxml import etree
 
 from ros_license_toolkit.common import get_spdx_license_name
@@ -115,18 +115,61 @@ class Check:
 
 class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
+    def __init__(self):
+        super().__init__()
+        xml_schema_3_parsed = etree.parse('./schemas/package_format3.xsd')
+        self.xml_schema_3 = etree.XMLSchema(xml_schema_3_parsed)
+        xml_schema_2_parsed = etree.parse('./schemas/package_format3.xsd')
+        self.xml_schema_2 = etree.XMLSchema(xml_schema_2_parsed)
+        xml_schema_1_parsed = etree.parse('./schemas/package_format1.xsd')
+        self.xml_schema_1 = etree.XMLSchema(xml_schema_1_parsed)
 
-    def check(self, package):
-        valid = self.validate(package.abspath + "/package.xml", "")
-        return 3
+    def _check(self, package):
+        version, status = self.validate(package.abspath + "/package.xml")
+        if status:
+            self._success(f"Detected package.xml version {version}, "
+                          "validation of scheme successful.")
+        else:
+            if version == -1:
+                self._failed("package.xml does not contain correct package "
+                             "format number. Please use a real version. "
+                             "(e.g. <package format=\"3\">)")
+            elif version == 1:
+                self._failed(
+                    "package.xml contains errors: "
+                    f"{self.xml_schema_1.error_log.last_error.message}")
+            elif version == 2:
+                self._failed(
+                    "package.xml contains errors: "
+                    f"{self.xml_schema_2.error_log.last_error.message}")
+            elif version == 3:
+                self._failed(
+                    "package.xml contains errors: "
+                    f"{self.xml_schema_3.error_log.last_error.message}")
 
-    def validate(self, xml_cont: str, xsd_cont: str) -> bool:
-        xml_schema_doc = etree.parse('./schemas/package_format3.xsd')
-        xmlschema = etree.XMLSchema(xml_schema_doc)
-
-        xml_doc = etree.parse(xml_cont)
-        result = xmlschema.validate(xml_doc)
-        return result
+    def validate(self, pck_xml_path: str) -> Tuple[int, bool]:
+        """This is validating package.xml file from given path.
+        Automatically detects version number and validates
+        it with corresponding scheme, e.g. format 3.
+        If everything is correct, returns format number, else -1."""
+        xml_doc_parsed = etree.parse(pck_xml_path)
+        for element in xml_doc_parsed.getiterator():
+            if element.tag == 'package' and 'format' in element.attrib:
+                version = element.attrib['format']
+                status_check = False
+                if version == '3':
+                    version = 3
+                    status_check = self.xml_schema_3.validate(xml_doc_parsed)
+                elif version == '2':
+                    version = 2
+                    status_check = self.xml_schema_2.validate(xml_doc_parsed)
+                elif version == '1':
+                    version = 1
+                    status_check = self.xml_schema_1.validate(xml_doc_parsed)
+                else:
+                    version = -1
+                return (version, status_check)
+        return (-1, False)
 
 
 class LicenseTagExistsCheck(Check):
