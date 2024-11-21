@@ -24,7 +24,8 @@ import sys
 import timeit
 from typing import Optional, Sequence
 
-from ros_license_toolkit.checks import SchemaCheck, Status
+from ros_license_toolkit.checks import Status
+from ros_license_toolkit.license_checks.schema_check import SchemaCheck
 from ros_license_toolkit.license_checks.license_file_referenced_check import \
     LicenseFilesReferencedCheck
 from ros_license_toolkit.license_checks.license_in_code_check import \
