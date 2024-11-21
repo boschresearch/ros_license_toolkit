@@ -16,8 +16,10 @@
 
 """This Module contains SchemaCheck, which implements Check."""
 
-from lxml import etree
 from typing import Tuple
+
+from lxml import etree
+
 from ros_license_toolkit.checks import Check
 
 

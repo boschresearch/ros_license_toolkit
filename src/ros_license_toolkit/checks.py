@@ -105,6 +105,3 @@ class Check:
     def _check(self, package: Package):
         """Check `package`. To be overwritten by subclasses."""
         raise NotImplementedError("Overwrite this")
-
-
-
