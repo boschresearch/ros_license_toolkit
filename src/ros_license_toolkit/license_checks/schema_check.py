@@ -40,22 +40,21 @@ class SchemaCheck(Check):
             self._success(f"Detected package.xml version {version}, "
                           "validation of scheme successful.")
         else:
-            if version == -1:
-                self._failed("package.xml does not contain correct package "
-                             "format number. Please use a real version. "
-                             "(e.g. <package format=\"3\">)")
-            elif version == 1:
-                self._failed(
-                    "package.xml contains errors: "
-                    f"{self.xml_schema_1.error_log.last_error.message}")
+            reason = ''
+            if version == 1:
+                reason = "package.xml contains errors: " +\
+                    f"{self.xml_schema_1.error_log.last_error.message}"
             elif version == 2:
-                self._failed(
-                    "package.xml contains errors: "
-                    f"{self.xml_schema_2.error_log.last_error.message}")
+                reason = "package.xml contains errors: " +\
+                    f"{self.xml_schema_2.error_log.last_error.message}"
             elif version == 3:
-                self._failed(
-                    "package.xml contains errors: "
-                    f"{self.xml_schema_3.error_log.last_error.message}")
+                reason = "package.xml contains errors: " +\
+                    f"{self.xml_schema_3.error_log.last_error.message}"
+            elif version == -1:
+                reason = "package.xml does not contain correct package " +\
+                    "format number. Please use a real version. " +\
+                    "(e.g. <package format=\"3\">)"
+            self._failed(reason)
 
     def validate(self, pck_xml_path: str) -> Tuple[int, bool]:
         """This is validating package.xml file from given path.
