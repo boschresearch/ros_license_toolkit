@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<?xml-model href="http://download.ros.org/schema/package_format4.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="4">
   <name>test_pkg_ignore_readme_contents</name>
   <version>3.2.1</version>
   <description>very suggestive description</description>
