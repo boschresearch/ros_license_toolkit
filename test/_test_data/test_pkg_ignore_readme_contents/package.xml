@@ -2,5 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_ignore_readme_contents</name>
+  <version>3.2.1</version>
+  <description>very suggestive description</description>
+  <maintainer email="user@bosch.com"></maintainer>
   <license file="LICENSE" source-files="code_with_license.py">Apache-2.0</license>
 </package>

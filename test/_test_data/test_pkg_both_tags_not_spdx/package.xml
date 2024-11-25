@@ -2,6 +2,9 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_both_tags_not_spdx</name>
+  <version>1.2.3</version>
+  <description>describing words</description>
+  <maintainer email="test@test.com"></maintainer>
   <license file="BSD.LICENSE">BSD</license>
   <license file="MPL.LICENSE" source-files="code_with_MPL.py">MPL</license>
 </package>

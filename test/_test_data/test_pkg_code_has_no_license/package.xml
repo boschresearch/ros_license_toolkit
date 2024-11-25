@@ -2,5 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_code_has_no_license</name>
+  <version>1.2.3</version>
+  <description>describing words</description>
+  <maintainer email="test@test.com"></maintainer>
   <license file="LICENSE">Apache-2.0</license>
 </package>

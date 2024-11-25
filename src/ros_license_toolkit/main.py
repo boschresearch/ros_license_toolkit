@@ -125,7 +125,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
-    return os.EX_DATAERR
+    return os.EX_DATAERR  # TODO change this to critical error
 
 
 def generate_copyright_file(packages, rll_print):
@@ -169,6 +169,7 @@ def process_one_pkg(rll_print, package):
         rll_print(check)
         rll_print(check.verbose(), Verbosity.VERBOSE)
 
+    checks_to_perform.append(schema_check)
     rll_print(minor_sep())
     # Every check is successful, no warning
     if max(check.status for check in checks_to_perform) == Status.SUCCESS:

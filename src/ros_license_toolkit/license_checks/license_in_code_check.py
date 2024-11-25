@@ -30,6 +30,7 @@ class LicensesInCodeCheck(Check):
 
     def __init__(self: 'LicensesInCodeCheck'):
         Check.__init__(self)
+        # self.package_xml_vers = package_xml_version
         self.declared_licenses: Dict[str, LicenseTag] = {}
         self.files_with_uncovered_licenses: Dict[str, List[str]] = {}
         self.files_not_matched_by_any_license_tag: Dict[str, List[str]] = {}

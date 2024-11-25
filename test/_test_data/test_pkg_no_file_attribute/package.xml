@@ -2,5 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_no_file_attribute</name>
+  <version>8.4.2</version>
+  <description>even more suggestive description</description>
+  <maintainer email="somebody@bosch.com"></maintainer>
   <license>BSD-3-Clause</license>
 </package>
