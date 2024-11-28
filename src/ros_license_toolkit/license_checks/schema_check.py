@@ -50,6 +50,12 @@ class SchemaCheck(Check):
             elif version == 3:
                 reason = "package.xml contains errors: " +\
                     f"{self.xml_schema_3.error_log.last_error.message}"
+            # Temporary workaround for not implemented version 4
+            elif version == 4:
+                reason = "couldn't check package.xml scheme. Version 4 is " +\
+                    "not available right now"
+                self._warning(reason)
+                return
             elif version == -1:
                 reason = "package.xml does not contain correct package " +\
                     "format number. Please use a real version. " +\
@@ -75,6 +81,8 @@ class SchemaCheck(Check):
                 elif version == '1':
                     version = 1
                     status_check = self.xml_schema_1.validate(xml_doc_parsed)
+                elif version == '4':  # Work around: 4 not available right now
+                    version = 4
                 else:
                     version = -1
                 return (version, status_check)
