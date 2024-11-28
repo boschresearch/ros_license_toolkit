@@ -125,7 +125,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
-    return os.EX_DATAERR  # TODO change this to critical error
+    return os.EX_DATAERR
 
 
 def generate_copyright_file(packages, rll_print):
