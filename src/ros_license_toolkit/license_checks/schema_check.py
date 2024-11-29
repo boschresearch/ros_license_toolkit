@@ -21,6 +21,7 @@ from typing import Tuple
 from lxml import etree
 
 from ros_license_toolkit.checks import Check
+from ros_license_toolkit.package import Package
 
 
 class SchemaCheck(Check):
@@ -34,56 +35,46 @@ class SchemaCheck(Check):
         xml_schema_1_parsed = etree.parse('./schemas/package_format1.xsd')
         self.xml_schema_1 = etree.XMLSchema(xml_schema_1_parsed)
 
-    def _check(self, package):
-        version, status = self.validate(package.abspath + "/package.xml")
+    def _check(self, package: Package):
+        status, message = self.validate(package)
+        version: int = package.package_xml_format_ver
         if status:
             self._success(f"Detected package.xml version {version}, "
                           "validation of scheme successful.")
         else:
-            reason = ''
-            if version == 1:
-                reason = "package.xml contains errors: " +\
-                    f"{self.xml_schema_1.error_log.last_error.message}"
-            elif version == 2:
-                reason = "package.xml contains errors: " +\
-                    f"{self.xml_schema_2.error_log.last_error.message}"
-            elif version == 3:
-                reason = "package.xml contains errors: " +\
-                    f"{self.xml_schema_3.error_log.last_error.message}"
             # Temporary workaround for not implemented version 4
-            elif version == 4:
+            if version == 4:
                 reason = "couldn't check package.xml scheme. Version 4 is " +\
                     "not available right now"
                 self._warning(reason)
                 return
-            elif version == -1:
+
+            if message != '':
+                reason = f"package.xml contains errors: {message}"
+            else:
                 reason = "package.xml does not contain correct package " +\
                     "format number. Please use a real version. " +\
                     "(e.g. <package format=\"3\">)"
             self._failed(reason)
 
-    def validate(self, pck_xml_path: str) -> Tuple[int, bool]:
+    def validate(self, package: Package) -> Tuple[bool, str]:
         """This is validating package.xml file from given path.
         Automatically detects version number and validates
         it with corresponding scheme, e.g. format 3.
         If everything is correct, returns format number, else -1."""
-        xml_doc_parsed = etree.parse(pck_xml_path)
-        for element in xml_doc_parsed.getiterator():
-            if element.tag == 'package' and 'format' in element.attrib:
-                version = element.attrib['format']
-                status_check = False
-                if version == '3':
-                    version = 3
-                    status_check = self.xml_schema_3.validate(xml_doc_parsed)
-                elif version == '2':
-                    version = 2
-                    status_check = self.xml_schema_2.validate(xml_doc_parsed)
-                elif version == '1':
-                    version = 1
-                    status_check = self.xml_schema_1.validate(xml_doc_parsed)
-                elif version == '4':  # Work around: 4 not available right now
-                    version = 4
-                else:
-                    version = -1
-                return (version, status_check)
-        return (-1, False)
+        version = package.package_xml_format_ver
+        xml_doc = package.parsed_package_xml
+        validation_schema: etree.XMLSchema = False
+        if version == 3:
+            validation_schema = self.xml_schema_3
+        elif version == 2:
+            validation_schema = self.xml_schema_2
+        elif version == 1:
+            validation_schema = self.xml_schema_1
+        if validation_schema:
+            status_check = validation_schema.validate(xml_doc)
+            message = ''
+            if not status_check:
+                message = validation_schema.error_log.last_error_message
+            return status_check, message
+        return False, message
