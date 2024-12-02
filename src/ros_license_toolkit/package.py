@@ -254,7 +254,7 @@ class Package:
                     except ValueError:
                         self._package_xml_format_ver = INVALID
                     return self._package_xml_format_ver
-        self._package_xml_format_ver = INVALID
+            self._package_xml_format_ver = INVALID
         return self._package_xml_format_ver
 
     @property

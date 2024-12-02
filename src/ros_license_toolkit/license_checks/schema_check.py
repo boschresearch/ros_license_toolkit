@@ -66,6 +66,6 @@ class SchemaCheck(Check):
             schema = self.xml_schemas[version]
             result = schema.validate(package.parsed_package_xml)
             if not result:
-                message = schema.error_log.last_error_message
+                message = schema.error_log.last_error
             return result, message
         return False, message
