@@ -16,7 +16,7 @@
 
 """This Module contains SchemaCheck, which implements Check."""
 
-from typing import Tuple
+from typing import Dict, Tuple
 
 from lxml import etree
 
@@ -28,12 +28,10 @@ class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
     def __init__(self):
         super().__init__()
-        xml_schema_3_parsed = etree.parse('./schemas/package_format3.xsd')
-        self.xml_schema_3 = etree.XMLSchema(xml_schema_3_parsed)
-        xml_schema_2_parsed = etree.parse('./schemas/package_format3.xsd')
-        self.xml_schema_2 = etree.XMLSchema(xml_schema_2_parsed)
-        xml_schema_1_parsed = etree.parse('./schemas/package_format1.xsd')
-        self.xml_schema_1 = etree.XMLSchema(xml_schema_1_parsed)
+        self.xml_schemas: Dict[int, etree] = {}
+        for i in range(1, 4):
+            xml_schema_parsed = etree.parse(f'./schemas/package_format{i}.xsd')
+            self.xml_schemas[i] = etree.XMLSchema(xml_schema_parsed)
 
     def _check(self, package: Package):
         status, message = self.validate(package)
@@ -63,18 +61,11 @@ class SchemaCheck(Check):
         it with corresponding scheme, e.g. format 3.
         If everything is correct, returns format number, else -1."""
         version = package.package_xml_format_ver
-        xml_doc = package.parsed_package_xml
-        validation_schema: etree.XMLSchema = False
-        if version == 3:
-            validation_schema = self.xml_schema_3
-        elif version == 2:
-            validation_schema = self.xml_schema_2
-        elif version == 1:
-            validation_schema = self.xml_schema_1
-        if validation_schema:
-            status_check = validation_schema.validate(xml_doc)
-            message = ''
-            if not status_check:
-                message = validation_schema.error_log.last_error_message
-            return status_check, message
+        message = ''
+        if version in self.xml_schemas:
+            schema = self.xml_schemas[version]
+            result = schema.validate(package.parsed_package_xml)
+            if not result:
+                message = schema.error_log.last_error_message
+            return result, message
         return False, message

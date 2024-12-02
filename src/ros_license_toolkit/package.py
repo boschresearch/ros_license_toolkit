@@ -33,6 +33,8 @@ from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
 
+INVALID = -1
+
 
 class PackageException(Exception):
     """Exception raised when a package is invalid."""
@@ -240,8 +242,9 @@ class Package:
     @property
     def package_xml_format_ver(self) -> int:
         """Returns version of package.xml format as seen in
-        <package format="3">. If Version is not valid, -1 is returned."""
-        if self._package_xml_format_ver is None:
+        <package format="3">. If Version is not valid,
+        INVALID (-1) is returned."""
+        if self._package_xml_format_ver == 0:
             root = self.parsed_package_xml.getroot()
             if root.tag == 'package':
                 if 'format' in root.attrib:
@@ -249,15 +252,15 @@ class Package:
                     try:
                         self._package_xml_format_ver = int(version)
                     except ValueError:
-                        self._package_xml_format_ver = -1
+                        self._package_xml_format_ver = INVALID
                     return self._package_xml_format_ver
-        self._package_xml_format_ver = -1
+        self._package_xml_format_ver = INVALID
         return self._package_xml_format_ver
 
     @property
     def parsed_package_xml(self) -> etree:
         """Returns the package.xml content parsed as etree."""
-        if self._parsed_package_xml == 0:
+        if self._parsed_package_xml is None:
             path = self.abspath + "/package.xml"
             assert os.path.exists(path), f'Path {path} does not exist.'
             self._parsed_package_xml = etree.parse(path)
