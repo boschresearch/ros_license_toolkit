@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format1.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="1">
+    <name>my_very_own_package1</name>
+    <version>19.5.12</version>
+    <description>very descriptive text</description>
+    <maintainer email="a@b.com"></maintainer>
+    <license >Apache-2.0</license>
+</package>

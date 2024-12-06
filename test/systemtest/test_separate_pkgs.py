@@ -161,6 +161,20 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(check_output_status(
             stdout, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS))
 
+    def test_pkg_scheme1_conform(self):
+        """Test on a package that has all attributes for being conform to
+        the official scheme v1"""
+        process, stdout = open_subprocess("test_pkg_scheme1_conform")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
+    def test_pkg_scheme2_conform(self):
+        """Test on a package that has all attributes for being conform to
+        the official scheme v2"""
+        process, stdout = open_subprocess("test_pkg_scheme2_conform")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
     def test_pkg_scheme3_conform(self):
         """Test on a package that has all attributes for being conform to
         the official scheme v3"""
