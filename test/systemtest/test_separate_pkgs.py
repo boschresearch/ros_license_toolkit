@@ -168,6 +168,13 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(check_output_status(stdout))
 
+    def test_pkg_scheme1_violation(self):
+        """Test on a package that has all attributes except for maintainer,
+        and therefor not conform to the official scheme v1."""
+        process, stdout = open_subprocess("test_pkg_scheme1_violation")
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
     def test_pkg_scheme2_conform(self):
         """Test on a package that has all attributes for being conform to
         the official scheme v2"""
@@ -175,11 +182,25 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(check_output_status(stdout))
 
+    def test_pkg_scheme2_violation(self):
+        """Test on a package that has all attributes except the wrong version
+        format being conform to the official scheme v2"""
+        process, stdout = open_subprocess("test_pkg_scheme2_violation")
+        self.assertEqual(os.EX_DATAERR, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
     def test_pkg_scheme3_conform(self):
         """Test on a package that has all attributes for being conform to
         the official scheme v3"""
         process, stdout = open_subprocess("test_pkg_scheme3_conform")
         self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
+    def test_pkg_scheme3_violation(self):
+        """Test on a package that has all attributes except faulty name format
+        for being conform to the official scheme v3."""
+        process, stdout = open_subprocess("test_pkg_scheme3_violation")
+        self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(check_output_status(stdout))
 
     def test_pkg_spdx_tag(self):

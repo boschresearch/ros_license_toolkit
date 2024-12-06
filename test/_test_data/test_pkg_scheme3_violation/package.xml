@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>faulty_format_3_test wrong</name>
+  <version>6.12.24</version>
+  <description>description</description>
+  <maintainer email="abc@def.com"></maintainer>
+  <license>Naumen</license>
+</package>
