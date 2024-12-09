@@ -69,11 +69,10 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         default=False, help='disable most output')
     parser.add_argument(
         '-e', '--continue_on_error', action='store_true',
-        default=False, help='Treats errors as warnings so checks dont break '
-        + ' automated workflows.')
+        default=False, help='treats all errors as warnings')
     parser.add_argument(
         '-w', '--warnings_as_error', action='store_true',
-        default=False, help='Treats warnings as errors.')
+        default=False, help='treats all warnings as errors')
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
