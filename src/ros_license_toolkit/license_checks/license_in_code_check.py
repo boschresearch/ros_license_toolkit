@@ -30,11 +30,10 @@ class LicensesInCodeCheck(Check):
 
     def __init__(self: 'LicensesInCodeCheck'):
         Check.__init__(self)
-        # self.package_xml_vers = package_xml_version
         self.declared_licenses: Dict[str, LicenseTag] = {}
         self.files_with_uncovered_licenses: Dict[str, List[str]] = {}
         self.files_not_matched_by_any_license_tag: Dict[str, List[str]] = {}
-        self.files_with_inofficial_tag: Dict[str, List[str]] = {}
+        self.files_with_unofficial_tag: Dict[str, List[str]] = {}
 
     def _check(self, package: Package):
         if len(package.license_tags) == 0:
@@ -56,18 +55,18 @@ class LicensesInCodeCheck(Check):
             licenses = found_licenses_str.split(' AND ')
             for license_str in licenses:
                 if license_str not in self.declared_licenses:
-                    # this license has an inofficial tag
-                    inofficial_licenses = {
+                    # this license has an unofficial tag
+                    unofficial_licenses = {
                         lic_tag.id_from_license_text: key
                         for key, lic_tag in package.license_tags.items()
                         if lic_tag.id_from_license_text != ''}
-                    if license_str in inofficial_licenses.keys():
-                        if fname not in self.files_with_inofficial_tag:
-                            self.files_with_inofficial_tag[fname] = []
-                        self.files_with_inofficial_tag[fname].append(
+                    if license_str in unofficial_licenses.keys():
+                        if fname not in self.files_with_unofficial_tag:
+                            self.files_with_unofficial_tag[fname] = []
+                        self.files_with_unofficial_tag[fname].append(
                             license_str)
-                        self.files_with_inofficial_tag[fname].append(
-                            inofficial_licenses[license_str])
+                        self.files_with_unofficial_tag[fname].append(
+                            unofficial_licenses[license_str])
                         continue
                     # this license is not declared by any license tag
                     if fname not in self.files_with_uncovered_licenses:
@@ -98,13 +97,13 @@ class LicensesInCodeCheck(Check):
                 self.files_not_matched_by_any_license_tag,
                 package,
             )
-        elif self.files_with_inofficial_tag:
+        elif self.files_with_unofficial_tag:
             info_str = ''
             info_str += 'For the following files, please change the ' +\
                 'License Tag in the package file to SPDX format:\n' +\
                 '\n'.join(
                     [f"  '{x[0]}' is of {x[1][0]} but its Tag is {x[1][1]}."
-                     for x in self.files_with_inofficial_tag.items()])
+                     for x in self.files_with_unofficial_tag.items()])
             self._warning(info_str)
         elif len(self.files_not_matched_by_any_license_tag) > 0:
             info_str = ''

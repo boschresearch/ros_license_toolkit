@@ -34,6 +34,8 @@ class SchemaCheck(Check):
             self.xml_schemas[i] = etree.XMLSchema(xml_schema_parsed)
 
     def _check(self, package: Package):
+        """Checks via schema validation if the package.xml has the correct
+        format, dependant on the version it is in."""
         status, message = self.validate(package)
         version: int = package.package_xml_format_ver
         if status:

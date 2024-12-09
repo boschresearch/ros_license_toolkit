@@ -16,7 +16,6 @@
 
 """This module contains the checks for the linter."""
 
-
 from enum import IntEnum
 
 from ros_license_toolkit.package import Package, PackageException

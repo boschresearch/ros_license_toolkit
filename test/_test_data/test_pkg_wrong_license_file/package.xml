@@ -4,6 +4,6 @@
   <name>test_pkg_wrong_license_file</name>
   <version>1.0.0</version>
   <description>description of a description</description>
-  <maintainer email="someone.else@de.bosch.com"></maintainer>s
+  <maintainer email="someone.else@de.bosch.com"></maintainer>
   <license file="LICENSE">BSD-3-Clause</license>
 </package>

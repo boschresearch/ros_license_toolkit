@@ -152,12 +152,8 @@ def process_one_pkg(rll_print, package):
     rll_print(
         f'git hash of ({package.repo.get_path()}):'
         f' {package.repo.get_hash()}')
-    # check for scheme here, then insert scheme version in constructor
-    schema_check = SchemaCheck()
-    schema_check.check(package)
-    rll_print(schema_check)
-    rll_print(schema_check.verbose(), Verbosity.VERBOSE)
     checks_to_perform = [
+        SchemaCheck(),
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),
@@ -169,7 +165,6 @@ def process_one_pkg(rll_print, package):
         rll_print(check)
         rll_print(check.verbose(), Verbosity.VERBOSE)
 
-    checks_to_perform.append(schema_check)
     rll_print(minor_sep())
     # Every check is successful, no warning
     if max(check.status for check in checks_to_perform) == Status.SUCCESS:
