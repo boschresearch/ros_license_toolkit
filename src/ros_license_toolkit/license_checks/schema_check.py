@@ -16,7 +16,7 @@
 
 """This Module contains SchemaCheck, which implements Check."""
 
-from typing import Dict, Tuple
+from typing import Tuple
 
 from lxml import etree
 
@@ -28,11 +28,7 @@ class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
     def __init__(self):
         super().__init__()
-        self.xml_schemas: Dict[int, etree] = {}
-        for i in range(1, 4):
-            address = f'http://download.ros.org/schema/package_format{i}.xsd'
-            schema = etree.parse(address)
-            self.xml_schemas[i] = etree.XMLSchema(schema)
+        self.accepted_versions = [1, 2, 3]
 
     def _check(self, package: Package):
         status, message = self.validate(package)
@@ -63,10 +59,15 @@ class SchemaCheck(Check):
         If everything is correct, returns format number, else -1."""
         version = package.package_xml_format_ver
         message = ''
-        if version in self.xml_schemas:
-            schema = self.xml_schemas[version]
+        if version in self.accepted_versions:
+            schema = self._get_validation_schema(version)
             result = schema.validate(package.parsed_package_xml)
             if not result:
                 message = schema.error_log.last_error
             return result, message
         return False, message
+
+    def _get_validation_schema(self, version: int):
+        address = f'http://download.ros.org/schema/package_format{version}.xsd'
+        schema = etree.parse(address)
+        return etree.XMLSchema(schema)
