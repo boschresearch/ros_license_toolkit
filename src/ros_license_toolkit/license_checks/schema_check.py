@@ -17,7 +17,6 @@
 """This Module contains SchemaCheck, which implements Check."""
 
 from typing import Dict, Tuple
-import requests
 
 from lxml import etree
 
@@ -29,17 +28,11 @@ class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
     def __init__(self):
         super().__init__()
-        self.online_schemas = {}
+        self.xml_schemas: Dict[int, etree] = {}
         for i in range(1, 4):
             address = f'http://download.ros.org/schema/package_format{i}.xsd'
             schema = etree.parse(address)
-            self.online_schemas[i] = etree.XMLSchema(schema)
-
-        self.xml_schemas: Dict[int, etree] = {}
-
-        for i in range(1, 4):
-            xml_schema_parsed = etree.parse(f'./schemas/package_format{i}.xsd')
-            self.xml_schemas[i] = etree.XMLSchema(xml_schema_parsed)
+            self.xml_schemas[i] = etree.XMLSchema(schema)
 
     def _check(self, package: Package):
         status, message = self.validate(package)
