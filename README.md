@@ -38,16 +38,18 @@ graph TD
 
 This checks:
 
+- [x] Is `package.xml` conform to it's schema?
+    [- SchemaCheck](src/ros_license_toolkit/license_checks/schema_check.py#L27)
 - [x] Is any license defined in `package.xml`?
-    [- LicenseTagExistsCheck](src/ros_license_toolkit/checks.py#L90)
+    [- LicenseTagExistsCheck](src/ros_license_toolkit/license_checks/license_tag_exists_check.py#L24)
 - [x] Has at most one license tag without a source-files declaration?
-    [- LicenseTagExistsCheck](src/ros_license_toolkit/checks.py#L90)
+    [- LicenseTagExistsCheck](src/ros_license_toolkit/license_checks/license_tag_exists_check.py#L24)
 - [x] Do all licenses tags follow the SPDX standard?
-    [- LicenseTagIsInSpdxListCheck](src/ros_license_toolkit/checks.py#L104)
+    [- LicenseTagIsInSpdxListCheck](src/ros_license_toolkit/license_checks/license_tag_is_spdx.py#L24)
 - [x] Are license texts available and correctly referenced for all declared licenses?
-    [- LicenseTextExistsCheck](src/ros_license_toolkit/checks.py#L123)
+    [- LicenseTextExistsCheck](src/ros_license_toolkit/license_checks/license_text_exists_check.py#L30)
 - [x] Does the code contain licenses not declared in any license tags source-file attribute (source-files="src/something/**")?
-    [- LicensesInCodeCheck](src/ros_license_toolkit/checks.py#L182)
+    [- LicensesInCodeCheck](src/ros_license_toolkit/license_checks/license_in_code_check.py#L28)
 
 ## Usage
 
@@ -71,7 +73,7 @@ ros_license_toolkit my_ros_package
 
 ```bash
 $ ros_license_toolkit -h
-usage: ros_license_toolkit [-h] [-c] [-v] [-q] path
+usage: ros_license_toolkit [-h] [-c] [-v] [-q] [-e] [-w] path
 
 Checks ROS packages for correct license declaration.
 
@@ -84,6 +86,10 @@ options:
                         generate a copyright file
   -v, --verbose         enable verbose output
   -q, --quiet           disable most output
+  -e, --continue_on_error
+                        Treats all errors as warnings
+  -w, --warnings_as_error
+                        Treats all warnings as errors
 ```
 
 Additionally, there is an option to ignore single files, folders and types of files.
@@ -140,9 +146,9 @@ In particular, the following things will have to be done:
 - [x] Each LicenseTag should have SPDX id.
 - [x] Single license tag without file attribute and single license text should match automatically.
 - [x] Turn into github action.
-- [ ] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
+- [x] Evaluate runtime. If scancode-toolkit takes too long on too many cases, we will have to look for an alternative.
+- [x] Error of `LicenseTagIsInSpdxListCheck` must be a warning
 - [ ] Idea: Create pull requests for package maintainers automatically.
-- [ ] Error of `LicenseTagIsInSpdxListCheck` must be a warning
 
 ## License
 
