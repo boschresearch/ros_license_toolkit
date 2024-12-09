@@ -87,9 +87,9 @@ options:
   -v, --verbose         enable verbose output
   -q, --quiet           disable most output
   -e, --continue_on_error
-                        Treats all errors as warnings
+                        treats all errors as warnings
   -w, --warnings_as_error
-                        Treats all warnings as errors
+                        treats all warnings as errors
 ```
 
 Additionally, there is an option to ignore single files, folders and types of files.
