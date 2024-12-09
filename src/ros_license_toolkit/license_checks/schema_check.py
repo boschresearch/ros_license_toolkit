@@ -32,43 +32,44 @@ class SchemaCheck(Check):
         self.validation_schema: etree.XMLSchema = None
 
     def _check(self, package: Package):
-        status, message = self.validate(package)
         version: int = package.package_xml_format_ver
-        if status:
-            self._success(f"Detected package.xml version {version}, "
-                          "validation of scheme successful.")
+        if version in self.accepted_versions:
+            status, message = self._validate(package)
+            if status:
+                self._success(f"Detected package.xml version {version}, "
+                              "validation of scheme successful.")
+            else:
+                reason = f"package.xml contains errors: {message}"
+                self._failed(reason)
         else:
             # Temporary workaround for not implemented version 4
             if version == 4:
                 reason = "couldn't check package.xml scheme. Version 4 is " +\
                     "not available right now"
                 self._warning(reason)
-                return
-
-            if message != '':
-                reason = f"package.xml contains errors: {message}"
             else:
                 reason = "package.xml does not contain correct package " +\
                     "format number. Please use a real version. " +\
                     "(e.g. <package format=\"3\">)"
-            self._failed(reason)
+                self._failed(reason)
 
-    def validate(self, package: Package) -> Tuple[bool, str]:
-        """This is validating package.xml file from given path.
-        Automatically detects version number and validates
-        it with corresponding scheme, e.g. format 3.
-        If everything is correct, returns format number, else -1."""
+    def _validate(self, package: Package) -> Tuple[bool, str]:
+        """This is validating package.xml file from given package.
+        This can only validate for format version 1, 2 or 3. Every other
+        version WILL FAIL. Please check before calling, no check here. If
+        everything is correct, returns format number, else -1."""
         version = package.package_xml_format_ver
         message = ''
-        if version in self.accepted_versions:
-            schema = self._get_validation_schema(version)
-            result = schema.validate(package.parsed_package_xml)
-            if not result:
-                message = schema.error_log.last_error
-            return result, message
-        return False, message
+        schema = self._get_validation_schema(version)
+        result = schema.validate(package.parsed_package_xml)
+        if not result:
+            message = schema.error_log.last_error
+        return result, message
 
     def _get_validation_schema(self, version: int):
+        """Return validation schema for version 1, 2 or 3. If called for other
+        version numbers, this WILL FAIL. Version is not checked again.
+        Only call with version 1, 2 or 3."""
         if self.validation_schema is None:
             address = 'http://download.ros.org/schema/' +\
                 f'package_format{version}.xsd'

@@ -7,4 +7,5 @@
   <maintainer email="abc@def.com"></maintainer>
   <license file="LICENSE">AFL-2.0</license>
   <!-- Academic Free License v2.0 -->
+  <member_of_group>group</member_of_group>
 </package>
