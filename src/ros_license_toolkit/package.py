@@ -22,6 +22,7 @@ import os
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional
 
+from lxml import etree
 from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
@@ -31,6 +32,8 @@ from ros_license_toolkit.common import (get_ignored_content,
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
+
+INVALID = -1
 
 
 class PackageException(Exception):
@@ -82,6 +85,12 @@ class Package:
 
         # All ignored files and folders
         self._ignored_content: List[str] = get_ignored_content(self.abspath)
+
+        # The package.xml file, parsed as etree
+        self._parsed_package_xml: etree = None
+
+        # The package.xml version as set in <package format="x">
+        self._package_xml_format_ver: int = 0
 
     def _get_path_relative_to_pkg(self, path: str) -> str:
         """Get path relative to pkg root"""
@@ -229,6 +238,33 @@ class Package:
         self._check_for_single_tag_without_file()
 
         return self._license_tags
+
+    @property
+    def package_xml_format_ver(self) -> int:
+        """Returns version of package.xml format as seen in
+        <package format="3">. If Version is not valid,
+        INVALID (-1) is returned."""
+        if self._package_xml_format_ver == 0:
+            root = self.parsed_package_xml.getroot()
+            if root.tag == 'package':
+                if 'format' in root.attrib:
+                    version = root.attrib['format']
+                    try:
+                        self._package_xml_format_ver = int(version)
+                    except ValueError:
+                        self._package_xml_format_ver = INVALID
+                    return self._package_xml_format_ver
+            self._package_xml_format_ver = INVALID
+        return self._package_xml_format_ver
+
+    @property
+    def parsed_package_xml(self) -> etree:
+        """Returns the package.xml content parsed as etree."""
+        if self._parsed_package_xml is None:
+            path = self.abspath + "/package.xml"
+            assert os.path.exists(path), f'Path {path} does not exist.'
+            self._parsed_package_xml = etree.parse(path)
+        return self._parsed_package_xml
 
     @property
     def repo_url(self) -> Optional[str]:

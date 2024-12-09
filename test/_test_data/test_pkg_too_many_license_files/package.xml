@@ -2,5 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_too_many_license_files</name>
+  <version>8.4.2</version>
+  <description>even more suggestive description</description>
+  <maintainer email="somebody@bosch.com"></maintainer>
   <license file="LICENSE">AFL-2.0</license>
 </package>

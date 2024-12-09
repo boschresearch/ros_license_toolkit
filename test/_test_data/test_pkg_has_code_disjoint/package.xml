@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<?xml-model href="http://download.ros.org/schema/package_format4.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="4">
   <name>test_pkg_has_code_disjoint</name>
+  <version>1.2.3</version>
+  <description>describing words</description>
+  <maintainer email="test@test.com"></maintainer>
   <license file="LICENSE">BSD-3-Clause</license>
   <license file="LICENSE_APACHE" source-files="src/** also_src/**">Apache-2.0</license>
 </package>

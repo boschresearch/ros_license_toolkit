@@ -35,6 +35,7 @@ from ros_license_toolkit.license_checks.license_tag_is_spdx import \
     LicenseTagIsInSpdxListCheck
 from ros_license_toolkit.license_checks.license_text_exists_check import \
     LicenseTextExistsCheck
+from ros_license_toolkit.license_checks.schema_check import SchemaCheck
 from ros_license_toolkit.package import get_packages_in_path
 from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
                                              WARNING_STR, Verbosity, major_sep,
@@ -152,6 +153,7 @@ def process_one_pkg(rll_print, package):
         f'git hash of ({package.repo.get_path()}):'
         f' {package.repo.get_hash()}')
     checks_to_perform = [
+        SchemaCheck(),
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),

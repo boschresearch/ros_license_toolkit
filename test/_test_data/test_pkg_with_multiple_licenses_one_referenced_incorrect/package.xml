@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<?xml-model href="http://download.ros.org/schema/package_format4.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="4">
   <name>test_pkg_with_multiple_licenses_one_referenced_incorrect</name>
+  <version>1.0.0</version>
+  <description>description of a description</description>
+  <maintainer email="someone.else@de.bosch.com"></maintainer>
   <license file="bsd.LICENSE" source-files="more_code_with_BSD.py">BSD</license>
   <license file="mpl.LICENSE">MPL-1.0</license>
 </package>

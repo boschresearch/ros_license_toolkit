@@ -2,6 +2,9 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>test_pkg_both_tags_not_spdx_one_file_own</name>
+  <version>3.2.1</version>
+  <description>very suggestive description</description>
+  <maintainer email="user@bosch.com"></maintainer>
   <license file="LICENSE">Self Created License</license>
   <license file="MPL.LICENSE" source-files="code_with_MPL.py">MPL</license>
 </package>

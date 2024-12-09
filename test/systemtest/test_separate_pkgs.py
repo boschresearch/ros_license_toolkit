@@ -161,6 +161,13 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(check_output_status(
             stdout, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS))
 
+    def test_pkg_scheme3_conform(self):
+        """Test on a package that has all attributes for being conform to
+        the official scheme v3"""
+        process, stdout = open_subprocess("test_pkg_scheme3_conform")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
     def test_pkg_spdx_tag(self):
         """Test on a package with a license declared in the package.xml
         with the SPDX tag."""
