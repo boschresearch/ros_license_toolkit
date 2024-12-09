@@ -29,6 +29,7 @@ class SchemaCheck(Check):
     def __init__(self):
         super().__init__()
         self.accepted_versions = [1, 2, 3]
+        self.validation_schema: etree.XMLSchema = None
 
     def _check(self, package: Package):
         status, message = self.validate(package)
@@ -68,6 +69,9 @@ class SchemaCheck(Check):
         return False, message
 
     def _get_validation_schema(self, version: int):
-        address = f'http://download.ros.org/schema/package_format{version}.xsd'
-        schema = etree.parse(address)
-        return etree.XMLSchema(schema)
+        if self.validation_schema is None:
+            address = 'http://download.ros.org/schema/' +\
+                f'package_format{version}.xsd'
+            schema = etree.parse(address)
+            self.validation_schema = etree.XMLSchema(schema)
+        return self.validation_schema
