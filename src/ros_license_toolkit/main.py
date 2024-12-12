@@ -179,6 +179,7 @@ def process_one_pkg(rll_print, package):
     rll_print(schema_check)
     rll_print(schema_check.verbose(), Verbosity.VERBOSE)
     checks_to_perform = [
+        SchemaCheck(),
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),
