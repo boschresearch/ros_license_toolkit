@@ -16,7 +16,7 @@
 
 """This Module contains SchemaCheck, which implements Check."""
 
-from typing import Tuple
+from typing import Optional, Tuple
 
 from lxml import etree
 
@@ -29,9 +29,11 @@ class SchemaCheck(Check):
     def __init__(self):
         super().__init__()
         self.accepted_versions = [1, 2, 3]
-        self.validation_schema: etree.XMLSchema = None
+        self.validation_schema: Optional[etree.XMLSchema] = None
 
     def _check(self, package: Package):
+        """Checks via scheme validation via self._validate.
+        Also considers version of pacakge.xml for validation."""
         version: int = package.package_xml_format_ver
         if version in self.accepted_versions:
             status, message = self._validate(package)
@@ -54,10 +56,10 @@ class SchemaCheck(Check):
                 self._failed(reason)
 
     def _validate(self, package: Package) -> Tuple[bool, str]:
-        """This is validating package.xml file from given package.
+        """This is validating the package.xml schema from given package.
         This can only validate for format version 1, 2 or 3. Every other
-        version WILL FAIL. Please check before calling, no check here. If
-        everything is correct, returns format number, else -1."""
+        version WILL FAIL. If everything is correct, returns format number,
+        else -1."""
         version = package.package_xml_format_ver
         message = ''
         schema = self._get_validation_schema(version)

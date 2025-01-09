@@ -86,7 +86,8 @@ class TestPkgs(unittest.TestCase):
         a license different from the package main license."""
         process, stdout = open_subprocess("test_pkg_has_code_disjoint")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=WARNING))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=WARNING))
 
     def test_pkg_has_code_of_different_license(self):
         """Test on a package with source files under a license different
@@ -104,7 +105,8 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess(
             "test_pkg_has_code_of_different_license_and_tag")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=WARNING))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=WARNING))
 
     def test_pkg_has_code_of_different_license_and_wrong_tag(self):
         """Test on a package with source files under a license different
@@ -114,7 +116,7 @@ class TestPkgs(unittest.TestCase):
             "test_pkg_has_code_of_different_license_and_wrong_tag")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(check_output_status(
-            stdout, exp_lic_validated=WARNING, exp_lic_text_exits=FAILURE,
+            stdout, exp_schema_validated=WARNING, exp_lic_text_exits=FAILURE,
             exp_lic_in_code=FAILURE))
 
     def test_pkg_ignore_readme_contents(self):
@@ -122,7 +124,8 @@ class TestPkgs(unittest.TestCase):
         that are not in package and shall therefore be ignored."""
         process, stdout = open_subprocess("test_pkg_ignore_readme_contents")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=WARNING))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=WARNING))
 
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
@@ -174,7 +177,8 @@ class TestPkgs(unittest.TestCase):
         and therefor not conform to the official scheme v1."""
         process, stdout = open_subprocess("test_pkg_scheme1_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=FAILURE))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=FAILURE))
 
     def test_pkg_scheme2_conform(self):
         """Test on a package that has all attributes for being conform to
@@ -188,7 +192,8 @@ class TestPkgs(unittest.TestCase):
         format being conform to the official scheme v2"""
         process, stdout = open_subprocess("test_pkg_scheme2_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=FAILURE))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=FAILURE))
 
     def test_pkg_scheme3_conform(self):
         """Test on a package that has all attributes for being conform to
@@ -202,7 +207,8 @@ class TestPkgs(unittest.TestCase):
         for being conform to the official scheme v3."""
         process, stdout = open_subprocess("test_pkg_scheme3_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_validated=FAILURE))
+        self.assertTrue(check_output_status(stdout,
+                                            exp_schema_validated=FAILURE))
 
     def test_pkg_spdx_tag(self):
         """Test on a package with a license declared in the package.xml
@@ -297,7 +303,7 @@ def open_subprocess(test_data_name: str):
 
 
 def check_output_status(output: str,
-                        exp_lic_validated: Status = Status.SUCCESS,
+                        exp_schema_validated: Status = Status.SUCCESS,
                         exp_lic_tag_exists: Status = Status.SUCCESS,
                         exp_lic_tag_spdx: Status = Status.SUCCESS,
                         exp_lic_text_exits: Status = Status.SUCCESS,
@@ -317,7 +323,7 @@ def check_output_status(output: str,
     real_lic_files_referenced = get_test_result(
         output, "LicenseFilesReferencedCheck")
 
-    return exp_lic_validated == real_lic_validated \
+    return exp_schema_validated == real_lic_validated \
         and exp_lic_tag_exists == real_lic_tag_exists \
         and exp_lic_tag_spdx == real_lic_tag_spdx \
         and exp_lic_text_exits == real_lic_text_exits \
