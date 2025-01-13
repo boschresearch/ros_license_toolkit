@@ -80,7 +80,7 @@ class SchemaCheck(Check):
             try:
                 schema = etree.parse(address)
                 self.validation_schema = etree.XMLSchema(schema)
-            except (AttributeError, etree.XMLSyntaxError) as e:
-                print(e)
+            except (AttributeError, etree.XMLSyntaxError) as error:
+                print(error)
                 print("An error encountered while getting " + address)
         return self.validation_schema
