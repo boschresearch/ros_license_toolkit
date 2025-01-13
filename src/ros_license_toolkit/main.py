@@ -69,8 +69,8 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         default=False, help='disable most output')
     parser.add_argument(
         '-e', '--continue_on_error', action='store_true',
-        default=False, help='treats all errors as warnings, i.e. will give'
-        + ' returncode 0 even on errors')
+        default=False, help='treats all errors as warnings, i.e. will give '
+        + 'returncode 0 even on errors')
     parser.add_argument(
         '-w', '--warnings_as_error', action='store_true',
         default=False, help='treats all warnings as errors')
