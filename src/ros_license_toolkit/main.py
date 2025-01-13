@@ -67,6 +67,13 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     parser.add_argument(
         '-q', '--quiet', dest='quiet', action='store_true',
         default=False, help='disable most output')
+    parser.add_argument(
+        '-e', '--continue_on_error', action='store_true',
+        default=False, help='treats all errors as warnings, i.e. will give '
+        + 'returncode 0 even on errors')
+    parser.add_argument(
+        '-w', '--warnings_as_error', action='store_true',
+        default=False, help='treats all warnings as errors')
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
@@ -118,14 +125,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
 
     # Print the overall results
-    if max(results_per_package.values()) == Status.SUCCESS:
-        rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
-        return os.EX_OK
-    if max(results_per_package.values()) == Status.WARNING:
-        rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
-        return os.EX_OK
-    rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
-    return os.EX_DATAERR
+    return print_results(results_per_package, rll_print, parsed_args)
 
 
 def generate_copyright_file(packages, rll_print):
@@ -142,6 +142,28 @@ def generate_copyright_file(packages, rll_print):
         rll_print(red(
             "Can only generate copyright file for single package"),
             Verbosity.QUIET)
+
+
+def print_results(result, rll_print, args):
+    """Printing the result of package"""
+    if max(result.values()) == Status.SUCCESS:
+        rll_print(f"All packages:\n {SUCCESS_STR}", Verbosity.QUIET)
+        return os.EX_OK
+
+    if max(result.values()) == Status.WARNING:
+        if args.warnings_as_error:
+            rll_print(f"All packages:\n {FAILURE_STR} "
+                      + "(Treating warnings as failure)", Verbosity.QUIET)
+            return os.EX_DATAERR
+        rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
+        return os.EX_OK
+
+    if args.continue_on_error:  # Error is Warning, still displayed red
+        rll_print(f"All packages:\n {WARNING_STR} "
+                  + "(Treating errors as warnings)", Verbosity.QUIET)
+        return os.EX_OK
+    rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
+    return os.EX_DATAERR
 
 
 def process_one_pkg(rll_print, package):

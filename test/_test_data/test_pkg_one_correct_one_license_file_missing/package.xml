@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<?xml-model href="http://download.ros.org/schema/package_format4.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="4">
   <name>test_pkg_one_correct_one_license_file_missing</name>
   <version>8.4.2</version>
   <description>even more suggestive description</description>
