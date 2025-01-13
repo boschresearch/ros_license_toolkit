@@ -87,7 +87,7 @@ options:
   -v, --verbose         enable verbose output
   -q, --quiet           disable most output
   -e, --continue_on_error
-                        treats all errors as warnings
+                        treats all errors as warnings, i.e. will give returncode 0 even on errors
   -w, --warnings_as_error
                         treats all warnings as errors
 ```

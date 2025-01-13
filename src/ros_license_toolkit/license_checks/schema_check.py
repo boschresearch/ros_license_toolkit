@@ -63,10 +63,12 @@ class SchemaCheck(Check):
         version = package.package_xml_format_ver
         message = ''
         schema = self._get_validation_schema(version)
-        result = schema.validate(package.parsed_package_xml)
-        if not result:
-            message = schema.error_log.last_error
-        return result, message
+        if schema:
+            result = schema.validate(package.parsed_package_xml)
+            if not result:
+                message = schema.error_log.last_error
+            return result, message
+        return False, 'Couldn\'t get schema, no validation possible.'
 
     def _get_validation_schema(self, version: int):
         """Return validation schema for version 1, 2 or 3. If called for other
@@ -75,6 +77,10 @@ class SchemaCheck(Check):
         if self.validation_schema is None:
             address = 'http://download.ros.org/schema/' +\
                 f'package_format{version}.xsd'
-            schema = etree.parse(address)
-            self.validation_schema = etree.XMLSchema(schema)
+            try:
+                schema = etree.parse(address)
+                self.validation_schema = etree.XMLSchema(schema)
+            except (AttributeError, etree.XMLSyntaxError) as e:
+                print(e)
+                print("An error encountered while getting " + address)
         return self.validation_schema
