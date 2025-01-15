@@ -20,7 +20,7 @@ git push --tags
 
 This triggers the CI to build and release the package.
 
-## ALL BELOW IS PERFORMED AUTOMATICALLY  
+## ALL BELOW IS PERFORMED AUTOMATICALLY
 
 > **_ATTENTION:_**
 The following steps are performed automatically
