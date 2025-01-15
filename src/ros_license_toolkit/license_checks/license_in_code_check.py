@@ -130,7 +130,7 @@ class LicensesInCodeCheck(Check):
                 package,
             )
         else:
-            self._success("All licenses found in the code are covered by a " "license declaration.")
+            self._success("All licenses found in the code are covered by a license declaration.")
 
     def _print_info(
         self,

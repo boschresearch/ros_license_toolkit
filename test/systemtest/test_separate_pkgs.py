@@ -302,7 +302,7 @@ def open_subprocess(test_data_name: str):
     return process, stdout
 
 
-def check_output_status(
+def check_output_status(  # pylint: disable=too-many-positional-arguments
     output: str,
     exp_schema_validated: Status = Status.SUCCESS,
     exp_lic_tag_exists: Status = Status.SUCCESS,
