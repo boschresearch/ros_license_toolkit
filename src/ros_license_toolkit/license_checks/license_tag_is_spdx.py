@@ -27,8 +27,7 @@ class LicenseTagIsInSpdxListCheck(Check):
     def _check(self, package: Package):
         licenses_not_in_spdx_list = []
         for license_tag in package.license_tags.keys():
-            if not is_license_name_in_spdx_list(
-                    license_tag):
+            if not is_license_name_in_spdx_list(license_tag):
                 licenses_not_in_spdx_list.append(license_tag)
         if len(licenses_not_in_spdx_list) > 0:
             self._warning(

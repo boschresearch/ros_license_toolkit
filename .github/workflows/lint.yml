@@ -8,23 +8,24 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  build: 
+  build:
     name: py${{ matrix.python-version }} @ ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - python-version: "3.7"
-            os: "ubuntu-20.04"
-          - python-version: "3.7"
-            os: "ubuntu-22.04"
-          - python-version: "3.8"
-            os: "ubuntu-20.04"
-          - python-version: "3.8"
-            os: "ubuntu-22.04"
+          # versions updated according to
+          # https://devguide.python.org/versions/
+          # on 2025-01-15
           - python-version: "3.9"
             os: "ubuntu-22.04"
           - python-version: "3.10"
+            os: "ubuntu-22.04"
+          - python-version: "3.11"
+            os: "ubuntu-22.04"
+          - python-version: "3.12"
+            os: "ubuntu-22.04"
+          - python-version: "3.13"
             os: "ubuntu-22.04"
     runs-on: ${{ matrix.os }}
     concurrency:
@@ -43,21 +44,8 @@ jobs:
       - name: Update pip
         run: |
           pip install --upgrade pip
-          pip install setuptools_rust  
-      - name: Install dependencies
-        run: pip install .
-      - uses: ricardochaves/python-lint@v1.4.0
-        with:
-          python-root-list: "src/ test/"
-          use-pylint: true
-          use-pycodestyle: true
-          use-flake8: true
-          use-black: false
-          use-mypy: true
-          use-isort: true
-          extra-pylint-options: ""
-          extra-pycodestyle-options: ""
-          extra-flake8-options: ""
-          extra-black-options: ""
-          extra-mypy-options: "--ignore-missing-imports"
-          extra-isort-options: ""
+      - name: Install packages
+        run: |
+          pip install .
+      - name: Pre-commit
+        uses: pre-commit/action@v3.0.1

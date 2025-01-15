@@ -28,15 +28,14 @@ IGNORED = [
     "setup.py",
     "setup.cfg",
     "CMakeLists.txt",
-    ".git/*"
+    ".git/*",
 ]
 
 
 def get_spdx_license_name(scan_results: Dict[str, Any]) -> Optional[str]:
     """Get the SPDX license name from scan results."""
-    if scan_results['percentage_of_license_text'] \
-       >= REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
-        return scan_results['detected_license_expression_spdx']
+    if scan_results["percentage_of_license_text"] >= REQUIRED_PERCENTAGE_OF_LICENSE_TEXT:
+        return scan_results["detected_license_expression_spdx"]
     return None
 
 
@@ -46,9 +45,9 @@ def get_ignored_content(pkg_abspath: str) -> List[str]:
     ignored_content: List[str] = []
     scanignore_path = pkg_abspath + "/.scanignore"
     if os.path.exists(scanignore_path):
-        with open(scanignore_path, 'r', encoding="utf-8") as f:
+        with open(scanignore_path, "r", encoding="utf-8") as f:
             for line in f:
-                line_contents = line.split('#')
+                line_contents = line.split("#")
                 ignore_pattern = line_contents[0].rstrip()
                 if len(ignore_pattern) > 0:
                     ignored_content.append(ignore_pattern)

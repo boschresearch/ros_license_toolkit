@@ -24,6 +24,7 @@ from ros_license_toolkit.ui_elements import NO_REASON_STR, green, red, yellow
 
 class Status(IntEnum):
     """Levels of success or failure for the output"""
+
     SUCCESS = 0
     WARNING = 1
     FAILURE = 2
@@ -32,7 +33,7 @@ class Status(IntEnum):
 class Check:
     """Base class for checks."""
 
-    def __init__(self: 'Check'):
+    def __init__(self: "Check"):
         """Initialize a check."""
         # overall success of this check
         self.status: Status = Status.FAILURE
@@ -41,7 +42,7 @@ class Check:
         self.reason: str = NO_REASON_STR
 
         # string with additional information for verbose output
-        self.verbose_output: str = ''
+        self.verbose_output: str = ""
 
     def _failed(self, reason: str):
         """Set this check as failed for `reason`."""
@@ -57,7 +58,7 @@ class Check:
         """Set this check as successful for reason `r`."""
         self.status = Status.SUCCESS
         if self.reason == NO_REASON_STR:
-            self.reason = ''
+            self.reason = ""
         else:
             self.reason += "\n "
         self.reason += reason

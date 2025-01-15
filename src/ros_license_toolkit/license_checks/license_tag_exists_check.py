@@ -29,5 +29,4 @@ class LicenseTagExistsCheck(Check):
             self._failed("No license tag defined.")
             self.verbose_output = red(str(package.package_xml))
         else:
-            self._success(
-                f"Found licenses {list(map(str, package.license_tags))}")
+            self._success(f"Found licenses {list(map(str, package.license_tags))}")

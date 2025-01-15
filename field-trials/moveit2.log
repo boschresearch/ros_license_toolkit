@@ -25,7 +25,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_simulation/simulation.hpp': ['BSD-3-Clause']
   'include/moveit_setup_simulation/simulation_widget.hpp': ['BSD-3-Clause']
@@ -45,7 +45,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_app_plugins/launches_config.hpp': ['BSD-3-Clause']
   'include/moveit_setup_app_plugins/launches_widget.hpp': ['BSD-3-Clause']
@@ -75,7 +75,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_assistant/navigation_widget.hpp': ['BSD-3-Clause']
   'include/moveit_setup_assistant/setup_assistant_widget.hpp': ['BSD-3-Clause']
@@ -97,7 +97,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_srdf_plugins/default_collisions_widget.hpp': ['BSD-3-Clause']
   'include/moveit_setup_srdf_plugins/robot_poses_widget.hpp': ['BSD-3-Clause']
@@ -153,7 +153,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_framework/generated_file.hpp': ['BSD-3-Clause']
   'include/moveit_setup_framework/generated_time.hpp': ['BSD-3-Clause']
@@ -196,7 +196,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_setup_core_plugins/author_information_widget.hpp': ['BSD-3-Clause']
   'include/moveit_setup_core_plugins/start_screen_widget.hpp': ['BSD-3-Clause']
@@ -269,7 +269,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'scripts/moveit_benchmark_statistics.py': ['BSD-3-Clause']
   'include/moveit/benchmarks/BenchmarkExecutor.h': ['BSD-3-Clause']
@@ -292,7 +292,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit/move_group/move_group_context.h': ['BSD-3-Clause']
   'include/moveit/move_group/capability_names.h': ['BSD-3-Clause']
@@ -398,7 +398,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit/warehouse/state_storage.h': ['BSD-3-Clause']
   'include/moveit/warehouse/moveit_message_storage.h': ['BSD-3-Clause']
@@ -434,7 +434,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit/robot_interaction/interactive_marker_helpers.h': ['BSD-3-Clause']
   'include/moveit/robot_interaction/locked_robot_state.h': ['BSD-3-Clause']
@@ -494,7 +494,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'pointcloud_octomap_updater/include/moveit/pointcloud_octomap_updater/pointcloud_octomap_updater.h': ['BSD-3-Clause']
   'pointcloud_octomap_updater/src/pointcloud_octomap_updater.cpp': ['BSD-3-Clause']
@@ -555,7 +555,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_simple_controller_manager/follow_joint_trajectory_controller_handle.h': ['BSD-3-Clause']
   'include/moveit_simple_controller_manager/empty_controller_handle.h': ['BSD-3-Clause']
@@ -592,7 +592,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/moveit_ros_control_interface/ControllerHandle.h': ['BSD-3-Clause']
   'src/controller_manager_plugin.cpp': ['BSD-3-Clause']
@@ -613,7 +613,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'demos/plan.py': ['BSD-3-Clause']
   'demos/plan_with_constraints.py': ['BSD-3-Clause']
@@ -643,7 +643,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'ompl_interface/scripts/generate_state_database.cpp': ['BSD-3-Clause']
   'ompl_interface/include/moveit/ompl_interface/ompl_interface.h': ['BSD-3-Clause']
@@ -783,7 +783,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but should be Apache 2.0.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'config/manipulator_controller.yaml': ['Apache-2.0']
   'config/manipulator_driver.yaml': ['Apache-2.0']
@@ -819,7 +819,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but should be Apache 2.0.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/ikfast.h': ['Apache-2.0']
   'src/prbt_manipulator_ikfast_moveit_plugin.cpp': ['BSD-3-Clause']
@@ -838,7 +838,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/pilz_industrial_motion_planner_testutils/circ_auxiliary_types.h': ['BSD-3-Clause']
   'include/pilz_industrial_motion_planner_testutils/robotstatemsgconvertible.h': ['BSD-3-Clause']
@@ -885,7 +885,7 @@ LicenseTextExistsCheck
 [91m FAILURE The following license tags do not have a valid license text file:
   'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
 LicensesInCodeCheck
-[91m FAILURE 
+[91m FAILURE
 The following files contain licenses that are not covered by any license tag:
   'include/joint_limits_copy/joint_limits_rosparam.hpp': ['Apache-2.0']
   'include/joint_limits_copy/joint_limits.hpp': ['Apache-2.0']

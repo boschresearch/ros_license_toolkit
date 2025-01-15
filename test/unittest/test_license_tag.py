@@ -19,8 +19,7 @@
 import unittest
 from xml.etree import ElementTree as ET
 
-from ros_license_toolkit.license_tag import (LicenseTag,
-                                             is_license_name_in_spdx_list)
+from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_list
 
 
 class TestChecks(unittest.TestCase):
@@ -33,10 +32,9 @@ class TestChecks(unittest.TestCase):
 
     def test_init(self):
         """Test the constructor of the LicenseTag class"""
-        by_spdx_tag = LicenseTag(ET.fromstring(
-            "<license>Apache-2.0</license>"), "")
+        by_spdx_tag = LicenseTag(ET.fromstring("<license>Apache-2.0</license>"), "")
         self.assertEqual(by_spdx_tag.id, "Apache-2.0")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

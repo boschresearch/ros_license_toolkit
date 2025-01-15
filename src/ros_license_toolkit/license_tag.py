@@ -44,9 +44,12 @@ def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
 class LicenseTag:
     """A license tag found in a package.xml file."""
 
-    def __init__(self, element: ET.Element,
-                 pkg_path: str,
-                 license_file_scan_results: Optional[Dict[str, Any]] = None):
+    def __init__(
+        self,
+        element: ET.Element,
+        pkg_path: str,
+        license_file_scan_results: Optional[Dict[str, Any]] = None,
+    ):
         """Initialize a license tag from an XML element."""
         self.element = element
         assert self.element.text is not None, "License tag must have text."
@@ -64,17 +67,15 @@ class LicenseTag:
         self.id = raw_license_name
         # If a file is linked to the tag, set its id for internal checks
         if license_file_scan_results:
-            self.id_from_license_text = \
-                get_id_from_license_text(license_file_scan_results)
+            self.id_from_license_text = get_id_from_license_text(license_file_scan_results)
 
         # Path to the file containing the license text
         # (relative to package root)
-        self.license_text_file: Optional[str] = element.attrib.get(
-            "file", None)
+        self.license_text_file: Optional[str] = element.attrib.get("file", None)
 
         # Paths to the source files that are licensed under this license
         self._source_files: Optional[Set[str]] = None
-        self.source_files_str: str = element.attrib.get("source-files", '')
+        self.source_files_str: str = element.attrib.get("source-files", "")
         if not self.source_files_str:
             # If no source-files attribute is given, assume all files
             # are licensed under this license.
@@ -107,25 +108,20 @@ class LicenseTag:
 
     def get_license_text_file(self) -> str:
         """Return the file attribute."""
-        assert self.license_text_file is not None, \
-            "License tag must have file attribute."
+        assert self.license_text_file is not None, "License tag must have file attribute."
         return self.license_text_file
 
     @property
     def source_files(self) -> Set[str]:
         """Return the source-files attribute."""
-        assert self._source_files is not None, \
-            "License tag must have source-files attribute."
+        assert self._source_files is not None, "License tag must have source-files attribute."
         return self._source_files
 
     def make_this_the_main_license(self, other_licenses: List["LicenseTag"]):
         """Make this the main license for the package."""
-        assert not self.has_source_files(), \
-            "This must not have a source-files, yet."
-        assert self.source_files_str == "**", \
-            "This must have a source-files attribute of '**'."
-        source_files = _eval_glob(
-            self.source_files_str, self.package_path)
+        assert not self.has_source_files(), "This must not have a source-files, yet."
+        assert self.source_files_str == "**", "This must have a source-files attribute of '**'."
+        source_files = _eval_glob(self.source_files_str, self.package_path)
         for other_license in other_licenses:
             if other_license == self:
                 continue
@@ -135,6 +131,6 @@ class LicenseTag:
 
 def get_id_from_license_text(license_file_scan_result: Dict[str, Any]) -> str:
     """Return the detected license id from the license declaration"""
-    if 'detected_license_expression_spdx' in license_file_scan_result:
-        return license_file_scan_result['detected_license_expression_spdx']
-    return ''
+    if "detected_license_expression_spdx" in license_file_scan_result:
+        return license_file_scan_result["detected_license_expression_spdx"]
+    return ""
