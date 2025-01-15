@@ -67,9 +67,7 @@ class LicenseTag:
         self.id = raw_license_name
         # If a file is linked to the tag, set its id for internal checks
         if license_file_scan_results:
-            self.id_from_license_text = get_id_from_license_text(
-                license_file_scan_results
-            )
+            self.id_from_license_text = get_id_from_license_text(license_file_scan_results)
 
         # Path to the file containing the license text
         # (relative to package root)
@@ -110,25 +108,19 @@ class LicenseTag:
 
     def get_license_text_file(self) -> str:
         """Return the file attribute."""
-        assert (
-            self.license_text_file is not None
-        ), "License tag must have file attribute."
+        assert self.license_text_file is not None, "License tag must have file attribute."
         return self.license_text_file
 
     @property
     def source_files(self) -> Set[str]:
         """Return the source-files attribute."""
-        assert (
-            self._source_files is not None
-        ), "License tag must have source-files attribute."
+        assert self._source_files is not None, "License tag must have source-files attribute."
         return self._source_files
 
     def make_this_the_main_license(self, other_licenses: List["LicenseTag"]):
         """Make this the main license for the package."""
         assert not self.has_source_files(), "This must not have a source-files, yet."
-        assert (
-            self.source_files_str == "**"
-        ), "This must have a source-files attribute of '**'."
+        assert self.source_files_str == "**", "This must have a source-files attribute of '**'."
         source_files = _eval_glob(self.source_files_str, self.package_path)
         for other_license in other_licenses:
             if other_license == self:

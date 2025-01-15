@@ -27,8 +27,7 @@ from rospkg import RosPack, list_by_path
 from rospkg.common import PACKAGE_FILE
 from scancode.api import get_licenses
 
-from ros_license_toolkit.common import (get_ignored_content,
-                                        get_spdx_license_name)
+from ros_license_toolkit.common import get_ignored_content, get_spdx_license_name
 from ros_license_toolkit.copyright import get_copyright_strings_per_pkg
 from ros_license_toolkit.license_tag import LicenseTag
 from ros_license_toolkit.repo import NotARepoError, Repo
@@ -158,18 +157,9 @@ class Package:
         """One license tag can have no source-files attribute.
         But there can be only one such tag.
         This is then the main license."""
-        if (
-            len(
-                list(
-                    filter(
-                        lambda x: not x.has_source_files(), self._license_tags.values()
-                    )
-                )
-            )
-            > 1
-        ):
+        if len(list(filter(lambda x: not x.has_source_files(), self._license_tags.values()))) > 1:
             raise MoreThanOneLicenseWithoutSourceFilesTag(
-                "There must be at most one license tag without " "source-files."
+                "There must be at most one license tag without source-files."
             )
         for tag in self._license_tags.values():
             if not tag.has_source_files():
@@ -192,7 +182,7 @@ class Package:
             > 1
         ):
             raise MoreThanOneLicenseWithoutLicenseTextFile(
-                "There must be at most one license tag without " "a license text file."
+                "There must be at most one license tag without a license text file."
             )
         for tag in self._license_tags.values():
             if not tag.has_license_text_file():
@@ -223,9 +213,9 @@ class Package:
             license_tag_key = next(iter(self._license_tags.keys()))
             id_from_text = self._license_tags[license_tag_key].id_from_license_text
             if id_from_text is None:
-                only_file_id = self.found_license_texts[
-                    next(iter(self.found_license_texts))
-                ]["detected_license_expression_spdx"]
+                only_file_id = self.found_license_texts[next(iter(self.found_license_texts))][
+                    "detected_license_expression_spdx"
+                ]
                 self._license_tags[license_tag_key].id_from_license_text = only_file_id
 
     @property
@@ -312,10 +302,7 @@ class Package:
             license_path = os.path.join(self.abspath, pkg_license.license_text_file)
             if not os.path.exists(license_path):
                 raise FileExistsError(
-                    (
-                        "Cannot create copyright file."
-                        f"File {license_path} does not exist."
-                    )
+                    ("Cannot create copyright file." f"File {license_path} does not exist.")
                 )
             with open(license_path, encoding="utf-8") as f:
                 license_lines = f.readlines()

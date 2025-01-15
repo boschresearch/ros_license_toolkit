@@ -25,9 +25,7 @@ import unittest
 class TestDocumentation(unittest.TestCase):
     """Test if this packages readme is up to date."""
 
-    @unittest.skipIf(
-        sys.version_info < (3, 10), "Behavior of argparse changed in Python 3.10"
-    )
+    @unittest.skipIf(sys.version_info < (3, 10), "Behavior of argparse changed in Python 3.10")
     def test_readme(self):
         """Check if the help text is up to date."""
         with subprocess.Popen(
@@ -41,7 +39,5 @@ class TestDocumentation(unittest.TestCase):
         # find relevant part of the readme
         with open("README.md", "r", encoding="utf-8") as readme:
             readme_content = readme.read()
-        readme_usage = (
-            readme_content.split("$ ros_license_toolkit -h")[1].split("```")[0].strip()
-        )
+        readme_usage = readme_content.split("$ ros_license_toolkit -h")[1].split("```")[0].strip()
         self.assertEqual(readme_usage, output)

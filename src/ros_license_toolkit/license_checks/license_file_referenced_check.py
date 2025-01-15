@@ -42,8 +42,7 @@ class LicenseFilesReferencedCheck(Check):
     def _handle_inofficial_licenses(self, package: Package, filename, license_text):
         if (
             "detected_license_expression_spdx" in license_text
-            and license_text["detected_license_expression_spdx"]
-            not in package.license_tags
+            and license_text["detected_license_expression_spdx"] not in package.license_tags
         ):
             spdx_expression = license_text["detected_license_expression_spdx"]
             inofficial_licenses = {
@@ -65,12 +64,7 @@ class LicenseFilesReferencedCheck(Check):
             info_str += (
                 "The following license files are not"
                 + " mentioned by any tag:\n"
-                + "\n".join(
-                    [
-                        f"  '{x[0]}' is of {x[1]}."
-                        for x in self.not_covered_texts.items()
-                    ]
-                )
+                + "\n".join([f"  '{x[0]}' is of {x[1]}." for x in self.not_covered_texts.items()])
             )
             self._failed(info_str)
         elif self.inofficial_covered_texts:

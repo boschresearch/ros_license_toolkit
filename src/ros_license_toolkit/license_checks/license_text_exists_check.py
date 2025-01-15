@@ -21,8 +21,7 @@ from typing import Any, Dict, Optional
 
 from ros_license_toolkit.checks import Check, Status
 from ros_license_toolkit.common import get_spdx_license_name
-from ros_license_toolkit.license_tag import (LicenseTag,
-                                             is_license_name_in_spdx_list)
+from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_list
 from ros_license_toolkit.package import Package
 from ros_license_toolkit.ui_elements import red
 
@@ -65,8 +64,7 @@ class LicenseTextExistsCheck(Check):
                 continue
             if license_text_file not in self.found_license_texts:
                 self.license_tags_without_license_text[license_tag] = (
-                    f"License text file '{license_text_file}' not included"
-                    + " in scan results."
+                    f"License text file '{license_text_file}' not included" + " in scan results."
                 )
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
@@ -131,9 +129,7 @@ class LicenseTextExistsCheck(Check):
                     )
                 )
             self.verbose_output = red(
-                "\n".join(
-                    [f"  '{x[0]}': {x[1]}" for x in self.found_license_texts.items()]
-                )
+                "\n".join([f"  '{x[0]}': {x[1]}" for x in self.found_license_texts.items()])
             )
         else:
             self._success("All license tags have a valid license text file.")

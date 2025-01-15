@@ -40,8 +40,7 @@ class SchemaCheck(Check):
             status, message = self._validate(package)
             if status:
                 self._success(
-                    f"Detected package.xml version {version}, "
-                    "validation of scheme successful."
+                    f"Detected package.xml version {version}, " "validation of scheme successful."
                 )
             else:
                 reason = f"package.xml contains errors: {message}"
@@ -50,8 +49,7 @@ class SchemaCheck(Check):
             # Temporary workaround for not implemented version 4
             if version == 4:
                 reason = (
-                    "couldn't check package.xml scheme. Version 4 is "
-                    + "not available right now"
+                    "couldn't check package.xml scheme. Version 4 is " + "not available right now"
                 )
                 self._warning(reason)
             else:

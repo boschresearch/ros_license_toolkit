@@ -19,8 +19,7 @@
 import unittest
 from xml.etree import ElementTree as ET
 
-from ros_license_toolkit.license_tag import (LicenseTag,
-                                             is_license_name_in_spdx_list)
+from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_list
 
 
 class TestChecks(unittest.TestCase):

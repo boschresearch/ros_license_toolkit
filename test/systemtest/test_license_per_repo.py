@@ -59,9 +59,7 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
 
     def test_license_text_in_repo_bsd3(self):
         """Testing with BSD-3-Clause license text."""
-        self._test_repo(
-            "test_repo_bsd3", ["pkg_with_bsd3_a", "pkg_with_bsd3_b"], "BSD-3-Clause"
-        )
+        self._test_repo("test_repo_bsd3", ["pkg_with_bsd3_a", "pkg_with_bsd3_b"], "BSD-3-Clause")
 
     def test_license_text_in_repo_mit(self):
         """Testing with MIT license text."""

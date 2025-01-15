@@ -42,8 +42,12 @@ repository = "https://github.com/boschresearch/ros_license_toolkit"
 [project.scripts]
 ros_license_toolkit = "ros_license_toolkit.main:main"
 
-[isort]
+[tool.black]
+line-length = 100
+
+[tool.isort]
 profile = "black"
+line_length = 100
 
 [tool.codespell]
 ignore-words-list = 'assertIn'

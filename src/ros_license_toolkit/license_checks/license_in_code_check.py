@@ -88,10 +88,7 @@ class LicensesInCodeCheck(Check):
                 "\nThe following files contain licenses that "
                 + "are not covered by any license tag:\n"
                 + "\n".join(
-                    [
-                        f"  '{x[0]}': {x[1]}"
-                        for x in self.files_with_uncovered_licenses.items()
-                    ]
+                    [f"  '{x[0]}': {x[1]}" for x in self.files_with_uncovered_licenses.items()]
                 )
             )
             self._print_info(
@@ -133,10 +130,7 @@ class LicensesInCodeCheck(Check):
                 package,
             )
         else:
-            self._success(
-                "All licenses found in the code are covered by a "
-                "license declaration."
-            )
+            self._success("All licenses found in the code are covered by a " "license declaration.")
 
     def _print_info(
         self,

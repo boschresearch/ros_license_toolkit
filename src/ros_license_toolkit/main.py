@@ -25,21 +25,25 @@ import timeit
 from typing import Optional, Sequence
 
 from ros_license_toolkit.checks import Status
-from ros_license_toolkit.license_checks.license_file_referenced_check import \
-    LicenseFilesReferencedCheck
-from ros_license_toolkit.license_checks.license_in_code_check import \
-    LicensesInCodeCheck
-from ros_license_toolkit.license_checks.license_tag_exists_check import \
-    LicenseTagExistsCheck
-from ros_license_toolkit.license_checks.license_tag_is_spdx import \
-    LicenseTagIsInSpdxListCheck
-from ros_license_toolkit.license_checks.license_text_exists_check import \
-    LicenseTextExistsCheck
+from ros_license_toolkit.license_checks.license_file_referenced_check import (
+    LicenseFilesReferencedCheck,
+)
+from ros_license_toolkit.license_checks.license_in_code_check import LicensesInCodeCheck
+from ros_license_toolkit.license_checks.license_tag_exists_check import LicenseTagExistsCheck
+from ros_license_toolkit.license_checks.license_tag_is_spdx import LicenseTagIsInSpdxListCheck
+from ros_license_toolkit.license_checks.license_text_exists_check import LicenseTextExistsCheck
 from ros_license_toolkit.license_checks.schema_check import SchemaCheck
 from ros_license_toolkit.package import get_packages_in_path
-from ros_license_toolkit.ui_elements import (FAILURE_STR, SUCCESS_STR,
-                                             WARNING_STR, Verbosity, major_sep,
-                                             minor_sep, red, rll_print_factory)
+from ros_license_toolkit.ui_elements import (
+    FAILURE_STR,
+    SUCCESS_STR,
+    WARNING_STR,
+    Verbosity,
+    major_sep,
+    minor_sep,
+    red,
+    rll_print_factory,
+)
 
 
 def main(args: Optional[Sequence[str]] = None) -> int:
@@ -87,8 +91,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
         "--continue_on_error",
         action="store_true",
         default=False,
-        help="treats all errors as warnings, i.e. will give "
-        + "returncode 0 even on errors",
+        help="treats all errors as warnings, i.e. will give " + "returncode 0 even on errors",
     )
     parser.add_argument(
         "-w",
@@ -134,10 +137,7 @@ def main(args: Optional[Sequence[str]] = None) -> int:
             generate_copyright_file(packages, rll_print)
         else:
             rll_print(
-                red(
-                    "Copyright file will not be generated "
-                    + "because there were linter errors."
-                ),
+                red("Copyright file will not be generated " + "because there were linter errors."),
                 Verbosity.QUIET,
             )
 
@@ -158,9 +158,7 @@ def generate_copyright_file(packages, rll_print):
         except AssertionError as error:
             rll_print(red(str(error)))
     else:
-        rll_print(
-            red("Can only generate copyright file for single package"), Verbosity.QUIET
-        )
+        rll_print(red("Can only generate copyright file for single package"), Verbosity.QUIET)
 
 
 def print_results(result, rll_print, args):

@@ -62,9 +62,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_both_tags_not_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING
-            )
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING)
         )
 
     def test_pkg_both_tags_not_spdx_one_file_own(self):
@@ -73,9 +71,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_both_tags_not_spdx_one_file_own")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, WARNING, SUCCESS, WARNING, FAILURE, WARNING, WARNING
-            )
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, WARNING, WARNING)
         )
 
     def test_pkg_code_has_no_license(self):
@@ -105,9 +101,7 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with source files under a license different
         from the package main license, but the additional license is declared
         in the package.xml."""
-        process, stdout = open_subprocess(
-            "test_pkg_has_code_of_different_license_and_tag"
-        )
+        process, stdout = open_subprocess("test_pkg_has_code_of_different_license_and_tag")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(check_output_status(stdout, exp_schema_validated=WARNING))
 
@@ -115,9 +109,7 @@ class TestPkgs(unittest.TestCase):
         """Test on a package with source files under a license different
         from the package main license, but the additional license is declared
         in the package.xml, but with the wrong name."""
-        process, stdout = open_subprocess(
-            "test_pkg_has_code_of_different_license_and_wrong_tag"
-        )
+        process, stdout = open_subprocess("test_pkg_has_code_of_different_license_and_wrong_tag")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
             check_output_status(
@@ -141,9 +133,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_name_not_in_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, SUCCESS, SUCCESS, WARNING, WARNING, SUCCESS, WARNING
-            )
+            check_output_status(stdout, SUCCESS, SUCCESS, WARNING, WARNING, SUCCESS, WARNING)
         )
 
     def test_pkg_no_file_attribute(self):
@@ -158,9 +148,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_no_license")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, FAILURE, FAILURE, SUCCESS, FAILURE, FAILURE, SUCCESS
-            )
+            check_output_status(stdout, FAILURE, FAILURE, SUCCESS, FAILURE, FAILURE, SUCCESS)
         )
 
     def test_pkg_no_license_file(self):
@@ -172,14 +160,10 @@ class TestPkgs(unittest.TestCase):
     def test_pkg_one_correct_one_license_file_missing(self):
         """Test on a package that has one correct license with file
         and code, but also one not known license tag without file"""
-        process, stdout = open_subprocess(
-            "test_pkg_one_correct_one_license_file_missing"
-        )
+        process, stdout = open_subprocess("test_pkg_one_correct_one_license_file_missing")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, WARNING, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS
-            )
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS)
         )
 
     def test_pkg_scheme1_conform(self):
@@ -247,9 +231,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_tag_not_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, SUCCESS, SUCCESS, WARNING, WARNING, WARNING, WARNING
-            )
+            check_output_status(stdout, SUCCESS, SUCCESS, WARNING, WARNING, WARNING, WARNING)
         )
 
     def test_pkg_unknown_license(self):
@@ -258,9 +240,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_unknown_license")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE
-            )
+            check_output_status(stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE)
         )
 
     def test_pkg_unknown_license_missing_file(self):
@@ -269,9 +249,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_unknown_license_missing_file")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(
-                stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE
-            )
+            check_output_status(stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE)
         )
 
     def test_pkg_with_license_and_file(self):
@@ -284,9 +262,7 @@ class TestPkgs(unittest.TestCase):
     def test_pkg_with_multiple_licenses_no_source_files_tag(self):
         """Test on a package with multiple licenses declared in the
         package.xml, none of which have source file tags."""
-        process, stdout = open_subprocess(
-            "test_pkg_with_multiple_licenses_no_source_files_tag"
-        )
+        process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(check_output_status(stdout, exp_lic_tag_exists=FAILURE))
 
@@ -300,9 +276,7 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertIn(b"WARNING Licenses ['BSD'] are not in SPDX list", stdout)
         self.assertTrue(
-            check_output_status(
-                stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING
-            )
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING)
         )
 
     def test_pkg_wrong_license_file(self):

@@ -65,9 +65,7 @@ class Repo:
             raise NotARepoError("No git repo found for package.")
 
         # absolute path to the repo
-        self.abs_path: str = os.path.normpath(
-            os.path.join(self.abs_package_path, relpath)
-        )
+        self.abs_path: str = os.path.normpath(os.path.join(self.abs_package_path, relpath))
 
         # (for logging purposes) the current git hash
         repo = git.Repo(search_path)
