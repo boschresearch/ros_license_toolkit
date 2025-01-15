@@ -101,6 +101,4 @@ def test_write_copyright_file():
             ) as f:
                 expected = f.read()
                 assert expected == output
-        # remove_existing_copyright_file(
-        #     path=copyright_file_path)
     remove_repo(TEST_DATA_FOLDER)

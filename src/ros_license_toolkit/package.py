@@ -307,8 +307,15 @@ class Package:
             with open(license_path, encoding="utf-8") as f:
                 license_lines = f.readlines()
             for line in license_lines:
-                cpr_str += f" {line}"
-            cpr_str += "\n\n"
+                out_line = f" {line}"
+                # remove leading whitespace from empty lines
+                if out_line == " \n":
+                    out_line = "\n"
+                cpr_str += out_line
+            cpr_str += "\n"
+        # remove double newlines at the end
+        if cpr_str.endswith("\n\n"):
+            cpr_str = cpr_str[:-1]
         return cpr_str
 
     def write_copyright_file(self, path: str):
