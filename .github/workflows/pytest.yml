@@ -19,16 +19,16 @@ jobs:
         include:
           # versions updated according to
           # https://devguide.python.org/versions/
-          # on 2023-07-12
-          - python-version: "3.8"
-            os: "ubuntu-20.04"
-          - python-version: "3.8"
-            os: "ubuntu-22.04"
+          # on 2025-01-15
           - python-version: "3.9"
             os: "ubuntu-22.04"
           - python-version: "3.10"
             os: "ubuntu-22.04"
           - python-version: "3.11"
+            os: "ubuntu-22.04"
+          - python-version: "3.12"
+            os: "ubuntu-22.04"
+          - python-version: "3.13"
             os: "ubuntu-22.04"
     runs-on: ${{ matrix.os }}
     concurrency:
