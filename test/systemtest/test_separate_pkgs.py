@@ -191,7 +191,7 @@ class TestPkgs(unittest.TestCase):
 
     def test_pkg_scheme1_violation(self):
         """Test on a package that has all attributes except for maintainer,
-        and therefor not conform to the official scheme v1."""
+        and therefore not conform to the official scheme v1."""
         process, stdout = open_subprocess("test_pkg_scheme1_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(check_output_status(stdout, exp_schema_validated=FAILURE))

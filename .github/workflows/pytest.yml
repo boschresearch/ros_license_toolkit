@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # versions updated accoring to
+          # versions updated according to
           # https://devguide.python.org/versions/
           # on 2023-07-12
           - python-version: "3.8"

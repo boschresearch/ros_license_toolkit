@@ -47,7 +47,7 @@ class LicenseTextExistsCheck(Check):
 
     def _check_licenses(self, package: Package) -> None:
         """checks each license tag for the corresponding license text. Also
-        detects inofficial licenses when tag is not in the SPDX license list"""
+        detects unofficial licenses when tag is not in the SPDX license list"""
         self.found_license_texts = package.found_license_texts
         for license_tag in package.license_tags.values():
             if not license_tag.has_license_text_file():
