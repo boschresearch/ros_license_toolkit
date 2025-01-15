@@ -26,6 +26,7 @@ from ros_license_toolkit.package import Package
 
 class SchemaCheck(Check):
     """This checks the xml scheme and returns the version number."""
+
     def __init__(self):
         super().__init__()
         self.accepted_versions = [1, 2, 3]
@@ -38,21 +39,27 @@ class SchemaCheck(Check):
         if version in self.accepted_versions:
             status, message = self._validate(package)
             if status:
-                self._success(f"Detected package.xml version {version}, "
-                              "validation of scheme successful.")
+                self._success(
+                    f"Detected package.xml version {version}, "
+                    "validation of scheme successful."
+                )
             else:
                 reason = f"package.xml contains errors: {message}"
                 self._failed(reason)
         else:
             # Temporary workaround for not implemented version 4
             if version == 4:
-                reason = "couldn't check package.xml scheme. Version 4 is " +\
-                    "not available right now"
+                reason = (
+                    "couldn't check package.xml scheme. Version 4 is "
+                    + "not available right now"
+                )
                 self._warning(reason)
             else:
-                reason = "package.xml does not contain correct package " +\
-                    "format number. Please use a real version. " +\
-                    "(e.g. <package format=\"3\">)"
+                reason = (
+                    "package.xml does not contain correct package "
+                    + "format number. Please use a real version. "
+                    + '(e.g. <package format="3">)'
+                )
                 self._failed(reason)
 
     def _validate(self, package: Package) -> Tuple[bool, str]:
@@ -61,22 +68,21 @@ class SchemaCheck(Check):
         version WILL FAIL. If everything is correct, returns format number,
         else -1."""
         version = package.package_xml_format_ver
-        message = ''
+        message = ""
         schema = self._get_validation_schema(version)
         if schema:
             result = schema.validate(package.parsed_package_xml)
             if not result:
                 message = schema.error_log.last_error
             return result, message
-        return False, 'Couldn\'t get schema, no validation possible.'
+        return False, "Couldn't get schema, no validation possible."
 
     def _get_validation_schema(self, version: int):
         """Return validation schema for version 1, 2 or 3. If called for other
         version numbers, this WILL FAIL. Version is not checked again.
         Only call with version 1, 2 or 3."""
         if self.validation_schema is None:
-            address = 'http://download.ros.org/schema/' +\
-                f'package_format{version}.xsd'
+            address = "http://download.ros.org/schema/" + f"package_format{version}.xsd"
             try:
                 schema = etree.parse(address)
                 self.validation_schema = etree.XMLSchema(schema)

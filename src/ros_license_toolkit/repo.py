@@ -57,8 +57,7 @@ class Repo:
         search_path = package_path
         for _ in range(REPO_SEARCH_DEPTH + 1):
             if is_git_repo(search_path):
-                relpath = os.path.relpath(
-                    search_path, self.abs_package_path)
+                relpath = os.path.relpath(search_path, self.abs_package_path)
                 break
             search_path = os.path.dirname(search_path)
 
@@ -66,8 +65,9 @@ class Repo:
             raise NotARepoError("No git repo found for package.")
 
         # absolute path to the repo
-        self.abs_path: str = os.path.normpath(os.path.join(
-            self.abs_package_path, relpath))
+        self.abs_path: str = os.path.normpath(
+            os.path.join(self.abs_package_path, relpath)
+        )
 
         # (for logging purposes) the current git hash
         repo = git.Repo(search_path)
@@ -81,14 +81,14 @@ class Repo:
                 continue
             scan_results = get_licenses(fpath)
             if get_spdx_license_name(scan_results):
-                if 'ros_license_toolkit/LICENSE' not in fpath:
+                if "ros_license_toolkit/LICENSE" not in fpath:
                     self.license_text_files[fpath] = scan_results
 
         # get the remote url
         self.remote_url: Optional[str] = None
         if len(repo.remotes) > 0:
             # Ignore package
-            if 'ros_license_toolkit' not in repo.remotes[0].url:
+            if "ros_license_toolkit" not in repo.remotes[0].url:
                 self.remote_url = repo.remotes[0].url
 
     def __eq__(self, __o) -> bool:

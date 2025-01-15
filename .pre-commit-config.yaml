@@ -1,35 +1,61 @@
 repos:
-- repo: local
-  hooks:
-    - id: pylint
-      name: pylint
-      entry: pylint
-      language: system
-      types: [ python ]
-      files: ^(src/|test/)
-    - id: pycodestyle
-      name: pycodestyle
-      entry: pycodestyle
-      language: system
-      types: [ python ]
-      files: ^(src/|test/)
-    - id: flake8
-      name: flake8
-      entry: flake8
-      language: system
-      types: [ python ]
-      files: ^(src/|test/)
-    - id: mypy
-      name: mypy
-      entry: mypy
-      args:
-        - "--ignore-missing-imports"
-      language: system
-      types: [ python ]
-      files: ^(src/|test/)
-    - id: isort
-      name: isort
-      entry: isort
-      language: system
-      types: [ python ]
-      files: ^(src/|test/)
+  # general
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+      - id: name-tests-test
+      - id: requirements-txt-fixer
+      - id: sort-simple-yaml
+      - id: trailing-whitespace
+  # static analysis
+  - repo: https://github.com/pycqa/pylint
+    rev: v3.3.1
+    hooks:
+        - id: pylint
+  # linting
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+  # type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+        - id: mypy
+  # spelling
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli # required to read config from pyproject.toml
+  # auto-formatting
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        language_version: python3.10
+  # import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort

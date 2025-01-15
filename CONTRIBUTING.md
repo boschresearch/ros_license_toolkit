@@ -1,12 +1,12 @@
 # Contributing
-Contributions to this are very welcome. 
-We are especially interested in feedback on scan results that you got from a 
+Contributions to this are very welcome.
+We are especially interested in feedback on scan results that you got from a
 package, please make then a PR with:
 * Package / Repo you are testing with commit hash
 * Scan results you got (ideally with `-v`)
 * What did not match you expectations?
 
-In terms of code changes, we follow the standard GitHub pull request model. 
+In terms of code changes, we follow the standard GitHub pull request model.
 For large contributions we do encourage you to file a ticket in
 the GitHub issues tracking system prior to any code development to coordinate
 with the development team early in the process. Coordinating up

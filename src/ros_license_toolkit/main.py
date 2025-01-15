@@ -54,26 +54,49 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     if not args:
         args = sys.argv[1:]
     parser = argparse.ArgumentParser(
-        description='Checks ROS packages for correct license declaration.')
+        description="Checks ROS packages for correct license declaration."
+    )
     parser.add_argument(
-        'path', default='.',
-        help='path to ROS2 package or repo containing packages')
+        "path", default=".", help="path to ROS2 package or repo containing packages"
+    )
     parser.add_argument(
-        '-c', '--generate_copyright_file', action='store_true',
-        default=False, help='generate a copyright file')
+        "-c",
+        "--generate_copyright_file",
+        action="store_true",
+        default=False,
+        help="generate a copyright file",
+    )
     parser.add_argument(
-        '-v', '--verbose', dest='verbose', action='store_true',
-        default=False, help='enable verbose output')
+        "-v",
+        "--verbose",
+        dest="verbose",
+        action="store_true",
+        default=False,
+        help="enable verbose output",
+    )
     parser.add_argument(
-        '-q', '--quiet', dest='quiet', action='store_true',
-        default=False, help='disable most output')
+        "-q",
+        "--quiet",
+        dest="quiet",
+        action="store_true",
+        default=False,
+        help="disable most output",
+    )
     parser.add_argument(
-        '-e', '--continue_on_error', action='store_true',
-        default=False, help='treats all errors as warnings, i.e. will give '
-        + 'returncode 0 even on errors')
+        "-e",
+        "--continue_on_error",
+        action="store_true",
+        default=False,
+        help="treats all errors as warnings, i.e. will give "
+        + "returncode 0 even on errors",
+    )
     parser.add_argument(
-        '-w', '--warnings_as_error', action='store_true',
-        default=False, help='treats all warnings as errors')
+        "-w",
+        "--warnings_as_error",
+        action="store_true",
+        default=False,
+        help="treats all warnings as errors",
+    )
     parsed_args = parser.parse_args(args)
 
     # Determine the verbosity level
@@ -87,20 +110,15 @@ def main(args: Optional[Sequence[str]] = None) -> int:
 
     # Sanity check the path
     assert isinstance(parsed_args.path, str)
-    assert os.path.exists(
-        parsed_args.path), f'Path {parsed_args.path} does not exist.'
+    assert os.path.exists(parsed_args.path), f"Path {parsed_args.path} does not exist."
 
     # Get the packages in the path
     packages = get_packages_in_path(parsed_args.path)
     if not packages:
-        rll_print(f'No packages found in {parsed_args.path}', Verbosity.QUIET)
+        rll_print(f"No packages found in {parsed_args.path}", Verbosity.QUIET)
         return os.EX_USAGE
-    rll_print(
-        f'Found {len(packages)} packages in {parsed_args.path}',
-        Verbosity.QUIET)
-    rll_print(
-        f' Packages: {", ".join([p.name for p in packages])}',
-        Verbosity.VERBOSE)
+    rll_print(f"Found {len(packages)} packages in {parsed_args.path}", Verbosity.QUIET)
+    rll_print(f' Packages: {", ".join([p.name for p in packages])}', Verbosity.VERBOSE)
     rll_print(major_sep())
 
     # lets time the execution
@@ -109,20 +127,22 @@ def main(args: Optional[Sequence[str]] = None) -> int:
     # Check the packages
     results_per_package = {}
     for package in packages:
-        results_per_package.update(
-            process_one_pkg(rll_print, package))
+        results_per_package.update(process_one_pkg(rll_print, package))
 
     if parsed_args.generate_copyright_file:
         if max(results_per_package.values()) != Status.FAILURE:
             generate_copyright_file(packages, rll_print)
         else:
-            rll_print(red(
-                "Copyright file will not be generated "
-                + "because there were linter errors."),
-                Verbosity.QUIET)
+            rll_print(
+                red(
+                    "Copyright file will not be generated "
+                    + "because there were linter errors."
+                ),
+                Verbosity.QUIET,
+            )
 
     stop = timeit.default_timer()
-    rll_print(f'Execution time: {stop - start:.2f} seconds', Verbosity.QUIET)
+    rll_print(f"Execution time: {stop - start:.2f} seconds", Verbosity.QUIET)
 
     # Print the overall results
     return print_results(results_per_package, rll_print, parsed_args)
@@ -134,14 +154,13 @@ def generate_copyright_file(packages, rll_print):
     if len(packages) == 1:
         package = packages[0]
         try:
-            package.write_copyright_file(
-                os.path.join(os.getcwd(), 'copyright'))
+            package.write_copyright_file(os.path.join(os.getcwd(), "copyright"))
         except AssertionError as error:
             rll_print(red(str(error)))
     else:
-        rll_print(red(
-            "Can only generate copyright file for single package"),
-            Verbosity.QUIET)
+        rll_print(
+            red("Can only generate copyright file for single package"), Verbosity.QUIET
+        )
 
 
 def print_results(result, rll_print, args):
@@ -152,15 +171,19 @@ def print_results(result, rll_print, args):
 
     if max(result.values()) == Status.WARNING:
         if args.warnings_as_error:
-            rll_print(f"All packages:\n {FAILURE_STR} "
-                      + "(Treating warnings as failure)", Verbosity.QUIET)
+            rll_print(
+                f"All packages:\n {FAILURE_STR} " + "(Treating warnings as failure)",
+                Verbosity.QUIET,
+            )
             return os.EX_DATAERR
         rll_print(f"All packages:\n {WARNING_STR}", Verbosity.QUIET)
         return os.EX_OK
 
     if args.continue_on_error:  # Error is Warning, still displayed red
-        rll_print(f"All packages:\n {WARNING_STR} "
-                  + "(Treating errors as warnings)", Verbosity.QUIET)
+        rll_print(
+            f"All packages:\n {WARNING_STR} " + "(Treating errors as warnings)",
+            Verbosity.QUIET,
+        )
         return os.EX_OK
     rll_print(f"All packages:\n {FAILURE_STR}", Verbosity.QUIET)
     return os.EX_DATAERR
@@ -169,18 +192,17 @@ def print_results(result, rll_print, args):
 def process_one_pkg(rll_print, package):
     """Perform checks on one package, print results and return them."""
     results_per_package = {}
-    rll_print(f'[{package.name}]')
-    assert package.repo is not None, 'Package must be in a git repo.'
-    rll_print(
-        f'git hash of ({package.repo.get_path()}):'
-        f' {package.repo.get_hash()}')
+    rll_print(f"[{package.name}]")
+    assert package.repo is not None, "Package must be in a git repo."
+    rll_print(f"git hash of ({package.repo.get_path()}):" f" {package.repo.get_hash()}")
     checks_to_perform = [
         SchemaCheck(),
         LicenseTagExistsCheck(),
         LicenseTagIsInSpdxListCheck(),
         LicenseTextExistsCheck(),
         LicensesInCodeCheck(),
-        LicenseFilesReferencedCheck()]
+        LicenseFilesReferencedCheck(),
+    ]
 
     for check in checks_to_perform:
         check.check(package)
@@ -204,5 +226,5 @@ def process_one_pkg(rll_print, package):
     return results_per_package
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

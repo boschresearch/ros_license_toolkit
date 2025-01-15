@@ -22,21 +22,20 @@ from typing import Any, Dict, List
 from scancode.api import get_copyrights
 
 
-def _get_copyright_strs_from_results(
-        scan_results: Dict[str, Any]) -> List[str]:
+def _get_copyright_strs_from_results(scan_results: Dict[str, Any]) -> List[str]:
     """Get copyright strings from scan results."""
-    return [cpr['copyright'] for cpr in scan_results['copyrights']]
+    return [cpr["copyright"] for cpr in scan_results["copyrights"]]
 
 
 def _clean_copyright_text(copyright_text: str):
     for prefix_to_remove in [
-        'copyright (c) ',
-        'copyright (c)',
-        'copyright ',
-        'copyright',
+        "copyright (c) ",
+        "copyright (c)",
+        "copyright ",
+        "copyright",
     ]:
         if copyright_text.lower().startswith(prefix_to_remove):
-            copyright_text = copyright_text[len(prefix_to_remove):]
+            copyright_text = copyright_text[len(prefix_to_remove) :]
             break
     return copyright_text
 

@@ -8,7 +8,7 @@ jobs:
           fail-fast: true
           matrix:
             include:
-              # versions updated accoring to 
+              # versions updated accoring to
               # https://devguide.python.org/versions/
               # on 2023-07-12
               - python-version: "3.8"
@@ -74,4 +74,3 @@ jobs:
                 user: __token__
                 password: ${{ secrets.PYPI_TOKEN }}
                 packages-dir: dist
-            

@@ -34,13 +34,14 @@ def red(message: str):
 
 
 def yellow(message: str):
-    """Make this `message` yellow """
+    """Make this `message` yellow"""
     return f"{YELLOW}{message}{NC}"
 
 
 def green(message: str):
     """Make this `message` green"""
     return f"{GREEN}{message}{NC}"
+
 
 # further UI elements
 
@@ -64,8 +65,10 @@ def minor_sep() -> str:
 
 # verbosity levels
 
+
 class Verbosity(Enum):
     """Verbosity levels for the output"""
+
     QUIET = auto()
     NORMAL = auto()
     VERBOSE = auto()
@@ -73,8 +76,10 @@ class Verbosity(Enum):
 
 def rll_print_factory(verbosity: Verbosity):
     """Return a function that prints only if the verbosity is high enough"""
+
     def rll_print(message: str, level: Verbosity = Verbosity.NORMAL):
         """Print `message` if the verbosity is high enough"""
         if level.value <= verbosity.value:
             print(message)
+
     return rll_print

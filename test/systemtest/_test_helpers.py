@@ -35,7 +35,6 @@ def make_repo(repo_path):
     if os.path.exists(os.path.join(repo_path, ".git")):
         remove_repo(repo_path)
     repo = git.Repo.init(repo_path)
-    repo.create_remote(
-        "origin", "https://fake.git")
+    repo.create_remote("origin", "https://fake.git")
     repo.index.add(["."])
     repo.index.commit("initial commit")

@@ -46,11 +46,11 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
         with subprocess.Popen(
             ["ros_license_toolkit", repo_path],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         ) as process:
             stdout, stderr = process.communicate()
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertEqual(b'', stderr)
+        self.assertEqual(b"", stderr)
         self.assertIn(license_name.encode(), stdout)
         for pkg_name in pkg_names:
             self.assertIn(pkg_name.encode(), stdout)
@@ -60,19 +60,13 @@ class TestLicensePerRepoBsd3(unittest.TestCase):
     def test_license_text_in_repo_bsd3(self):
         """Testing with BSD-3-Clause license text."""
         self._test_repo(
-            "test_repo_bsd3",
-            ["pkg_with_bsd3_a", "pkg_with_bsd3_b"],
-            "BSD-3-Clause"
+            "test_repo_bsd3", ["pkg_with_bsd3_a", "pkg_with_bsd3_b"], "BSD-3-Clause"
         )
 
     def test_license_text_in_repo_mit(self):
         """Testing with MIT license text."""
-        self._test_repo(
-            "test_repo_mit",
-            ["pkg_with_mit_a", "pkg_with_mit_b"],
-            "MIT"
-        )
+        self._test_repo("test_repo_mit", ["pkg_with_mit_a", "pkg_with_mit_b"], "MIT")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

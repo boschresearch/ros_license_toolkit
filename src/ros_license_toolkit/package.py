@@ -117,14 +117,17 @@ class Package:
     def _run_scan_and_save_results(self):
         """Get a dict of files in the package and their license scan results.
         Note that the code is only evaluated on the first call."""
-        if (self._found_files_w_licenses is not None and  # noqa: W504
-                self._found_license_texts is not None):
+        if (
+            self._found_files_w_licenses is not None  # noqa: W504
+            and self._found_license_texts is not None
+        ):
             return
         self._found_files_w_licenses = {}
         self._found_license_texts = {}
-        for (root, _, files) in os.walk(self.abspath):
-            files_rel_to_pkg = [self._get_path_relative_to_pkg(
-                os.path.join(root, f)) for f in files]
+        for root, _, files in os.walk(self.abspath):
+            files_rel_to_pkg = [
+                self._get_path_relative_to_pkg(os.path.join(root, f)) for f in files
+            ]
             for pattern in self._ignored_content:
                 matched = fnmatch.filter(files_rel_to_pkg, pattern)
                 for m in matched:
@@ -135,50 +138,62 @@ class Package:
                 # Path relative to package root
                 scan_results = get_licenses(fpath)
                 if get_spdx_license_name(scan_results):
-                    self._found_license_texts[fname
-                                              ] = scan_results
+                    self._found_license_texts[fname] = scan_results
                 else:
                     # not a license text file but also interesting
-                    self._found_files_w_licenses[fname
-                                                 ] = scan_results
+                    self._found_files_w_licenses[fname] = scan_results
         # look also in the repo for license text files
         if self.repo is not None:
             for path, res in self.repo.license_text_files.items():
-                self._found_license_texts[
-                    self._get_path_relative_to_pkg(path)] = res
+                self._found_license_texts[self._get_path_relative_to_pkg(path)] = res
 
     @property
     def package_xml(self):
         """Get xml of `package.xml` as `ElementTree` object."""
         if self._package_xml is None:
-            self._package_xml = ET.parse(
-                os.path.join(self.abspath, 'package.xml'))
+            self._package_xml = ET.parse(os.path.join(self.abspath, "package.xml"))
         return self._package_xml
 
     def _check_single_license_tag_without_source_files(self):
         """One license tag can have no source-files attribute.
         But there can be only one such tag.
         This is then the main license."""
-        if len(list(filter(lambda x: not x.has_source_files(),
-                           self._license_tags.values()))) > 1:
+        if (
+            len(
+                list(
+                    filter(
+                        lambda x: not x.has_source_files(), self._license_tags.values()
+                    )
+                )
+            )
+            > 1
+        ):
             raise MoreThanOneLicenseWithoutSourceFilesTag(
-                "There must be at most one license tag without "
-                "source-files.")
+                "There must be at most one license tag without " "source-files."
+            )
         for tag in self._license_tags.values():
             if not tag.has_source_files():
-                tag.make_this_the_main_license(
-                    list(self._license_tags.values()))
+                tag.make_this_the_main_license(list(self._license_tags.values()))
                 break
 
     def _check_single_license_tag_without_file_attribute(self):
         """One license tag can have no file attribute, but only one.
         It may be associated to a license text file in the package or
         the repo."""
-        if len(list(filter(lambda x: not x.has_license_text_file(),
-                           self._license_tags.values()))) > 1:
+        if (
+            len(
+                list(
+                    filter(
+                        lambda x: not x.has_license_text_file(),
+                        self._license_tags.values(),
+                    )
+                )
+            )
+            > 1
+        ):
             raise MoreThanOneLicenseWithoutLicenseTextFile(
-                "There must be at most one license tag without "
-                "a license text file.")
+                "There must be at most one license tag without " "a license text file."
+            )
         for tag in self._license_tags.values():
             if not tag.has_license_text_file():
                 license_texts = self.found_license_texts
@@ -206,14 +221,12 @@ class Package:
         declaration exist."""
         if len(self._license_tags) == 1 and len(self.found_license_texts) == 1:
             license_tag_key = next(iter(self._license_tags.keys()))
-            id_from_text = self._license_tags[
-                license_tag_key].id_from_license_text
+            id_from_text = self._license_tags[license_tag_key].id_from_license_text
             if id_from_text is None:
                 only_file_id = self.found_license_texts[
-                    next(iter(self.found_license_texts))][
-                        'detected_license_expression_spdx']
-                self._license_tags[license_tag_key].id_from_license_text = \
-                    only_file_id
+                    next(iter(self.found_license_texts))
+                ]["detected_license_expression_spdx"]
+                self._license_tags[license_tag_key].id_from_license_text = only_file_id
 
     @property
     def license_tags(self) -> Dict[str, LicenseTag]:
@@ -221,16 +234,14 @@ class Package:
         if self._license_tags is not None:
             return self._license_tags
         self._license_tags = {}
-        for license_tag in self.package_xml.iterfind('license'):
+        for license_tag in self.package_xml.iterfind("license"):
             license_file_scan_result = None
-            if 'file' in license_tag.attrib:
-                license_file = license_tag.attrib['file']
+            if "file" in license_tag.attrib:
+                license_file = license_tag.attrib["file"]
                 if license_file in self.found_license_texts:
-                    license_file_scan_result = \
-                        self.found_license_texts[license_file]
-                    license_file_scan_result['filename'] = license_file
-            tag = LicenseTag(license_tag,
-                             self.abspath, license_file_scan_result)
+                    license_file_scan_result = self.found_license_texts[license_file]
+                    license_file_scan_result["filename"] = license_file
+            tag = LicenseTag(license_tag, self.abspath, license_file_scan_result)
             self._license_tags[tag.get_license_id()] = tag
 
         self._check_single_license_tag_without_source_files()
@@ -246,9 +257,9 @@ class Package:
         INVALID (-1) is returned."""
         if self._package_xml_format_ver == 0:
             root = self.parsed_package_xml.getroot()
-            if root.tag == 'package':
-                if 'format' in root.attrib:
-                    version = root.attrib['format']
+            if root.tag == "package":
+                if "format" in root.attrib:
+                    version = root.attrib["format"]
                     try:
                         self._package_xml_format_ver = int(version)
                     except ValueError:
@@ -262,7 +273,7 @@ class Package:
         """Returns the package.xml content parsed as etree."""
         if self._parsed_package_xml is None:
             path = self.abspath + "/package.xml"
-            assert os.path.exists(path), f'Path {path} does not exist.'
+            assert os.path.exists(path), f"Path {path} does not exist."
             self._parsed_package_xml = etree.parse(path)
         return self._parsed_package_xml
 
@@ -277,19 +288,19 @@ class Package:
     def get_license_files(self) -> List[str]:
         """Get all license text files associated with license tags
         in the package.xml."""
-        return [x.get_license_text_file() for x in
-                self.license_tags.values()]
+        return [x.get_license_text_file() for x in self.license_tags.values()]
 
     def get_copyright_file_contents(self) -> str:
         """Get a string representation of the copyright notice."""
-        pkg_copyright_strings \
-            = get_copyright_strings_per_pkg(
-                self)
-        cpr_str = "".join((
-            "Format: https://www.debian.org/doc/packaging-manuals/copyright",
-            "-format/1.0/\n",
-            f"Source: {self.repo_url}\n",
-            f"Upstream-Name: {self.name}\n\n",))
+        pkg_copyright_strings = get_copyright_strings_per_pkg(self)
+        cpr_str = "".join(
+            (
+                "Format: https://www.debian.org/doc/packaging-manuals/copyright",
+                "-format/1.0/\n",
+                f"Source: {self.repo_url}\n",
+                f"Upstream-Name: {self.name}\n\n",
+            )
+        )
         for key, cprs in pkg_copyright_strings.items():
             source_files_str = self.license_tags[key].source_files_str
             cpr_str += f"Files:\n {source_files_str}\n"
@@ -297,14 +308,15 @@ class Package:
             cpr_str += "\n           ".join(cprs)
             pkg_license = self.license_tags[key]
             cpr_str += f"\nLicense: {pkg_license.id}\n"
-            assert pkg_license.license_text_file, \
-                "License text file must be defined."
-            license_path = os.path.join(self.abspath,
-                                        pkg_license.license_text_file)
+            assert pkg_license.license_text_file, "License text file must be defined."
+            license_path = os.path.join(self.abspath, pkg_license.license_text_file)
             if not os.path.exists(license_path):
                 raise FileExistsError(
-                    ('Cannot create copyright file.'
-                     f'File {license_path} does not exist.'))
+                    (
+                        "Cannot create copyright file."
+                        f"File {license_path} does not exist."
+                    )
+                )
             with open(license_path, encoding="utf-8") as f:
                 license_lines = f.readlines()
             for line in license_lines:
@@ -314,7 +326,7 @@ class Package:
 
     def write_copyright_file(self, path: str):
         """Write the contents of the copyright notice to a file."""
-        with open(path, 'w', encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8") as f:
             f.write(self.get_copyright_file_contents())
 
 

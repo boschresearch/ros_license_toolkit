@@ -8,7 +8,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  build: 
+  build:
     name: py${{ matrix.python-version }} @ ${{ matrix.os }}
     strategy:
       fail-fast: false

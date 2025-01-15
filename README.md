@@ -2,10 +2,10 @@
 
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/boschresearch/ros_license_toolkit/pytest.yml?label=pytest&style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/pytest.yml)
 [![github lint](https://img.shields.io/github/actions/workflow/status/boschresearch/ros_license_toolkit/lint.yml?label=lint&style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/actions/workflows/lint.yml)
-[![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/issues) 
-[![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/pulls) 
+[![GitHub issues](https://img.shields.io/github/issues/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/issues)
+[![GitHub prs](https://img.shields.io/github/issues-pr/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/pulls)
 [![PyPI](https://img.shields.io/pypi/v/ros_license_toolkit?style=flat-square)](https://pypi.org/project/ros-license-toolkit/)
-[![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/search?l=python) 
+[![python](https://img.shields.io/github/languages/top/boschresearch/ros_license_toolkit.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/search?l=python)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://github.com/boschresearch/ros_license_toolkit/blob/main/LICENSE)
 
 > **Warning**
@@ -24,7 +24,7 @@ ROS packages must have licenses. This tool checks if the license declarations in
 ```mermaid
 graph TD
     classDef stroke stroke:#333,stroke-width:2px;
-    s([scan code for licenses and copyrights]) 
+    s([scan code for licenses and copyrights])
     class s stroke
     p[compare to\n package.xml\nfor linting]
     class p stroke
@@ -94,8 +94,8 @@ options:
 ```
 
 Additionally, there is an option to ignore single files, folders and types of files.
-If there exists a `.scanignore` in the **top level directory** of a package, 
-everything in it is going to be ignored. 
+If there exists a `.scanignore` in the **top level directory** of a package,
+everything in it is going to be ignored.
 The file entries work similar to a `.gitignore` file, including making comments with `#`.
 One Example for a custom `.scanignore` file:
 
