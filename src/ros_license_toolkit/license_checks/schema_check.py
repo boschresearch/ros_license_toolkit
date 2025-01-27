@@ -16,6 +16,7 @@
 
 """This Module contains SchemaCheck, which implements Check."""
 
+import os
 from typing import Optional, Tuple
 
 from lxml import etree
@@ -37,7 +38,7 @@ class SchemaCheck(Check):
         Also considers version of package.xml for validation."""
         version: int = package.package_xml_format_ver
         if version in self.accepted_versions:
-            status, message = self._validate(package)
+            status, message = self.validate(package)
             if status:
                 self._success(
                     f"Detected package.xml version {version}, " "validation of scheme successful."
@@ -60,14 +61,14 @@ class SchemaCheck(Check):
                 )
                 self._failed(reason)
 
-    def _validate(self, package: Package) -> Tuple[bool, str]:
+    def validate(self, package: Package) -> Tuple[bool, str]:
         """This is validating the package.xml schema from given package.
         This can only validate for format version 1, 2 or 3. Every other
         version WILL FAIL. If everything is correct, returns format number,
         else -1."""
         version = package.package_xml_format_ver
         message = ""
-        schema = self._get_validation_schema(version)
+        schema = self.get_validation_schema(version)
         if schema:
             result = schema.validate(package.parsed_package_xml)
             if not result:
@@ -75,16 +76,25 @@ class SchemaCheck(Check):
             return result, message
         return False, "Couldn't get schema, no validation possible."
 
-    def _get_validation_schema(self, version: int):
+    def get_validation_schema(self, version: int):
         """Return validation schema for version 1, 2 or 3. If called for other
         version numbers, this WILL FAIL. Version is not checked again.
         Only call with version 1, 2 or 3."""
-        if self.validation_schema is None:
-            address = "http://download.ros.org/schema/" + f"package_format{version}.xsd"
+        cache_dir: str = os.path.expanduser("~/.cache/ros_license_toolkit")
+        os.makedirs(cache_dir, exist_ok=True)
+        schema_file = os.path.join(cache_dir, f"package_format{version}.xsd")
+
+        if not os.path.exists(schema_file):
+            address = f"http://download.ros.org/schema/package_format{version}.xsd"
             try:
                 schema = etree.parse(address)
-                self.validation_schema = etree.XMLSchema(schema)
+                with open(schema_file, "wb") as f:
+                    f.write(etree.tostring(schema))
             except (AttributeError, etree.XMLSyntaxError) as error:
                 print(error)
                 print("An error encountered while getting " + address)
+        else:
+            schema = etree.parse(schema_file)
+
+        self.validation_schema = etree.XMLSchema(schema)
         return self.validation_schema
