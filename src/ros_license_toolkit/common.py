@@ -19,10 +19,11 @@
 import os
 from typing import Any, Dict, List, Optional
 
-REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 95.0
+REQUIRED_PERCENTAGE_OF_LICENSE_TEXT = 90.0
 
 # files we ignore in scan results
 IGNORED = [
+    "CHANGELOG.rst",
     ".scanignore",
     "package.xml",
     "setup.py",

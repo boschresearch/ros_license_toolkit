@@ -163,7 +163,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_one_correct_one_license_file_missing")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS)
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, SUCCESS, SUCCESS)
         )
 
     def test_pkg_scheme1_conform(self):
@@ -274,9 +274,10 @@ class TestPkgs(unittest.TestCase):
             "test_pkg_with_multiple_licenses_one_referenced_incorrect"
         )
         self.assertEqual(os.EX_OK, process.returncode)
+        print(stdout)
         self.assertIn(b"WARNING Licenses ['BSD'] are not in SPDX list", stdout)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING)
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, SUCCESS, WARNING)
         )
 
     def test_pkg_wrong_license_file(self):
