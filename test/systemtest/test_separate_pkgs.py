@@ -163,7 +163,7 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_one_correct_one_license_file_missing")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, FAILURE, SUCCESS)
+            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, SUCCESS, SUCCESS)
         )
 
     def test_pkg_scheme1_conform(self):
