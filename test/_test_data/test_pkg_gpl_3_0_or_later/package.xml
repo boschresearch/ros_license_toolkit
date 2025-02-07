@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>test_pkg_gpl_3_0_or_later</name>
+  <version>1.2.3</version>
+  <description></description>
+  <maintainer email="abc@def.com"></maintainer>
+  <license file="LICENSE">GPL-3.0-or-later</license>
+  <member_of_group>group</member_of_group>
+</package>

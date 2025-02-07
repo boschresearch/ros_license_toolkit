@@ -19,6 +19,9 @@
 import os
 from typing import Any, Dict, Optional
 
+import jellyfish
+import requests
+
 from ros_license_toolkit.checks import Check, Status
 from ros_license_toolkit.common import get_spdx_license_name
 from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_list
@@ -75,6 +78,18 @@ class LicenseTextExistsCheck(Check):
                 )
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
+            # Idea: when license tag is present and has license file linked, try to validate that
+            # linked file manually by calling spdx api and comparing local license text with
+            # official from spdx side:
+            license_file_for_tag = package.abspath + "/"
+            if license_tag.license_text_file:
+                license_file_for_tag += license_tag.license_text_file
+            with open(license_file_for_tag, "r", encoding="utf-8") as f:
+                content = f.read()
+                percentage = self._compare_text_with_spdx_text(license_tag, content)
+                if percentage > 0.9:
+                    pass
+                    # TODO: define case for percantage beeing high enough
             actual_license: Optional[str] = get_spdx_license_name(
                 self.found_license_texts[license_text_file]
             )
@@ -133,3 +148,31 @@ class LicenseTextExistsCheck(Check):
             )
         else:
             self._success("All license tags have a valid license text file.")
+
+    def _compare_text_with_spdx_text(self, tag, text):
+        url = f"https://spdx.org/licenses/{tag}.json"
+        response = requests.get(url, timeout=100)
+        if response is not None and response.status_code == 200:
+            parsed_response = response.json()
+        difference = get_similarity_percent(parsed_response["licenseText"], text)
+        return difference
+
+
+def get_similarity_percent(text1, text2):
+    """
+    TODO: from
+    https://github.com/spdx/spdx-license-matcher/blob/master/spdx_license_matcher/difference.py
+    Levenshtein distance, a string metric for measuring the difference between two sequences,
+    is used to calculate the similarity percentage between two license texts.
+
+    Arguments:
+        text1 {string} -- string 1
+        text2 {string} -- string 2
+
+    Returns:
+        float -- similarity percentage between the two given texts.
+    """
+    lev_dis = float(jellyfish.levenshtein_distance(text1, text2))
+    bigger = float(max(len(text1), len(text2)))
+    similarityPercentage = round((bigger - lev_dis) / bigger * 100, 2)
+    return similarityPercentage
