@@ -28,6 +28,9 @@ from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_
 from ros_license_toolkit.package import Package
 from ros_license_toolkit.ui_elements import red
 
+# Value for minimal levenshtein distance between license texts for them to be accepted
+SIMILARITY_THRESHOLD = 0.9
+
 
 class LicenseTextExistsCheck(Check):
     """This ensures that the license text file referenced by the tag exists."""
@@ -78,18 +81,6 @@ class LicenseTextExistsCheck(Check):
                 )
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
-            # Idea: when license tag is present and has license file linked, try to validate that
-            # linked file manually by calling spdx api and comparing local license text with
-            # official from spdx side:
-            license_file_for_tag = package.abspath + "/"
-            if license_tag.license_text_file:
-                license_file_for_tag += license_tag.license_text_file
-            with open(license_file_for_tag, "r", encoding="utf-8") as f:
-                content = f.read()
-                percentage = self._compare_text_with_spdx_text(license_tag, content)
-                if percentage > 0.9:
-                    pass
-                    # TODO: define case for percantage beeing high enough
             actual_license: Optional[str] = get_spdx_license_name(
                 self.found_license_texts[license_text_file]
             )
@@ -100,7 +91,18 @@ class LicenseTextExistsCheck(Check):
                 )
                 self.missing_license_texts_status[license_tag] = Status.FAILURE
                 continue
-            if actual_license != license_tag.get_license_id():
+            # Idea: when license tag is present and has license file linked, try to validate that
+            # linked file manually by calling spdx api and comparing local license text with
+            # official from spdx side:
+            if license_tag.has_license_text_file():
+                license_file_for_tag = package.abspath + "/" + license_tag.get_license_text_file()
+            with open(license_file_for_tag, "r", encoding="utf-8") as f:
+                content = f.read()
+                similarity_of_texts = self._compare_text_with_spdx_text(license_tag, content)
+
+            if (actual_license != license_tag.get_license_id()) and (
+                similarity_of_texts < SIMILARITY_THRESHOLD
+            ):
                 self.license_tags_without_license_text[license_tag] = (
                     f"License text file '{license_text_file}' is "
                     + f"of license {actual_license} but tag is "
@@ -150,6 +152,8 @@ class LicenseTextExistsCheck(Check):
             self._success("All license tags have a valid license text file.")
 
     def _compare_text_with_spdx_text(self, tag, text):
+        """Get similarity percent between original license text (from spdx api) and given licence
+        text."""
         url = f"https://spdx.org/licenses/{tag}.json"
         response = requests.get(url, timeout=100)
         if response is not None and response.status_code == 200:
@@ -159,20 +163,11 @@ class LicenseTextExistsCheck(Check):
 
 
 def get_similarity_percent(text1, text2):
-    """
-    TODO: from
+    """Levenshtein distance based similarity percent of text1 and text2, regularized to longer text
+    for percent value. From
     https://github.com/spdx/spdx-license-matcher/blob/master/spdx_license_matcher/difference.py
-    Levenshtein distance, a string metric for measuring the difference between two sequences,
-    is used to calculate the similarity percentage between two license texts.
-
-    Arguments:
-        text1 {string} -- string 1
-        text2 {string} -- string 2
-
-    Returns:
-        float -- similarity percentage between the two given texts.
     """
     lev_dis = float(jellyfish.levenshtein_distance(text1, text2))
     bigger = float(max(len(text1), len(text2)))
-    similarityPercentage = round((bigger - lev_dis) / bigger * 100, 2)
-    return similarityPercentage
+    similarity_percentage = round((bigger - lev_dis) / bigger * 100, 2)
+    return similarity_percentage
