@@ -1,9 +1,11 @@
+name: Release
 on:
     push:
         tags:
             - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
     test:
+        name: py${{ matrix.python-version }} @ ${{ matrix.os }}
         strategy:
           fail-fast: true
           matrix:
@@ -47,6 +49,7 @@ jobs:
                 job-summary: true
 
     release:
+        name: Release
         runs-on: ubuntu-latest
         needs: test
         steps:
