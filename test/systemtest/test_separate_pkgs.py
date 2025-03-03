@@ -82,6 +82,12 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertNotIn(b"WARNING", stdout)
 
+    def test_pkg_gpl_3_0_or_later(self):
+        """Test on a package with license code of gpl_3_0."""
+        process, stdout = open_subprocess("test_pkg_code_has_no_license")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(check_output_status(stdout))
+
     def test_pkg_has_code_disjoint(self):
         """Test on a package with two disjoint sets of source files under
         a license different from the package main license."""

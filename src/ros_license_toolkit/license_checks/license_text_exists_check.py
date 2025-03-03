@@ -28,8 +28,8 @@ from ros_license_toolkit.license_tag import LicenseTag, is_license_name_in_spdx_
 from ros_license_toolkit.package import Package
 from ros_license_toolkit.ui_elements import red
 
-# Value for minimal levenshtein distance between license texts for them to be accepted
-SIMILARITY_THRESHOLD = 0.9
+# Value for minimal percentage between license texts for them to be accepted
+SIMILARITY_THRESHOLD = 90  # in percent
 
 
 class LicenseTextExistsCheck(Check):
