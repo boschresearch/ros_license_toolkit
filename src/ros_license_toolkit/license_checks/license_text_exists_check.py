@@ -20,7 +20,7 @@ import os
 from typing import Any, Dict, Optional
 
 import jellyfish
-import requests
+import requests  # type: ignore[import-untyped]
 
 from ros_license_toolkit.checks import Check, Status
 from ros_license_toolkit.common import get_spdx_license_name
@@ -101,6 +101,9 @@ class LicenseTextExistsCheck(Check):
                     content = f.read()
                     similarity_of_texts = self.compare_text_with_spdx_text(license_tag, content)
 
+                # IDEA: if accepted, add the tag to the package.found_license_texts, since scanning
+                # has failed to do so. Also solves problem of license_file_referenced check
+
                 # if similarity couldn't be determined or is too low --> fail, else success
                 if similarity_of_texts is None or similarity_of_texts < SIMILARITY_THRESHOLD:
                     self.license_tags_without_license_text[license_tag] = (
@@ -142,7 +145,7 @@ class LicenseTextExistsCheck(Check):
                         ]
                     )
                 )
-            self.verbose_output = red(
+            self.verbose_output = red(  # pylint: disable=attribute-defined-outside-init
                 "\n".join([f"  '{x[0]}': {x[1]}" for x in self.found_license_texts.items()])
             )
         else:
