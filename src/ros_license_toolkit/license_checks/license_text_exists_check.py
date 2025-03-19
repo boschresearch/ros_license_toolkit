@@ -19,8 +19,8 @@
 import os
 from typing import Any, Dict, Optional
 
-import jellyfish
 import requests  # type: ignore[import-untyped]
+from Levenshtein import distance
 
 from ros_license_toolkit.checks import Check, Status
 from ros_license_toolkit.common import get_spdx_license_name
@@ -177,7 +177,7 @@ class LicenseTextExistsCheck(Check):
     def get_similarity_percent(self, text1, text2):
         """Levenshtein distance based similarity percent of text1 and text2, regularized to longer
         text for percent value."""
-        lev_dis = float(jellyfish.levenshtein_distance(text1, text2))
-        bigger = float(max(len(text1), len(text2)))
+        lev_dis = distance(text1, text2)
+        bigger = max(len(text1), len(text2))
         similarity_percentage = round(100 * (bigger - lev_dis) / bigger, 2)
         return similarity_percentage
