@@ -24,12 +24,21 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from typing import Any, Dict, List, Optional, Set
 
-from license_expression import get_spdx_licensing
+import requests  # type: ignore[import-untyped]
 
 
 def is_license_name_in_spdx_list(license_name: str) -> bool:
     """Check if a license name is in the SPDX list of licenses."""
-    return license_name in get_spdx_licensing().known_symbols
+    url = "https://spdx.org/licenses/licenses.json"
+    response = requests.get(url, timeout=100)
+    if response is not None and response.status_code == 200:
+        parsed_response = response.json()
+        spdx_list = [
+            x["licenseId"]
+            for x in parsed_response["licenses"]
+            if x["isDeprecatedLicenseId"] is False
+        ]
+    return license_name in spdx_list
 
 
 def _eval_glob(glob_str: str, pkg_path: str) -> Set[str]:
