@@ -84,17 +84,17 @@ class SchemaCheck(Check):
         os.makedirs(cache_dir, exist_ok=True)
         schema_file = os.path.join(cache_dir, f"package_format{version}.xsd")
 
-        if not os.path.exists(schema_file):
-            address = f"http://download.ros.org/schema/package_format{version}.xsd"
-            try:
-                schema = etree.parse(address)
-                with open(schema_file, "wb") as f:
-                    f.write(etree.tostring(schema))
-            except (AttributeError, etree.XMLSyntaxError) as error:
-                print(error)
-                print("An error encountered while getting " + address)
-        else:
-            schema = etree.parse(schema_file)
+        # if not os.path.exists(schema_file):
+        #     address = f"http://download.ros.org/schema/package_format{version}.xsd"
+        #     try:
+        #         schema = etree.parse(address)
+        #         with open(schema_file, "wb") as f:
+        #             f.write(etree.tostring(schema))
+        #     except (AttributeError, etree.XMLSyntaxError) as error:
+        #         print(error)
+        #         print("An error encountered while getting " + address)
+        # else:
+        schema = etree.parse(schema_file)
 
         self.validation_schema = etree.XMLSchema(schema)
         return self.validation_schema

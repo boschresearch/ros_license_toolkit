@@ -25,7 +25,7 @@ import xml.etree.ElementTree as ET
 from glob import glob
 from typing import Any, Dict, List, Optional, Set
 
-import requests  # type: ignore[import-untyped]
+# import requests  # type: ignore[import-untyped]
 
 
 def is_license_name_in_spdx_list(license_name: str) -> bool:
@@ -34,21 +34,21 @@ def is_license_name_in_spdx_list(license_name: str) -> bool:
     os.makedirs(cache_dir, exist_ok=True)
     license_file = os.path.join(cache_dir, "spdx_list.txt")
 
-    if not os.path.exists(license_file):
-        url = "https://spdx.org/licenses/licenses.json"
-        response = requests.get(url, timeout=100)
-        if response is not None and response.status_code == 200:
-            parsed_response = response.json()
-            spdx_list = [
-                x["licenseId"]
-                for x in parsed_response["licenses"]
-                if x["isDeprecatedLicenseId"] is False
-            ]
-            with open(license_file, "w", encoding="utf-8") as f:
-                json.dump(spdx_list, f)
-    else:
-        with open(license_file, "r", encoding="utf-8") as f:
-            spdx_list = json.load(f)
+    # if not os.path.exists(license_file):
+    #     url = "https://spdx.org/licenses/licenses.json"
+    #     response = requests.get(url, timeout=100)
+    #     if response is not None and response.status_code == 200:
+    #         parsed_response = response.json()
+    #         spdx_list = [
+    #             x["licenseId"]
+    #             for x in parsed_response["licenses"]
+    #             if x["isDeprecatedLicenseId"] is False
+    #         ]
+    #         with open(license_file, "w", encoding="utf-8") as f:
+    #             json.dump(spdx_list, f)
+    # else:
+    with open(license_file, "r", encoding="utf-8") as f:
+        spdx_list = json.load(f)
     return license_name in spdx_list
 
 
