@@ -30,7 +30,7 @@ from typing import Any, Dict, List, Optional, Set
 
 def is_license_name_in_spdx_list(license_name: str) -> bool:
     """Check if a license name is in the SPDX list of licenses."""
-    cache_dir: str = os.path.expanduser("~/.cache/ros_license_toolkit")
+    cache_dir: str = os.path.expanduser("./data")
     os.makedirs(cache_dir, exist_ok=True)
     license_file = os.path.join(cache_dir, "spdx_list.txt")
 

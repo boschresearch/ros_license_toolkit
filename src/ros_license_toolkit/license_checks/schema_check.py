@@ -80,7 +80,7 @@ class SchemaCheck(Check):
         """Return validation schema for version 1, 2 or 3. If called for other
         version numbers, this WILL FAIL. Version is not checked again.
         Only call with version 1, 2 or 3."""
-        cache_dir: str = os.path.expanduser("~/.cache/ros_license_toolkit")
+        cache_dir: str = os.path.expanduser("./data")
         os.makedirs(cache_dir, exist_ok=True)
         schema_file = os.path.join(cache_dir, f"package_format{version}.xsd")
 
