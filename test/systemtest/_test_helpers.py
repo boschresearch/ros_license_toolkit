@@ -26,7 +26,8 @@ import git
 
 def remove_repo(repo_path):
     """Remove an existing git repo."""
-    shutil.rmtree(os.path.join(repo_path, ".git"))
+    if os.path.exists(os.path.join(repo_path, ".git")):
+        shutil.rmtree(os.path.join(repo_path, ".git"))
 
 
 def make_repo(repo_path):

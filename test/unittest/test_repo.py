@@ -18,6 +18,8 @@
 
 import os
 import unittest
+from test.systemtest._test_helpers import make_repo, remove_repo
+from test.systemtest.test_copyright import TEST_DATA_FOLDER
 
 import git
 
@@ -40,6 +42,7 @@ class TestRepo(unittest.TestCase):
 
     def test_eq(self):
         """Test the equality operator"""
+        make_repo(os.path.join(TEST_DATA_FOLDER, ".."))
         repo1 = Repo(os.path.join(os.path.dirname(__file__), ".."))
         repo2 = Repo(os.path.join(os.path.dirname(__file__)))
         self.assertEqual(repo1, repo2)
@@ -49,3 +52,4 @@ class TestRepo(unittest.TestCase):
         repo = Repo(os.path.join(os.path.dirname(__file__)))
         git_repo = git.Repo(repo.get_path())
         self.assertEqual(repo.get_hash(), git_repo.head.object.hexsha)
+        remove_repo(os.path.join(TEST_DATA_FOLDER, ".."))
