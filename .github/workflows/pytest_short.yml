@@ -54,7 +54,7 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--durations=30"
+          custom-arguments: ""
           emoji: true
           verbose: true
           job-summary: true
