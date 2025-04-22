@@ -1,0 +1,68 @@
+name: Pytest
+on:
+  # push:
+  #   branches: [main]
+  pull_request:
+    branches: [main]
+  # schedule:
+  #   # Runs every tuesday at 07:00 UTC
+  #   - cron: "0 7 * * 2"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  build:
+    name: py${{ matrix.python-version }} @ ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # versions updated according to
+          # https://devguide.python.org/versions/
+          # on 2025-01-15
+          - python-version: "3.9"
+            os: "ubuntu-22.04"
+          - python-version: "3.10"
+            os: "ubuntu-22.04"
+          - python-version: "3.11"
+            os: "ubuntu-22.04"
+          - python-version: "3.12"
+            os: "ubuntu-22.04"
+          - python-version: "3.13"
+            os: "ubuntu-22.04"
+    runs-on: ${{ matrix.os }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.python-version }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: "Europe/Berlin"
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Update pip
+        run: |
+          pip install --upgrade pip
+          pip install setuptools_rust
+      - name: Install pytest
+        run: pip install pytest pytest-md pytest-emoji pytest-cov
+      - name: Install package
+        run: pip install .
+      - uses: pavelzw/pytest-action@v2
+        with:
+          custom-arguments: "--durations=30"
+          emoji: true
+          verbose: true
+          job-summary: true
+      # - uses: orgoro/coverage@v3.1
+      #   with:
+      #     coverageFile: "coverage.xml"
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     thresholdAll: .9
+      #   if: github.event_name == 'pull_request'
+      #   continue-on-error: true
+        # workaround for https://github.com/orgoro/coverage/issues/259
