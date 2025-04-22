@@ -1,12 +1,7 @@
 name: Pytest
 on:
-  # push:
-  #   branches: [main]
   pull_request:
     branches: [main]
-  # schedule:
-  #   # Runs every tuesday at 07:00 UTC
-  #   - cron: "0 7 * * 2"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -54,15 +49,6 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: ""
           emoji: true
           verbose: true
           job-summary: true
-      # - uses: orgoro/coverage@v3.1
-      #   with:
-      #     coverageFile: "coverage.xml"
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     thresholdAll: .9
-      #   if: github.event_name == 'pull_request'
-      #   continue-on-error: true
-        # workaround for https://github.com/orgoro/coverage/issues/259

@@ -2,8 +2,6 @@ name: Pytest
 on:
   push:
     branches: [main]
-  # pull_request:
-  #   branches: [main]
   schedule:
     # Runs every tuesday at 07:00 UTC
     - cron: "0 7 * * 2"
@@ -54,7 +52,7 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: ""
+          custom-arguments: "--cov=ros_license_toolkit --cov-report xml"
           emoji: true
           verbose: true
           job-summary: true
