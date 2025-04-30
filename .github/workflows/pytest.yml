@@ -2,6 +2,8 @@ name: Pytest
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     # Runs every tuesday at 07:00 UTC
     - cron: "0 7 * * 2"
@@ -56,6 +58,13 @@ jobs:
           emoji: true
           verbose: true
           job-summary: true
+        if: github.event_name != 'pull_request'
+      - uses: pavelzw/pytest-action@v2
+        with:
+          emoji: true
+          verbose: true
+          job-summary: true
+        if: github.event_name == 'pull_request'
       - uses: orgoro/coverage@v3.1
         with:
           coverageFile: "coverage.xml"
