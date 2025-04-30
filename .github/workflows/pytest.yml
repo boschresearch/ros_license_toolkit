@@ -65,11 +65,4 @@ jobs:
           verbose: true
           job-summary: true
         if: github.event_name == 'pull_request'
-      - uses: orgoro/coverage@v3.1
-        with:
-          coverageFile: "coverage.xml"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          thresholdAll: .9
-        if: github.event_name == 'pull_request'
-        continue-on-error: true
-        # workaround for https://github.com/orgoro/coverage/issues/259
+      - run: cat coverage.xml >> $GITHUB_STEP_SUMMARY
