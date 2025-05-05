@@ -54,15 +54,15 @@ jobs:
         run: pip install .
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--cov=ros_license_toolkit --cov-report xml"
+          custom-arguments: "--cov=ros_license_toolkit --cov-report xml --durations=30"
           emoji: true
           verbose: true
           job-summary: true
-        if: github.event_name != 'pull_request'
-      - uses: pavelzw/pytest-action@v2
+      - uses: orgoro/coverage@v3.1
         with:
-          emoji: true
-          verbose: true
-          job-summary: true
+          coverageFile: "coverage.xml"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          thresholdAll: .9
         if: github.event_name == 'pull_request'
-      # - run: cat coverage.xml >> $GITHUB_STEP_SUMMARY
+        continue-on-error: true
+        # workaround for https://github.com/orgoro/coverage/issues/259
