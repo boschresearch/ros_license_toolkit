@@ -35,8 +35,8 @@ class TestPkgs(unittest.TestCase):
 
     # pylint: disable=too-many-public-methods
     # Here it make sense to keep all tests in one place
-    @classmethod
-    def setUpClass(cls):
+    def __init__(self, methodName="runTest"):
+        super().__init__(methodName)
         make_repo(TEST_DATA_FOLDER)
 
     def test_deep_package_folder(self):
