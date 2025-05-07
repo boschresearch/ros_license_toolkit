@@ -20,7 +20,8 @@ import os
 import subprocess
 import unittest
 from test.systemtest._test_helpers import make_repo, remove_repo
-from test.systemtest.test_copyright import TEST_DATA_FOLDER
+
+# from test.systemtest.test_copyright import TEST_DATA_FOLDER
 from typing import Optional
 
 from ros_license_toolkit.checks import Status
@@ -35,9 +36,9 @@ class TestPkgs(unittest.TestCase):
 
     # pylint: disable=too-many-public-methods
     # Here it make sense to keep all tests in one place
-    @classmethod
-    def setUpClass(cls):
-        make_repo(TEST_DATA_FOLDER)
+    # @classmethod
+    # def setUpClass(cls):
+    #     make_repo(TEST_DATA_FOLDER)
 
     def test_deep_package_folder(self):
         """Call the linter on directories in three levels.
@@ -300,7 +301,6 @@ class TestPkgs(unittest.TestCase):
                 stdout, exp_lic_text_exits=FAILURE, exp_lic_files_referenced=WARNING
             )
         )
-        remove_repo(TEST_DATA_FOLDER)
 
     # @classmethod
     # def tearDownClass(cls):

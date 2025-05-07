@@ -61,7 +61,6 @@ jobs:
         if: github.event_name != 'pull_request'
       - uses: pavelzw/pytest-action@v2
         with:
-          custom-arguments: "--cov=ros_license_toolkit --cov-report xml"
           emoji: true
           verbose: true
           job-summary: true
