@@ -300,10 +300,11 @@ class TestPkgs(unittest.TestCase):
                 stdout, exp_lic_text_exits=FAILURE, exp_lic_files_referenced=WARNING
             )
         )
-
-    @classmethod
-    def tearDownClass(cls):
         remove_repo(TEST_DATA_FOLDER)
+
+    # @classmethod
+    # def tearDownClass(cls):
+    #     remove_repo(TEST_DATA_FOLDER)
 
 
 def open_subprocess(test_data_name: str):
