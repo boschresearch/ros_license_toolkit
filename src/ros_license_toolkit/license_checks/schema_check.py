@@ -19,6 +19,7 @@
 import os
 from typing import Optional, Tuple
 
+import requests  # type: ignore[import-untyped]
 from lxml import etree
 
 from ros_license_toolkit.checks import Check
@@ -87,7 +88,11 @@ class SchemaCheck(Check):
         if not os.path.exists(schema_file):
             address = f"http://download.ros.org/schema/package_format{version}.xsd"
             try:
-                schema = etree.parse(address)
+                response = requests.get(address, stream=True, timeout=100)
+                response.raise_for_status()
+                response_parsed = response.content  # throw error when bad http code
+
+                schema = etree.fromstring(response_parsed)
                 with open(schema_file, "wb") as f:
                     f.write(etree.tostring(schema))
             except (AttributeError, etree.XMLSyntaxError) as error:

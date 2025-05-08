@@ -21,6 +21,8 @@ This module tests the linter on all packages in the test directory.
 import os
 import subprocess
 import unittest
+from test.systemtest._test_helpers import make_repo
+from test.systemtest.test_copyright import TEST_DATA_FOLDER
 
 
 class TestAllPackages(unittest.TestCase):
@@ -30,6 +32,7 @@ class TestAllPackages(unittest.TestCase):
         """Call the linter on the whole test directory.
         Check that the output contains all package names.
         """
+        make_repo(TEST_DATA_FOLDER)
         with subprocess.Popen(
             ["ros_license_toolkit", "test/_test_data"],
             stdout=subprocess.PIPE,
