@@ -67,12 +67,12 @@ jobs:
             - name: Build
               run: |
                 python -m build
-            - uses: softprops/action-gh-release@v1
+            - uses: softprops/action-gh-release@v2.2.2
               with:
                 files: dist/*
                 tag_name: ${{ github.ref_name }}
                 name: ${{ github.ref_name }}
-            - uses: pypa/gh-action-pypi-publish@v1.8.8
+            - uses: pypa/gh-action-pypi-publish@v1.12.4
               with:
                 user: __token__
                 password: ${{ secrets.PYPI_TOKEN }}
