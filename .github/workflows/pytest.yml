@@ -59,10 +59,11 @@ jobs:
           verbose: true
           job-summary: true
         if: github.event_name != 'pull_request'
+      - run: cat coverage.xml >> $GITHUB_STEP_SUMMARY
+        if: github.event_name != 'pull_request'
       - uses: pavelzw/pytest-action@v2
         with:
           emoji: true
           verbose: true
           job-summary: true
         if: github.event_name == 'pull_request'
-      - run: cat coverage.xml >> $GITHUB_STEP_SUMMARY
