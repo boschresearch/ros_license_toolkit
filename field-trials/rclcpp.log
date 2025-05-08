@@ -1,61 +1,556 @@
 Found 4 packages in .
 ====================
-[rclcpp_action]
-git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+[rclcpp]
+git hash of (/tmp/tmp.3g6YumaFyg/rclcpp): e7afaa636a97dc3908d25d367652b58ecda95273
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
 LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
 LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
 LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'QUALITY_DECLARATION.md' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'resource/logging.hpp.em' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'resource/get_interface.hpp.em' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'resource/interface_traits.hpp.em' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/type_support.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/graph_listener.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/memory_strategy.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executor_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/rate.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/signal_handler.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/guard_condition.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/typesupport_helpers.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/logger.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/memory_strategies.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/serialized_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/subscription_base.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/logging_mutex.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executable_list.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/time.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/utilities.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/logging_mutex.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/message_info.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/duration.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/event_handler.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_event_handler.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/future_return_code.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/timer.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/serialization.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/generic_publisher.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/generic_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/generic_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/waitable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_map.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/any_executable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/time_source.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/context.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/publisher_base.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/init_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_service_names.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/network_flow_endpoint.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/clock.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/create_generic_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/event.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_value.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/generic_subscription.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/qos_overriding_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/intra_process_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/signal_handler.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/callback_group.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/create_generic_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/parameter_events_filter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/expand_topic_or_service_name.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/qos.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/subscription_intra_process_base.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/dynamic_typesupport/dynamic_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/dynamic_typesupport/dynamic_message_type_support.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/dynamic_typesupport/dynamic_message_type_builder.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/dynamic_typesupport/dynamic_message_type.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/dynamic_typesupport/dynamic_serialization_support.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/executor_entities_collector.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/executor_entities_collection.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/static_single_threaded_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/single_threaded_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/executor_notify_waitable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/executors/multi_threaded_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/contexts/default_context.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_type_descriptions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_services.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_logging.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_clock.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_topics.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_graph.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_timers.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_time_source.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_parameters.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_waitables.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/node_interfaces/node_base.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/exceptions/exceptions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/experimental/timers_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/experimental/executors/events_executor/events_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/wait_set_policies/detail/write_preferring_read_write_lock.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/resolve_intra_process_buffer_type.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/rmw_implementation_specific_payload.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/utilities.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/resolve_parameter_overrides.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/rmw_implementation_specific_publisher_payload.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/resolve_parameter_overrides.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/add_guard_condition_to_rcl_wait_set.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/rclcpp/detail/rmw_implementation_specific_subscription_payload.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/cmake/rclcpp_add_build_failure_test.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_publisher_count_api.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_qos_overriding_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_intra_process_buffer.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_timers_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_add_callback_groups_to_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_loaned_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_guard_condition.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_message_memory_strategy.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_find_weak_nodes.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_type_support.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_logger_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_rosout_subscription.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_content_filter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_serialized_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_time_source.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_qos_event.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_publisher_subscription_count_api.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter_event_handler.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_client_common.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_rosout_qos.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_memory_strategy.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_node_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_interface_traits.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_typesupport_helpers.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_publisher.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_qos.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_wait_for_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_with_type_adapter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_service_introspection.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_rate.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_serialized_message_allocator.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_generic_pubsub.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_duration.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_node_global_args.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_context.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_intra_process_manager_with_allocators.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_utilities.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_timer.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_intra_process_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_time.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_copy_all_parameter_values.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_graph_listener.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter_events_filter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_traits.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_logger.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_qos_parameters.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_init_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_publisher_with_type_adapter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_logging.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_generic_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_expand_topic_or_service_name.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_create_timer.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_subscription_publisher_with_same_type_adapter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_function_traits.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_any_subscription_callback.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_clock.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_future_return_code.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_ring_buffer_implementation.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_create_subscription.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_any_service_callback.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter_map.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_wait_set.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_generic_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_externally_defined_services.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/test_parameter_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_multi_threaded_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors_callback_group_behavior.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_static_single_threaded_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_events_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_reinitialized_timers.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_static_executor_entities_collector.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_entities_collector.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_events_queue.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executor_notify_waitable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_waitable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors_intraprocess.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors_timer_cancel_behavior.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/executor_types.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors_busy_waiting.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_waitable.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/executors/test_executors_warmup.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_type_descriptions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_interfaces.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_parameters.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_clock.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_waitables.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_get_node_interfaces.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_graph.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/node_wrapper.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_base.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_timers.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_services.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_node_topics.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_does_not_compile/get_node_topics_interface_const_ptr_rclcpp_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_does_not_compile/get_node_topics_interface_const_ref_rclcpp_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_does_not_compile/get_node_topics_interface_const_ref_wrapped_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/test_does_not_compile/get_node_topics_interface_const_ptr_wrapped_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/node_interfaces/detail/test_template_utils.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/waitables/waitable_test_helpers.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/waitables/test_intra_process_waitable.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/topic_statistics/test_topic_stats_utils.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/topic_statistics/test_subscription_topic_statistics.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/exceptions/test_exceptions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/allocator/test_allocator_deleter.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/allocator/test_allocator_common.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/strategies/test_allocator_memory_strategy.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/strategies/test_message_pool_memory_strategy.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/wait_set_policies/test_storage_policy_common.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/wait_set_policies/test_thread_safe_synchronization.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/wait_set_policies/test_dynamic_storage.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/rclcpp/wait_set_policies/test_static_storage.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_executor.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_init_shutdown.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_node_parameters_interface.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_parameter_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/mocking_utils/patch.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/utils/test_rclcpp_gtest_macros.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/utils/rclcpp_gtest_macros.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/timer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/rclcpp.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/qos.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_generic_subscription.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/macros.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_generic_publisher.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_base.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/serialized_message.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/waitable.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/generic_client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/publisher_base.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/network_flow_endpoint.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/duration.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/generic_service.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/intra_process_buffer_type.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_service.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/time_source.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_template.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/function_traits.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/expand_topic_or_service_name.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/memory_strategy.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executor.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/any_subscription_callback.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/serialization.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/clock.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/init_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/topic_statistics_state.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_wait_set_mask.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_map.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executor_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/typesupport_helpers.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/service.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/copy_all_parameter_values.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/rate.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/type_support_decl.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/graph_listener.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/publisher_factory.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/context.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_value.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/event.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/qos_overriding_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_content_filter_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/utilities.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_subscription.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/logger.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_event_handler.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_for_message.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/intra_process_setting.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/publisher.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/publisher_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/generic_publisher.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/loaned_message.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/any_service_callback.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_result_kind.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_generic_service.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_generic_client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_service.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_timer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_factory.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_impl.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/callback_group.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/future_return_code.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/visibility_control.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/type_adapter.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/is_ros_compatible_type.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/event_handler.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/memory_strategies.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/message_memory_strategy.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_options.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/guard_condition.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/generic_subscription.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/create_publisher.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/exceptions.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/subscription_traits.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/any_executable.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/time.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/get_message_type_support_handle.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/message_info.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/parameter_events_filter.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_result.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/dynamic_typesupport/dynamic_message.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/dynamic_typesupport/dynamic_message_type_builder.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/dynamic_typesupport/dynamic_message_type.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/dynamic_typesupport/dynamic_message_type_support.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/dynamic_typesupport/dynamic_serialization_support.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/static_single_threaded_executor.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/single_threaded_executor.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/executor_entities_collection.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/multi_threaded_executor.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/executor_notify_waitable.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/executors/executor_entities_collector.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/contexts/default_context.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_graph_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_type_descriptions_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_base_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_time_source.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_waitables.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_timers.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_clock_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_logging_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_timers_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_waitables_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_type_descriptions.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_topics.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_clock.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_services_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_services.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_base.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_parameters_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_time_source_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_interfaces.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_topics_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_logging.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_graph.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/node_parameters.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/node_interfaces/detail/node_interfaces_helpers.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/topic_statistics/subscription_topic_statistics.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/exceptions/exceptions.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/allocator/allocator_deleter.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/allocator/allocator_common.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/create_intra_process_buffer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/intra_process_manager.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/timers_manager.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/subscription_intra_process_base.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/executable_list.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/subscription_intra_process.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/subscription_intra_process_buffer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/ros_message_intra_process_buffer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/executors/events_executor/events_executor_event_types.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/executors/events_executor/events_queue.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/executors/events_executor/events_executor.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/executors/events_executor/simple_events_queue.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/buffers/intra_process_buffer.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/buffers/buffer_implementation_base.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/experimental/buffers/ring_buffer_implementation.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/strategies/allocator_memory_strategy.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/strategies/message_pool_memory_strategy.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/sequential_synchronization.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/dynamic_storage.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/static_storage.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/thread_safe_synchronization.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/detail/storage_policy_common.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/detail/synchronization_policy_common.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/wait_set_policies/detail/write_preferring_read_write_lock.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/template_contains.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/qos_parameters.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/resolve_enable_topic_statistics.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/resolve_use_intra_process.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/resolve_intra_process_buffer_type.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/cpp_callback_trampoline.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/rmw_implementation_specific_publisher_payload.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/add_guard_condition_to_rcl_wait_set.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/utilities.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/rmw_implementation_specific_subscription_payload.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/template_unique.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/rmw_implementation_specific_payload.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp/detail/subscription_callback_type_helper.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
 --------------------
-[rclcpp_action] Overall:[92m
- SUCCESS[00m
-====================
-[rclcpp_lifecycle]
-git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
-LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[rclcpp_lifecycle] Overall:[92m
- SUCCESS[00m
+[rclcpp] Overall:
+ [93mWARNING[00m
 ====================
 [rclcpp_components]
-git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+git hash of (/tmp/tmp.3g6YumaFyg/rclcpp): e7afaa636a97dc3908d25d367652b58ecda95273
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
 LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
 LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
 LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'QUALITY_DECLARATION.md' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'rclcpp_components-extras.cmake.in' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/rclcpp_components_package_hook.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/rclcpp_components_register_nodes.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/rclcpp_components_register_node.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/node_main.cpp.in' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/component_container_isolated.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/component_container.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/component_container_mt.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/component_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_component_manager_api.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_component_manager.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_components.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/components/test_component.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/component_manager.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/node_factory.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/register_node_macro.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/node_factory_template.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/component_manager_isolated.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/visibility_control.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_components/node_instance_wrapper.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
 --------------------
-[rclcpp_components] Overall:[92m
- SUCCESS[00m
+[rclcpp_components] Overall:
+ [93mWARNING[00m
 ====================
-[rclcpp]
-git hash of (..): 338eed0c060ab58608fc6e44c6936bde2c4e061e
+[rclcpp_action]
+git hash of (/tmp/tmp.3g6YumaFyg/rclcpp): e7afaa636a97dc3908d25d367652b58ecda95273
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
 LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
 LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
 LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'QUALITY_DECLARATION.md' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/types.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/server_goal_handle.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/server.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/qos.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_types.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_server_goal_handle.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_traits.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_server.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_action_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_action_server.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/mocking_utils/patch.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/qos.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/rclcpp_action.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/create_client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/create_server.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/types.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/client_goal_handle_impl.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/client.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/visibility_control.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/server_goal_handle.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/client_goal_handle.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/server.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_action/exceptions.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
 --------------------
-[rclcpp] Overall:[92m
- SUCCESS[00m
+[rclcpp_action] Overall:
+ [93mWARNING[00m
 ====================
-Execution time: 228.03 seconds
-All packages:[92m
- SUCCESS[00m
+[rclcpp_lifecycle]
+git hash of (/tmp/tmp.3g6YumaFyg/rclcpp): e7afaa636a97dc3908d25d367652b58ecda95273
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
+LicensesInCodeCheck
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'QUALITY_DECLARATION.md' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/managed_entity.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/lifecycle_node_interface_impl.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/lifecycle_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/state.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/lifecycle_node_interface_impl.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/transition.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/node_interfaces/lifecycle_node_interface.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_state_wrapper.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_callback_exceptions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_lifecycle_node_errors.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_register_custom_callbacks.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_lifecycle_publisher.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_transition_wrapper.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_service.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_lifecycle_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_state_machine_info.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_lifecycle_service_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_lifecycle_node.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_state.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_lifecycle_client.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/benchmark/benchmark_transition.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/mocking_utils/patch.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/state.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/lifecycle_publisher.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/visibility_control.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/managed_entity.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/transition.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/lifecycle_node.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/lifecycle_node_impl.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rclcpp_lifecycle/type_traits/is_manageable_node.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[rclcpp_lifecycle] Overall:
+ [93mWARNING[00m
+====================
+Execution time: 393.94 seconds
+All packages:
+ [93mWARNING[00m

@@ -1,999 +1,905 @@
-Found 40 packages in .
-====================
-[moveit]
-git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[moveit] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_simulation]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_simulation/simulation.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_simulation/simulation_widget.hpp': ['BSD-3-Clause']
-  'src/simulation_widget.cpp': ['BSD-3-Clause']
-  'src/simulation.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_simulation] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_app_plugins]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_app_plugins/launches_config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/launches_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/perception_config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/perception.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/launch_bundle.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/perception_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_app_plugins/launches.hpp': ['BSD-3-Clause']
-  'test/test_perception.cpp': ['BSD-3-Clause']
-  'src/perception_config.cpp': ['BSD-3-Clause']
-  'src/perception.cpp': ['BSD-3-Clause']
-  'src/launches_config.cpp': ['BSD-3-Clause']
-  'src/launches.cpp': ['BSD-3-Clause']
-  'src/perception_widget.cpp': ['BSD-3-Clause']
-  'src/launches_widget.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_app_plugins] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_assistant]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_assistant/navigation_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_assistant/setup_assistant_widget.hpp': ['BSD-3-Clause']
-  'src/setup_assistant_widget.cpp': ['BSD-3-Clause']
-  'src/main.cpp': ['BSD-3-Clause']
-  'src/collisions_updater.cpp': ['BSD-3-Clause']
-  'src/navigation_widget.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_assistant] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_srdf_plugins]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_srdf_plugins/default_collisions_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/robot_poses_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/srdf_step.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/group_meta_config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/rotated_header_view.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/passive_joints.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/collision_linear_model.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/collision_matrix_model.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/passive_joints_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/planning_groups_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/end_effectors.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/default_collisions.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/virtual_joints_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/kinematic_chain_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/compute_default_collisions.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/planning_groups.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/group_edit_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/virtual_joints.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/end_effectors_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_srdf_plugins/robot_poses.hpp': ['BSD-3-Clause']
-  'test/test_srdf.cpp': ['BSD-3-Clause']
-  'src/default_collisions.cpp': ['BSD-3-Clause']
-  'src/virtual_joints_widget.cpp': ['BSD-3-Clause']
-  'src/virtual_joints.cpp': ['BSD-3-Clause']
-  'src/collision_linear_model.cpp': ['BSD-3-Clause']
-  'src/end_effectors.cpp': ['BSD-3-Clause']
-  'src/collision_matrix_model.cpp': ['BSD-3-Clause']
-  'src/rotated_header_view.cpp': ['BSD-3-Clause']
-  'src/group_edit_widget.cpp': ['BSD-3-Clause']
-  'src/planning_groups.cpp': ['BSD-3-Clause']
-  'src/robot_poses.cpp': ['BSD-3-Clause']
-  'src/passive_joints_widget.cpp': ['BSD-3-Clause']
-  'src/compute_default_collisions.cpp': ['BSD-3-Clause']
-  'src/passive_joints.cpp': ['BSD-3-Clause']
-  'src/robot_poses_widget.cpp': ['BSD-3-Clause']
-  'src/planning_groups_widget.cpp': ['BSD-3-Clause']
-  'src/end_effectors_widget.cpp': ['BSD-3-Clause']
-  'src/group_meta_config.cpp': ['BSD-3-Clause']
-  'src/default_collisions_widget.cpp': ['BSD-3-Clause']
-  'src/kinematic_chain_widget.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_srdf_plugins] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_framework]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_framework/generated_file.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/generated_time.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/testing_utils.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/templates.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/data_warehouse.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/utilities.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/setup_step.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/qt/helper_widgets.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/qt/rviz_panel.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/qt/double_list_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/qt/xml_syntax_highlighter.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/qt/setup_step_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/data/srdf_config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/data/urdf_config.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_framework/data/package_settings_config.hpp': ['BSD-3-Clause']
-  'templates/package.xml.template': ['BSD-3-Clause']
-  'src/package_settings_config.cpp': ['BSD-3-Clause']
-  'src/double_list_widget.cpp': ['BSD-3-Clause']
-  'src/urdf_config.cpp': ['BSD-3-Clause']
-  'src/xml_syntax_highlighter.cpp': ['BSD-3-Clause']
-  'src/helper_widgets.cpp': ['BSD-3-Clause']
-  'src/templates.cpp': ['BSD-3-Clause']
-  'src/data_warehouse.cpp': ['BSD-3-Clause']
-  'src/rviz_panel.cpp': ['BSD-3-Clause']
-  'src/srdf_config.cpp': ['BSD-3-Clause']
-  'src/utilities.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_framework] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_core_plugins]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_setup_core_plugins/author_information_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_core_plugins/start_screen_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_core_plugins/start_screen.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_core_plugins/configuration_files_widget.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_core_plugins/author_information.hpp': ['BSD-3-Clause']
-  'include/moveit_setup_core_plugins/configuration_files.hpp': ['BSD-3-Clause']
-  'src/author_information_widget.cpp': ['BSD-3-Clause']
-  'src/author_information.cpp': ['BSD-3-Clause']
-  'src/start_screen.cpp': ['BSD-3-Clause']
-  'src/start_screen_widget.cpp': ['BSD-3-Clause']
-  'src/configuration_files.cpp': ['BSD-3-Clause']
-  'src/configuration_files_widget.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_setup_core_plugins] Overall:[91m
- FAILURE[00m
-====================
-[moveit_setup_controllers]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[moveit_setup_controllers] Overall:[91m
- FAILURE[00m
-====================
-[moveit_configs_utils]
-git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[moveit_configs_utils] Overall:[91m
- FAILURE[00m
-====================
-[moveit_servo]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD 3-Clause'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD 3-Clause'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD 3-Clause': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[moveit_servo] Overall:[91m
- FAILURE[00m
-====================
-[benchmarks]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'scripts/moveit_benchmark_statistics.py': ['BSD-3-Clause']
-  'include/moveit/benchmarks/BenchmarkExecutor.h': ['BSD-3-Clause']
-  'include/moveit/benchmarks/BenchmarkOptions.h': ['BSD-3-Clause']
-  'src/RunBenchmark.cpp': ['BSD-3-Clause']
-  'src/BenchmarkOptions.cpp': ['BSD-3-Clause']
-  'src/BenchmarkExecutor.cpp': ['BSD-3-Clause']
-  'src/simple_benchmarks/CombinePredefinedPosesBenchmark.cpp': ['BSD-3-Clause'][00m
---------------------
-[benchmarks] Overall:[91m
- FAILURE[00m
-====================
-[move_group]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit/move_group/move_group_context.h': ['BSD-3-Clause']
-  'include/moveit/move_group/capability_names.h': ['BSD-3-Clause']
-  'include/moveit/move_group/move_group_capability.h': ['BSD-3-Clause']
-  'src/move_group_context.cpp': ['BSD-3-Clause']
-  'src/move_group_capability.cpp': ['BSD-3-Clause']
-  'src/move_group.cpp': ['BSD-3-Clause']
-  'src/list_capabilities.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/kinematics_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/cartesian_path_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/kinematics_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/get_planning_scene_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/apply_planning_scene_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/plan_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/clear_octomap_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/tf_publisher_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/execute_trajectory_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/query_planners_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/move_action_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/cartesian_path_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/execute_trajectory_action_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/state_validation_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/clear_octomap_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/state_validation_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/plan_service_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/tf_publisher_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/query_planners_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/move_action_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/apply_planning_scene_service_capability.h': ['BSD-3-Clause']
-  'src/default_capabilities/execute_trajectory_action_capability.cpp': ['BSD-3-Clause']
-  'src/default_capabilities/get_planning_scene_service_capability.h': ['BSD-3-Clause'][00m
---------------------
-[move_group] Overall:[91m
- FAILURE[00m
-====================
-[moveit_ros]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[moveit_ros] Overall:[91m
- FAILURE[00m
-====================
-[hybrid_planning]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[hybrid_planning] Overall:[91m
- FAILURE[00m
-====================
-[planning_interface]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[planning_interface] Overall:[91m
- FAILURE[00m
-====================
-[occupancy_map_monitor]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[occupancy_map_monitor] Overall:[91m
- FAILURE[00m
-====================
-[warehouse]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit/warehouse/state_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/moveit_message_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/trajectory_constraints_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/planning_scene_world_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/planning_scene_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/constraints_storage.h': ['BSD-3-Clause']
-  'include/moveit/warehouse/warehouse_connector.h': ['BSD-3-Clause']
-  'src/planning_scene_storage.cpp': ['BSD-3-Clause']
-  'src/trajectory_constraints_storage.cpp': ['BSD-3-Clause']
-  'src/broadcast.cpp': ['BSD-3-Clause']
-  'src/warehouse_connector.cpp': ['BSD-3-Clause']
-  'src/moveit_message_storage.cpp': ['BSD-3-Clause']
-  'src/warehouse_services.cpp': ['BSD-3-Clause']
-  'src/constraints_storage.cpp': ['BSD-3-Clause']
-  'src/planning_scene_world_storage.cpp': ['BSD-3-Clause']
-  'src/save_as_text.cpp': ['BSD-3-Clause']
-  'src/save_to_warehouse.cpp': ['BSD-3-Clause']
-  'src/state_storage.cpp': ['BSD-3-Clause']
-  'src/import_from_text.cpp': ['BSD-3-Clause']
-  'src/initialize_demo_db.cpp': ['BSD-3-Clause'][00m
---------------------
-[warehouse] Overall:[91m
- FAILURE[00m
-====================
-[robot_interaction]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit/robot_interaction/interactive_marker_helpers.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/locked_robot_state.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/interaction.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/robot_interaction.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/kinematic_options_map.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/interaction_handler.h': ['BSD-3-Clause']
-  'include/moveit/robot_interaction/kinematic_options.h': ['BSD-3-Clause']
-  'test/locked_robot_state_test.cpp': ['BSD-3-Clause']
-  'src/robot_interaction.cpp': ['BSD-3-Clause']
-  'src/locked_robot_state.cpp': ['BSD-3-Clause']
-  'src/kinematic_options.cpp': ['BSD-3-Clause']
-  'src/interaction_handler.cpp': ['BSD-3-Clause']
-  'src/interactive_marker_helpers.cpp': ['BSD-3-Clause']
-  'src/kinematic_options_map.cpp': ['BSD-3-Clause'][00m
---------------------
-[robot_interaction] Overall:[91m
- FAILURE[00m
-====================
-[visualization]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[visualization] Overall:[91m
- FAILURE[00m
-====================
-[planning]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[planning] Overall:[91m
- FAILURE[00m
-====================
-[perception]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'pointcloud_octomap_updater/include/moveit/pointcloud_octomap_updater/pointcloud_octomap_updater.h': ['BSD-3-Clause']
-  'pointcloud_octomap_updater/src/pointcloud_octomap_updater.cpp': ['BSD-3-Clause']
-  'pointcloud_octomap_updater/src/plugin_init.cpp': ['BSD-3-Clause']
-  'semantic_world/include/moveit/semantic_world/semantic_world.h': ['BSD-3-Clause']
-  'semantic_world/src/semantic_world.cpp': ['BSD-3-Clause']
-  'depth_image_octomap_updater/include/moveit/depth_image_octomap_updater/depth_image_octomap_updater.h': ['BSD-3-Clause']
-  'depth_image_octomap_updater/src/depth_image_octomap_updater.cpp': ['BSD-3-Clause']
-  'depth_image_octomap_updater/src/updater_plugin.cpp': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/depth_self_filter_nodelet.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/stereo_camera_model.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/gl_mesh.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/filter_job.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/gl_renderer.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/mesh_filter_base.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/mesh_filter.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/transform_provider.h': ['BSD-3-Clause']
-  'mesh_filter/include/moveit/mesh_filter/sensor_model.h': ['BSD-3-Clause']
-  'mesh_filter/test/mesh_filter_test.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/mesh_filter_base.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/depth_self_filter_nodelet.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/stereo_camera_model.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/transform_provider.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/gl_renderer.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/mesh_filter.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/gl_mesh.cpp': ['BSD-3-Clause']
-  'mesh_filter/src/sensor_model.cpp': ['BSD-3-Clause']
-  'lazy_free_space_updater/include/moveit/lazy_free_space_updater/lazy_free_space_updater.h': ['BSD-3-Clause']
-  'lazy_free_space_updater/src/lazy_free_space_updater.cpp': ['BSD-3-Clause']
-  'point_containment_filter/include/moveit/point_containment_filter/shape_mask.h': ['BSD-3-Clause']
-  'point_containment_filter/src/shape_mask.cpp': ['BSD-3-Clause'][00m
---------------------
-[perception] Overall:[91m
- FAILURE[00m
-====================
-[moveit_common]
-git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[moveit_common] Overall:[91m
- FAILURE[00m
-====================
-[moveit_simple_controller_manager]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_simple_controller_manager/follow_joint_trajectory_controller_handle.h': ['BSD-3-Clause']
-  'include/moveit_simple_controller_manager/empty_controller_handle.h': ['BSD-3-Clause']
-  'include/moveit_simple_controller_manager/gripper_controller_handle.h': ['BSD-3-Clause']
-  'include/moveit_simple_controller_manager/action_based_controller_handle.h': ['BSD-3-Clause']
-  'src/moveit_simple_controller_manager.cpp': ['BSD-3-Clause']
-  'src/follow_joint_trajectory_controller_handle.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_simple_controller_manager] Overall:[91m
- FAILURE[00m
-====================
-[moveit_plugins]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[moveit_plugins] Overall:[91m
- FAILURE[00m
-====================
-[moveit_ros_control_interface]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/moveit_ros_control_interface/ControllerHandle.h': ['BSD-3-Clause']
-  'src/controller_manager_plugin.cpp': ['BSD-3-Clause']
-  'src/gripper_controller_plugin.cpp': ['BSD-3-Clause']
-  'src/joint_trajectory_controller_plugin.cpp': ['BSD-3-Clause']
-  'src/empty_controller_plugin.cpp': ['BSD-3-Clause'][00m
---------------------
-[moveit_ros_control_interface] Overall:[91m
- FAILURE[00m
-====================
-[moveit_commander]
-git hash of (..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'demos/plan.py': ['BSD-3-Clause']
-  'demos/plan_with_constraints.py': ['BSD-3-Clause']
-  'demos/pick.py': ['BSD-3-Clause']
-  'test/python_moveit_commander_ns.py': ['BSD-3-Clause']
-  'test/python_moveit_commander_ros_namespace.py': ['BSD-3-Clause']
-  'test/python_time_parameterization.py': ['BSD-3-Clause']
-  'test/python_moveit_commander.py': ['BSD-3-Clause']
-  'src/moveit_commander/robot.py': ['BSD-3-Clause']
-  'src/moveit_commander/conversions.py': ['BSD-3-Clause']
-  'src/moveit_commander/planning_scene_interface.py': ['BSD-3-Clause']
-  'src/moveit_commander/roscpp_initializer.py': ['BSD-3-Clause']
-  'src/moveit_commander/exception.py': ['BSD-3-Clause']
-  'src/moveit_commander/move_group.py': ['BSD-3-Clause']
-  'src/moveit_commander/interpreter.py': ['BSD-3-Clause'][00m
---------------------
-[moveit_commander] Overall:[91m
- FAILURE[00m
-====================
-[ompl]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'ompl_interface/scripts/generate_state_database.cpp': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/ompl_interface.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/planning_context_manager.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/model_based_planning_context.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/goal_union.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/state_validity_checker.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/constrained_goal_sampler.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/threadsafe_state_storage.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/constraint_approximations.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/projection_evaluators.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/constrained_sampler.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/ompl_constraints.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/detail/constraints_library.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/model_based_state_space.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/model_based_state_space_factory.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/joint_space/constrained_planning_state_space.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/joint_space/constrained_planning_state_space_factory.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/joint_space/joint_model_state_space_factory.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/joint_space/joint_model_state_space.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/work_space/pose_model_state_space_factory.h': ['BSD-3-Clause']
-  'ompl_interface/include/moveit/ompl_interface/parameterization/work_space/pose_model_state_space.h': ['BSD-3-Clause']
-  'ompl_interface/test/load_test_robot.h': ['BSD-3-Clause']
-  'ompl_interface/test/test_ompl_constraints.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_constrained_state_validity_checker.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_constrained_planning_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_planning_context_manager.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_threadsafe_state_storage.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_state_validity_checker.cpp': ['BSD-3-Clause']
-  'ompl_interface/test/test_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/ompl_planner_manager.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/ompl_interface.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/model_based_planning_context.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/planning_context_manager.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/ompl_constraints.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/constraints_library.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/state_validity_checker.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/projection_evaluators.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/constrained_sampler.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/constrained_goal_sampler.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/goal_union.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/detail/threadsafe_state_storage.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/model_based_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/model_based_state_space_factory.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/joint_space/constrained_planning_state_space_factory.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/joint_space/joint_model_state_space_factory.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/joint_space/joint_model_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/joint_space/constrained_planning_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/work_space/pose_model_state_space.cpp': ['BSD-3-Clause']
-  'ompl_interface/src/parameterization/work_space/pose_model_state_space_factory.cpp': ['BSD-3-Clause'][00m
---------------------
-[ompl] Overall:[91m
- FAILURE[00m
-====================
-[chomp_interface]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[chomp_interface] Overall:[91m
- FAILURE[00m
-====================
-[chomp_optimizer_adapter]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file 'src/chomp_optimizer_adapter.cpp' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[chomp_optimizer_adapter] Overall:[91m
- FAILURE[00m
-====================
-[chomp_motion_planner]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[chomp_motion_planner] Overall:[91m
- FAILURE[00m
-====================
-[moveit_planners]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
---------------------
-[moveit_planners] Overall:[91m
- FAILURE[00m
-====================
-[prbt_pg70_support]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache 2.0'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['Apache 2.0'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'Apache 2.0': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[prbt_pg70_support] Overall:[91m
- FAILURE[00m
-====================
-[prbt_support]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache 2.0'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['Apache 2.0'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but should be Apache 2.0.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'config/manipulator_controller.yaml': ['Apache-2.0']
-  'config/manipulator_driver.yaml': ['Apache-2.0']
-  'urdf/simple_gripper_brackets.urdf.xacro': ['Apache-2.0']
-  'urdf/prbt_macro.xacro': ['Apache-2.0']
-  'urdf/prbt.xacro': ['Apache-2.0'][00m
---------------------
-[prbt_support] Overall:[91m
- FAILURE[00m
-====================
-[prbt_moveit_config]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': No license text file defined.[00m
-LicensesInCodeCheck
-[91m FAILURE AssertionError: License tag must have file attribute.[00m
---------------------
-[prbt_moveit_config] Overall:[91m
- FAILURE[00m
-====================
-[prbt_ikfast_manipulator_plugin]
-git hash of (None): None
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache 2.0'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['Apache 2.0'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but should be Apache 2.0.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/ikfast.h': ['Apache-2.0']
-  'src/prbt_manipulator_ikfast_moveit_plugin.cpp': ['BSD-3-Clause']
-  'src/prbt_manipulator_ikfast_solver.cpp': ['Apache-2.0'][00m
---------------------
-[prbt_ikfast_manipulator_plugin] Overall:[91m
- FAILURE[00m
-====================
-[pilz_industrial_motion_planner_testutils]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
-LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
-LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
-LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
-LicensesInCodeCheck
-[91m FAILURE
-The following files contain licenses that are not covered by any license tag:
-  'include/pilz_industrial_motion_planner_testutils/circ_auxiliary_types.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/robotstatemsgconvertible.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/default_values.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/cartesianpathconstraintsbuilder.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/testdata_loader.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/xml_testdata_loader.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/basecmd.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/robotconfiguration.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/circ.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/async_test.h': ['Apache-2.0']
-  'include/pilz_industrial_motion_planner_testutils/command_types_typedef.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/cartesianconfiguration.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/motionplanrequestconvertible.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/exception_types.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/jointconfiguration.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/gripper.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/sequence.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/ptp.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/lin.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/interim.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/circauxiliary.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/motioncmd.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/center.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/checks.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/goalconstraintsmsgconvertible.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner_testutils/xml_constants.h': ['BSD-3-Clause']
-  'src/sequence.cpp': ['BSD-3-Clause']
-  'src/robotconfiguration.cpp': ['BSD-3-Clause']
-  'src/xml_testdata_loader.cpp': ['BSD-3-Clause']
-  'src/cartesianconfiguration.cpp': ['BSD-3-Clause']
-  'src/jointconfiguration.cpp': ['BSD-3-Clause'][00m
---------------------
-[pilz_industrial_motion_planner_testutils] Overall:[91m
- FAILURE[00m
+Found 42 packages in .
 ====================
 [pilz_industrial_motion_planner]
-git hash of (../..): 2c70d01cb679029ccbee28e7f58f8d4745c7097b
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['BSD'][00m
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
 LicenseTagIsInSpdxListCheck
-[91m FAILURE Licenses ['BSD'] are not in SPDX list of licenses.[00m
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
 LicenseTextExistsCheck
-[91m FAILURE The following license tags do not have a valid license text file:
-  'BSD': License text file '../../LICENSE.txt' is of license BSD-3-Clause but should be BSD.[00m
+[92m SUCCESS All license tags have a valid license text file.[00m
 LicensesInCodeCheck
 [91m FAILURE
 The following files contain licenses that are not covered by any license tag:
-  'include/joint_limits_copy/joint_limits_rosparam.hpp': ['Apache-2.0']
+  'doc/figure/blend_case_2.eps': ['Apache-2.0']
+  'doc/figure/original_trajectories.eps': ['Apache-2.0']
+  'doc/figure/blend_case_1.eps': ['Apache-2.0']
+  'doc/figure/blend_case_3.eps': ['Apache-2.0']
+  'include/joint_limits_copy/joint_limits_rosparam.h': ['Apache-2.0']
+  'include/joint_limits_copy/joint_limits.h': ['Apache-2.0']
   'include/joint_limits_copy/joint_limits.hpp': ['Apache-2.0']
-  'include/pilz_industrial_motion_planner/planning_context_loader_lin.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/joint_limits_aggregator.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/plan_components_builder.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/pilz_industrial_motion_planner.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_loader_ptp.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/cartesian_trajectory.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/joint_limits_validator.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_blend_response.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_generator_circ.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/command_list_manager.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_blender.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/velocity_profile_atrap.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/joint_limits_container.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/path_circle_generator.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_blend_request.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_exceptions.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/limits_container.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_generation_exceptions.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_base.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_generator_ptp.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_lin.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/cartesian_trajectory_point.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_generator_lin.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_circ.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_ptp.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/joint_limits_interface_extension.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_generator.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/move_group_sequence_service.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/capability_names.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_loader_circ.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/tip_frame_getter.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/planning_context_loader.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/joint_limits_extension.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_blender_transition_window.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/trajectory_functions.h': ['BSD-3-Clause']
-  'include/pilz_industrial_motion_planner/move_group_sequence_action.h': ['BSD-3-Clause']
-  'doc/figure/blend_case_1.eps': ['Apache-2.0', 'Apache-2.0']
-  'doc/figure/blend_case_3.eps': ['Apache-2.0', 'Apache-2.0']
-  'doc/figure/original_trajectories.eps': ['Apache-2.0', 'Apache-2.0']
-  'doc/figure/blend_case_2.eps': ['Apache-2.0', 'Apache-2.0']
-  'test/test_utils.cpp': ['BSD-3-Clause']
-  'test/test_utils.h': ['BSD-3-Clause']
-  'test/acceptance_tests/acceptance_test_lin.md': ['BSD-3-Clause']
-  'test/acceptance_tests/acceptance_test_ptp.md': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_joint_limit.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_blender_transition_window.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_get_solver_tip_frame.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_generator.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_pilz_industrial_motion_planner.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_generator_lin.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_joint_limits_aggregator.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_functions.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_generator_common.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_joint_limits_container.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_generator_ptp.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_planning_context.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_planning_context_loaders.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_pilz_industrial_motion_planner_direct.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_velocity_profile_atrap.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_joint_limits_validator.cpp': ['BSD-3-Clause']
-  'test/unit_tests/src/unittest_trajectory_generator_circ.cpp': ['BSD-3-Clause']
-  'test/test_data/testpoints.py': ['BSD-3-Clause']
-  'test/test_data/prbt/testdata_deprecated.xml': ['BSD-3-Clause']
-  'test/test_data/prbt/testdata_sequence.xml': ['BSD-3-Clause']
-  'test/test_data/prbt/testdata_with_gripper.xml': ['BSD-3-Clause']
-  'test/test_data/frankaemika_panda/testdata_sequence.xml': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_action_preemption.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_command_planning.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_command_planning_frankaemika_panda.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_action_capability_with_gripper.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_get_solver_tip_frame.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_command_list_manager.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_service_capability_frankaemika_panda.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_service_capability_with_gripper.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_command_planning_with_gripper.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_service_capability.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_action_capability_frankaemika_panda.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_sequence_action.test': ['BSD-3-Clause']
-  'test/integration_tests/launch/integrationtest_plan_components_builder.test': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_command_planning.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_sequence_action_preemption.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_command_list_manager.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_sequence_service_capability.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/python_move_group_planning.py': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_plan_components_builder.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_sequence_action.cpp': ['BSD-3-Clause']
-  'test/integration_tests/src/integrationtest_get_solver_tip_frame.cpp': ['BSD-3-Clause']
-  'src/path_circle_generator.cpp': ['BSD-3-Clause']
-  'src/pilz_industrial_motion_planner.cpp': ['BSD-3-Clause']
-  'src/velocity_profile_atrap.cpp': ['BSD-3-Clause']
-  'src/trajectory_generator_lin.cpp': ['BSD-3-Clause']
-  'src/trajectory_functions.cpp': ['BSD-3-Clause']
-  'src/joint_limits_validator.cpp': ['BSD-3-Clause']
-  'src/joint_limits_container.cpp': ['BSD-3-Clause']
-  'src/move_group_sequence_service.cpp': ['BSD-3-Clause']
-  'src/planning_context_loader_ptp.cpp': ['BSD-3-Clause']
-  'src/trajectory_generator_ptp.cpp': ['BSD-3-Clause']
-  'src/planning_context_loader.cpp': ['BSD-3-Clause']
-  'src/trajectory_generator_circ.cpp': ['BSD-3-Clause']
-  'src/planning_context_loader_circ.cpp': ['BSD-3-Clause']
-  'src/trajectory_generator.cpp': ['BSD-3-Clause']
-  'src/plan_components_builder.cpp': ['BSD-3-Clause']
-  'src/trajectory_blender_transition_window.cpp': ['BSD-3-Clause']
-  'src/command_list_manager.cpp': ['BSD-3-Clause']
-  'src/move_group_sequence_action.cpp': ['BSD-3-Clause']
-  'src/planning_context_loader_lin.cpp': ['BSD-3-Clause']
-  'src/joint_limits_aggregator.cpp': ['BSD-3-Clause']
-  'src/limits_container.cpp': ['BSD-3-Clause'][00m
+  'include/joint_limits_copy/joint_limits_rosparam.hpp': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[pilz_industrial_motion_planner] Overall:
+ [91mFAILURE[00m
+====================
+[moveit_planners]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_planners] Overall:
+ [92mSUCCESS[00m
+====================
+[ompl]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[ompl] Overall:
+ [92mSUCCESS[00m
+====================
+[stomp]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[stomp] Overall:
+ [92mSUCCESS[00m
+====================
+[prbt_moveit_config]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[prbt_moveit_config] Overall:
+ [92mSUCCESS[00m
+====================
+[prbt_pg70_support]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache 2.0'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['Apache 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache 2.0': License text file '../../../LICENSE.txt' is of license BSD-3-Clause but tag is Apache 2.0.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'config/gripper_driver_canopen_motor_node.yaml': ['Apache-2.0']
+  'config/gripper_controller.yaml': ['Apache-2.0']
+  'config/controllers_manipulator_gripper.yaml': ['Apache-2.0']
+  'config/fake_controllers.yaml': ['Apache-2.0']
+  'config/pg70_tcp_offset.xacro': ['Apache-2.0']
+  'config/joint_limits.yaml': ['Apache-2.0']
+  'config/pg70.srdf.xacro': ['Apache-2.0']
+  'urdf/pg70.urdf.xacro': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[prbt_pg70_support] Overall:
+ [91mFAILURE[00m
+====================
+[prbt_ikfast_manipulator_plugin]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[91m FAILURE package.xml contains errors: /tmp/tmp.3g6YumaFyg/moveit2/moveit_planners/test_configs/prbt_ikfast_manipulator_plugin/package.xml:12:0:ERROR:SCHEMASV:SCHEMAV_ELEMENT_CONTENT: Element 'url': This element is not expected. Expected is one of ( group_depend, member_of_group, export ).[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache 2.0'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['Apache 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but tag is Apache 2.0.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'src/prbt_manipulator_ikfast_solver.cpp': ['Apache-2.0']
+  'src/prbt_manipulator_ikfast_moveit_plugin.cpp': ['BSD-3-Clause']
+  'include/ikfast.h': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[91m FAILURE The following license files are not mentioned by any tag:
+  'LICENSE' is of Apache-2.0.[00m
+--------------------
+[prbt_ikfast_manipulator_plugin] Overall:
+ [91mFAILURE[00m
+====================
+[prbt_support]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache 2.0'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['Apache 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache 2.0': License text file 'LICENSE' is of license Apache-2.0 but tag is Apache 2.0.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'config/manipulator_driver.yaml': ['Apache-2.0']
+  'config/manipulator_controller.yaml': ['Apache-2.0']
+  'urdf/prbt_macro.xacro': ['Apache-2.0']
+  'urdf/simple_gripper_brackets.urdf.xacro': ['Apache-2.0']
+  'urdf/prbt.xacro': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[91m FAILURE The following license files are not mentioned by any tag:
+  'LICENSE' is of Apache-2.0.[00m
+--------------------
+[prbt_support] Overall:
+ [91mFAILURE[00m
+====================
+[pilz_industrial_motion_planner_testutils]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'include/pilz_industrial_motion_planner_testutils/async_test.h': ['Apache-2.0']
+  'include/pilz_industrial_motion_planner_testutils/async_test.hpp': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[pilz_industrial_motion_planner_testutils] Overall:
+ [91mFAILURE[00m
+====================
+[chomp_motion_planner]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[chomp_motion_planner] Overall:
+ [92mSUCCESS[00m
+====================
+[chomp_interface]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[chomp_interface] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_configs_utils]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_configs_utils] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_kinematics]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'ikfast_kinematics_plugin/templates/ikfast.h': ['Apache-2.0']
+  'kdl_kinematics_plugin/src/chainiksolver_vel_mimic_svd.cpp': ['LGPL-2.1-or-later']
+  'kdl_kinematics_plugin/include/moveit/kdl_kinematics_plugin/chainiksolver_vel_mimic_svd.hpp': ['LGPL-2.1-or-later']
+  'kdl_kinematics_plugin/include/moveit/kdl_kinematics_plugin/chainiksolver_vel_mimic_svd.h': ['LGPL-2.1-or-later'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_kinematics] Overall:
+ [91mFAILURE[00m
+====================
+[moveit_ros_control_interface]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_ros_control_interface] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_plugins]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_plugins] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_simple_controller_manager]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_simple_controller_manager] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_common]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_common] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_app_plugins]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_app_plugins] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_simulation]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_simulation] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_controllers]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_controllers] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_core_plugins]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_core_plugins] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_framework]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_framework] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_srdf_plugins]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_srdf_plugins] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_setup_assistant]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_setup_assistant] Overall:
+ [92mSUCCESS[00m
+====================
+[perception]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[perception] Overall:
+ [92mSUCCESS[00m
+====================
+[robot_interaction]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[robot_interaction] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_servo]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_servo] Overall:
+ [92mSUCCESS[00m
+====================
+[move_group]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[move_group] Overall:
+ [92mSUCCESS[00m
+====================
+[hybrid_planning]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[91m FAILURE package.xml contains errors: /tmp/tmp.3g6YumaFyg/moveit2/moveit_ros/hybrid_planning/package.xml:5:0:ERROR:SCHEMASV:SCHEMAV_ELEMENT_CONTENT: Element 'author': This element is not expected. Expected is ( maintainer ).[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[hybrid_planning] Overall:
+ [91mFAILURE[00m
+====================
+[trajectory_cache]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../../LICENSE.txt' is of license BSD-3-Clause but tag is Apache License 2.0.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'src/trajectory_cache.cpp': ['Apache-2.0']
+  'src/cache_insert_policies/always_insert_never_prune_policy.cpp': ['Apache-2.0']
+  'src/cache_insert_policies/best_seen_execution_time_policy.cpp': ['Apache-2.0']
+  'src/features/motion_plan_request_features.cpp': ['Apache-2.0']
+  'src/features/get_cartesian_path_request_features.cpp': ['Apache-2.0']
+  'src/utils/utils.cpp': ['Apache-2.0']
+  'test/test_trajectory_cache.cpp': ['Apache-2.0']
+  'test/test_trajectory_cache.py': ['Apache-2.0']
+  'test/cache_insert_policies/test_always_insert_never_prune_policy_with_move_group.cpp': ['Apache-2.0']
+  'test/cache_insert_policies/test_best_seen_execution_time_policy_with_move_group.cpp': ['Apache-2.0']
+  'test/fixtures/move_group_fixture.cpp': ['Apache-2.0']
+  'test/fixtures/move_group_fixture.hpp': ['Apache-2.0']
+  'test/fixtures/warehouse_fixture.cpp': ['Apache-2.0']
+  'test/fixtures/warehouse_fixture.hpp': ['Apache-2.0']
+  'test/features/test_constant_features_with_move_group.cpp': ['Apache-2.0']
+  'test/features/test_motion_plan_request_features_with_move_group.cpp': ['Apache-2.0']
+  'test/features/test_get_cartesian_path_request_features_with_move_group.cpp': ['Apache-2.0']
+  'test/utils/test_utils.cpp': ['Apache-2.0']
+  'test/utils/test_utils_with_move_group.cpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/trajectory_cache.h': ['Apache-2.0']
+  'include/moveit/trajectory_cache/trajectory_cache.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/cache_insert_policies/best_seen_execution_time_policy.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/cache_insert_policies/always_insert_never_prune_policy.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/cache_insert_policies/cache_insert_policy_interface.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/features/motion_plan_request_features.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/features/get_cartesian_path_request_features.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/features/constant_features.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/features/features_interface.hpp': ['Apache-2.0']
+  'include/moveit/trajectory_cache/utils/utils.hpp': ['Apache-2.0'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[trajectory_cache] Overall:
+ [91mFAILURE[00m
+====================
+[benchmarks]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[benchmarks] Overall:
+ [92mSUCCESS[00m
+====================
+[warehouse]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[warehouse] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_ros]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_ros] Overall:
+ [92mSUCCESS[00m
+====================
+[tests]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[tests] Overall:
+ [92mSUCCESS[00m
+====================
+[occupancy_map_monitor]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[occupancy_map_monitor] Overall:
+ [92mSUCCESS[00m
+====================
+[planning_interface]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[planning_interface] Overall:
+ [92mSUCCESS[00m
+====================
+[planning]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[planning] Overall:
+ [92mSUCCESS[00m
+====================
+[visualization]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[visualization] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_py]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD'][00m
+LicenseTagIsInSpdxListCheck
+[93m WARNING Licenses ['BSD'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
+LicenseTextExistsCheck
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'BSD': License text file '../LICENSE.txt' is of license BSD-3-Clause but tag is BSD.[00m
+LicensesInCodeCheck
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'moveit/utils.py' is of BSD-3-Clause but its Tag is BSD.
+  'moveit/policies/policy.py' is of BSD-3-Clause but its Tag is BSD.
+  'moveit/servo_client/teleop.py' is of BSD-3-Clause but its Tag is BSD.
+  'moveit/servo_client/devices/ps4_dualshock.py' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/planning.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/core.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/moveit_cpp/moveit_cpp.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/moveit_cpp/moveit_cpp.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/moveit_cpp/planning_component.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/moveit_cpp/planning_component.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/planning_scene_monitor/planning_scene_monitor.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/planning_scene_monitor/planning_scene_monitor.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/trajectory_execution_manager/trajectory_execution_manager.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_ros/trajectory_execution_manager/trajectory_execution_manager.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/src/copy_ros_msg.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/src/ros_msg_typecasters.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/include/moveit_py/moveit_py_utils/ros_msg_typecasters.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/include/moveit_py/moveit_py_utils/copy_ros_msg.h' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/include/moveit_py/moveit_py_utils/ros_msg_typecasters.h' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_py_utils/include/moveit_py/moveit_py_utils/copy_ros_msg.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/kinematic_constraints/utils.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/kinematic_constraints/utils.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/transforms/transforms.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/transforms/transforms.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/collision_common.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/collision_matrix.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/world.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/collision_matrix.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/collision_common.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/collision_detection/world.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_trajectory/robot_trajectory.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_trajectory/robot_trajectory.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/joint_model.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/joint_model.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/joint_model_group.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/joint_model_group.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/robot_model.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_model/robot_model.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/planning_scene/planning_scene.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/planning_scene/planning_scene.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/controller_manager/controller_manager.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/controller_manager/controller_manager.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/planning_interface/planning_response.cpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/planning_interface/planning_response.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_state/robot_state.hpp' is of BSD-3-Clause but its Tag is BSD.
+  'src/moveit/moveit_core/robot_state/robot_state.cpp' is of BSD-3-Clause but its Tag is BSD.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_py] Overall:
+ [93mWARNING[00m
+====================
+[moveit_runtime]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_runtime] Overall:
+ [92mSUCCESS[00m
+====================
+[moveit_core]
+git hash of (/tmp/tmp.3g6YumaFyg/moveit2): 870b23d8fd96ce4636c2f8ab6b96dacac860d2aa
+SchemaCheck
+[92m SUCCESS Detected package.xml version 3, validation of scheme successful.[00m
+LicenseTagExistsCheck
+[92m SUCCESS Found licenses ['BSD-3-Clause'][00m
+LicenseTagIsInSpdxListCheck
+[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+LicenseTextExistsCheck
+[92m SUCCESS All license tags have a valid license text file.[00m
+LicensesInCodeCheck
+[91m FAILURE
+The following files contain licenses that are not covered by any license tag:
+  'trajectory_processing/src/time_optimal_trajectory_generation.cpp': ['BSD-2-Clause']
+  'trajectory_processing/test/test_time_optimal_trajectory_generation.cpp': ['BSD-2-Clause']
+  'trajectory_processing/include/moveit/trajectory_processing/time_optimal_trajectory_generation.h': ['BSD-2-Clause']
+  'trajectory_processing/include/moveit/trajectory_processing/time_optimal_trajectory_generation.hpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/bullet_utils.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/contact_checker_common.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/bullet_cast_bvh_manager.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/bullet_bvh_manager.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/bullet_discrete_bvh_manager.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/src/bullet_integration/ros_bullet_utils.cpp': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/ros_bullet_utils.hpp': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/basic_types.h': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_cast_bvh_manager.hpp': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/basic_types.hpp': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_utils.hpp': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/contact_checker_common.hpp': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/contact_checker_common.h': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_discrete_bvh_manager.h': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_bvh_manager.h': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_cast_bvh_manager.h': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_discrete_bvh_manager.hpp': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_bvh_manager.hpp': ['BSD-2-Clause']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/ros_bullet_utils.h': ['Apache-2.0']
+  'collision_detection_bullet/include/moveit/collision_detection_bullet/bullet_integration/bullet_utils.h': ['BSD-2-Clause'][00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
+--------------------
+[moveit_core] Overall:
+ [91mFAILURE[00m
+====================
+Execution time: 894.04 seconds
+All packages:
+ [91mFAILURE[00m

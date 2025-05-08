@@ -1,33 +1,155 @@
 Found 2 packages in .
 ====================
 [rmw]
-git hash of (..): 31c6fd094c8bd01d0a231856df1bd9a476bea26a
+git hash of (/tmp/tmp.3g6YumaFyg/rmw): db4d05e9706d5474b0ac53f7a500c331d6140499
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
 LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
 LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
 LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'QUALITY_DECLARATION.md' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'rmw-extras.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/configure_rmw_library.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/get_rmw_typesupport.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/register_rmw_implementation.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/validate_node_name.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/message_sequence.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/time.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/allocators.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/topic_endpoint_info.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/publisher_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/event.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/sanity_checks.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/topic_endpoint_info_array.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/subscription_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/qos_string_conversions.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/validate_namespace.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/subscription_content_filter_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/init.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/types.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/convert_rcutils_ret_to_rmw_ret.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/names_and_types.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/network_flow_endpoint.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/validate_full_topic_name.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/security_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/discovery_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/network_flow_endpoint_array.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'src/init_options.c' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_network_flow_endpoint_array.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_qos_string_conversions.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_subscription_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_serialized_message.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_types.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_validate_node_name.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_message_sequence.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_network_flow_endpoint.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_allocators.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_subscription_content_filter_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_topic_endpoint_info_array.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_convert_rcutils_ret_to_rmw_ret.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_discovery_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_validate_full_topic_name.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_sanity_checks.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_topic_endpoint_info.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_time.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_init_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_init.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_validate_namespace.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_publisher_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_names_and_types.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_event.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/test_security_options.cpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'test/time_bomb_allocator_testing_utils.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/allocators.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/get_topic_endpoint_info.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/get_network_flow_endpoints.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/network_flow_endpoint.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/names_and_types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/security_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/event.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/features.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/init_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/domain_id.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/visibility_control.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/get_topic_names_and_types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/init.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/subscription_content_filter_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/qos_string_conversions.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/validate_node_name.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/serialized_message.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/rmw.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/validate_full_topic_name.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/qos_profiles.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/subscription_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/topic_endpoint_info_array.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/event_callback_type.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/macros.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/dynamic_message_type_support.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/time.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/convert_rcutils_ret_to_rmw_ret.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/ret_types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/qos_policy_kind.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/network_flow_endpoint_array.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/check_type_identifiers_match.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/discovery_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/publisher_options.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/sanity_checks.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/get_service_names_and_types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/topic_endpoint_info.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/incompatible_qos_events_statuses.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/validate_namespace.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/message_sequence.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/error_handling.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/get_node_info_and_types.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/impl/config.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/impl/cpp/key_value.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/impl/cpp/macros.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/impl/cpp/demangle.hpp' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/message_lost.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/events_statuses.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/offered_deadline_missed.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/matched.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/incompatible_qos.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/liveliness_lost.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/incompatible_type.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/requested_deadline_missed.h' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'include/rmw/events_statuses/liveliness_changed.h' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
 --------------------
-[rmw] Overall:[92m
- SUCCESS[00m
+[rmw] Overall:
+ [93mWARNING[00m
 ====================
 [rmw_implementation_cmake]
-git hash of (..): 31c6fd094c8bd01d0a231856df1bd9a476bea26a
+git hash of (/tmp/tmp.3g6YumaFyg/rmw): db4d05e9706d5474b0ac53f7a500c331d6140499
+SchemaCheck
+[92m SUCCESS Detected package.xml version 2, validation of scheme successful.[00m
 LicenseTagExistsCheck
-[92m SUCCESS Found licenses ['Apache-2.0'][00m
+[92m SUCCESS Found licenses ['Apache License 2.0'][00m
 LicenseTagIsInSpdxListCheck
-[92m SUCCESS All license tags are in SPDX list of licenses.[00m
+[93m WARNING Licenses ['Apache License 2.0'] are not in SPDX list of licenses. Make sure to exactly match one of https://spdx.org/licenses/.[00m
 LicenseTextExistsCheck
-[92m SUCCESS All license tags have a valid license text file.[00m
+[93m WARNING Since they are not in the SPDX list, we can not check if these tags have the correct license text:
+  'Apache License 2.0': License text file '../LICENSE' is of license Apache-2.0 but tag is Apache License 2.0.[00m
 LicensesInCodeCheck
-[92m SUCCESS All licenses found in the code are covered by a license declaration.[00m
+[93m WARNING For the following files, please change the License Tag in the package file to SPDX format:
+  'rmw_implementation_cmake-extras.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/get_available_rmw_implementations.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/get_default_rmw_implementation.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.
+  'cmake/call_for_each_rmw_implementation.cmake' is of Apache-2.0 but its Tag is Apache License 2.0.[00m
+LicenseFilesReferencedCheck
+[92m SUCCESS All license declaration are referenced by a tag.[00m
 --------------------
-[rmw_implementation_cmake] Overall:[92m
- SUCCESS[00m
+[rmw_implementation_cmake] Overall:
+ [93mWARNING[00m
 ====================
-Execution time: 49.85 seconds
-All packages:[92m
- SUCCESS[00m
+Execution time: 72.97 seconds
+All packages:
+ [93mWARNING[00m
