@@ -91,10 +91,8 @@ class SchemaCheck(Check):
                 response = requests.get(address, stream=True, timeout=100)
                 response.raise_for_status()
                 response_parsed = response.content  # throw error when bad http code
-                with open(schema_file, "wb") as xml_file:
-                    xml_file.write(response_parsed)
 
-                schema = etree.parse(schema_file)
+                schema = etree.fromstring(response_parsed)
                 with open(schema_file, "wb") as f:
                     f.write(etree.tostring(schema))
             except (AttributeError, etree.XMLSyntaxError) as error:
