@@ -12,11 +12,8 @@ jobs:
         runs-on: ubuntu-latest
         needs: test
         steps:
-            - uses: szenius/set-timezone@v1.0
-              with:
-                timezoneLinux: "Europe/Berlin"
-            - uses: actions/checkout@v3
-            - uses: actions/setup-python@v4
+            - uses: actions/checkout@v7
+            - uses: actions/setup-python@v7
               with:
                 python-version: "3.11"
             - name: Update pip
@@ -26,12 +23,12 @@ jobs:
             - name: Build
               run: |
                 python -m build
-            - uses: softprops/action-gh-release@v2.2.2
+            - uses: softprops/action-gh-release@v3.0.3
               with:
                 files: dist/*
                 tag_name: ${{ github.ref_name }}
                 name: ${{ github.ref_name }}
-            - uses: pypa/gh-action-pypi-publish@v1.13.0
+            - uses: pypa/gh-action-pypi-publish@v1.14.2
               with:
                 user: __token__
                 password: ${{ secrets.PYPI_TOKEN }}
