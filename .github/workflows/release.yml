@@ -12,9 +12,7 @@ jobs:
             include:
               # versions updated according to
               # https://devguide.python.org/versions/
-              # on 2025-01-15
-              - python-version: "3.9"
-                os: "ubuntu-22.04"
+              # on 2026-09-07
               - python-version: "3.10"
                 os: "ubuntu-22.04"
               - python-version: "3.11"
@@ -23,6 +21,12 @@ jobs:
                 os: "ubuntu-22.04"
               - python-version: "3.13"
                 os: "ubuntu-22.04"
+              - python-version: "3.14"
+                os: "ubuntu-24.04"
+              - python-version: "3.15"
+                os: "ubuntu-24.04"
+              - python-version: "3.16"
+                os: "ubuntu-24.04"
         runs-on: ${{ matrix.os }}
         concurrency:
           group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.os }}-${{ matrix.python-version }}
