@@ -8,3 +8,7 @@ updates:
     directory: ".github/workflows"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "pre-commit"
+    directory: "/" # .pre-commit-config.yaml
+    schedule:
+      interval: "weekly"
