@@ -21,8 +21,6 @@ jobs:
           # versions updated according to
           # https://devguide.python.org/versions/
           # on 2026-09-07
-          - python-version: "3.7"  # legacy ...
-            os: "ubuntu-22.04"
           - python-version: "3.10"
             os: "ubuntu-22.04"
           - python-version: "3.11"
