@@ -19,6 +19,7 @@
 import os
 import subprocess
 import unittest
+from dataclasses import dataclass
 from test.systemtest._test_helpers import make_repo, remove_repo
 from test.systemtest.test_copyright import TEST_DATA_FOLDER
 from typing import Optional
@@ -28,6 +29,18 @@ from ros_license_toolkit.checks import Status
 SUCCESS = Status.SUCCESS
 WARNING = Status.WARNING
 FAILURE = Status.FAILURE
+
+
+@dataclass(frozen=True)
+class ExpectedCheckStatuses:
+    """Expected status for each license check."""
+
+    schema_validated: Status = SUCCESS
+    license_tag_exists: Status = SUCCESS
+    license_tag_spdx: Status = SUCCESS
+    license_text_exists: Status = SUCCESS
+    license_in_code: Status = SUCCESS
+    license_files_referenced: Status = SUCCESS
 
 
 class TestPkgs(unittest.TestCase):
@@ -66,7 +79,16 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_both_tags_not_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, WARNING, WARNING)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING,
+                    license_tag_spdx=WARNING,
+                    license_text_exists=WARNING,
+                    license_in_code=WARNING,
+                    license_files_referenced=WARNING,
+                ),
+            )
         )
 
     def test_pkg_both_tags_not_spdx_one_file_own(self):
@@ -75,7 +97,16 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_both_tags_not_spdx_one_file_own")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, WARNING, WARNING)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING,
+                    license_tag_spdx=WARNING,
+                    license_text_exists=FAILURE,
+                    license_in_code=WARNING,
+                    license_files_referenced=WARNING,
+                ),
+            )
         )
 
     def test_pkg_code_has_no_license(self):
@@ -97,7 +128,9 @@ class TestPkgs(unittest.TestCase):
         a license different from the package main license."""
         process, stdout = open_subprocess("test_pkg_has_code_disjoint")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=WARNING))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=WARNING))
+        )
 
     def test_pkg_has_code_of_different_license(self):
         """Test on a package with source files under a license different
@@ -105,7 +138,7 @@ class TestPkgs(unittest.TestCase):
         the additional license is not declared in the package.xml."""
         process, stdout = open_subprocess("test_pkg_has_code_of_different_license")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_in_code=FAILURE))
+        self.assertTrue(check_output_status(stdout, ExpectedCheckStatuses(license_in_code=FAILURE)))
 
     def test_pkg_has_code_of_different_license_and_tag(self):
         """Test on a package with source files under a license different
@@ -113,7 +146,9 @@ class TestPkgs(unittest.TestCase):
         in the package.xml."""
         process, stdout = open_subprocess("test_pkg_has_code_of_different_license_and_tag")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=WARNING))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=WARNING))
+        )
 
     def test_pkg_has_code_of_different_license_and_wrong_tag(self):
         """Test on a package with source files under a license different
@@ -124,9 +159,11 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(
             check_output_status(
                 stdout,
-                exp_schema_validated=WARNING,
-                exp_lic_text_exits=FAILURE,
-                exp_lic_in_code=FAILURE,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING,
+                    license_text_exists=FAILURE,
+                    license_in_code=FAILURE,
+                ),
             )
         )
 
@@ -135,7 +172,9 @@ class TestPkgs(unittest.TestCase):
         that are not in package and shall therefore be ignored."""
         process, stdout = open_subprocess("test_pkg_ignore_readme_contents")
         self.assertEqual(os.EX_OK, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=WARNING))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=WARNING))
+        )
 
     def test_pkg_name_not_in_spdx(self):
         """Test on a package that has valid License file with BSD-3-Clause
@@ -143,7 +182,14 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_name_not_in_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, SUCCESS, SUCCESS, WARNING, WARNING, SUCCESS, WARNING)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    license_tag_spdx=WARNING,
+                    license_text_exists=WARNING,
+                    license_files_referenced=WARNING,
+                ),
+            )
         )
 
     def test_pkg_no_file_attribute(self):
@@ -158,14 +204,24 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_no_license")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, FAILURE, FAILURE, SUCCESS, FAILURE, FAILURE, SUCCESS)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=FAILURE,
+                    license_tag_exists=FAILURE,
+                    license_text_exists=FAILURE,
+                    license_in_code=FAILURE,
+                ),
+            )
         )
 
     def test_pkg_no_license_file(self):
         """Test on a package with no license text file."""
         process, stdout = open_subprocess("test_pkg_no_license_file")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_text_exits=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(license_text_exists=FAILURE))
+        )
 
     def test_pkg_one_correct_one_license_file_missing(self):
         """Test on a package that has one correct license with file
@@ -173,7 +229,14 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_one_correct_one_license_file_missing")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, FAILURE, SUCCESS, SUCCESS)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING,
+                    license_tag_spdx=WARNING,
+                    license_text_exists=FAILURE,
+                ),
+            )
         )
 
     def test_pkg_scheme1_conform(self):
@@ -188,7 +251,9 @@ class TestPkgs(unittest.TestCase):
         and therefore not conform to the official scheme v1."""
         process, stdout = open_subprocess("test_pkg_scheme1_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=FAILURE))
+        )
 
     def test_pkg_scheme2_conform(self):
         """Test on a package that has all attributes for being conform to
@@ -202,7 +267,9 @@ class TestPkgs(unittest.TestCase):
         format being conform to the official scheme v2"""
         process, stdout = open_subprocess("test_pkg_scheme2_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=FAILURE))
+        )
 
     def test_pkg_scheme3_conform(self):
         """Test on a package that has all attributes for being conform to
@@ -216,7 +283,9 @@ class TestPkgs(unittest.TestCase):
         for being conform to the official scheme v3."""
         process, stdout = open_subprocess("test_pkg_scheme3_violation")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_schema_validated=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(schema_validated=FAILURE))
+        )
 
     def test_pkg_spdx_tag(self):
         """Test on a package with a license declared in the package.xml
@@ -233,7 +302,9 @@ class TestPkgs(unittest.TestCase):
         self.assertIn(b"bsd.LICENSE", stdout)
         self.assertIn(b"apl.LICENSE", stdout)
         self.assertNotIn(b"../../../LICENSE", stdout)
-        self.assertTrue(check_output_status(stdout, exp_lic_files_referenced=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(license_files_referenced=FAILURE))
+        )
 
     def test_pkg_tag_not_spdx(self):
         """Test on a package that has one linked declaration, one code file
@@ -241,7 +312,15 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_tag_not_spdx")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, SUCCESS, SUCCESS, WARNING, WARNING, WARNING, WARNING)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    license_tag_spdx=WARNING,
+                    license_text_exists=WARNING,
+                    license_in_code=WARNING,
+                    license_files_referenced=WARNING,
+                ),
+            )
         )
 
     def test_pkg_unknown_license(self):
@@ -250,7 +329,10 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_unknown_license")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(license_tag_spdx=WARNING, license_text_exists=FAILURE),
+            )
         )
 
     def test_pkg_unknown_license_missing_file(self):
@@ -259,7 +341,10 @@ class TestPkgs(unittest.TestCase):
         process, stdout = open_subprocess("test_pkg_unknown_license_missing_file")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, exp_lic_tag_spdx=WARNING, exp_lic_text_exits=FAILURE)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(license_tag_spdx=WARNING, license_text_exists=FAILURE),
+            )
         )
 
     def test_pkg_with_license_and_file(self):
@@ -274,7 +359,9 @@ class TestPkgs(unittest.TestCase):
         package.xml, none of which have source file tags."""
         process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag")
         self.assertEqual(os.EX_DATAERR, process.returncode)
-        self.assertTrue(check_output_status(stdout, exp_lic_tag_exists=FAILURE))
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(license_tag_exists=FAILURE))
+        )
 
     def test_pkg_with_multiple_licenses_one_referenced_incorrect(self):
         """Test on a package with multiple licenses declared in the
@@ -287,7 +374,15 @@ class TestPkgs(unittest.TestCase):
         print(stdout)
         self.assertIn(b"WARNING Licenses ['BSD'] are not in SPDX list", stdout)
         self.assertTrue(
-            check_output_status(stdout, WARNING, SUCCESS, WARNING, WARNING, SUCCESS, WARNING)
+            check_output_status(
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING,
+                    license_tag_spdx=WARNING,
+                    license_text_exists=WARNING,
+                    license_files_referenced=WARNING,
+                ),
+            )
         )
 
     def test_pkg_wrong_license_file(self):
@@ -297,7 +392,10 @@ class TestPkgs(unittest.TestCase):
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
             check_output_status(
-                stdout, exp_lic_text_exits=FAILURE, exp_lic_files_referenced=WARNING
+                stdout,
+                ExpectedCheckStatuses(
+                    license_text_exists=FAILURE, license_files_referenced=WARNING
+                ),
             )
         )
 
@@ -317,19 +415,10 @@ def open_subprocess(test_data_name: str):
     return process, stdout
 
 
-def check_output_status(  # pylint: disable=too-many-positional-arguments
-    output: str,
-    exp_schema_validated: Status = Status.SUCCESS,
-    exp_lic_tag_exists: Status = Status.SUCCESS,
-    exp_lic_tag_spdx: Status = Status.SUCCESS,
-    exp_lic_text_exits: Status = Status.SUCCESS,
-    exp_lic_in_code: Status = Status.SUCCESS,
-    exp_lic_files_referenced: Status = Status.SUCCESS,
+def check_output_status(
+    output: bytes, expected: ExpectedCheckStatuses = ExpectedCheckStatuses()
 ) -> bool:
-    """Check output of each check for expected status.
-    each argument except for output tells the expected status of a
-    certain check. The default is always SUCCESS."""
-    # pylint: disable=too-many-arguments
+    """Check output of each check against the expected statuses."""
 
     real_lic_validated = get_test_result(output, "SchemaCheck")
     real_lic_tag_exists = get_test_result(output, "LicenseTagExistsCheck")
@@ -339,18 +428,19 @@ def check_output_status(  # pylint: disable=too-many-positional-arguments
     real_lic_files_referenced = get_test_result(output, "LicenseFilesReferencedCheck")
 
     return (
-        exp_schema_validated == real_lic_validated
-        and exp_lic_tag_exists == real_lic_tag_exists
-        and exp_lic_tag_spdx == real_lic_tag_spdx
-        and exp_lic_text_exits == real_lic_text_exits
-        and exp_lic_in_code == real_lic_in_code
-        and exp_lic_files_referenced == real_lic_files_referenced
+        expected.schema_validated == real_lic_validated
+        and expected.license_tag_exists == real_lic_tag_exists
+        and expected.license_tag_spdx == real_lic_tag_spdx
+        and expected.license_text_exists == real_lic_text_exits
+        and expected.license_in_code == real_lic_in_code
+        and expected.license_files_referenced == real_lic_files_referenced
     )
 
 
-def get_test_result(output: str, test_name: str) -> Optional[Status]:
+def get_test_result(output: bytes, test_name: str) -> Optional[Status]:
     """Get result status for specific test.
     Return None if no status could be found"""
+    result_line = ""
     lines = output.splitlines()
     for i, line in enumerate(lines):
         if test_name not in str(line):
