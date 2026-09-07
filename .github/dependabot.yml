@@ -4,3 +4,7 @@ updates:
     directory: "/" # pyproject.toml
     schedule:
       interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/" # .github/workflows
+    schedule:
+      interval: "weekly"
