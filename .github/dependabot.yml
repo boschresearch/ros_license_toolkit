@@ -4,6 +4,8 @@ updates:
     directory: "/" # pyproject.toml
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "python-Levenshtein"  # the latest version is not available for python 3.10, but we want to support 3.10 for now.
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
     schedule:
