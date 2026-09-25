@@ -30,7 +30,8 @@ dependencies = [
     "rospkg==1.6.3",
     "scancode-toolkit==32.5.0",
     "requests==2.34.2",
-    "python-Levenshtein==0.27.4",
+    "python-Levenshtein==0.27.4; python_version == '3.10'",
+    "python-Levenshtein==0.27.5; python_version >= '3.11'",
 ]
 requires-python = ">=3.10"
 
