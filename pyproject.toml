@@ -27,7 +27,7 @@ classifiers = [
 keywords = ["ros", "license", "toolkit", "oss", "packages"]
 dependencies = [
     "gitpython==3.1.62",
-    "rospkg==1.6.2",
+    "rospkg==1.6.3",
     "scancode-toolkit==32.5.0",
     "requests==2.34.2",
     "python-Levenshtein==0.27.4",
