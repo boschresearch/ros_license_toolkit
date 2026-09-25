@@ -348,19 +348,29 @@ class TestPkgs(unittest.TestCase):
         )
 
     def test_pkg_with_license_and_file(self):
-        """Test on a package with a license declared in the package.xml
-        and a matching license text file."""
+        """License declared in the package.xml and a matching license text file."""
         process, stdout = open_subprocess("test_pkg_with_license_and_file")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(check_output_status(stdout))
 
-    def test_pkg_with_multiple_licenses_no_source_files_tag(self):
-        """Test on a package with multiple licenses declared in the
-        package.xml, none of which have source file tags."""
-        process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag")
+    def test_pkg_with_multiple_licenses_no_source_files_tag_v3(self):
+        """Multiple licenses declared in the
+        package.xml (v3), none of which have source file tags."""
+        process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag_v3")
+        self.assertEqual(os.EX_OK, process.returncode)
+        self.assertTrue(
+            check_output_status(stdout, ExpectedCheckStatuses(license_tag_exists=WARNING))
+        )
+
+    def test_pkg_with_multiple_licenses_no_source_files_tag_v4(self):
+        """Multiple licenses declared in the
+        package.xml (v4), none of which have source file tags."""
+        process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag_v4")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
-            check_output_status(stdout, ExpectedCheckStatuses(license_tag_exists=FAILURE))
+            check_output_status(
+                stdout, ExpectedCheckStatuses(schema_validated=WARNING, license_tag_exists=FAILURE)
+            )
         )
 
     def test_pkg_with_multiple_licenses_one_referenced_incorrect(self):
