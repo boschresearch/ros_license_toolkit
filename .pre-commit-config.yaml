@@ -45,7 +45,7 @@ repos:
           - tomli # required to read config from pyproject.toml
   # auto-formatting
   - repo: https://github.com/psf/black
-    rev: 26.5.1
+    rev: 26.10.1
     hooks:
       - id: black
         language_version: python3.10
