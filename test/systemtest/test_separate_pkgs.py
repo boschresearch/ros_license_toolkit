@@ -354,8 +354,8 @@ class TestPkgs(unittest.TestCase):
         self.assertTrue(check_output_status(stdout))
 
     def test_pkg_with_multiple_licenses_no_source_files_tag_v3(self):
-        """Multiple licenses declared in the
-        package.xml (v3), none of which have source file tags."""
+        """Multiple licenses declared in the package.xml (v3), none of which have
+        source file tags, also has code with the declared licenses."""
         process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag_v3")
         self.assertEqual(os.EX_OK, process.returncode)
         self.assertTrue(
@@ -363,13 +363,16 @@ class TestPkgs(unittest.TestCase):
         )
 
     def test_pkg_with_multiple_licenses_no_source_files_tag_v4(self):
-        """Multiple licenses declared in the
-        package.xml (v4), none of which have source file tags."""
+        """Multiple licenses declared in the package.xml (v4), none of which have
+        source file tags, also has code with the declared licenses."""
         process, stdout = open_subprocess("test_pkg_with_multiple_licenses_no_source_files_tag_v4")
         self.assertEqual(os.EX_DATAERR, process.returncode)
         self.assertTrue(
             check_output_status(
-                stdout, ExpectedCheckStatuses(schema_validated=WARNING, license_tag_exists=FAILURE)
+                stdout,
+                ExpectedCheckStatuses(
+                    schema_validated=WARNING, license_tag_exists=FAILURE, license_in_code=FAILURE
+                ),
             )
         )
 

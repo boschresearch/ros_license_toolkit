@@ -73,8 +73,12 @@ class LicensesInCodeCheck(Check):
                         self.files_with_uncovered_licenses[fname] = []
                     self.files_with_uncovered_licenses[fname].append(license_str)
                     continue
+                if package.package_xml_format_version <= 3:
+                    # For package.xml format version 3 or lower, we have no clear mapping
+                    # from license tags to source files.
+                    continue
                 if fname not in self.declared_licenses[license_str].source_files:
-                    # this license is declared by a license tag but the file
+                    # This license is declared by a license tag but the file
                     # is not listed in the source files of the license tag
                     if fname not in self.files_not_matched_by_any_license_tag:
                         self.files_not_matched_by_any_license_tag[fname] = []
