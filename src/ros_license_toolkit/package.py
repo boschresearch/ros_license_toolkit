@@ -241,7 +241,7 @@ class Package:
         return self._license_tags
 
     @property
-    def package_xml_format_ver(self) -> int:
+    def package_xml_format_version(self) -> int:
         """Returns version of package.xml format as seen in
         <package format="3">. If Version is not valid,
         INVALID (-1) is returned."""

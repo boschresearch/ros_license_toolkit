@@ -37,7 +37,7 @@ class SchemaCheck(Check):
     def _check(self, package: Package):
         """Checks via scheme validation via self._validate.
         Also considers version of package.xml for validation."""
-        version: int = package.package_xml_format_ver
+        version: int = package.package_xml_format_version
         if version in self.accepted_versions:
             status, message = self.validate(package)
             if status:
@@ -67,7 +67,7 @@ class SchemaCheck(Check):
         This can only validate for format version 1, 2 or 3. Every other
         version WILL FAIL. If everything is correct, returns format number,
         else -1."""
-        version = package.package_xml_format_ver
+        version = package.package_xml_format_version
         message = ""
         schema = self.get_validation_schema(version)
         if schema:

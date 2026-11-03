@@ -17,7 +17,7 @@
 """This Module contains LicenseTagExistsCheck, which implements Check."""
 
 from ros_license_toolkit.checks import Check
-from ros_license_toolkit.package import Package
+from ros_license_toolkit.package import MoreThanOneLicenseWithoutSourceFilesTag, Package
 from ros_license_toolkit.ui_elements import red
 
 
@@ -25,8 +25,15 @@ class LicenseTagExistsCheck(Check):
     """This ensures that a tag defining the license exists."""
 
     def _check(self, package: Package):
-        if len(package.license_tags) == 0:
-            self._failed("No license tag defined.")
-            self.verbose_output = red(str(package.package_xml))
-        else:
-            self._success(f"Found licenses {list(map(str, package.license_tags))}")
+        try:
+            n_license_tags = len(package.license_tags)
+            if n_license_tags == 0:
+                self._failed("No license tag defined.")
+                self.verbose_output = red(str(package.package_xml))
+            else:
+                self._success(f"Found licenses {list(map(str, package.license_tags))}")
+        except MoreThanOneLicenseWithoutSourceFilesTag as e:
+            if package.package_xml_format_version <= 3:
+                self._warning(str(e))
+            else:
+                raise e
