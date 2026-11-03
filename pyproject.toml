@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ros_license_toolkit"
-version = "2.1.0"
+version = "2.1.1"
 description = "Checks ROS packages for correct license declaration."
 readme = "README.md"
 authors = [
@@ -26,8 +26,9 @@ classifiers = [
 ]
 keywords = ["ros", "license", "toolkit", "oss", "packages"]
 dependencies = [
-    "gitpython==3.1.62",
+    "gitpython==3.2.1",
     "rospkg==1.6.3",
+    "pluggy<1.7.0",
     "scancode-toolkit==32.5.0",
     "requests==2.34.2",
     "python-Levenshtein==0.27.4; python_version == '3.10'",
